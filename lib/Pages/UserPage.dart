@@ -1,6 +1,9 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 
+import '../Widgets/GridText.dart';
+import '../Widgets/ImageHelper.dart';
+
 class UserPage extends StatelessWidget {
   UserPage();
 
@@ -111,41 +114,3 @@ class UserPage extends StatelessWidget {
 }
 
 
-class GridText extends StatelessWidget
-{
-  String number;
-  String text;
-  GridText(this.number, this.text);
-
-  Widget build(BuildContext context)
-  {
-    return Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Spacer(),
-           Flexible(child: Text(number, maxLines: 2, textAlign: TextAlign.center,)), 
-            Flexible(child: Text(text, textAlign: TextAlign.center,))
-          ],
-    );
-  }
-}
-
-class ImageHelper extends StatelessWidget
-{
-  String url;
-  String text;
-  ImageHelper(this.url, this.text);
-
-  Widget build(BuildContext context)
-  {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Flexible(child: Container( height: 75, width:75, child: Image.network(url))),
-        Flexible(child: Text(text, textAlign: TextAlign.center,))
-      ],
-    );
-  }
-}
