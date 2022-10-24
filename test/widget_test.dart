@@ -6,7 +6,7 @@
 // tree, read text, and verify that the values of widget properties are correct.
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:temper_tunes/main.dart';
+import 'package:mood_swing/main.dart';
 
 void main() {
   testWidgets('App Heartbeat Test', (WidgetTester tester) async {
