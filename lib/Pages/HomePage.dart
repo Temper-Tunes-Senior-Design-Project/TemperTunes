@@ -1,4 +1,7 @@
+import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
+
+import 'UserPage.dart';
 
 class HomePage extends StatelessWidget {
   HomePage();
@@ -7,7 +10,8 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Temper Tunes"),
+        title: Text("Mood Swing"),
+        actions: [IconButton( icon: Icon(Icons.person), onPressed: () {Navigator.push(context, new MaterialPageRoute(builder: (ctxt){return UserPage();}));}, ),],
       ),
       body: Center(
         child: Column(
@@ -19,6 +23,21 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar: ConvexAppBar(
+        style:
+        TabStyle.fixedCircle,
+        items: [
+          TabItem(icon: Icon(Icons.list), title: "Playlists"),
+          TabItem(
+            icon: Icon(Icons.create),
+            title: "Create",
+          ),
+          TabItem(icon: Icon(Icons.settings), title: "Preferences"),
+        ],
+        onTap: (int index) {
+
+        }
+    ),
     );
   }
 }
