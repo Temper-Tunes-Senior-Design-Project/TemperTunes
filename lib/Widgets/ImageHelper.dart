@@ -6,6 +6,7 @@ class ImageHelper extends StatelessWidget
   final String text;
   ImageHelper(this.url, this.text);
 
+  @override
   Widget build(BuildContext context)
   {
     return Column(

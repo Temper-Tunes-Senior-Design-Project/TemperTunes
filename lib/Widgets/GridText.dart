@@ -6,6 +6,7 @@ class GridText extends StatelessWidget
   final String text;
   GridText(this.number, this.text);
 
+  @override
   Widget build(BuildContext context)
   {
     return Column(
