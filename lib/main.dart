@@ -8,8 +8,7 @@ void main() {
 }
 
 class App extends StatelessWidget {
-
-  MockNavigator? mockNavigator; //Used to add a binding for testing
+  final MockNavigator? mockNavigator; //Used to add a binding for testing
 
   App({this.mockNavigator});
 
@@ -22,7 +21,7 @@ class App extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: HomePage(),
-      navigatorObservers: mockNavigator!=null?[mockNavigator!]:[],
+      navigatorObservers: mockNavigator != null ? [mockNavigator!] : [],
     );
   }
 }
