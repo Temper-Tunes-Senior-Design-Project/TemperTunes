@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 
 import 'Pages/HomePage.dart';
+import 'Widgets/MockNavigator.dart';
 
 void main() {
   runApp(App());
 }
 
 class App extends StatelessWidget {
-  App();
+  final MockNavigator? mockNavigator; //Used to add a binding for testing
 
-  // This widget is the root of your application.
+  App({this.mockNavigator});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,6 +21,7 @@ class App extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: HomePage(),
+      navigatorObservers: mockNavigator != null ? [mockNavigator!] : [],
     );
   }
 }

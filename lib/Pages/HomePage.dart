@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'UserPage.dart';
 
 class HomePage extends StatelessWidget {
+  static Key UserButtonKey = Key("User Button");
   HomePage();
 
   @override
@@ -11,7 +12,17 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Mood Swing"),
-        actions: [IconButton( icon: Icon(Icons.person), onPressed: () {Navigator.push(context, new MaterialPageRoute(builder: (ctxt){return UserPage();}));}, ),],
+        actions: [
+          IconButton(
+            key: UserButtonKey,
+            icon: Icon(Icons.person),
+            onPressed: () {
+              Navigator.push(context, new MaterialPageRoute(builder: (ctxt) {
+                return UserPage();
+              }));
+            },
+          ),
+        ],
       ),
       body: Center(
         child: Column(
@@ -24,20 +35,16 @@ class HomePage extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: ConvexAppBar(
-        style:
-        TabStyle.fixedCircle,
-        items: [
-          TabItem(icon: Icon(Icons.list), title: "Playlists"),
-          TabItem(
-            icon: Icon(Icons.create),
-            title: "Create",
-          ),
-          TabItem(icon: Icon(Icons.settings), title: "Preferences"),
-        ],
-        onTap: (int index) {
-
-        }
-    ),
+          style: TabStyle.fixedCircle,
+          items: [
+            TabItem(icon: Icon(Icons.list), title: "Playlists"),
+            TabItem(
+              icon: Icon(Icons.create),
+              title: "Create",
+            ),
+            TabItem(icon: Icon(Icons.settings), title: "Preferences"),
+          ],
+          onTap: (int index) {}),
     );
   }
 }
