@@ -1,11 +1,11 @@
 {
-  "name": "temper_tunes",
-  "short_name": "temper_tunes",
+  "name": "Mood Swing",
+  "short_name": "Mood Swing",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#ffffff",
-  "description": "A new Flutter project.",
+  "description": " An AI-driven music recommendation system.",
   "orientation": "portrait-primary",
   "prefer_related_applications": false,
   "icons": [

@@ -1,5 +1,5 @@
 name: mood_swing
-description: A new Flutter project.
+description: An AI-driven music recommendation system.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
