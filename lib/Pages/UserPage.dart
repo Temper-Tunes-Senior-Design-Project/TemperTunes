@@ -1,4 +1,4 @@
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+//import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 
 import '../Widgets/GridText.dart';
@@ -94,21 +94,7 @@ class UserPage extends StatelessWidget {
               Spacer(),
             ],
       ),
-      bottomNavigationBar: ConvexAppBar(
-          style:
-          TabStyle.fixedCircle, //This works well if one feature is the star
-          items: [
-            TabItem(icon: Icon(Icons.list), title: "Playlists"),
-            TabItem(
-              icon: Icon(Icons.create),
-              title: "Create",
-            ),
-            TabItem(icon: Icon(Icons.settings), title: "Preferences"),
-          ],
-          onTap: (int index) {
 
-          }
-      ),
     );
   }
 }
