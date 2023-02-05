@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 //List of viable login pages
 enum LoginPage { LandingPage, LoginInfoPage, RegisterPage, InfoPage }
