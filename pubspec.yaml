@@ -13,7 +13,6 @@ dependencies:
   convex_bottom_bar: ^3.0.0
   firebase_core: ^2.4.1
   google_fonts: ^2.1.0
-  firebase_core: ^2.4.1
 
 dev_dependencies:
   flutter_test:

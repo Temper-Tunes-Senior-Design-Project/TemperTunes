@@ -7,7 +7,6 @@ import Foundation
 
 import firebase_core
 import path_provider_foundation
-import firebase_core
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   FLTFirebaseCorePlugin.register(with: registry.registrar(forPlugin: "FLTFirebaseCorePlugin"))
