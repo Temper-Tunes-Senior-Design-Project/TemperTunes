@@ -10,8 +10,9 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  persistent_bottom_nav_bar: ^5.0.2
+  convex_bottom_bar: ^3.0.0
   google_fonts: ^2.1.0
+  firebase_core: ^2.4.1
 
 dev_dependencies:
   flutter_test:
@@ -45,8 +46,6 @@ flutter:
         - asset: fonts/MavenPro-Black.ttf
         - asset: fonts/MavenPro-SemiBold.ttf
         - asset: fonts/MavenPro-VariableFont_wght.ttf
-
-mediaquery_sizer: ^1.1.0
 
 assets:
   - assets/bokeh_lights.png

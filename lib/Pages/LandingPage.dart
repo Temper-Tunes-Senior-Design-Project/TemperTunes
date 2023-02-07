@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart' show debugPaintSizeEnabled;
 import '../Widgets/widgets.dart';
-//import 'package:flutter/widgets.dart' as ui;
 
 
 class Body extends StatelessWidget {
@@ -90,17 +88,6 @@ class LargeScreen extends StatelessWidget {
   }
 }
 
-
-    /*
-    return Container(
-      height: 200,
-      child: Stack(
-        fit: StackFit.expand,
-        children: [addLogo()],
-      ),
-    );
-*/
-
 class SmallScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -180,12 +167,6 @@ class LandingPage extends StatelessWidget {
 
   @override
   Widget build(Object context) {
-    Widget addLogo = Container(
-        padding: const EdgeInsets.all(32),
-        child: new Image.asset('music_swing_logo_med.png', scale: 1)
-    );
-
-    //Materialapp debugger false
     return Scaffold(
         resizeToAvoidBottomInset: false,
         body: DecoratedBox(
@@ -202,96 +183,3 @@ class LandingPage extends StatelessWidget {
     );
   }
 }
-
-
-/*
-
-runApp(
-          new MediaQuery(
-              data: new MediaQueryData.fromWindow(ui.window),
-              child: new Directionality(
-                  textDirection: TextDirection.rtl,
-                  child: new LandingPage()))
-  );
-
-var background = "landingpage_bg.png";
-
-class Body extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ResponsiveWidget(
-      largeScreen: LargeScreen(),
-      smallScreen: SmallScreen(),
-    );
-  }
-}
-
-class LargeScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Stack(
-        fit: StackFit.loose,
-        children: <Widget>[addBackground()],
-      ),]
-    );
-  }
-
-  //Adds background Image
-  Widget addBackground() {
-    return FractionallySizedBox(
-      alignment: Alignment.centerRight, //to keep images aligned to right
-      widthFactor: 1, //covers about 60% of the screen width
-      heightFactor: 0.5,
-      child: new Image.asset(background,fit: BoxFit.cover)
-    );
-  }
-}
-
-
-class SmallScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: EdgeInsets.all(0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Center(
-              child: new Image.asset(background, scale: 1),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-class LandingPage extends StatelessWidget {
-  const LandingPage({super.key});
-
-  @override
-  Widget build(Object context) {
-    return LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints viewportConstraints){
-          return SingleChildScrollView(
-              child: ConstrainedBox(
-                  constraints: BoxConstraints(
-                    minHeight: viewportConstraints.maxHeight,
-                  ),
-                  child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        Body()
-                      ]
-                  )
-              )
-          );
-        }
-    );
-  }
-}
-
-
-*/

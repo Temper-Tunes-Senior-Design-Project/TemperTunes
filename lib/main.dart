@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mood_swing/Pages/UserPage.dart';
-
-import 'Pages/HomePage.dart';
-import 'Pages/LandingPage.dart';
 import 'Pages/LoginPage.dart';
 
 void main() {
@@ -12,7 +8,7 @@ void main() {
 class App extends StatelessWidget {
   App();
 
-  Map<int, Color> color = {
+  final Map<int, Color> color = {
     50: Color.fromRGBO(13, 0, 54, 0.1),
     100: Color.fromRGBO(13, 0, 54, 0.2),
     200: Color.fromRGBO(13, 0, 54, 0.3),

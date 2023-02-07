@@ -1,4 +1,5 @@
 
+import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 
 import 'UserPage.dart';
@@ -32,18 +33,17 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
-
-      // bottomNavigationBar: ConvexAppBar(
-      //     style: TabStyle.textIn,
-      //     items: [
-      //       TabItem(icon: Icon(Icons.list), title: "Playlists"),
-      //       TabItem(
-      //         icon: Icon(Icons.create),
-      //         title: "Create",
-      //       ),
-      //       TabItem(icon: Icon(Icons.settings), title: "Preferences"),
-      //     ],
-      //     onTap: (int index) {}),
+      bottomNavigationBar: ConvexAppBar(
+          style: TabStyle.textIn,
+          items: [
+            TabItem(icon: Icon(Icons.list), title: "Playlists"),
+            TabItem(
+              icon: Icon(Icons.create),
+              title: "Create",
+            ),
+            TabItem(icon: Icon(Icons.settings), title: "Preferences"),
+          ],
+          onTap: (int index) {}),
     );
   }
 }
