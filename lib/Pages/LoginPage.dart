@@ -41,13 +41,14 @@ class LargeScreen extends StatelessWidget {
                         IconData(0xf05bc, fontFamily: 'MaterialIcons'),
                         color: Colors.white,
                         size: 40,
-                      )
-                    )
-                  ]
-                )
+                      ),
+                    ),
+                  ],
+                ),
               ),
+              ///Main Container
               Container(
-                height: height*0.7,
+                height: height*0.8,
                 width: width*0.3,
                 decoration: BoxDecoration(
                   color: Colors.grey.withOpacity(0.3),
@@ -59,7 +60,7 @@ class LargeScreen extends StatelessWidget {
                         padding: EdgeInsets.only(top: height*0.02),
                         child: Image.asset(
                               "music_swing_logo_small.png",
-                              scale: 2.5)),
+                              scale: 2.5),),
                     ///Icon for user
                     Container(
                         alignment: Alignment.topLeft,
@@ -82,7 +83,7 @@ class LargeScreen extends StatelessWidget {
                         height: 8,
                         thickness: 2,
                         color: Colors.white,
-                      )
+                      ),
                     ),
                     ///password icon
                     Container(
@@ -92,7 +93,7 @@ class LargeScreen extends StatelessWidget {
                           IconData(0xe3ae, fontFamily: 'MaterialIcons'),
                           color: MyPalette.white,
                           size: 30,
-                        )
+                        ),
                     ),
                     ///horizontal line
                     Container(
@@ -105,7 +106,7 @@ class LargeScreen extends StatelessWidget {
                           height: 8,
                           thickness: 2,
                           color: Colors.white,
-                        )
+                        ),
                     ),
                     ///Buttons
                     //Login button
@@ -115,7 +116,11 @@ class LargeScreen extends StatelessWidget {
                         width: 0.27*width,
                         height: 0.06*height,
                         decoration: BoxDecoration(
-                          color: MyPalette.slateBlue,
+                          gradient: LinearGradient(
+                            begin: Alignment.topRight,
+                            end: Alignment.bottomLeft,
+                            colors: [MyPalette.slateBlue,  MyPalette.brightMagenta,MyPalette.turqoise, ],
+                          ),
                           borderRadius: BorderRadius.all(Radius.circular(15))
                         ),
                         child: Align(
@@ -125,20 +130,24 @@ class LargeScreen extends StatelessWidget {
                                 fontSize: 25,
                                 fontFamily: 'Share Tech',
                                 color: Colors.white,
-                              )
-                          )
-                        )
-                    )
+                              ),
+                          ),
+                        ),
+                    ),
                     ),
                     //Register Button
                     Container(
-                        padding: EdgeInsets.only(top:0.023*height),
+                        padding: EdgeInsets.only(top:0.05*height),
                         child: Container(
                             width: 0.27*width,
                             height: 0.06*height,
                             decoration: BoxDecoration(
-                                color: MyPalette.slateBlue,
-                                borderRadius: BorderRadius.all(Radius.circular(15))
+                              gradient: LinearGradient(
+                                begin: Alignment.topRight,
+                                end: Alignment.bottomLeft,
+                                colors: [MyPalette.slateBlue,  MyPalette.brightMagenta,MyPalette.turqoise, ],
+                              ),
+                              borderRadius: BorderRadius.all(Radius.circular(15))
                             ),
                             child: Align(
                                 alignment: Alignment.center,
@@ -147,14 +156,14 @@ class LargeScreen extends StatelessWidget {
                                       fontSize: 25,
                                       fontFamily: 'Share Tech',
                                       color: Colors.white,
-                                    )
-                                )
-                            )
-                        )
+                                    ),
+                                ),
+                            ),
+                        ),
                     ),
                     ///Forgot Password
                     Container(
-                      padding: EdgeInsets.only(top:0.04*height),
+                      padding: EdgeInsets.only(top:0.08*height),
                       child: Text('Forgot your password?',
                         textAlign: TextAlign.center,
                         style: TextStyle(
@@ -162,16 +171,16 @@ class LargeScreen extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           fontSize: 15,
                           color: MyPalette.turqoise,
-                        )
-                      )
-                    )
-                  ]
-                )
-              )
-            ]
-          )
-        )
-      )
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 
@@ -209,10 +218,10 @@ class SmallScreen extends StatelessWidget {
                         IconData(0xf05bc, fontFamily: 'MaterialIcons'),
                         color: Colors.white,
                         size: 40,
-                      )
+                      ),
                     ),
-                  ]
-                )
+                  ],
+                ),
               ),
               Container(
                 child: Column (
@@ -221,7 +230,7 @@ class SmallScreen extends StatelessWidget {
                     Container(
                       alignment: Alignment.topCenter,
                       padding: EdgeInsets.only(top: height*0.02, bottom: height*0.022),
-                      child: Image.asset("music_swing_logo_small.png", scale: 2.5)),
+                      child: Image.asset("music_swing_logo_small.png", scale: 2.5),),
                     ///User input area
                     Container(
                       padding: EdgeInsets.only(left:0.12*width),
@@ -273,7 +282,12 @@ class SmallScreen extends StatelessWidget {
                         width: 0.8*width,
                         height: 0.07*height,
                         decoration: BoxDecoration(
-                          color: MyPalette.slateBlue,
+                          //color: MyPalette.slateBlue,
+                          gradient: LinearGradient(
+                            begin: Alignment.topRight,
+                            end: Alignment.bottomLeft,
+                            colors: [MyPalette.slateBlue,  MyPalette.brightMagenta,MyPalette.turqoise, ],
+                          ),
                           borderRadius: BorderRadius.all(Radius.circular(15))),
                         child:Align(
                           alignment: Alignment.center,
@@ -282,9 +296,9 @@ class SmallScreen extends StatelessWidget {
                               fontSize: 25,
                               fontFamily: 'Share Tech',
                               color: Colors.white,
-                            )
+                            ),
                           ),
-                        )
+                        ),
                       ),
                     ),
                     ///Register button
@@ -294,7 +308,11 @@ class SmallScreen extends StatelessWidget {
                         width: 0.8*width,
                         height: 0.07*height,
                         decoration: BoxDecoration(
-                          color: MyPalette.slateBlue,
+                          gradient: LinearGradient(
+                            begin: Alignment.topRight,
+                            end: Alignment.bottomLeft,
+                            colors: [MyPalette.slateBlue,  MyPalette.brightMagenta,MyPalette.turqoise, ],
+                          ),
                           borderRadius: BorderRadius.all(Radius.circular(15))),
                         child:Align(
                           alignment: Alignment.center,
@@ -304,7 +322,7 @@ class SmallScreen extends StatelessWidget {
                                 fontFamily: 'Share Tech',
                                 color: Colors.white,)
                             ),
-                        )
+                        ),
                       ),
                     ),
                     ///Forgot Password
@@ -318,16 +336,16 @@ class SmallScreen extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
                             color: MyPalette.turqoise,
-                          )
-                        )
-                      )
-                    )
-                ])
-              )
-            ]
-          )
-        )
-      )
+                          ),
+                        ),
+                      ),
+                    ),
+                ],),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
@@ -343,7 +361,7 @@ class LoginPage extends StatelessWidget {
         resizeToAvoidBottomInset: false,
         body: Column(
             children: [Body()]
-        )
+        ),
     );
   }
 }

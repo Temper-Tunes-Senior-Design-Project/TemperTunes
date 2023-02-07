@@ -4,6 +4,7 @@ import 'package:mood_swing/Pages/UserPage.dart';
 import 'Pages/HomePage.dart';
 import 'Pages/LandingPage.dart';
 import 'Pages/LoginPage.dart';
+import 'Pages/SignupPage.dart';
 
 void main() {
   runApp(App());
@@ -35,8 +36,8 @@ class App extends StatelessWidget {
           primarySwatch: MaterialColor(0x0d0036, color),
           fontFamily: 'Maven Pro'),
 
-   //   home:UserPage(),
-     home: LoginPage(),
+   // home: LoginPage()
+     home: SignupPage(),
     );
   }
 }

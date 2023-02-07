@@ -49,5 +49,4 @@ flutter:
 mediaquery_sizer: ^1.1.0
 
 assets:
-  - assets/bokeh_lights.png
   - assets/music_swing_logo_med.png
