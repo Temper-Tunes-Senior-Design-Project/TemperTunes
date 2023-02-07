@@ -48,7 +48,5 @@ flutter:
         - asset: fonts/MavenPro-Black.ttf
         - asset: fonts/MavenPro-SemiBold.ttf
         - asset: fonts/MavenPro-VariableFont_wght.ttf
-
-assets:
-  - assets/bokeh_lights.png
-  - assets/music_swing_logo_med.png
+  assets:
+    - assets/

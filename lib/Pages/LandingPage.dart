@@ -22,7 +22,7 @@ class LargeScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Center(
-              child: new Image.asset("music_swing_logo_med.png", width: 360, height: 413),
+              child: new Image.asset("assets/music_swing_logo_med.png", width: 360, height: 413),
             ),
             Padding(
               padding: EdgeInsets.only(left: 0.0, top: 0),

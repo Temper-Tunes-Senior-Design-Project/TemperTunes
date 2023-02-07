@@ -3,6 +3,7 @@ import 'Pages/LoginPage.dart';
 import 'Widgets/MockNavigator.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(App());
 }
 

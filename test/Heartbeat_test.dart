@@ -9,6 +9,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mood_swing/main.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
   group("App Tests", () {
     testWidgets('App Heartbeat Test', (WidgetTester tester) async {
       // Build our app and trigger a frame.

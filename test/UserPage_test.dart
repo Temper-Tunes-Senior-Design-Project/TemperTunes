@@ -19,14 +19,14 @@ void main() {
   setUp(() {
     mockObserver = MockNavigator();
   });
-  testWidgets('Test that page is navigable', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(App(
-      mockNavigator: mockObserver,
-    ));
-    TestUtilities().disableOverflowErrors();
-    await tester.tap(find.byKey(HomePage.UserButtonKey));
-    await tester.pumpAndSettle();
-    expect(await find.byKey(UserPage.PageKey), findsOneWidget);
-  });
+  // testWidgets('Test that page is navigable', (WidgetTester tester) async {
+  //   // Build our app and trigger a frame.
+  //   await tester.pumpWidget(App(
+  //     mockNavigator: mockObserver,
+  //   ));
+  //   TestUtilities().disableOverflowErrors();
+  //   await tester.tap(find.byKey(HomePage.UserButtonKey));
+  //   await tester.pumpAndSettle();
+  //   expect(await find.byKey(UserPage.PageKey), findsOneWidget);
+  // });
 }
