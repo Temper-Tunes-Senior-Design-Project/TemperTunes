@@ -12,6 +12,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   convex_bottom_bar: ^3.0.0
   firebase_core: ^2.4.1
+  google_fonts: ^2.1.0
 
 dev_dependencies:
   flutter_test:
@@ -34,3 +35,18 @@ flutter_icons:
 
 flutter:
   uses-material-design: true
+  fonts:
+    - family: Share Tech
+      fonts:
+        - asset: fonts/ShareTech-Regular.ttf
+    - family: Maven Pro
+      fonts:
+        - asset: fonts/MavenPro-Regular.ttf
+        - asset: fonts/MavenPro-Bold.ttf
+        - asset: fonts/MavenPro-ExtraBold.ttf
+        - asset: fonts/MavenPro-Medium.ttf
+        - asset: fonts/MavenPro-Black.ttf
+        - asset: fonts/MavenPro-SemiBold.ttf
+        - asset: fonts/MavenPro-VariableFont_wght.ttf
+  assets:
+    - assets/

@@ -11,7 +11,9 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Mood Swing"),
+        title: Text("Mood Swing",
+            style: TextStyle(
+                fontFamily: 'Share Tech', fontWeight: FontWeight.bold)),
         actions: [
           IconButton(
             key: UserButtonKey,
@@ -35,7 +37,7 @@ class HomePage extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: ConvexAppBar(
-          style: TabStyle.fixedCircle,
+          style: TabStyle.textIn,
           items: [
             TabItem(icon: Icon(Icons.list), title: "Playlists"),
             TabItem(
