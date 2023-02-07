@@ -258,7 +258,7 @@ class SmallScreen extends StatelessWidget {
                    ///Horizontal line
                    Container(
                      padding: EdgeInsets.only(
-                       left: 0.1*width, right:0.1*width,top:3, bottom:height*0.05),
+                       left: 0.1*width, right:0.1*width,top:3, bottom:height*0.045),
                      child: const Divider(
                        height: 8,
                        thickness: 2,
@@ -268,38 +268,59 @@ class SmallScreen extends StatelessWidget {
                    ///Buttons
                     //Login Button
                     Container(
-                      width: 0.8*width,
-                      height: 0.06*height,
-                      decoration: BoxDecoration(
-                        color: MyPalette.slateBlue,
-                        borderRadius: BorderRadius.all(Radius.circular(15))),
-                      child:Align(
-                        alignment: Alignment.center,
-                        child: Text("Login", textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 25,
-                            fontFamily: 'Share Tech',
-                            color: Colors.white,
-                          )
-                        ),
-                      )
-                    ),
-                    ///Register button
-                    Container(
+                      //padding: EdgeInsets.only(top: height*0.03),
+                      child: Container(
                         width: 0.8*width,
-                        height: 0.06*height,
+                        height: 0.07*height,
                         decoration: BoxDecoration(
-                            color: MyPalette.slateBlue,
-                            borderRadius: BorderRadius.all(Radius.circular(15))),
+                          color: MyPalette.slateBlue,
+                          borderRadius: BorderRadius.all(Radius.circular(15))),
                         child:Align(
                           alignment: Alignment.center,
-                            child: Text("Login", textAlign: TextAlign.center,
+                          child: Text("Login", textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 25,
+                              fontFamily: 'Share Tech',
+                              color: Colors.white,
+                            )
+                          ),
+                        )
+                      ),
+                    ),
+                    ///Register button
+                    Container (
+                      padding: EdgeInsets.only(top: height*0.03),
+                      child: Container(
+                        width: 0.8*width,
+                        height: 0.07*height,
+                        decoration: BoxDecoration(
+                          color: MyPalette.slateBlue,
+                          borderRadius: BorderRadius.all(Radius.circular(15))),
+                        child:Align(
+                          alignment: Alignment.center,
+                            child: Text("Register", textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 25,
                                 fontFamily: 'Share Tech',
                                 color: Colors.white,)
                             ),
                         )
+                      ),
+                    ),
+                    ///Forgot Password
+                    Container(
+                      padding: EdgeInsets.only(top: 0.05*height),
+                      child: Container(
+                        child: Text('Forgot your password?',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: 'Maven Pro',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: MyPalette.turqoise,
+                          )
+                        )
+                      )
                     )
                 ])
               )

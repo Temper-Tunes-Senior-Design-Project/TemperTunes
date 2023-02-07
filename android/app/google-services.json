@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1024103738297",
+    "project_id": "mood-swing-6c9d0",
+    "storage_bucket": "mood-swing-6c9d0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1024103738297:android:d026d0457c0c46e80fe468",
+        "android_client_info": {
+          "package_name": "com.tempertunes.temper_tunes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1024103738297-2mqld3o01gt6gb1nt0m4cq0kn781r0j7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWxOM9r0Ulvf4d8Xi-8GtpA8ZN_BKYQSk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1024103738297-2mqld3o01gt6gb1nt0m4cq0kn781r0j7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1024103738297-ikdr012sp6bbsb1s4hpglst68m36l2nk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.tempertunes.temperTunes"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
