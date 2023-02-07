@@ -24,7 +24,7 @@ class LargeScreen extends StatelessWidget {
           height: height,
           decoration:BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("LoginPageLarge.png"), fit: BoxFit.cover),
+                image: AssetImage("assets/LoginPageLarge.png"), fit: BoxFit.cover),
           ),
           child: Padding(
             padding: EdgeInsets.only(top: 0.02*height),
@@ -59,7 +59,7 @@ class LargeScreen extends StatelessWidget {
                     alignment: Alignment.topCenter,
                         padding: EdgeInsets.only(top: height*0.02),
                         child: Image.asset(
-                              "music_swing_logo_small.png",
+                              "assets/music_swing_logo_small.png",
                               scale: 2.5),),
                     ///Icon for user
                     Container(
@@ -200,7 +200,7 @@ class SmallScreen extends StatelessWidget {
         decoration: BoxDecoration(
           //set img to bg of body
           image: DecorationImage(
-              image: AssetImage("loginPageSmall.png"), fit: BoxFit.cover),
+              image: AssetImage("assets/loginPageSmall.png"), fit: BoxFit.cover),
           ),
         child: Padding(
           padding: EdgeInsets.only(top: 0.025*height),
@@ -213,7 +213,7 @@ class SmallScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      padding: EdgeInsets.only(left:0.02*width),
+                      padding: EdgeInsets.only(left:0.03*width, top: 0.06*height),
                       child: Icon(
                         IconData(0xf05bc, fontFamily: 'MaterialIcons'),
                         color: Colors.white,
@@ -230,7 +230,7 @@ class SmallScreen extends StatelessWidget {
                     Container(
                       alignment: Alignment.topCenter,
                       padding: EdgeInsets.only(top: height*0.02, bottom: height*0.022),
-                      child: Image.asset("music_swing_logo_small.png", scale: 2.5),),
+                      child: Image.asset("assets/music_swing_logo_small.png", scale: 2.5),),
                     ///User input area
                     Container(
                       padding: EdgeInsets.only(left:0.12*width),

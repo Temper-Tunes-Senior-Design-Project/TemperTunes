@@ -31,7 +31,7 @@ class profileBar extends StatelessWidget{
               Container(
                 padding: EdgeInsets.only(bottom: height*0.02),
                 child: CircleAvatar(
-                  backgroundImage: AssetImage("profilepic.png"),
+                  backgroundImage: AssetImage("assets/profilepic.png"),
                   radius: 90,
                 )
               ),
@@ -208,7 +208,7 @@ class LargeScreen extends StatelessWidget {
           height: height,
           decoration:BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("userPageLarge.png"), fit: BoxFit.cover),
+                image: AssetImage("assets/userPageLarge.png"), fit: BoxFit.cover),
           ),
           child: Padding(
             padding: EdgeInsets.only(left:50, top: 80, right: width*0.02),
@@ -356,7 +356,7 @@ class LargeScreen extends StatelessWidget {
                                                                                   //Watch icon
                                                                                   Container(
                                                                                       padding: EdgeInsets.only(top:0.01*height),
-                                                                                      child: Image.asset("spotifyLogo.png", height:0.1*height, width: 0.11*width)
+                                                                                      child: Image.asset("assets/spotifyLogo.png", height:0.1*height, width: 0.11*width)
 
                                                                                   ),
                                                                                   //Device Descr.
@@ -392,7 +392,7 @@ class LargeScreen extends StatelessWidget {
                                                                                   //Watch icon
                                                                                   Container(
                                                                                       padding: EdgeInsets.only(top:0.01*height),
-                                                                                      child: Image.asset("appleMusicLogo.png", height:0.12*height, width:width*0.11)
+                                                                                      child: Image.asset("assets/appleMusicLogo.png", height:0.12*height, width:width*0.11)
 
                                                                                   ),
                                                                                   //Device Descr.
@@ -449,15 +449,16 @@ class SmallScreen extends StatelessWidget {
           decoration: BoxDecoration(
             //set img to bg of body
             image: DecorationImage(
-                image: AssetImage("UserPageLarge.png"), fit: BoxFit.cover),
+                image: AssetImage("assets/userPageLarge.png"), fit: BoxFit.cover),
           ),
           child: Container(
             child: Column(
               children: <Widget>[
+                ///top container
                 Container(
                   alignment: Alignment.topCenter,
                   width: width,
-                  height: 0.35 *height,
+                  height: 0.38 *height,
                   decoration: BoxDecoration(
                     color: MyPalette.darkTurqoise,
                     borderRadius: BorderRadius.only(
@@ -469,19 +470,31 @@ class SmallScreen extends StatelessWidget {
                     child: Container(
                       alignment: Alignment.center,
                       child: Column(
-                        //profile picture
                         children: [
-                          Container(
-                              alignment: Alignment.center,
-                              child: new Icon(
-                                IconData(0xe043, fontFamily: 'MaterialIcons'),
+                          ///Back button
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                            Container(
+                              padding: EdgeInsets.only(left:0.02*width, top: 0.04*height),
+                              child: Icon(
+                                IconData(0xf05bc, fontFamily: 'MaterialIcons'),
                                 color: Colors.white,
-                                size: height*0.2,
-                              )
+                                size: 40,
+                              ),
+                            ),
+                          ],),
+                          ///Profile picture
+                          Container(
+                            alignment: Alignment.center,
+                            child: CircleAvatar(
+                              backgroundImage: AssetImage("assets/profilepic.png"),
+                              radius: 60,
+                            ),
                           ),
                           //User's name and membership
                           Container(
-                            //padding: EdgeInsets.only(top:height*0.001),
+                            padding: EdgeInsets.only(top:height*0.001),
                             child: Column(
                               children: [
                                 //Name
@@ -500,28 +513,28 @@ class SmallScreen extends StatelessWidget {
                                 )
                               ],
                             ),
-                          )],
-                      )
-
-                    )
-
-                  )
+                          ),],
+                      ),
+                    ),
+                  ),
                 ),
+
+
                 SizedBox(
                   height: 0.05*height,
                 ),
+                ///User stats pt1
                 Container(
                     alignment: Alignment.topRight,
-                    ///User Stats
                     child: Container(
                         alignment: Alignment.topRight,
-                        height: height*0.1,
+                        height: height*0.075,
                         width: width*0.9,
                         decoration: BoxDecoration(
                           color: MyPalette.magenta,
                           borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(80),
-                              topLeft:Radius.circular(80)),
+                              topLeft:Radius.circular(80),),
                         ),
                         child: Container(
                             child: Row(
@@ -551,8 +564,8 @@ class SmallScreen extends StatelessWidget {
                                                 fontSize:26,
                                             ))
                                           ),
-                                        ]
-                                      )
+                                        ],
+                                      ),
                                   ),
                                 ///Songs
                                   Container(
@@ -578,23 +591,23 @@ class SmallScreen extends StatelessWidget {
                                                     fontSize:26,
                                                   ))
                                           ),
-                                        ]
-                                    )
+                                        ],
+                                    ),
                                   ),
-                                ]
-                            )
-                        )
+                                ],
+                            ),
+                        ),
 
-                    )),
+                    ),),
                 SizedBox(
                   height: 0.03*height,
                 ),
-                ///more stats
+                ///User stats pt2
                 Container(
                     alignment: Alignment.topLeft,
                     child: Container(
                         alignment: Alignment.topLeft,
-                        height: height*0.1,
+                        height: height*0.075,
                         width: width*0.9,
                         decoration: BoxDecoration(
                           color: MyPalette.darkTurqoise,
@@ -632,7 +645,7 @@ class SmallScreen extends StatelessWidget {
                                                     ))
                                             ),
                                           ]
-                                      )
+                                      ),
                                   ),
                                   ///Exported Playlists
                                   Container(
@@ -658,16 +671,18 @@ class SmallScreen extends StatelessWidget {
                                                       fontSize:26,
                                                     ))
                                             ),
-                                          ]
-                                      )
+                                          ],
+                                      ),
                                   ),
-                                ]
-                            )
-                        )
-                    )),
+                                ],
+                            ),
+                        ),
+                    ),),
                 SizedBox(
                   height: 0.03*height,
                 ),
+
+
                 ///User's linked devices
                 Container(
                     alignment: Alignment.topRight,
@@ -698,15 +713,15 @@ class SmallScreen extends StatelessWidget {
                                                   fontFamily: 'Maven Pro',
                                                   fontSize: 16,
                                                   color: Colors.white,
-                                                )
-                                                )),
-                                          ]
-                                      )
+                                                ),
+                                                ),),
+                                          ],
+                                      ),
                                   ),
-                                ]
-                            )
-                        )
-                    )),
+                                ],
+                            ),
+                        ),
+                    ),),
                 SizedBox(
                   height: 0.03*height,
                 ),
@@ -740,21 +755,19 @@ class SmallScreen extends StatelessWidget {
                                                   fontFamily: 'Maven Pro',
                                                   fontSize: 16,
                                                   color: Colors.white,
-                                                )
-                                                )),
-                                          ]
-                                      )
-                                  )
-                                ]
-                            )
-                        )
-                    )),
-
-              ]
-                )
-
-            )
-          )
+                                                ),
+                                                ),),
+                                          ],
+                                      ),
+                                  ),
+                              ],
+                          ),
+                      ),
+                  ),),
+                ],
+              ),
+            ),
+          ),
         );
   }
 }
@@ -769,99 +782,4 @@ class UserPage extends StatelessWidget {
     );
   }
 }
-
-
-
-
-/*
-
-    return Scaffold(
-      backgroundColor: Colors.lightBlue,
-      appBar: AppBar(
-        title: Text("Mood Swing"),
-        actions: [Icon(Icons.person),],
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-
-              Container(
-                height: 150,
-                child: Row(
-                  children: [
-                    Container(child: Image.network("https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png")),
-                    Expanded(
-                      child: Container(
-                        height: 198,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text("John Doe"),
-                            Text("Member Since: September 2022"),
-                            Container(
-                                height: 100,
-                                width: 250,
-                                child: Card(
-                                    child: Container(
-                                      height: 100,
-                                      child: GridView.count(
-                                        physics: NeverScrollableScrollPhysics(),
-                                        childAspectRatio: 10/4,
-                                        crossAxisSpacing: 0,
-                                        crossAxisCount: 2,
-                                        mainAxisSpacing: 0,
-                                        //gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, mainAxisSpacing: 0),
-                                        padding: EdgeInsets.zero,
-                                children: [
-                                 GridText("14", "Playlists"),
-                                  GridText("103", "Total Songs"),
-                                 GridText("13", "Classifications"),
-                                 GridText("4", "Devices"),
-
-                                ],),
-                                    ),
-                                    ),
-                              ),
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-                child: Text("Your Accounts"),
-              ),
-              Card(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                   SizedBox( height: 75, child: ImageHelper('https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Spotify_logo_without_text.svg/252px-Spotify_logo_without_text.svg.png?20160123212544', 'Spotify')),
-                    SizedBox( height: 75, child: ImageHelper('https://static.wikia.nocookie.net/logopedia/images/a/aa/Ic_launcher.png/revision/latest?cb=20201027194703', 'Apple Music')),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
-                child: Text("Your Devices"),
-              ),
-              Card(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox( height: 75, width: 105, child: ImageHelper('https://cdn1.vectorstock.com/i/thumb-large/13/00/watch-icon-on-white-vector-22181300.jpg', 'John Doe\'s Apple Watch')),
-                    SizedBox( height: 75, width: 105, child: ImageHelper('https://cdn1.vectorstock.com/i/thumb-large/13/00/watch-icon-on-white-vector-22181300.jpg', 'Fitbit 7502')),
-                  ],
-                ),
-              ),
-              Spacer(),
-            ],
-      ),
-
-    );
-  }
- */
 

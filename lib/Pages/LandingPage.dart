@@ -24,7 +24,7 @@ class LargeScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Center(
-              child: new Image.asset("music_swing_logo_med.png", width: 360, height: 413),
+              child: new Image.asset("assets/music_swing_logo_med.png", width: 360, height: 413),
             ),
             Padding(
               padding: EdgeInsets.only(left: 0.0, top: 0),
@@ -71,18 +71,18 @@ class LargeScreen extends StatelessWidget {
                                               Container(
                                                 padding: const EdgeInsets.only(top: 20),
                                                 child: Icon(
-                                                  IconData(0xe353, fontFamily: 'MaterialIcons'),
+                                                  IconData(0xe095, fontFamily: 'MaterialIcons'),
                                                   color: MyPalette.white,
                                                   size: 60,
                                                 ),
-                                              )
-                                        ]),
-                                    )
-                                  ])
-                          )
-                      )
-                ])
-            )
+                                              ),
+                                        ],),
+                                    ),
+                                  ],),
+                          ),
+                      ),
+                ],),
+            ),
           ],
         ),
       ),
@@ -91,27 +91,20 @@ class LargeScreen extends StatelessWidget {
 }
 
 
-    /*
-    return Container(
-      height: 200,
-      child: Stack(
-        fit: StackFit.expand,
-        children: [addLogo()],
-      ),
-    );
-*/
 
 class SmallScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
       child: Padding(
-        padding: EdgeInsets.all(20),
+        padding: EdgeInsets.only(left:20, right: 20, top: 0.07*height),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Center(
-              child: new Image.asset("music_swing_logo_small.png", width: 370, height: 338),
+              child: new Image.asset("assets/music_swing_logo_small.png", width: 370, height: 338),
             ),
             Padding(
               padding: EdgeInsets.only(left: 0.0, top: 0),
@@ -154,23 +147,23 @@ class SmallScreen extends StatelessWidget {
                                       textAlign: TextAlign.center,
                                       ),
                                     Container(
-                                      padding: const EdgeInsets.only(top: 30),
+                                      padding: EdgeInsets.only(top: height*0.07),
                                       child: Icon(
-                                          IconData(0xe043, fontFamily: 'MaterialIcons'),
+                                          IconData(0xe095, fontFamily: 'MaterialIcons'),
                                           color: MyPalette.white,
-                                          size: 36,
+                                          size: 50,
                                       ),
-                                    )]
-                                  )
-                                )
-                              ])
-                            )
-                          )
-                        ])
-                      )
-                    ]
-                  )
-              )
+                                    ),],
+                                  ),
+                                ),
+                              ],),
+                            ),
+                          ),
+                        ],),
+                      ),
+                    ],
+                  ),
+              ),
             );
   }
 }
@@ -180,10 +173,6 @@ class LandingPage extends StatelessWidget {
 
   @override
   Widget build(Object context) {
-    Widget addLogo = Container(
-        padding: const EdgeInsets.all(32),
-        child: new Image.asset('music_swing_logo_med.png', scale: 1)
-    );
 
     //Materialapp debugger false
     return Scaffold(
@@ -193,7 +182,7 @@ class LandingPage extends StatelessWidget {
               decoration:BoxDecoration(
                 //set img to bg of body
                 image: DecorationImage(
-                    image: AssetImage("landingpageBG.png"), fit: BoxFit.cover),
+                    image: AssetImage("assets/landingpageBG.png"), fit: BoxFit.cover),
               ),
               child: Column(
                   children: [Body()]
@@ -203,95 +192,3 @@ class LandingPage extends StatelessWidget {
   }
 }
 
-
-/*
-
-runApp(
-          new MediaQuery(
-              data: new MediaQueryData.fromWindow(ui.window),
-              child: new Directionality(
-                  textDirection: TextDirection.rtl,
-                  child: new LandingPage()))
-  );
-
-var background = "landingpage_bg.png";
-
-class Body extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ResponsiveWidget(
-      largeScreen: LargeScreen(),
-      smallScreen: SmallScreen(),
-    );
-  }
-}
-
-class LargeScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Stack(
-        fit: StackFit.loose,
-        children: <Widget>[addBackground()],
-      ),]
-    );
-  }
-
-  //Adds background Image
-  Widget addBackground() {
-    return FractionallySizedBox(
-      alignment: Alignment.centerRight, //to keep images aligned to right
-      widthFactor: 1, //covers about 60% of the screen width
-      heightFactor: 0.5,
-      child: new Image.asset(background,fit: BoxFit.cover)
-    );
-  }
-}
-
-
-class SmallScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: EdgeInsets.all(0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Center(
-              child: new Image.asset(background, scale: 1),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-class LandingPage extends StatelessWidget {
-  const LandingPage({super.key});
-
-  @override
-  Widget build(Object context) {
-    return LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints viewportConstraints){
-          return SingleChildScrollView(
-              child: ConstrainedBox(
-                  constraints: BoxConstraints(
-                    minHeight: viewportConstraints.maxHeight,
-                  ),
-                  child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        Body()
-                      ]
-                  )
-              )
-          );
-        }
-    );
-  }
-}
-
-
-*/

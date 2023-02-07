@@ -24,7 +24,7 @@ class LargeScreen extends StatelessWidget {
             height: height,
             decoration:BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage("LoginPageLarge.png"), fit: BoxFit.cover),
+                  image: AssetImage("assets/LoginPageLarge.png"), fit: BoxFit.cover),
             ),
             child: Padding(
               ///back arrow
@@ -61,7 +61,7 @@ class LargeScreen extends StatelessWidget {
                                   alignment: Alignment.topCenter,
                                   padding: EdgeInsets.only(top: height*0.02),
                                   child: Image.asset(
-                                      "music_swing_logo_small.png",
+                                      "assets/music_swing_logo_small.png",
                                       scale: 2.3),),
                                 ///EnterUsername
                                 Column(
@@ -232,10 +232,10 @@ class SmallScreen extends StatelessWidget {
         decoration: BoxDecoration(
           //set img to bg of body
           image: DecorationImage(
-              image: AssetImage("loginPageSmall.png"), fit: BoxFit.cover),
+              image: AssetImage("assets/loginPageSmall.png"), fit: BoxFit.cover),
         ),
         child: Padding(
-          padding: EdgeInsets.only(top: 0.025*height),
+          padding: EdgeInsets.only(left:0.03*width, top: 0.06*height),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget> [
@@ -262,7 +262,7 @@ class SmallScreen extends StatelessWidget {
                     Container(
                       alignment: Alignment.topCenter,
                       padding: EdgeInsets.only(top: height*0.02, bottom:height*0.05),
-                      child: Image.asset("music_swing_logo_small.png", scale: 2.5),),
+                      child: Image.asset("assets/music_swing_logo_small.png", scale: 2.5),),
 
                     ///Username
                     Column(
