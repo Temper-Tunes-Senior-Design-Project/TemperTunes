@@ -12,6 +12,9 @@ class Body extends StatelessWidget {
   }
 }
 
+class UserPage extends StatelessWidget {
+  static const Key PageKey = Key("User Page");
+  UserPage();
 
 class profileBar extends StatelessWidget{
   @override
