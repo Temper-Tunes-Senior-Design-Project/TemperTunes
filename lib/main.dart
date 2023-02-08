@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'Pages/LoginPage.dart';
+import 'Containers/LoginContainer.dart';
 import 'Widgets/MockNavigator.dart';
 
 void main() {
@@ -33,7 +33,7 @@ class App extends StatelessWidget {
       theme: ThemeData(
           primarySwatch: MaterialColor(0x0d0036, color),
           fontFamily: 'Maven Pro'),
-      home: LoginPage(),
+      home: LoginContainer(),
     );
   }
 }
