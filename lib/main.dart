@@ -38,7 +38,7 @@ class App extends StatelessWidget {
           primarySwatch: MaterialColor(0x0d0036, color),
           fontFamily: 'Maven Pro'),
 
-    home: PreferencesPage(),
+    home: LandingPage(),
  //    home: SignupPage(),
     );
   }

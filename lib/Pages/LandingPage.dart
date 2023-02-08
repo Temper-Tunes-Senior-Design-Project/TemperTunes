@@ -18,14 +18,19 @@ class Body extends StatelessWidget {
 class LargeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.only(top:30),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Center(
-              child: new Image.asset("assets/music_swing_logo_med.png", width: 360, height: 413),
+            Container(
+              alignment: Alignment.center,
+
+              //padding: EdgeInsets.only(right: 0.02*width),
+              child: new Image.asset("assets/music_swing_logo_med.png", height: height*0.5,),
             ),
             Padding(
               padding: EdgeInsets.only(left: 0.0, top: 0),
@@ -92,6 +97,8 @@ class LargeScreen extends StatelessWidget {
 }
 
 
+/*
+
 class SwipeToOpen extends StatelessWidget{
   const SwipeToOpen({super.key});
 
@@ -118,7 +125,7 @@ class SwipeToOpen extends StatelessWidget{
     );
   }
 }
-
+*/
 
 
 
