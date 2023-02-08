@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
+import '../../Pages/LandingPage.dart';
+import '../../Pages/LoginPage.dart';
 
 //List of viable login pages
-enum LoginPage { LandingPage, LoginInfoPage, RegisterPage, InfoPage }
+enum LoginPages { LandingPage, LoginPage, RegisterPage, InfoPage }
 
 //Register the properties of login pages
-extension LoginPages on LoginPage {
-  static Map<LoginPage, Widget> pages = {
-    LoginPage.LandingPage: Container(),
-    LoginPage.LoginInfoPage: Container(),
-    LoginPage.RegisterPage: Container(),
-    LoginPage.InfoPage: Container(),
+extension LoginPageExtension on LoginPages {
+  static Map<LoginPages, Widget> pages = {
+    LoginPages.LandingPage: LandingPage(),
+    LoginPages.LoginPage: LoginPage(),
+    LoginPages.RegisterPage: Container(),
+    LoginPages.InfoPage: Container(),
   };
 
   //Unimplemented
   //This allows you to restrict navigation between pages based on requirements.
   // e.g: A user needs to have a valid password/account before continuing.
-  static Map<LoginPage, bool Function()> assertions = {};
+  static Map<LoginPages, bool Function()> assertions = {};
 
   //Route to the page if the assertion function passes and the page exists.
   Widget get page {
@@ -24,9 +26,17 @@ extension LoginPages on LoginPage {
 }
 
 class LoginState extends ChangeNotifier {
-  Widget activePage = LoginPage.LandingPage.page;
+  LoginPages active = LoginPages.LandingPage;
+  Widget activePage = LoginPages.LandingPage.page;
 
-  void setPage(LoginPage routePage) {
+  void setActive(LoginPages routePage)
+  {
+    active = routePage;
+    activePage = routePage.page;
+    notifyListeners();
+  }
+
+  void setPage(LoginPages routePage) {
     activePage = routePage.page;
     notifyListeners(); //setState();
   }

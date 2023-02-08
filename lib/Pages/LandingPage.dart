@@ -98,7 +98,7 @@ class SmallScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Center(
-              child: new Image.asset("music_swing_logo_small.png", width: 370, height: 338),
+              child: new Image.asset("assets/music_swing_logo_small.png", width: 370, height: 338),
             ),
             Padding(
               padding: EdgeInsets.only(left: 0.0, top: 0),
@@ -162,7 +162,8 @@ class SmallScreen extends StatelessWidget {
   }
 }
 
-class LandingPage extends StatelessWidget {
+class LandingPage extends StatelessWidget
+{
   const LandingPage({super.key});
 
   @override
@@ -174,7 +175,7 @@ class LandingPage extends StatelessWidget {
               decoration:BoxDecoration(
                 //set img to bg of body
                 image: DecorationImage(
-                    image: AssetImage("landingpageBG.png"), fit: BoxFit.cover),
+                    image: AssetImage("assets/landingpageBG.png"), fit: BoxFit.cover),
               ),
               child: Column(
                   children: [Body()]

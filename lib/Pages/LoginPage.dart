@@ -2,6 +2,20 @@ import 'package:flutter/material.dart';
 import '../Widgets/widgets.dart';
 
 
+class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: Column(
+            children: [Body()]
+        )
+    );
+  }
+}
+
 class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -306,22 +320,6 @@ class SmallScreen extends StatelessWidget {
           )
         )
       )
-    );
-  }
-}
-
-
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
-
-  @override
-  Widget build(Object context) {
-    //Materialapp debugger false
-    return Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: Column(
-            children: [Body()]
-        )
     );
   }
 }
