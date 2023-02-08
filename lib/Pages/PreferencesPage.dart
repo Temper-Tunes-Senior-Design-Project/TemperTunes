@@ -26,13 +26,12 @@ class LargeScreen extends StatelessWidget {
           image: DecorationImage(
               image: AssetImage("assets/LoginPageLarge.png"), fit: BoxFit.cover),
         ),
-        child: Padding(
           ///back arrow
-          padding: EdgeInsets.only(top: 0.02*height),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Container(
+                padding: EdgeInsets.only(top: 0.02*height),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -54,6 +53,7 @@ class LargeScreen extends StatelessWidget {
                   ],
                 ),
               ),
+
               ///Main Container
               Container(
                 height: height*0.8,
@@ -62,163 +62,179 @@ class LargeScreen extends StatelessWidget {
                     color: Colors.grey.withOpacity(0.3),
                     borderRadius: BorderRadius.all(Radius.circular(20))),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    ///App logo
-                    Container(
-                      alignment: Alignment.topCenter,
-                      padding: EdgeInsets.only(top: height*0.02),
-                      child: Image.asset(
-                          "assets/music_swing_logo_small.png",
-                          scale: 2.3),),
-                    ///EnterUsername
-                    Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.only(left: width*0.02, top: height*0.06),
-                          alignment: Alignment.topLeft,
-                          //icon for user
-                          child: Text( 'Username', style: TextStyle(
-                            fontFamily: 'Maven Pro',
-                            fontWeight: FontWeight.w100,
-                            color: Colors.white54,
-                            fontSize: 14,
-                          ),
-                          ),
-                        ),
-                        ///Horizontal line
-                        Container(
-                          padding: EdgeInsets.only(
-                              left:0.02*width,
-                              right: 0.02*width,
-                              top: 3),
-                          child: const Divider(
-                            height: 8,
-                            thickness: 2,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                    ///Enter Email
-                    Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.only(left: 0.02*width, top: height*0.05),
-                          alignment: Alignment.topLeft,
-                          child: Text( 'Email', style: TextStyle(
-                            fontFamily: 'Maven Pro',
-                            fontWeight: FontWeight.w100,
-                            color: Colors.white54,
-                            fontSize: 14,
-                          ),
-                          ),
-                        ),
-                        ///horizontal line
-                        Container(
-                            padding: EdgeInsets.only(
-                                left:0.02*width,
-                                right: 0.02*width,
-                                top: 3),
-                            child: const Divider(
-                              height: 8,
-                              thickness: 2,
-                              color: Colors.white,
-                            )
-                        ),
-                      ],
-                    ),
-                    ///Password
-                    Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.only(left: 0.02*width, top: height*0.06),
-                          alignment: Alignment.topLeft,
-                          //icon for user
-                          child: Text( 'Password', style: TextStyle(
-                            fontFamily: 'Maven Pro',
-                            fontWeight: FontWeight.w100,
-                            color: Colors.white54,
-                            fontSize: 14,
-                          ),
-                          ),
-                        ),
-                        ///horizontal line
-                        Container(
-                            padding: EdgeInsets.only(
-                                left:0.02*width,
-                                right: 0.02*width,
-                                top: 3),
-                            child: const Divider(
-                              height: 8,
-                              thickness: 2,
-                              color: Colors.white,
-                            )
-                        ),
-                      ],
-                    ),
-                    ///Confirm Password
-                    Column(
-                      children: [
-                        Container(
-                          alignment: Alignment.topLeft,
-                          padding: EdgeInsets.only(left: width*0.02, top: height*0.06),
-                          //icon for user
-                          child: Text( 'Confirm Password', style: TextStyle(
-                            fontFamily: 'Maven Pro',
-                            fontWeight: FontWeight.w100,
-                            color: Colors.white54,
-                            fontSize: 14,
-                          ),
-                          ),
-                        ),
-                        ///horizontal line
-                        Container(
-                            padding: EdgeInsets.only(
-                                left:0.02*width,
-                                right: 0.02*width,
-                                bottom: 0.02*width,
-                                top: 3),
-                            child: const Divider(
-                              height: 8,
-                              thickness: 2,
-                              color: Colors.white,
-                            )
-                        ),
-                      ],
-                    ),
-
-                    ///Forgot Password
+                    ///logo
                     Container(
                       padding: EdgeInsets.only(top:0.02*height),
-                      child: Column(
+                      child: Image.asset(
+                          "assets/music_swing_logo_small.png",
+                          scale: 2.5),
+
+                    ),
+
+                    ///Preferences Title
+                    Container(
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.only(top:0.03*height, bottom: 0.03*height),
+                      child: Text('Preferences', style: TextStyle(
+                        fontSize: 53,
+                        fontFamily: 'Share Tech',
+                        color: MyPalette.lightPurple,
+                      ),),
+                    ),
+
+                    ///Account
+                    Container(
+                      child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                            alignment: Alignment.topLeft,
+                            child: Icon(
+                              IconData(0xe491, fontFamily: 'MaterialIcons'),
+                              color: MyPalette.white,
+                              size: 24,
+                            )
+                        ),
+                        ///Name
+                        Container(
+                          padding: EdgeInsets.only(left:0.01*width),
+                          alignment: Alignment.topLeft,
+                          child: Text( 'Account', style: TextStyle(
+                            fontFamily: 'Maven Pro',
+                            color: Colors.white,
+                            fontSize: 24,
+                          ),
+                        ),
+                        ),
+                      ],
+                    ),
+                    ),
+
+                    ///Change Email
+                    Container(
+                      padding: EdgeInsets.only(top: 0.035*height),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('Already have an account?',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
+                          Container(
+                              alignment: Alignment.topLeft,
+                              child: Icon(
+                                IconData(0xe22a, fontFamily: 'MaterialIcons'),
+                                color: MyPalette.white,
+                                size: 24,
+                              )
+                          ),
+                          ///Name
+                          Container(
+                            padding: EdgeInsets.only(left:0.01*width),
+                            alignment: Alignment.topLeft,
+                            child: Text( 'Change Email', style: TextStyle(
                               fontFamily: 'Maven Pro',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
                               color: Colors.white,
+                              fontSize: 24,
+                            ),
                             ),
                           ),
-                          Text('Go to login',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: 'Maven Pro',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                              color: MyPalette.turqoise,
-                            ),
-                          )
                         ],
                       ),
                     ),
+
+                    ///Change Password
+                    Container(
+                      padding: EdgeInsets.only(top: 0.035*height),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                              alignment: Alignment.topLeft,
+                              child: Icon(
+                                IconData(0xf052b, fontFamily: 'MaterialIcons'),
+                                color: MyPalette.white,
+                                size: 24,
+                              )
+                          ),
+                          ///Name
+                          Container(
+                            padding: EdgeInsets.only(left:0.01*width),
+                            alignment: Alignment.topLeft,
+                            child: Text( 'Change Password', style: TextStyle(
+                              fontFamily: 'Maven Pro',
+                              color: Colors.white,
+                              fontSize: 24,
+                            ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    ///Adjust Presets
+                    Container(
+                      padding: EdgeInsets.only(top: 0.035*height),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                              alignment: Alignment.topLeft,
+                              child: Icon(
+                                IconData(0xe91c, fontFamily: 'MaterialIcons'),
+                                color: MyPalette.white,
+                                size: 24,
+                              )
+                          ),
+                          ///Name
+                          Container(
+                            padding: EdgeInsets.only(left:0.01*width),
+                            alignment: Alignment.topLeft,
+                            child: Text( 'Adjust Presets', style: TextStyle(
+                              fontFamily: 'Maven Pro',
+                              color: Colors.white,
+                              fontSize: 24,
+                            ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    ///Delete
+                    Container(
+                      padding: EdgeInsets.only(top: 0.035*height),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                              alignment: Alignment.topLeft,
+                              child: Icon(
+                                IconData(0xe1b9, fontFamily: 'MaterialIcons'),
+                                color: MyPalette.white,
+                                size: 24,
+                              )
+                          ),
+                          ///Name
+                          Container(
+                            padding: EdgeInsets.only(left:0.01*width),
+                            alignment: Alignment.topLeft,
+                            child: Text( 'Delete Account', style: TextStyle(
+                              fontFamily: 'Maven Pro',
+                              color: Colors.white,
+                              fontSize: 24,
+                            ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+
+
                   ],
                 ),
               ),
             ],
           ),
-        ),
+
       ),
     );
   }
@@ -242,7 +258,7 @@ class SmallScreen extends StatelessWidget {
               image: AssetImage("assets/loginPageSmall.png"), fit: BoxFit.cover),
         ),
         child: Padding(
-          padding: EdgeInsets.only(left:0.03*width, top: 0.06*height),
+          padding: EdgeInsets.only(left:0.03*width, top: 0.07*height),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget> [
@@ -263,155 +279,183 @@ class SmallScreen extends StatelessWidget {
                 ),
               ),
               Container(
-                child: Column (
+                alignment: Alignment.center,
+                child: Expanded(
+                  child: Column (
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    ///Logo
-                    Container(
-                      alignment: Alignment.topCenter,
-                      padding: EdgeInsets.only(top: height*0.02, bottom:height*0.05),
-                      child: Image.asset("assets/music_swing_logo_small.png", scale: 2.5),),
 
-                    ///Username
                     Column(
                       children: [
+                        ///Preferences Title
                         Container(
-                          padding: EdgeInsets.only(left:0.12*width),
-                          alignment: Alignment.topLeft,
-                          child: Text( 'Username', style: TextStyle(
-                            fontFamily: 'Maven Pro',
-                            fontWeight: FontWeight.w100,
-                            color: Colors.white54,
-                            fontSize: 14,
-                          ),
-                          ),
+                          alignment: Alignment.center,
+                          padding: EdgeInsets.only(top: height*0.01, bottom:height*0.05),
+                          child: Text('Preferences', style: TextStyle(
+                            fontSize: 58,
+                            fontFamily: 'Share Tech',
+                            color: MyPalette.lightPurple,
+                          ),),
                         ),
-                        ///Horizontal line
+
                         Container(
-                            padding: EdgeInsets.only(
-                              left: 0.1*width,
-                              right: 0.1*width,
-                              top:3,
+                          alignment: Alignment.center,
+                          padding: EdgeInsets.only(right: 0.03*width, left: 0.03*width),
+                          child: Column(
+                          children: [
+
+                            ///Account
+                            Container(
+                              padding: EdgeInsets.only(right:0.03*height),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.only(left:0.12*width),
+                                    alignment: Alignment.topLeft,
+                                    child: Icon(
+                                      IconData(0xe491, fontFamily: 'MaterialIcons'),
+                                      color: MyPalette.white,
+                                      size: 40,
+                                    )
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(left:0.04*width),
+                                    alignment: Alignment.topLeft,
+                                    child: Text( 'Account', style: TextStyle(
+                                      fontFamily: 'Maven Pro',
+                                      color: Colors.white,
+                                      fontSize: 28,
+                                    ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                            child: const Divider(
-                              height: 8,
-                              thickness: 2,
-                              color: Colors.white,
-                            )
-                        ),
-                      ],
-                    ),
 
-                    ///Email
-                    Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.only(left:0.12*width, top:height*0.05),
-                          alignment: Alignment.topLeft,
-                          child: Text( 'Email', style: TextStyle(
-                            fontFamily: 'Maven Pro',
-                            fontWeight: FontWeight.w100,
-                            color: Colors.white54,
-                            fontSize: 14,
-                          ),
-                          ),
-                        ),
-                        ///Horizontal line
-                        Container(
-                            padding: EdgeInsets.only(
-                                left: 0.1*width, right:0.1*width,top:3),
-                            child: const Divider(
-                              height: 8,
-                              thickness: 2,
-                              color: Colors.white,
-                            )
-                        ),
-                      ],
-                    ),
-
-                    ///Password
-                    Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.only(left:0.12*width, top:height*0.05),
-                          alignment: Alignment.topLeft,
-                          child: Text( 'Password', style: TextStyle(
-                            fontFamily: 'Maven Pro',
-                            fontWeight: FontWeight.w100,
-                            color: Colors.white54,
-                            fontSize: 14,
-                          ),
-                          ),
-                        ),
-                        ///Horizontal line
-                        Container(
-                            padding: EdgeInsets.only(
-                                left: 0.1*width, right:0.1*width,top:3),
-                            child: const Divider(
-                              height: 8,
-                              thickness: 2,
-                              color: Colors.white,
-                            )
-                        ),
-                      ],
-                    ),
-
-                    ///Confirm Password
-                    Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.only(left:0.12*width, top:height*0.05),
-                          alignment: Alignment.topLeft,
-                          child: Text( 'Confirm Password', style: TextStyle(
-                            fontFamily: 'Maven Pro',
-                            fontWeight: FontWeight.w100,
-                            color: Colors.white54,
-                            fontSize: 14,
-                          ),
-                          ),
-                        ),
-                        ///Horizontal line
-                        Container(
-                            padding: EdgeInsets.only(
-                                left: 0.1*width, right:0.1*width,top:3),
-                            child: const Divider(
-                              height: 8,
-                              thickness: 2,
-                              color: Colors.white,
-                            )
-                        ),
-                      ],
-                    ),
-
-                    ///Forgot Password
-                    Container(
-                      padding: EdgeInsets.only(top: 0.05*height),
-                      child: Column(
-                        children: [
-                          ///Regular Text
-                          Text('Forgot your password?',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: 'Maven Pro',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                              color: Colors.white,
+                            ///Change Email
+                            Container(
+                              padding: EdgeInsets.only(top: 0.04*height),
+                              child: Row(
+                              children: [
+                                ///icon
+                                Container(
+                                    padding: EdgeInsets.only(left:0.12*width),
+                                    alignment: Alignment.topLeft,
+                                    child: Icon(
+                                      IconData(0xe22a, fontFamily: 'MaterialIcons'),
+                                      color: MyPalette.white,
+                                      size: 40,
+                                    )
+                                ),
+                                Container(
+                                  padding: EdgeInsets.only(left:0.04*width),
+                                  alignment: Alignment.topLeft,
+                                  child: Text( 'Change Email', style: TextStyle(
+                                    fontFamily: 'Maven Pro',
+                                    color: Colors.white,
+                                    fontSize: 28,
+                                  ),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                          ///Linked text to login
-                          Text('Go to login',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: 'Maven Pro',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                              color: MyPalette.turqoise,
                             ),
-                          )
 
-                        ],
-                      ),
+                            ///Change Password
+                            Container(
+                              padding: EdgeInsets.only(top: 0.04*height),
+                              child: Row(
+                              children: [
+                                ///icon
+                                Container(
+                                    padding: EdgeInsets.only(left:0.12*width),
+                                    alignment: Alignment.topLeft,
+                                    child: Icon(
+                                      IconData(0xf052b, fontFamily: 'MaterialIcons'),
+                                      color: MyPalette.white,
+                                      size: 40,
+                                    )
+                                ),
+                                Container(
+                                  padding: EdgeInsets.only(left:0.04*width),
+                                  alignment: Alignment.topLeft,
+                                  child: Text( 'Change Password', style: TextStyle(
+                                    fontFamily: 'Maven Pro',
+                                    color: Colors.white,
+                                    fontSize: 28,
+                                  ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            ),
+
+
+                            ///Adjust Presets
+                            Container(
+                              padding: EdgeInsets.only(top: 0.04*height),
+                              child: Row(
+                              children: [
+                                ///icon
+                                Container(
+                                    padding: EdgeInsets.only(left:0.12*width),
+                                    alignment: Alignment.topLeft,
+                                    child: Icon(
+                                      IconData(0xe91c, fontFamily: 'MaterialIcons'),
+                                      color: MyPalette.white,
+                                      size: 40,
+                                    )
+                                ),
+                                Container(
+                                  padding: EdgeInsets.only(left:0.04*width),
+                                  alignment: Alignment.topLeft,
+                                  child: Text( 'Adjust Presets', style: TextStyle(
+                                    fontFamily: 'Maven Pro',
+                                    color: Colors.white,
+                                    fontSize: 28,
+                                  ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            ),
+
+
+                            ///Delete
+                            Container(
+                              padding: EdgeInsets.only(top: 0.04*height),
+                              child: Row(
+                              children: [
+                                ///icon
+                                Container(
+                                    padding: EdgeInsets.only(left:0.12*width),
+                                    alignment: Alignment.topLeft,
+                                    child: Icon(
+                                      IconData(0xe1b9, fontFamily: 'MaterialIcons'),
+                                      color: MyPalette.white,
+                                      size: 40,
+                                    )
+                                ),
+                                Container(
+                                  padding: EdgeInsets.only(left:0.04*width),
+                                  alignment: Alignment.topLeft,
+                                  child: Text( 'Delete Account', style: TextStyle(
+                                    fontFamily: 'Maven Pro',
+                                    color: Colors.white,
+                                    fontSize: 28,
+                                  ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            )
+                          ],
+                        ),
+                        ),
+                      ],
                     ),
                   ],),
+                ),
               ),
             ],
           ),
