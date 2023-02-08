@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:mood_swing/Pages/UserPage.dart';
-
-import 'Pages/HomePage.dart';
-import 'Pages/LandingPage.dart';
-import 'Pages/LoginPage.dart';
-import 'Pages/SignupPage.dart';
-import 'Pages/PreferencesPage.dart';
-
+import 'package:mood_swing/Containers/LoginContainer.dart';
+import 'Widgets/MockNavigator.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(App());
 }
 
 class App extends StatelessWidget {
-  App();
+  final MockNavigator? mockNavigator; //Used to add a binding for testing
 
-  Map<int, Color> color = {
+  App({this.mockNavigator});
+
+  final Map<int, Color> color = {
     50: Color.fromRGBO(13, 0, 54, 0.1),
     100: Color.fromRGBO(13, 0, 54, 0.2),
     200: Color.fromRGBO(13, 0, 54, 0.3),
@@ -28,7 +25,6 @@ class App extends StatelessWidget {
     900: Color.fromRGBO(13, 0, 54, 1),
   };
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -37,9 +33,7 @@ class App extends StatelessWidget {
       theme: ThemeData(
           primarySwatch: MaterialColor(0x0d0036, color),
           fontFamily: 'Maven Pro'),
-
-    home: LandingPage(),
- //    home: SignupPage(),
+      home: LoginContainer(),
     );
   }
 }
