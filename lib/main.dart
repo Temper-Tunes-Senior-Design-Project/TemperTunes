@@ -5,6 +5,8 @@ import 'Pages/HomePage.dart';
 import 'Pages/LandingPage.dart';
 import 'Pages/LoginPage.dart';
 import 'Pages/SignupPage.dart';
+import 'Pages/PreferencesPage.dart';
+
 
 void main() {
   runApp(App());
@@ -36,7 +38,7 @@ class App extends StatelessWidget {
           primarySwatch: MaterialColor(0x0d0036, color),
           fontFamily: 'Maven Pro'),
 
-    home: LandingPage()
+    home: PreferencesPage()
    //  home: SignupPage(),
     );
   }

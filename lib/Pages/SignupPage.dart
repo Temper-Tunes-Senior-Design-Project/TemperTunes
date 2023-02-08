@@ -37,11 +37,18 @@ class LargeScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                              padding: EdgeInsets.only(left:0.02*width),
-                              child: Icon(
-                                IconData(0xf05bc, fontFamily: 'MaterialIcons'),
-                                color: Colors.white,
-                                size: 40,
+                              padding: EdgeInsets.only(left:0.03*width),
+                              child: Row(
+                                children: [
+                                  ElevatedButton(
+                                    child: Icon(
+                                      IconData(0xf05bc, fontFamily: 'MaterialIcons'),
+                                      color: Colors.white,
+                                      size: 40,
+                                    ),
+                                    onPressed: () => Navigator.pop(context),
+                                  ),
+                                ],
                               ),
                             ),
                           ],

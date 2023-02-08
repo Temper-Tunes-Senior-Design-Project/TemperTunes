@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart' show debugPaintSizeEnabled;
 import '../Widgets/widgets.dart';
 //import 'package:flutter/widgets.dart' as ui;
+import 'SignupPage.dart';
 
 
 class Body extends StatelessWidget {
@@ -91,10 +92,41 @@ class LargeScreen extends StatelessWidget {
 }
 
 
+class SwipeToOpen extends StatelessWidget{
+  const SwipeToOpen({super.key});
+
+  @override
+  Widget build(BuildContext context){
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    final PageController controller = PageController();
+    return Container(
+      height: height,
+      width: width,
+      child: ListView(
+        shrinkWrap: true,
+        children: [PageView(
+          scrollDirection: Axis.vertical,
+          controller: controller,
+          children: const <Widget>
+          [
+            SignupPage(),
+          ],
+        ),
+        ],
+      ),
+    );
+  }
+}
+
+
+
+
 
 class SmallScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+  //  final PageController controller = PageController();
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
@@ -117,14 +149,14 @@ class SmallScreen extends StatelessWidget {
                         height: 200,
                         child:
                         Container(
-                          //  color: Colors.blue,
                             padding: const EdgeInsets.all(0), //space between text and pic
                             child: Row(
                               //since the layout is broken into rows
                               children: [
                             //Expanded makes a child of a row, column, or flex expand to fill all spaces along main axis
-                              Expanded(
+                              Container(
                               //Column holds only Title+Subtitle
+
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
@@ -139,7 +171,7 @@ class SmallScreen extends StatelessWidget {
                                               textAlign: TextAlign.center
                                           ),
                                         ),
-                                    const Text( 'Swipe to begin',
+                                    const Text( 'Select to begin',
                                       style: TextStyle(
                                         fontFamily: 'Maven Pro',
                                         color: MyPalette.white,
@@ -148,23 +180,34 @@ class SmallScreen extends StatelessWidget {
                                       ),
                                     Container(
                                       padding: EdgeInsets.only(top: height*0.07),
-                                      child: Icon(
-                                          IconData(0xe095, fontFamily: 'MaterialIcons'),
-                                          color: MyPalette.white,
-                                          size: 50,
+                                      child: Column(
+                                        children: [
+                                          ElevatedButton(
+                                            child: Icon(
+                                              IconData(0xe095, fontFamily: 'MaterialIcons'),
+                                              color: MyPalette.white,
+                                              size: 50,
+                                            ),
+                                          onPressed: () { Navigator.push(context,
+                                            MaterialPageRoute(builder:(context) => SignupPage()));}
+                                          ),
+                                        ],
+                                        ),
                                       ),
-                                    ),],
+                                  //    SwipeToOpen(),
+                                  ],
                                   ),
                                 ),
                               ],),
-                            ),
+                            ),                                                
                           ),
                         ],),
                       ),
-                    ],
-                  ),
-              ),
-            );
+
+          ],
+        ),
+      ),
+    );
   }
 }
 
