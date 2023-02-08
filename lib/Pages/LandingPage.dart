@@ -76,11 +76,21 @@ class LargeScreen extends StatelessWidget {
                                               //ICON
                                               Container(
                                                 padding: const EdgeInsets.only(top: 20),
-                                                child: Icon(
-                                                  IconData(0xe095, fontFamily: 'MaterialIcons'),
-                                                  color: MyPalette.white,
-                                                  size: 60,
-                                                ),
+                                                child: Column(
+                                                  children: [
+                                                    ElevatedButton(
+                                                        style: ElevatedButton.styleFrom(
+                                                            shape: CircleBorder(),
+                                                        ),
+                                                        child: Icon(
+                                                          IconData(0xe095, fontFamily: 'MaterialIcons'),
+                                                          color: MyPalette.white,
+                                                          size: 50,
+                                                        ),
+                                                        onPressed: () { Navigator.push(context,
+                                                            MaterialPageRoute(builder:(context) => SignupPage()));},
+                                                    ),
+                                                  ],),
                                               ),
                                         ],),
                                     ),
@@ -95,6 +105,8 @@ class LargeScreen extends StatelessWidget {
     );
   }
 }
+
+
 
 
 /*
@@ -125,7 +137,10 @@ class SwipeToOpen extends StatelessWidget{
     );
   }
 }
+
 */
+
+
 
 
 
@@ -140,7 +155,7 @@ class SmallScreen extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.only(left:20, right: 20, top: 0.07*height),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Center(
               child: new Image.asset("assets/music_swing_logo_small.png", width: 370, height: 338),
@@ -156,7 +171,7 @@ class SmallScreen extends StatelessWidget {
                         height: 200,
                         child:
                         Container(
-                            padding: const EdgeInsets.all(0), //space between text and pic
+                            padding: EdgeInsets.only(left:0.09*width), //space between text and pic
                             child: Row(
                               //since the layout is broken into rows
                               children: [
@@ -168,7 +183,8 @@ class SmallScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                       //Title
-                                        Container(
+                                        Container (
+                                          alignment: Alignment.center,
                                           padding: const EdgeInsets.only(bottom: 5),
                                           child: const Text('Mood Swing',
                                               style: TextStyle(
@@ -190,6 +206,9 @@ class SmallScreen extends StatelessWidget {
                                       child: Column(
                                         children: [
                                           ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                shape: CircleBorder(),
+                                              ),
                                             child: Icon(
                                               IconData(0xe095, fontFamily: 'MaterialIcons'),
                                               color: MyPalette.white,
@@ -201,7 +220,6 @@ class SmallScreen extends StatelessWidget {
                                         ],
                                         ),
                                       ),
-                                  //    SwipeToOpen(),
                                   ],
                                   ),
                                 ),

@@ -210,8 +210,41 @@ class LargeScreen extends StatelessWidget {
             image: DecorationImage(
                 image: AssetImage("assets/userPageLarge.png"), fit: BoxFit.cover),
           ),
-          child: Padding(
-            padding: EdgeInsets.only(left:50, top: 80, right: width*0.02),
+          child:
+            Column(
+              children:
+                [
+                  Container(
+                    ///Back button
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          padding: EdgeInsets.only(left:0.03*width, bottom:height*0.02, top: 0.03*height),
+                          child:
+                          Row(
+                            children: [
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  shape: CircleBorder(),
+                                ),
+                                child: Icon(
+                                  IconData(0xf05bc, fontFamily: 'MaterialIcons'),
+                                  color: Colors.white,
+                                  size: 40,
+                                ),
+                                onPressed: () => Navigator.pop(context),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+
+                 Padding(
+            padding: EdgeInsets.only(left:50, right: width*0.02),
             child: Row(
               children: <Widget>[
                 Align(
@@ -428,8 +461,10 @@ class LargeScreen extends StatelessWidget {
               ],
             ),
           ),
-        )
 
+              ],
+           ),
+        ),
       );
     }
 

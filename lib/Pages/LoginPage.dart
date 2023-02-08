@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart' show debugPaintSizeEnabled;
+import 'package:mood_swing/Pages/SignupPage.dart';
 import '../Widgets/widgets.dart';
 
 
@@ -37,10 +38,20 @@ class LargeScreen extends StatelessWidget {
                   children: [
                     Container(
                       padding: EdgeInsets.only(left:0.02*width),
-                      child: Icon(
-                        IconData(0xf05bc, fontFamily: 'MaterialIcons'),
-                        color: Colors.white,
-                        size: 40,
+                      child: Row(
+                        children: [
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              shape: CircleBorder(),
+                            ),
+                            child: Icon(
+                              IconData(0xf05bc, fontFamily: 'MaterialIcons'),
+                              color: Colors.white,
+                              size: 40,
+                            ),
+                            onPressed: () => Navigator.pop(context),
+                          )
+                        ],
                       ),
                     ),
                   ],
@@ -61,6 +72,7 @@ class LargeScreen extends StatelessWidget {
                         child: Image.asset(
                               "assets/music_swing_logo_small.png",
                               scale: 2.5),),
+
                     ///Icon for user
                     Container(
                         alignment: Alignment.topLeft,
@@ -108,6 +120,7 @@ class LargeScreen extends StatelessWidget {
                           color: Colors.white,
                         ),
                     ),
+
                     ///Buttons
                     //Login button
                     Container(
@@ -135,32 +148,44 @@ class LargeScreen extends StatelessWidget {
                         ),
                     ),
                     ),
+
                     //Register Button
                     Container(
-                        padding: EdgeInsets.only(top:0.05*height),
+                      child: TextButton(
                         child: Container(
-                            width: 0.27*width,
-                            height: 0.06*height,
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                begin: Alignment.topRight,
-                                end: Alignment.bottomLeft,
-                                colors: [MyPalette.slateBlue,  MyPalette.brightMagenta,MyPalette.turqoise, ],
-                              ),
-                              borderRadius: BorderRadius.all(Radius.circular(15))
-                            ),
-                            child: Align(
-                                alignment: Alignment.center,
-                                child: Text("Register", textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 25,
-                                      fontFamily: 'Share Tech',
-                                      color: Colors.white,
-                                    ),
+                          padding: EdgeInsets.only(top:0.05*height),
+                          child: Container(
+                              width: 0.27*width,
+                              height: 0.06*height,
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topRight,
+                                  end: Alignment.bottomLeft,
+                                  colors: [MyPalette.slateBlue,  MyPalette.brightMagenta,MyPalette.turqoise, ],
                                 ),
-                            ),
+                                borderRadius: BorderRadius.all(Radius.circular(15))
+                              ),
+                              child: Align(
+                                  alignment: Alignment.center,
+                                  child: Text("Register", textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontSize: 25,
+                                        fontFamily: 'Share Tech',
+                                        color: Colors.white,
+                                      ),
+                                  ),
+                              ),
+                          ),
+                      ),
+                        onPressed: () { Navigator.push(context,
+                            MaterialPageRoute(builder:(context) => SignupPage()));},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.transparent,
+                          foregroundColor: Colors.transparent,
                         ),
+                      ),
                     ),
+
                     ///Forgot Password
                     Container(
                       padding: EdgeInsets.only(top:0.08*height),
@@ -214,10 +239,21 @@ class SmallScreen extends StatelessWidget {
                   children: [
                     Container(
                       padding: EdgeInsets.only(left:0.03*width, top: 0.06*height),
-                      child: Icon(
-                        IconData(0xf05bc, fontFamily: 'MaterialIcons'),
-                        color: Colors.white,
-                        size: 40,
+                      child:
+                      Row(
+                        children: [
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              shape: CircleBorder(),
+                            ),
+                            child: Icon(
+                            IconData(0xf05bc, fontFamily: 'MaterialIcons'),
+                            color: Colors.white,
+                            size: 40,
+                          ),
+                            onPressed: () => Navigator.pop(context),
+                          )
+                        ],
                       ),
                     ),
                   ],
@@ -301,8 +337,11 @@ class SmallScreen extends StatelessWidget {
                         ),
                       ),
                     ),
+
                     ///Register button
-                    Container (
+                    Container(
+                      child: TextButton(
+                        child:Container (
                       padding: EdgeInsets.only(top: height*0.03),
                       child: Container(
                         width: 0.8*width,
@@ -322,6 +361,14 @@ class SmallScreen extends StatelessWidget {
                                 fontFamily: 'Share Tech',
                                 color: Colors.white,)
                             ),
+                        ),
+                      ),
+                    ),
+                        onPressed: () { Navigator.push(context,
+                            MaterialPageRoute(builder:(context) => SignupPage()));},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.transparent,
+                          foregroundColor: Colors.transparent,
                         ),
                       ),
                     ),

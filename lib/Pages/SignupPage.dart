@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart' show debugPaintSizeEnabled;
+import 'package:mood_swing/Pages/LoginPage.dart';
 import '../Widgets/widgets.dart';
 
 
@@ -33,24 +34,21 @@ class LargeScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Container(
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        padding: EdgeInsets.only(left:0.03*width, top: 0.06*height),
+                        child:
+                        Row(
                           children: [
-                            Container(
-                              padding: EdgeInsets.only(left:0.03*width),
-                              child: Row(
-                                children: [
-                                  ElevatedButton(
-                                    child: Icon(
-                                      IconData(0xf05bc, fontFamily: 'MaterialIcons'),
-                                      color: Colors.white,
-                                      size: 40,
-                                    ),
-                                    onPressed: () => Navigator.pop(context),
-                                  ),
-                                ],
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                shape: CircleBorder(),
                               ),
-                            ),
+                              child: Icon(
+                                IconData(0xf05bc, fontFamily: 'MaterialIcons'),
+                                color: Colors.white,
+                                size: 40,
+                              ),
+                              onPressed: () => Navigator.pop(context),
+                            )
                           ],
                         ),
                       ),
@@ -201,15 +199,25 @@ class LargeScreen extends StatelessWidget {
                                           color: Colors.white,
                                         ),
                                       ),
-                                      Text('Go to login',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontFamily: 'Maven Pro',
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16,
-                                          color: MyPalette.turqoise,
+                                      Container(
+                                        alignment: Alignment.center,
+                                        child: Column(
+                                          children: [
+                                            TextButton(
+                                              child: Text('Go to login',
+                                                style: TextStyle(
+                                                  fontFamily: 'Maven Pro',
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 16,
+                                                  color: MyPalette.turqoise,
+                                                ),
+                                              ),
+                                              onPressed: () { Navigator.push(context,
+                                                  MaterialPageRoute(builder:(context) => LoginPage()));},
+                                            ),
+                                          ],
                                         ),
-                                      )
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -253,10 +261,20 @@ class SmallScreen extends StatelessWidget {
                   children: [
                     Container(
                       padding: EdgeInsets.only(left:0.02*width),
-                      child: Icon(
-                        IconData(0xf05bc, fontFamily: 'MaterialIcons'),
-                        color: Colors.white,
-                        size: 40,
+                      child: Row(
+                        children: [
+                          ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                shape: CircleBorder(),
+                            ),
+                            child: Icon(
+                            IconData(0xf05bc, fontFamily: 'MaterialIcons'),
+                            color: Colors.white,
+                            size: 40,
+                          ),
+                            onPressed: () => Navigator.pop(context)
+                          ),
+                        ],
                       ),
                     ),
                   ],
@@ -277,20 +295,38 @@ class SmallScreen extends StatelessWidget {
                         Container(
                           padding: EdgeInsets.only(left:0.12*width),
                           alignment: Alignment.topLeft,
-                          child: Text( 'Username', style: TextStyle(
+                          child: TextField(
+                            style: TextStyle(
+                              fontFamily: 'Maven Pro',
+                              fontWeight: FontWeight.w100,
+                              color: Colors.white,
+                              fontSize: 18,
+                            ),
+                              decoration: const InputDecoration(
+                              hintStyle: TextStyle(color: Colors.white60),
+                              hintText: 'Username',
+                              border: UnderlineInputBorder(
+                                borderSide: BorderSide(width:3, color:Colors.white),),
+                              labelText: 'Enter your username',
+                              labelStyle: TextStyle(fontSize: 18,color: Colors.white54)
+                            ),
+                          ),
+                        /*  child: Text( 'Username', style: TextStyle(
                             fontFamily: 'Maven Pro',
                             fontWeight: FontWeight.w100,
                             color: Colors.white54,
                             fontSize: 14,
                             ),
                           ),
+
+                          */
                         ),
                         ///Horizontal line
                         Container(
                             padding: EdgeInsets.only(
                               left: 0.1*width,
                               right: 0.1*width,
-                              top:3,
+                              top:0,
                             ),
                             child: const Divider(
                               height: 8,
@@ -307,13 +343,31 @@ class SmallScreen extends StatelessWidget {
                         Container(
                             padding: EdgeInsets.only(left:0.12*width, top:height*0.05),
                             alignment: Alignment.topLeft,
-                            child: Text( 'Email', style: TextStyle(
+
+                           /* child: Text( 'Email', style: TextStyle(
                               fontFamily: 'Maven Pro',
                               fontWeight: FontWeight.w100,
                               color: Colors.white54,
                               fontSize: 14,
                               ),
                             ),
+                            */
+                          child: TextField(
+                            style: TextStyle(
+                              fontFamily: 'Maven Pro',
+                              fontWeight: FontWeight.w100,
+                              color: Colors.white,
+                              fontSize: 18,
+                            ),
+                            decoration: const InputDecoration(
+                                hintStyle: TextStyle(color: Colors.white60),
+                                hintText: 'Username',
+                                border: UnderlineInputBorder(
+                                  borderSide: BorderSide(width:3, color:Colors.white),),
+                                labelText: 'Enter your username',
+                                labelStyle: TextStyle(fontSize: 18,color: Colors.white54)
+                            ),
+                          ),
                         ),
                         ///Horizontal line
                         Container(
@@ -397,17 +451,25 @@ class SmallScreen extends StatelessWidget {
                               color: Colors.white,
                             ),
                           ),
-                          ///Linked text to login
-                          Text('Go to login',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: 'Maven Pro',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                              color: MyPalette.turqoise,
-                            ),
-                          )
 
+
+                          ///Linked text to login
+                          Container(
+                            alignment: Alignment.center,
+                            child: TextButton(
+                              child: Text('Go to login',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontFamily: 'Maven Pro',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                  color: MyPalette.turqoise,
+                                ),
+                                ),
+                                onPressed: () { Navigator.push(context,
+                                  MaterialPageRoute(builder:(context) => LoginPage()));},
+                            ),
+                          ),
                         ],
                       ),
                     ),

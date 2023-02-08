@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart' show debugPaintSizeEnabled;
+import 'package:mood_swing/Pages/UserPage.dart';
 import '../Widgets/widgets.dart';
 
 
@@ -86,31 +87,42 @@ class LargeScreen extends StatelessWidget {
 
                     ///Account
                     Container(
-                      child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                            alignment: Alignment.topLeft,
-                            child: Icon(
-                              IconData(0xe491, fontFamily: 'MaterialIcons'),
-                              color: MyPalette.white,
-                              size: 24,
-                            )
-                        ),
-                        ///Name
-                        Container(
-                          padding: EdgeInsets.only(left:0.01*width),
-                          alignment: Alignment.topLeft,
-                          child: Text( 'Account', style: TextStyle(
-                            fontFamily: 'Maven Pro',
-                            color: Colors.white,
-                            fontSize: 24,
-                          ),
-                        ),
-                        ),
+                      child: TextButton(
+                        child: Container(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                  alignment: Alignment.topLeft,
+                                  child: Icon(
+                                    IconData(0xe491, fontFamily: 'MaterialIcons'),
+                                    color: MyPalette.white,
+                                    size: 24,
+                                  ),
+                              ),
+                              ///Name
+                              Container(
+                                padding: EdgeInsets.only(left:0.01*width),
+                                alignment: Alignment.topLeft,
+                                child: Text( 'Account', style: TextStyle(
+                                  fontFamily: 'Maven Pro',
+                                  color: Colors.white,
+                                  fontSize: 24,
+                                ),
+                              ),
+                              ),
                       ],
                     ),
                     ),
+                        onPressed: () { Navigator.push(context,
+                            MaterialPageRoute(builder:(context) => UserPage()));},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.transparent,
+                          foregroundColor: Colors.transparent,
+                        ),
+                      ),
+                    ),
+
 
                     ///Change Email
                     Container(
@@ -306,6 +318,8 @@ class SmallScreen extends StatelessWidget {
 
                             ///Account
                             Container(
+                              child: TextButton(
+                                child: Container(
                               padding: EdgeInsets.only(right:0.03*height),
                               child: Row(
                                 children: [
@@ -329,6 +343,14 @@ class SmallScreen extends StatelessWidget {
                                     ),
                                   ),
                                 ],
+                              ),
+                            ),
+                                onPressed: () { Navigator.push(context,
+                                    MaterialPageRoute(builder:(context) => UserPage()));},
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.transparent,
+                                  foregroundColor: Colors.transparent,
+                                ),
                               ),
                             ),
 
