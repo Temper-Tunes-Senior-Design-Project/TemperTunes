@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mood_swing/Pages/LoginPage.dart';
 import '../Widgets/widgets.dart';
-
+import 'SignupPage.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -15,72 +16,100 @@ class Body extends StatelessWidget {
 class LargeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
     return SingleChildScrollView(
       child: Padding(
-        padding: EdgeInsets.only(top:30),
+        padding: EdgeInsets.only(top: 30),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Center(
-              child: new Image.asset("assets/music_swing_logo_med.png", width: 360, height: 413),
+            Container(
+              alignment: Alignment.center,
+
+              //padding: EdgeInsets.only(right: 0.02*width),
+              child: new Image.asset(
+                "assets/music_swing_logo_med.png",
+                height: height * 0.5,
+              ),
             ),
             Padding(
               padding: EdgeInsets.only(left: 0.0, top: 0),
             ),
             Center(
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height:200,
-                          child:
-                          Container(
-                              //color: Colors.blue,
-                              padding: const EdgeInsets.all(0), //space between text and pic
-                              child: Row(
-                                //since the layout is broken into rows
-                                  children: [
-                                    //Expanded makes a child of a row, column, or flex expand to fill all spaces along main axis
-                                    Expanded(
-                                      //Column holds only Title+Subtitle
-                                        child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.center,
-                                            children: [
-                                              Container(
-                                                  padding: const EdgeInsets.only(bottom: 8),
-                                                  //TITLE
-                                                  child: const Text('Mood Swing',
-                                                      style: TextStyle(
-                                                        fontFamily: 'Share Tech',
-                                                        color: MyPalette.lightPurple,
-                                                        fontSize: 65),
-                                                      textAlign: TextAlign.center,
-                                                      )
-                                              ),
-                                              //SUBTITLE
-                                              const Text( 'Click to begin',
-                                                style: TextStyle(
-                                                    fontFamily: 'Maven Pro',
-                                                    color: MyPalette.white,
-                                                    fontSize: 20),
-                                                textAlign: TextAlign.center,
-                                              ),
-                                              //ICON
-                                              Container(
-                                                padding: const EdgeInsets.only(top: 20),
-                                                child: Icon(
-                                                  IconData(0xe353, fontFamily: 'MaterialIcons'),
-                                                  color: MyPalette.white,
-                                                  size: 60,
-                                                ),
-                                              )
-                                        ]),
-                                    )
-                                  ])
-                          )
-                      )
-                ])
-            )
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 200,
+                    child: Container(
+                      //color: Colors.blue,
+                      padding:
+                          const EdgeInsets.all(0), //space between text and pic
+                      child: Row(
+                        //since the layout is broken into rows
+                        children: [
+                          //Expanded makes a child of a row, column, or flex expand to fill all spaces along main axis
+                          Expanded(
+                            //Column holds only Title+Subtitle
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Container(
+                                    padding: const EdgeInsets.only(bottom: 8),
+                                    //TITLE
+                                    child: const Text(
+                                      'Mood Swing',
+                                      style: TextStyle(
+                                          fontFamily: 'Share Tech',
+                                          color: MyPalette.lightPurple,
+                                          fontSize: 65),
+                                      textAlign: TextAlign.center,
+                                    )),
+                                //SUBTITLE
+                                const Text(
+                                  'Click to begin',
+                                  style: TextStyle(
+                                      fontFamily: 'Maven Pro',
+                                      color: MyPalette.white,
+                                      fontSize: 20),
+                                  textAlign: TextAlign.center,
+                                ),
+                                //ICON
+                                Container(
+                                  padding: const EdgeInsets.only(top: 20),
+                                  child: Column(
+                                    children: [
+                                      ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          shape: CircleBorder(),
+                                        ),
+                                        child: Icon(
+                                          IconData(0xe095,
+                                              fontFamily: 'MaterialIcons'),
+                                          color: MyPalette.white,
+                                          size: 50,
+                                        ),
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      SignupPage()));
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -91,79 +120,103 @@ class LargeScreen extends StatelessWidget {
 class SmallScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    //  final PageController controller = PageController();
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
       child: Padding(
-        padding: EdgeInsets.all(20),
+        padding: EdgeInsets.only(left: 20, right: 20, top: 0.07 * height),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Center(
-              child: new Image.asset("assets/music_swing_logo_small.png", width: 370, height: 338),
+              child: new Image.asset("assets/music_swing_logo_small.png",
+                  width: 370, height: 338),
             ),
             Padding(
               padding: EdgeInsets.only(left: 0.0, top: 0),
             ),
             Center(
               child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                        height: 200,
-                        child:
-                        Container(
-                          //  color: Colors.blue,
-                            padding: const EdgeInsets.all(0), //space between text and pic
-                            child: Row(
-                              //since the layout is broken into rows
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 200,
+                    child: Container(
+                      padding: EdgeInsets.only(
+                          left: 0.09 * width), //space between text and pic
+                      child: Row(
+                        //since the layout is broken into rows
+                        children: [
+                          //Expanded makes a child of a row, column, or flex expand to fill all spaces along main axis
+                          Container(
+                            //Column holds only Title+Subtitle
+
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                            //Expanded makes a child of a row, column, or flex expand to fill all spaces along main axis
-                              Expanded(
-                              //Column holds only Title+Subtitle
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                      //Title
-                                        Container(
-                                          padding: const EdgeInsets.only(bottom: 5),
-                                          child: const Text('Mood Swing',
-                                              style: TextStyle(
-                                                fontFamily: 'Share Tech',
-                                                color: MyPalette.lightPurple,
-                                                fontSize: 55,),
-                                              textAlign: TextAlign.center
-                                          ),
-                                        ),
-                                    const Text( 'Swipe to begin',
+                                //Title
+                                Container(
+                                  alignment: Alignment.center,
+                                  padding: const EdgeInsets.only(bottom: 5),
+                                  child: const Text('Mood Swing',
                                       style: TextStyle(
-                                        fontFamily: 'Maven Pro',
-                                        color: MyPalette.white,
-                                        fontSize: 18),
-                                      textAlign: TextAlign.center,
+                                        fontFamily: 'Share Tech',
+                                        color: MyPalette.lightPurple,
+                                        fontSize: 55,
                                       ),
-                                    Container(
-                                      padding: const EdgeInsets.only(top: 30),
-                                      child: Icon(
-                                          IconData(0xe043, fontFamily: 'MaterialIcons'),
-                                          color: MyPalette.white,
-                                          size: 36,
-                                      ),
-                                    )]
-                                  )
-                                )
-                              ])
-                            )
-                          )
-                        ])
-                      )
-                    ]
-                  )
-              )
-            );
+                                      textAlign: TextAlign.center),
+                                ),
+                                const Text(
+                                  'Select to begin',
+                                  style: TextStyle(
+                                      fontFamily: 'Maven Pro',
+                                      color: MyPalette.white,
+                                      fontSize: 18),
+                                  textAlign: TextAlign.center,
+                                ),
+                                Container(
+                                  padding: EdgeInsets.only(top: height * 0.07),
+                                  child: Column(
+                                    children: [
+                                      ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            shape: CircleBorder(),
+                                          ),
+                                          child: Icon(
+                                            IconData(0xe095,
+                                                fontFamily: 'MaterialIcons'),
+                                            color: MyPalette.white,
+                                            size: 50,
+                                          ),
+                                          onPressed: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        LoginPage()));
+                                          }),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 
-class LandingPage extends StatelessWidget
-{
+class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
 
   @override
@@ -172,15 +225,12 @@ class LandingPage extends StatelessWidget
         resizeToAvoidBottomInset: false,
         body: DecoratedBox(
             //BoxDecoration has image
-              decoration:BoxDecoration(
-                //set img to bg of body
-                image: DecorationImage(
-                    image: AssetImage("assets/landingpageBG.png"), fit: BoxFit.cover),
-              ),
-              child: Column(
-                  children: [Body()]
-              )
-          )
-    );
+            decoration: BoxDecoration(
+              //set img to bg of body
+              image: DecorationImage(
+                  image: AssetImage("assets/landingpageBG.png"),
+                  fit: BoxFit.cover),
+            ),
+            child: Column(children: [Body()])));
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'Containers/LoginContainer.dart';
+import 'package:mood_swing/Containers/LoginContainer.dart';
 import 'Widgets/MockNavigator.dart';
 
 void main() {
