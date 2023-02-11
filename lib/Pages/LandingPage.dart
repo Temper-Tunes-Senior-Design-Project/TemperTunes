@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mood_swing/Pages/LoginPage.dart';
 import '../Widgets/widgets.dart';
-//import 'package:flutter/widgets.dart' as ui;
 import 'SignupPage.dart';
 
 class Body extends StatelessWidget {
@@ -18,7 +17,6 @@ class LargeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.only(top: 30),
@@ -118,37 +116,6 @@ class LargeScreen extends StatelessWidget {
     );
   }
 }
-
-/*
-
-class SwipeToOpen extends StatelessWidget{
-  const SwipeToOpen({super.key});
-
-  @override
-  Widget build(BuildContext context){
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-    final PageController controller = PageController();
-    return Container(
-      height: height,
-      width: width,
-      child: ListView(
-        shrinkWrap: true,
-        children: [PageView(
-          scrollDirection: Axis.vertical,
-          controller: controller,
-          children: const <Widget>
-          [
-            SignupPage(),
-          ],
-        ),
-        ],
-      ),
-    );
-  }
-}
-
-*/
 
 class SmallScreen extends StatelessWidget {
   @override

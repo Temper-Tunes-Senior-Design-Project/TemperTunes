@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart' show debugPaintSizeEnabled;
 import 'package:mood_swing/Pages/LoginPage.dart';
 import '../Widgets/widgets.dart';
 
@@ -489,7 +488,6 @@ class SignupPage extends StatelessWidget {
 
   @override
   Widget build(Object context) {
-    //Materialapp debugger false
     return Scaffold(
         resizeToAvoidBottomInset: false,
         body: Column(
