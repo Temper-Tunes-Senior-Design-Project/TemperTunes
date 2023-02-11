@@ -18,19 +18,18 @@ class LargeScreen extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
-      child: Container(
-        width: width,
-        height: height,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage("assets/LoginPageLarge.png"),
-              fit: BoxFit.cover),
-        ),
-        child: Padding(
-          padding: EdgeInsets.only(top: 0.02 * height),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
+        child: Container(
+          width: width,
+          height: height,
+          decoration:BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("assets/loginPageLarge.png"), fit: BoxFit.cover),
+          ),
+          child: Padding(
+            padding: EdgeInsets.only(top: 0.02*height),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
               Container(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
