@@ -14,6 +14,7 @@ dependencies:
   firebase_core: ^2.4.1
   google_fonts: ^2.1.0
   mediaquery_sizer: ^1.1.0
+  camera: ^0.10.3
 
 
 dev_dependencies:
