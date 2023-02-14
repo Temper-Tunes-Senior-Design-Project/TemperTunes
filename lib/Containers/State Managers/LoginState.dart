@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import '../../Pages/LandingPage.dart';
 import '../../Pages/LoginPage.dart';
+import '../../Pages/SignupPage.dart';
 
 //List of viable login pages
-enum LoginPages { LandingPage, LoginPage, RegisterPage, InfoPage }
+enum LoginPages { LandingPage, LoginPage, SignupPage, InfoPage }
 
 //Register the properties of login pages
 extension LoginPageExtension on LoginPages {
   static Map<LoginPages, Widget> pages = {
     LoginPages.LandingPage: LandingPage(),
     LoginPages.LoginPage: LoginPage(),
-    LoginPages.RegisterPage: Container(),
+    LoginPages.SignupPage: SignupPage(),
     LoginPages.InfoPage: Container(),
   };
 
@@ -29,8 +30,7 @@ class LoginState extends ChangeNotifier {
   LoginPages active = LoginPages.LandingPage;
   Widget activePage = LoginPages.LandingPage.page;
 
-  void setActive(LoginPages routePage)
-  {
+  void setActive(LoginPages routePage) {
     active = routePage;
     activePage = routePage.page;
     notifyListeners();
