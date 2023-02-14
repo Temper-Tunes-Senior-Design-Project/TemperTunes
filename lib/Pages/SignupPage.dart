@@ -511,7 +511,6 @@ class SignupPage extends StatelessWidget {
 
   @override
   Widget build(Object context) {
-    //Materialapp debugger false
     return Scaffold(
         resizeToAvoidBottomInset: false,
         body: Column(
