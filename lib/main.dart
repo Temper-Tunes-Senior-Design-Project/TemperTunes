@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:mood_swing/Containers/LoginContainer.dart';
 import 'package:mood_swing/Pages/PreferencesPage.dart';
+import 'package:mood_swing/Pages/SignupPage.dart';
 import 'Pages/VerificationPage.dart';
-import 'Pages/SignupPage.dart';
-import 'Pages/PreferencesPage.dart';
+import 'Pages/HomePage.dart';
 import 'Widgets/MockNavigator.dart';
 import '../Widgets/widgets.dart';
-
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(App());
 }
-
 
 class App extends StatelessWidget {
   final MockNavigator? mockNavigator; //Used to add a binding for testing
@@ -38,25 +36,15 @@ class App extends StatelessWidget {
       title: 'Mood Swing',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          primarySwatch: MaterialColor(0xd789ff, color),
-          fontFamily: 'Maven Pro',
-          /*
-          inputDecorationTheme: const InputDecorationTheme(
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.white),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.purple),
-            ),
-          ),
-          */
-          iconTheme: const IconThemeData(color: Colors.white),
+        primarySwatch: MaterialColor(0xd789ff, color),
+        fontFamily: 'Maven Pro',
 
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
-       home: LoginContainer(),
+     // home: LoginContainer(),
 
-   //     home: VerificationPage(),
-    //   home:const VerificationPage(phoneNumber: "jdoe@gmail.com",),
+           home: SignupPage(),
+    //     home:const VerificationPage(phoneNumber: "jdoe@gmail.com",),
     );
   }
 }

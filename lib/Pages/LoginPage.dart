@@ -349,7 +349,7 @@ class SmallScreen extends StatelessWidget {
                                     color: MyPalette.white,
                                     size: 30,),),
                                 hintStyle: TextStyle(color: Colors.white60),
-                                border: OutlineInputBorder(
+                                border: UnderlineInputBorder(
                                   borderSide: BorderSide(width:10, color:Colors.white),),
                                 labelText: 'Please enter your username',
                                 labelStyle: TextStyle(fontSize: 15,color: Colors.white54)
@@ -396,7 +396,7 @@ class SmallScreen extends StatelessWidget {
                                   color: MyPalette.white,
                                   size: 32,),),
                                 hintStyle: TextStyle(color: Colors.white60),
-                                border: OutlineInputBorder(
+                                border: UnderlineInputBorder(
                                   borderSide: BorderSide(width:0, color:Colors.white),),
                                 labelText: 'Please enter your password',
                                 labelStyle: TextStyle(fontSize: 15,color: Colors.white54)

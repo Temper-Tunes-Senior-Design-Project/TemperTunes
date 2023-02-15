@@ -52,7 +52,7 @@ class LargeScreen extends StatelessWidget {
                       ),
                       ///Main Container
                       Container(
-                          height: height*0.75,
+                          height: height*0.8,
                           width: width*0.3,
                           decoration: BoxDecoration(
                               color: Colors.grey.withOpacity(0.3),
@@ -208,10 +208,56 @@ class LargeScreen extends StatelessWidget {
                                           height: 8,
                                           thickness: 2,
                                           color: Colors.white,
-                                        )
+                                        ),
                                     ),
                                   ],
                                 ),
+
+                                ///Register button
+                                Container(
+                                  child: TextButton(
+                                    child: Container(
+                                      padding: EdgeInsets.only(top: height * 0.02),
+                                      child: Container(
+                                        width: 0.5 * width,
+                                        height: 0.056 * height,
+                                        decoration: BoxDecoration(
+                                            gradient: LinearGradient(
+                                              begin: Alignment.topRight,
+                                              end: Alignment.bottomLeft,
+                                              colors: [
+                                                MyPalette.slateBlue,
+                                                MyPalette.brightMagenta,
+                                                MyPalette.turqoise,
+                                              ],
+                                            ),
+                                            borderRadius:
+                                            BorderRadius.all(Radius.circular(15))),
+                                        child: Align(
+                                          alignment: Alignment.center,
+                                          child: Text("Register",
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                fontSize: 25,
+                                                fontFamily: 'Share Tech',
+                                                color: Colors.white,
+                                              )),
+                                        ),
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => SignupPage()));
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      foregroundColor: Colors.transparent,
+                                    ),
+                                  ),
+                                ),
+
 
                                 ///Forgot Password
                                 Container(
@@ -308,7 +354,7 @@ class SmallScreen extends StatelessWidget {
                     ///Logo
                     Container(
                       alignment: Alignment.topCenter,
-                      padding: EdgeInsets.only(top: height*0.02, bottom:height*0.01),
+                      padding: EdgeInsets.only(top: height*0.02, bottom:height*0.005),
                       child: Image.asset("assets/music_swing_logo_small.png", scale: 2.5),),
 
                     ///Username
@@ -354,7 +400,7 @@ class SmallScreen extends StatelessWidget {
                     Column(
                       children: [
                         Container(
-                            padding: EdgeInsets.only(left:0.12*width, top:height*0.01),
+                            padding: EdgeInsets.only(left:0.12*width, top:height*0.005),
                             alignment: Alignment.topLeft,
                             child: TextField(
                               style: TextStyle(
@@ -390,7 +436,7 @@ class SmallScreen extends StatelessWidget {
                     Column(
                       children: [
                         Container(
-                            padding: EdgeInsets.only(left:0.12*width, top:height*0.01),
+                            padding: EdgeInsets.only(left:0.12*width, top:height*0.005),
                             alignment: Alignment.topLeft,
                               child: TextField(
                                 style: TextStyle(
@@ -426,7 +472,7 @@ class SmallScreen extends StatelessWidget {
                     Column(
                       children: [
                         Container(
-                            padding: EdgeInsets.only(left:0.12*width, top:height*0.01),
+                            padding: EdgeInsets.only(left:0.12*width, top:height*0.005),
                             alignment: Alignment.topLeft,
                           child: TextField(
                             style: TextStyle(
@@ -458,9 +504,54 @@ class SmallScreen extends StatelessWidget {
                       ],
                     ),
 
+                    ///Register Button
+                    Container(
+                      child: TextButton(
+                        child: Container(
+                          padding: EdgeInsets.only(top: height * 0.015),
+                          child: Container(
+                            width: 0.8 * width,
+                            height: 0.05 * height,
+                            decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topRight,
+                                  end: Alignment.bottomLeft,
+                                  colors: [
+                                    MyPalette.slateBlue,
+                                    MyPalette.brightMagenta,
+                                    MyPalette.turqoise,
+                                  ],
+                                ),
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(15))),
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Text("Register",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                    fontFamily: 'Share Tech',
+                                    color: Colors.white,
+                                  )),
+                            ),
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SignupPage()));
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.transparent,
+                          foregroundColor: Colors.transparent,
+                        ),
+                      ),
+                    ),
+
                     ///Forgot Password
                     Container(
-                      padding: EdgeInsets.only(top: 0.03*height),
+                      padding: EdgeInsets.only(top: 0.01*height, bottom: 0),
                       child: Column(
                         children: [
                           ///Regular Text
@@ -478,6 +569,7 @@ class SmallScreen extends StatelessWidget {
                           ///Linked text to login
                           Container(
                             alignment: Alignment.center,
+                            padding: EdgeInsets.only(top: 0),
                             child: TextButton(
                               child: Text('Go to login',
                                 textAlign: TextAlign.center,
