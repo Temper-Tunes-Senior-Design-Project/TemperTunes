@@ -19,6 +19,7 @@ dependencies:
   mediaquery_sizer: ^1.1.0
   pin_code_fields: ^7.4.0
   flutter_pin_code_fields: ^1.2.0
+  animations: ^2.0.7
 
 
 dev_dependencies:

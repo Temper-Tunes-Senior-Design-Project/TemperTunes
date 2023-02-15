@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mood_swing/Pages/LoginPage.dart';
-import 'package:mood_swing/Utilities/AuthRouter.dart';
 import '../Widgets/widgets.dart';
-
-TextEditingController usernameController = new TextEditingController();
-TextEditingController emailController = new TextEditingController();
-TextEditingController passwordController = new TextEditingController();
-TextEditingController passwordController2 = new TextEditingController();
 
 class Body extends StatelessWidget {
   @override
@@ -29,7 +23,7 @@ class LargeScreen extends StatelessWidget {
         height: height,
         decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/loginPageLarge.png"),
+              image: AssetImage("assets/LoginPageLarge.png"),
               fit: BoxFit.cover),
         ),
         child: Padding(
@@ -58,7 +52,7 @@ class LargeScreen extends StatelessWidget {
 
               ///Main Container
               Container(
-                height: height * 0.75,
+                height: height * 0.8,
                 width: width * 0.3,
                 decoration: BoxDecoration(
                     color: Colors.grey.withOpacity(0.3),
@@ -82,7 +76,6 @@ class LargeScreen extends StatelessWidget {
                               EdgeInsets.only(left: 0.03 * width, bottom: 0),
                           alignment: Alignment.topLeft,
                           child: TextField(
-                            controller: usernameController,
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               fontFamily: 'Maven Pro',
@@ -123,7 +116,6 @@ class LargeScreen extends StatelessWidget {
                               left: 0.03 * width, top: height * 0.01),
                           alignment: Alignment.topLeft,
                           child: TextField(
-                            controller: emailController,
                             style: TextStyle(
                               fontFamily: 'Maven Pro',
                               fontWeight: FontWeight.w100,
@@ -162,7 +154,6 @@ class LargeScreen extends StatelessWidget {
                               left: 0.03 * width, top: height * 0.01),
                           alignment: Alignment.topLeft,
                           child: TextField(
-                            controller: passwordController2,
                             style: TextStyle(
                               fontFamily: 'Maven Pro',
                               fontWeight: FontWeight.w100,
@@ -201,7 +192,6 @@ class LargeScreen extends StatelessWidget {
                               left: 0.03 * width, top: height * 0.01),
                           alignment: Alignment.topLeft,
                           child: TextField(
-                            controller: passwordController2,
                             style: TextStyle(
                               fontFamily: 'Maven Pro',
                               fontWeight: FontWeight.w100,
@@ -220,16 +210,60 @@ class LargeScreen extends StatelessWidget {
 
                         ///Horizontal line
                         Container(
-                            padding: EdgeInsets.only(
-                                left: 0.02 * width,
-                                right: 0.02 * width,
-                                top: 0),
-                            child: const Divider(
-                              height: 8,
-                              thickness: 2,
-                              color: Colors.white,
-                            )),
+                          padding: EdgeInsets.only(
+                              left: 0.02 * width, right: 0.02 * width, top: 0),
+                          child: const Divider(
+                            height: 8,
+                            thickness: 2,
+                            color: Colors.white,
+                          ),
+                        ),
                       ],
+                    ),
+
+                    ///Register button
+                    Container(
+                      child: TextButton(
+                        child: Container(
+                          padding: EdgeInsets.only(top: height * 0.02),
+                          child: Container(
+                            width: 0.5 * width,
+                            height: 0.056 * height,
+                            decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topRight,
+                                  end: Alignment.bottomLeft,
+                                  colors: [
+                                    MyPalette.slateBlue,
+                                    MyPalette.brightMagenta,
+                                    MyPalette.turqoise,
+                                  ],
+                                ),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(15))),
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Text("Register",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                    fontFamily: 'Share Tech',
+                                    color: Colors.white,
+                                  )),
+                            ),
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SignupPage()));
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.transparent,
+                          foregroundColor: Colors.transparent,
+                        ),
+                      ),
                     ),
 
                     ///Forgot Password
@@ -331,7 +365,7 @@ class SmallScreen extends StatelessWidget {
                     Container(
                       alignment: Alignment.topCenter,
                       padding: EdgeInsets.only(
-                          top: height * 0.02, bottom: height * 0.01),
+                          top: height * 0.02, bottom: height * 0.005),
                       child: Image.asset("assets/music_swing_logo_small.png",
                           scale: 2.5),
                     ),
@@ -344,7 +378,6 @@ class SmallScreen extends StatelessWidget {
                               EdgeInsets.only(left: 0.12 * width, bottom: 0),
                           alignment: Alignment.topLeft,
                           child: TextField(
-                            controller: usernameController,
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               fontFamily: 'Maven Pro',
@@ -385,10 +418,9 @@ class SmallScreen extends StatelessWidget {
                       children: [
                         Container(
                           padding: EdgeInsets.only(
-                              left: 0.12 * width, top: height * 0.01),
+                              left: 0.12 * width, top: height * 0.005),
                           alignment: Alignment.topLeft,
                           child: TextField(
-                            controller: emailController,
                             style: TextStyle(
                               fontFamily: 'Maven Pro',
                               fontWeight: FontWeight.w100,
@@ -426,10 +458,9 @@ class SmallScreen extends StatelessWidget {
                       children: [
                         Container(
                           padding: EdgeInsets.only(
-                              left: 0.12 * width, top: height * 0.01),
+                              left: 0.12 * width, top: height * 0.005),
                           alignment: Alignment.topLeft,
                           child: TextField(
-                            controller: passwordController,
                             style: TextStyle(
                               fontFamily: 'Maven Pro',
                               fontWeight: FontWeight.w100,
@@ -466,10 +497,9 @@ class SmallScreen extends StatelessWidget {
                       children: [
                         Container(
                           padding: EdgeInsets.only(
-                              left: 0.12 * width, top: height * 0.01),
+                              left: 0.12 * width, top: height * 0.005),
                           alignment: Alignment.topLeft,
                           child: TextField(
-                            controller: passwordController2,
                             style: TextStyle(
                               fontFamily: 'Maven Pro',
                               fontWeight: FontWeight.w100,
@@ -501,9 +531,54 @@ class SmallScreen extends StatelessWidget {
                       ],
                     ),
 
+                    ///Register Button
+                    Container(
+                      child: TextButton(
+                        child: Container(
+                          padding: EdgeInsets.only(top: height * 0.015),
+                          child: Container(
+                            width: 0.8 * width,
+                            height: 0.05 * height,
+                            decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topRight,
+                                  end: Alignment.bottomLeft,
+                                  colors: [
+                                    MyPalette.slateBlue,
+                                    MyPalette.brightMagenta,
+                                    MyPalette.turqoise,
+                                  ],
+                                ),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(15))),
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Text("Register",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                    fontFamily: 'Share Tech',
+                                    color: Colors.white,
+                                  )),
+                            ),
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SignupPage()));
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.transparent,
+                          foregroundColor: Colors.transparent,
+                        ),
+                      ),
+                    ),
+
                     ///Forgot Password
                     Container(
-                      padding: EdgeInsets.only(top: 0.03 * height),
+                      padding: EdgeInsets.only(top: 0.01 * height, bottom: 0),
                       child: Column(
                         children: [
                           ///Regular Text
@@ -521,6 +596,7 @@ class SmallScreen extends StatelessWidget {
                           ///Linked text to login
                           Container(
                             alignment: Alignment.center,
+                            padding: EdgeInsets.only(top: 0),
                             child: TextButton(
                               child: Text(
                                 'Go to login',
@@ -553,13 +629,6 @@ class SmallScreen extends StatelessWidget {
     );
   }
 }
-
-void signup()
-{
-   AuthRouter().registerUser(emailController.text, passwordController.text, (){});
-   print("Registered User");
-}
-
 
 class SignupPage extends StatelessWidget {
   const SignupPage({super.key});

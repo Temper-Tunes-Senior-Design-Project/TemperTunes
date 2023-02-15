@@ -375,13 +375,12 @@ class SmallScreen extends StatelessWidget {
                                   ),
                                 ),
                                 hintStyle: TextStyle(color: Colors.white60),
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                      width: 10, color: Colors.white),
-                                ),
-                                labelText: 'Please enter your email',
-                                labelStyle: TextStyle(
-                                    fontSize: 15, color: Colors.white54)),
+                                border: UnderlineInputBorder(
+                                  borderSide: BorderSide(width:10, color:Colors.white),),
+                                labelText: 'Please enter your username',
+                                labelStyle: TextStyle(fontSize: 15,color: Colors.white54)
+                              ),
+                            ),
                           ),
                         ),
 
@@ -429,16 +428,13 @@ class SmallScreen extends StatelessWidget {
                                   ),
                                 ),
                                 hintStyle: TextStyle(color: Colors.white60),
-                                border: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(width: 0, color: Colors.white),
-                                ),
+                                border: UnderlineInputBorder(
+                                  borderSide: BorderSide(width:0, color:Colors.white),),
                                 labelText: 'Please enter your password',
                                 labelStyle: TextStyle(
                                     fontSize: 15, color: Colors.white54)),
                           ),
                         ),
-
                         ///Horizontal line
                         Container(
                           padding: EdgeInsets.only(

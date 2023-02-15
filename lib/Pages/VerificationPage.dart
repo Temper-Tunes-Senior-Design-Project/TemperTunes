@@ -243,7 +243,7 @@ class _VerificationPageState extends State<VerificationPage> {
                         fontSize: 16,
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
               SizedBox(
