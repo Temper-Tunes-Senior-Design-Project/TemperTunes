@@ -18,24 +18,24 @@ class LargeScreen extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
-        child: Container(
-          width: width,
-          height: height,
-          decoration:BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("assets/loginPageLarge.png"), fit: BoxFit.cover),
-          ),
-          child: Padding(
-            padding: EdgeInsets.only(top: 0.02*height),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
+      child: Container(
+        width: width,
+        height: height,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("assets/LoginPageLarge.png"),
+              fit: BoxFit.cover),
+        ),
+        child: Padding(
+          padding: EdgeInsets.only(top: 0.03 * height, left: 0.06 * width),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
               Container(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      padding: EdgeInsets.only(left: 0.02 * width),
                       child: Row(
                         children: [
                           ElevatedButton(
@@ -45,7 +45,7 @@ class LargeScreen extends StatelessWidget {
                             child: Icon(
                               IconData(0xf05bc, fontFamily: 'MaterialIcons'),
                               color: Colors.white,
-                              size: 40,
+                              size: 35,
                             ),
                             onPressed: () => Navigator.pop(context),
                           )
@@ -69,59 +69,111 @@ class LargeScreen extends StatelessWidget {
                       alignment: Alignment.topCenter,
                       padding: EdgeInsets.only(top: height * 0.02),
                       child: Image.asset("assets/music_swing_logo_small.png",
-                          scale: 2.5),
+                          scale: 2.3),
                     ),
 
-                    ///Icon for user
-                    Container(
-                        alignment: Alignment.topLeft,
-                        padding: EdgeInsets.only(
-                            left: width * 0.02, top: height * 0.02),
-                        //icon for user
-                        child: Icon(
-                          IconData(0xe491, fontFamily: 'MaterialIcons'),
-                          color: MyPalette.white,
-                          size: 30,
-                        )),
+                    ///User input area
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        ///TextField
+                        Container(
+                          padding:
+                              EdgeInsets.only(left: 0.02 * width, bottom: 0),
+                          child: TextField(
+                            textAlign: TextAlign.left,
+                            cursorColor: Colors.white,
+                            style: TextStyle(
+                              fontFamily: 'Maven Pro',
+                              fontWeight: FontWeight.w100,
+                              color: Colors.white,
+                              fontSize: 16,
+                            ),
+                            decoration: const InputDecoration(
+                              prefixIcon: Icon(
+                                IconData(0xe491, fontFamily: 'MaterialIcons'),
+                                color: MyPalette.white,
+                                size: 34,
+                              ),
+                              hintStyle: TextStyle(color: Colors.white60),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    width: 3, color: Colors.transparent),
+                              ),
+                              labelText: 'Please enter your username',
+                              labelStyle: TextStyle(
+                                  fontSize: 15, color: Colors.white54),
+                            ),
+                          ),
+                        ),
 
-                    ///Horizontal line
-                    Container(
-                      padding: EdgeInsets.only(
-                          left: 0.02 * width,
-                          right: 0.02 * width,
-                          bottom: 0.02 * width,
-                          top: 3),
-                      child: const Divider(
-                        height: 8,
-                        thickness: 2,
-                        color: Colors.white,
-                      ),
+                        ///Horizontal line
+                        Container(
+                          padding: EdgeInsets.only(
+                            left: 0.02 * width,
+                            right: 0.02 * width,
+                            top: 0,
+                            bottom: height * 0.03,
+                          ),
+                          child: const Divider(
+                            height: 5,
+                            thickness: 2,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
                     ),
 
                     ///password icon
-                    Container(
-                      alignment: Alignment.topLeft,
-                      padding: EdgeInsets.only(
-                          left: 0.02 * width, top: height * 0.02),
-                      child: Icon(
-                        IconData(0xe3ae, fontFamily: 'MaterialIcons'),
-                        color: MyPalette.white,
-                        size: 30,
-                      ),
-                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        ///TextField
+                        Container(
+                          padding:
+                              EdgeInsets.only(left: 0.02 * width, bottom: 0),
+                          child: TextField(
+                            textAlign: TextAlign.left,
+                            cursorColor: Colors.white,
+                            style: TextStyle(
+                              fontFamily: 'Maven Pro',
+                              fontWeight: FontWeight.w100,
+                              color: Colors.white,
+                              fontSize: 20,
+                            ),
+                            decoration: const InputDecoration(
+                              prefixIcon: Icon(
+                                IconData(0xf052b, fontFamily: 'MaterialIcons'),
+                                color: MyPalette.white,
+                                size: 34,
+                              ),
+                              hintStyle: TextStyle(color: Colors.white60),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    width: 3, color: Colors.transparent),
+                              ),
+                              labelText: 'Please enter your username',
+                              labelStyle: TextStyle(
+                                  fontSize: 15, color: Colors.white54),
+                            ),
+                          ),
+                        ),
 
-                    ///horizontal line
-                    Container(
-                      padding: EdgeInsets.only(
-                          left: 0.02 * width,
-                          right: 0.02 * width,
-                          bottom: 0.02 * width,
-                          top: 3),
-                      child: const Divider(
-                        height: 8,
-                        thickness: 2,
-                        color: Colors.white,
-                      ),
+                        ///Horizontal line
+                        Container(
+                          padding: EdgeInsets.only(
+                            left: 0.02 * width,
+                            right: 0.02 * width,
+                            top: 0,
+                            bottom: height * 0.03,
+                          ),
+                          child: const Divider(
+                            height: 5,
+                            thickness: 2,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
                     ),
 
                     ///Buttons
@@ -130,7 +182,7 @@ class LargeScreen extends StatelessWidget {
                       padding: EdgeInsets.only(top: 0.016 * height),
                       child: Container(
                         width: 0.27 * width,
-                        height: 0.06 * height,
+                        height: 0.075 * height,
                         decoration: BoxDecoration(
                             gradient: LinearGradient(
                               begin: Alignment.topRight,
@@ -162,10 +214,10 @@ class LargeScreen extends StatelessWidget {
                     Container(
                       child: TextButton(
                         child: Container(
-                          padding: EdgeInsets.only(top: 0.05 * height),
+                          padding: EdgeInsets.only(top: 0.03 * height),
                           child: Container(
                             width: 0.27 * width,
-                            height: 0.06 * height,
+                            height: 0.075 * height,
                             decoration: BoxDecoration(
                                 gradient: LinearGradient(
                                   begin: Alignment.topRight,
@@ -194,9 +246,11 @@ class LargeScreen extends StatelessWidget {
                         ),
                         onPressed: () {
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SignupPage()));
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SignupPage(),
+                            ),
+                          );
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.transparent,
@@ -246,7 +300,7 @@ class SmallScreen extends StatelessWidget {
               fit: BoxFit.cover),
         ),
         child: Padding(
-          padding: EdgeInsets.only(top: 0.025 * height),
+          padding: EdgeInsets.only(left: 0.01 * width, top: 0.06 * height),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
@@ -256,8 +310,6 @@ class SmallScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      padding: EdgeInsets.only(
-                          left: 0.03 * width, top: 0.06 * height),
                       child: Row(
                         children: [
                           ElevatedButton(
@@ -284,58 +336,117 @@ class SmallScreen extends StatelessWidget {
                     Container(
                       alignment: Alignment.topCenter,
                       padding: EdgeInsets.only(
-                          top: height * 0.02, bottom: height * 0.022),
+                          top: height * 0.01, bottom: height * 0.012),
                       child: Image.asset("assets/music_swing_logo_small.png",
                           scale: 2.5),
                     ),
 
                     ///User input area
-                    Container(
-                      padding: EdgeInsets.only(left: 0.12 * width),
-                      alignment: Alignment.topLeft,
-                      child: Icon(
-                        IconData(0xe491, fontFamily: 'MaterialIcons'),
-                        color: MyPalette.white,
-                        size: 30,
-                      ),
-                    ),
-
-                    ///Horizontal line
-                    Container(
-                        padding: EdgeInsets.only(
-                          left: 0.1 * width,
-                          right: 0.1 * width,
-                          top: 3,
-                          bottom: height * 0.07,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        ///TextField
+                        Container(
+                          padding:
+                              EdgeInsets.only(left: 0.12 * width, bottom: 0),
+                          child: TextField(
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              fontFamily: 'Maven Pro',
+                              fontWeight: FontWeight.w100,
+                              color: Colors.white,
+                              fontSize: 20,
+                            ),
+                            decoration: const InputDecoration(
+                                prefixIcon: Align(
+                                  widthFactor: 1.0,
+                                  heightFactor: 1.0,
+                                  child: Icon(
+                                    IconData(0xe491,
+                                        fontFamily: 'MaterialIcons'),
+                                    color: MyPalette.white,
+                                    size: 30,
+                                  ),
+                                ),
+                                hintStyle: TextStyle(color: Colors.white60),
+                                border: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      width: 10, color: Colors.white),
+                                ),
+                                labelText: 'Please enter your username',
+                                labelStyle: TextStyle(
+                                    fontSize: 15, color: Colors.white54)),
+                          ),
                         ),
-                        child: const Divider(
-                          height: 8,
-                          thickness: 2,
-                          color: Colors.white,
-                        )),
 
-                    /// user icon
-                    Container(
-                        padding: EdgeInsets.only(left: 0.12 * width),
-                        alignment: Alignment.topLeft,
-                        child: Icon(
-                          IconData(0xe3ae, fontFamily: 'MaterialIcons'),
-                          color: MyPalette.white,
-                          size: 30,
-                        )),
-
-                    ///Horizontal line
-                    Container(
-                        padding: EdgeInsets.only(
+                        ///Horizontal line
+                        Container(
+                          padding: EdgeInsets.only(
                             left: 0.1 * width,
                             right: 0.1 * width,
-                            top: 3,
-                            bottom: height * 0.045),
-                        child: const Divider(
-                          height: 8,
-                          thickness: 2,
-                          color: Colors.white,
-                        )),
+                            top: 0,
+                            bottom: height * 0.03,
+                          ),
+                          child: const Divider(
+                            height: 5,
+                            thickness: 2,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    /// Password icon
+                    Column(
+                      children: [
+                        ///Text field
+                        Container(
+                          padding:
+                              EdgeInsets.only(left: 0.12 * width, bottom: 0),
+                          child: TextField(
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              fontFamily: 'Maven Pro',
+                              fontWeight: FontWeight.w100,
+                              color: Colors.white,
+                              fontSize: 20,
+                            ),
+                            decoration: const InputDecoration(
+                                prefixIcon: Align(
+                                  widthFactor: 1.0,
+                                  child: Icon(
+                                    IconData(0xf052b,
+                                        fontFamily: 'MaterialIcons'),
+                                    color: MyPalette.white,
+                                    size: 32,
+                                  ),
+                                ),
+                                hintStyle: TextStyle(color: Colors.white60),
+                                border: OutlineInputBorder(
+                                  borderSide:
+                                      BorderSide(width: 0, color: Colors.white),
+                                ),
+                                labelText: 'Please enter your password',
+                                labelStyle: TextStyle(
+                                    fontSize: 15, color: Colors.white54)),
+                          ),
+                        ),
+
+                        ///Horizontal line
+                        Container(
+                          padding: EdgeInsets.only(
+                              left: 0.1 * width,
+                              right: 0.1 * width,
+                              top: 3,
+                              bottom: height * 0.045),
+                          child: const Divider(
+                            height: 5,
+                            thickness: 2,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
 
                     ///Buttons
                     //Login Button
@@ -376,7 +487,7 @@ class SmallScreen extends StatelessWidget {
                     Container(
                       child: TextButton(
                         child: Container(
-                          padding: EdgeInsets.only(top: height * 0.03),
+                          padding: EdgeInsets.only(top: height * 0.015),
                           child: Container(
                             width: 0.8 * width,
                             height: 0.07 * height,
@@ -419,7 +530,7 @@ class SmallScreen extends StatelessWidget {
 
                     ///Forgot Password
                     Container(
-                      padding: EdgeInsets.only(top: 0.05 * height),
+                      padding: EdgeInsets.only(top: 0.01 * height),
                       child: Container(
                         child: Text(
                           'Forgot your password?',
