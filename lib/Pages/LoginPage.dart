@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mood_swing/Pages/SignupPage.dart';
+import '../Utilities/AuthRouter.dart';
 import '../Widgets/widgets.dart';
 
 class Body extends StatelessWidget {
@@ -11,6 +12,9 @@ class Body extends StatelessWidget {
     );
   }
 }
+
+TextEditingController emailController = new TextEditingController();
+TextEditingController passwordController = new TextEditingController();
 
 class LargeScreen extends StatelessWidget {
   @override
@@ -81,6 +85,7 @@ class LargeScreen extends StatelessWidget {
                           padding:
                               EdgeInsets.only(left: 0.02 * width, bottom: 0),
                           child: TextField(
+                            controller: emailController,
                             textAlign: TextAlign.left,
                             cursorColor: Colors.white,
                             style: TextStyle(
@@ -100,7 +105,7 @@ class LargeScreen extends StatelessWidget {
                                 borderSide: BorderSide(
                                     width: 3, color: Colors.transparent),
                               ),
-                              labelText: 'Please enter your username',
+                              labelText: 'Please enter your email',
                               labelStyle: TextStyle(
                                   fontSize: 15, color: Colors.white54),
                             ),
@@ -133,6 +138,7 @@ class LargeScreen extends StatelessWidget {
                           padding:
                               EdgeInsets.only(left: 0.02 * width, bottom: 0),
                           child: TextField(
+                            controller: passwordController,
                             textAlign: TextAlign.left,
                             cursorColor: Colors.white,
                             style: TextStyle(
@@ -152,7 +158,7 @@ class LargeScreen extends StatelessWidget {
                                 borderSide: BorderSide(
                                     width: 3, color: Colors.transparent),
                               ),
-                              labelText: 'Please enter your username',
+                              labelText: 'Please enter your password',
                               labelStyle: TextStyle(
                                   fontSize: 15, color: Colors.white54),
                             ),
@@ -373,7 +379,7 @@ class SmallScreen extends StatelessWidget {
                                   borderSide: BorderSide(
                                       width: 10, color: Colors.white),
                                 ),
-                                labelText: 'Please enter your username',
+                                labelText: 'Please enter your email',
                                 labelStyle: TextStyle(
                                     fontSize: 15, color: Colors.white54)),
                           ),
@@ -404,6 +410,7 @@ class SmallScreen extends StatelessWidget {
                           padding:
                               EdgeInsets.only(left: 0.12 * width, bottom: 0),
                           child: TextField(
+                            controller: passwordController,
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               fontFamily: 'Maven Pro',
@@ -555,12 +562,16 @@ class SmallScreen extends StatelessWidget {
   }
 }
 
+void login() async {
+  AuthRouter().login(emailController.text, passwordController.text, () {});
+}
+
+
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
   @override
   Widget build(Object context) {
-    //Materialapp debugger false
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Column(children: [Body()]),
