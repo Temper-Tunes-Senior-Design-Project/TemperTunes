@@ -55,7 +55,18 @@ class SidebarSmall extends StatelessWidget {
             floatingActionButtonLocation: FloatingActionButtonLocation.miniStartTop,
 
             drawer: SidebarDrawer(controller: _controller),
-
+            body: Row(
+              children: [
+                ///tiles
+                Expanded(
+                  child: Center(
+                    child: HomePage(
+                 ///     controller: _controller,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           );
         },
       ),
@@ -148,7 +159,6 @@ class SidebarDrawer extends StatelessWidget {
           label: 'User Profile',
           onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => UserPage()));},
          ),
-
 
         ///Make New Playlist
          SidebarXItem(
