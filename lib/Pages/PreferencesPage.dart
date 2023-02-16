@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart' show debugPaintSizeEnabled;
 import 'package:mood_swing/Pages/UserPage.dart';
 import '../Widgets/widgets.dart';
 
@@ -492,7 +491,6 @@ class PreferencesPage extends StatelessWidget {
 
   @override
   Widget build(Object context) {
-    //Materialapp debugger false
     return Scaffold(
         resizeToAvoidBottomInset: false,
         body: Column(

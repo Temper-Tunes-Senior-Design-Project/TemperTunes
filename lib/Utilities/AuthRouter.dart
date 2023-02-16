@@ -32,6 +32,7 @@ class AuthRouter {
       return credentials.user?.uid ?? "Invalid Credentials";
 
     } on FirebaseAuthException catch (e) {
+      print(e);
       callback.call();
       return "Invalid Credentials";
     }

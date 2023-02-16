@@ -637,10 +637,10 @@ class SmallScreen extends StatelessWidget {
 
 Future<void> register(BuildContext context) async {
   String uid = await AuthRouter().registerUser(_emailController.text, _passwordController.text, _usernameController.text,() {
-    print("Error occured");
+    print("Error occurred");
   });
   DatabaseRouter().createUser(uid);
-  Navigator.push(context, MaterialPageRoute(builder: (ctxt)=> HomePage()));
+  Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
 }
 
 class SignupPage extends StatelessWidget {
