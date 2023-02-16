@@ -23,7 +23,7 @@ class LargeScreen extends StatelessWidget {
         height: height,
         decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/LoginPageLarge.png"),
+              image: AssetImage("assets/loginPageLarge.png"),
               fit: BoxFit.cover),
         ),
         child: Padding(
@@ -72,14 +72,14 @@ class LargeScreen extends StatelessWidget {
                           scale: 2.3),
                     ),
 
-
                     ///User input area
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         ///TextField
                         Container(
-                          padding: EdgeInsets.only(left:0.02*width,bottom:0),
+                          padding:
+                              EdgeInsets.only(left: 0.02 * width, bottom: 0),
                           child: TextField(
                             textAlign: TextAlign.left,
                             cursorColor: Colors.white,
@@ -90,17 +90,23 @@ class LargeScreen extends StatelessWidget {
                               fontSize: 16,
                             ),
                             decoration: const InputDecoration(
-                                prefixIcon:Icon(IconData(0xe491, fontFamily: 'MaterialIcons'),
-                                  color: MyPalette.white,
-                                  size: 34,),
-                                hintStyle: TextStyle(color: Colors.white60),
-                                enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(width:3, color: Colors.transparent),),
-                                labelText: 'Please enter your username',
-                                labelStyle: TextStyle(fontSize: 15,color: Colors.white54),
+                              prefixIcon: Icon(
+                                IconData(0xe491, fontFamily: 'MaterialIcons'),
+                                color: MyPalette.white,
+                                size: 34,
+                              ),
+                              hintStyle: TextStyle(color: Colors.white60),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    width: 3, color: Colors.transparent),
+                              ),
+                              labelText: 'Please enter your username',
+                              labelStyle: TextStyle(
+                                  fontSize: 15, color: Colors.white54),
                             ),
                           ),
                         ),
+
                         ///Horizontal line
                         Container(
                           padding: EdgeInsets.only(
@@ -113,10 +119,10 @@ class LargeScreen extends StatelessWidget {
                             height: 5,
                             thickness: 2,
                             color: Colors.white,
-                          ),),
+                          ),
+                        ),
                       ],
                     ),
-
 
                     ///password icon
                     Column(
@@ -124,7 +130,8 @@ class LargeScreen extends StatelessWidget {
                       children: [
                         ///TextField
                         Container(
-                          padding: EdgeInsets.only(left:0.02*width,bottom:0),
+                          padding:
+                              EdgeInsets.only(left: 0.02 * width, bottom: 0),
                           child: TextField(
                             textAlign: TextAlign.left,
                             cursorColor: Colors.white,
@@ -135,17 +142,23 @@ class LargeScreen extends StatelessWidget {
                               fontSize: 20,
                             ),
                             decoration: const InputDecoration(
-                              prefixIcon:Icon(IconData(0xf052b, fontFamily: 'MaterialIcons'),
+                              prefixIcon: Icon(
+                                IconData(0xf052b, fontFamily: 'MaterialIcons'),
                                 color: MyPalette.white,
-                                size: 34,),
+                                size: 34,
+                              ),
                               hintStyle: TextStyle(color: Colors.white60),
                               enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(width:3, color: Colors.transparent),),
+                                borderSide: BorderSide(
+                                    width: 3, color: Colors.transparent),
+                              ),
                               labelText: 'Please enter your username',
-                              labelStyle: TextStyle(fontSize: 15,color: Colors.white54),
+                              labelStyle: TextStyle(
+                                  fontSize: 15, color: Colors.white54),
                             ),
                           ),
                         ),
+
                         ///Horizontal line
                         Container(
                           padding: EdgeInsets.only(
@@ -158,11 +171,10 @@ class LargeScreen extends StatelessWidget {
                             height: 5,
                             thickness: 2,
                             color: Colors.white,
-                          ),),
+                          ),
+                        ),
                       ],
                     ),
-
-
 
                     ///Buttons
                     //Login button
@@ -234,9 +246,11 @@ class LargeScreen extends StatelessWidget {
                         ),
                         onPressed: () {
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SignupPage(),),);
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SignupPage(),
+                            ),
+                          );
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.transparent,
@@ -286,7 +300,7 @@ class SmallScreen extends StatelessWidget {
               fit: BoxFit.cover),
         ),
         child: Padding(
-          padding: EdgeInsets.only(left:0.01*width, top: 0.06*height),
+          padding: EdgeInsets.only(left: 0.01 * width, top: 0.06 * height),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
@@ -327,61 +341,14 @@ class SmallScreen extends StatelessWidget {
                           scale: 2.5),
                     ),
 
-
                     ///User input area
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         ///TextField
                         Container(
-                            padding: EdgeInsets.only(left:0.12*width,bottom:0),
-                            child: TextField(
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                fontFamily: 'Maven Pro',
-                                fontWeight: FontWeight.w100,
-                                color: Colors.white,
-                                fontSize: 20,
-                              ),
-                              decoration: const InputDecoration(
-                                prefixIcon:Align(widthFactor: 1.0, heightFactor:1.0,
-                                  child: Icon(IconData(0xe491, fontFamily: 'MaterialIcons'),
-                                    color: MyPalette.white,
-                                    size: 30,),),
-                                hintStyle: TextStyle(color: Colors.white60),
-                                border: UnderlineInputBorder(
-                                  borderSide: BorderSide(width:10, color:Colors.white),),
-                                labelText: 'Please enter your username',
-                                labelStyle: TextStyle(fontSize: 15,color: Colors.white54)
-                              ),
-                            ),
-                          ),
-                        ///Horizontal line
-                        Container(
-                            padding: EdgeInsets.only(
-                              left: 0.1 * width,
-                              right: 0.1 * width,
-                              top: 0,
-                              bottom: height * 0.03,
-                            ),
-                            child: const Divider(
-                              height: 5,
-                              thickness: 2,
-                              color: Colors.white,
-                        ),),
-
-
-
-                      ],
-                    ),
-
-
-                    /// Password icon
-                    Column(
-                      children: [
-                        ///Text field
-                        Container(
-                          padding: EdgeInsets.only(left:0.12*width,bottom:0),
+                          padding:
+                              EdgeInsets.only(left: 0.12 * width, bottom: 0),
                           child: TextField(
                             textAlign: TextAlign.left,
                             style: TextStyle(
@@ -391,33 +358,95 @@ class SmallScreen extends StatelessWidget {
                               fontSize: 20,
                             ),
                             decoration: const InputDecoration(
-                                prefixIcon: Align(widthFactor: 1.0,
-                                  child: Icon(IconData(0xf052b, fontFamily: 'MaterialIcons'),
-                                  color: MyPalette.white,
-                                  size: 32,),),
+                                prefixIcon: Align(
+                                  widthFactor: 1.0,
+                                  heightFactor: 1.0,
+                                  child: Icon(
+                                    IconData(0xe491,
+                                        fontFamily: 'MaterialIcons'),
+                                    color: MyPalette.white,
+                                    size: 30,
+                                  ),
+                                ),
                                 hintStyle: TextStyle(color: Colors.white60),
                                 border: UnderlineInputBorder(
-                                  borderSide: BorderSide(width:0, color:Colors.white),),
-                                labelText: 'Please enter your password',
-                                labelStyle: TextStyle(fontSize: 15,color: Colors.white54)
-                            ),
+                                  borderSide: BorderSide(
+                                      width: 10, color: Colors.white),
+                                ),
+                                labelText: 'Please enter your username',
+                                labelStyle: TextStyle(
+                                    fontSize: 15, color: Colors.white54)),
                           ),
                         ),
+
                         ///Horizontal line
                         Container(
-                            padding: EdgeInsets.only(
-                                left: 0.1 * width,
-                                right: 0.1 * width,
-                                top: 3,
-                                bottom: height * 0.045),
-                            child: const Divider(
-                              height: 5,
-                              thickness: 2,
-                              color: Colors.white,
-                            ),),
+                          padding: EdgeInsets.only(
+                            left: 0.1 * width,
+                            right: 0.1 * width,
+                            top: 0,
+                            bottom: height * 0.03,
+                          ),
+                          child: const Divider(
+                            height: 5,
+                            thickness: 2,
+                            color: Colors.white,
+                          ),
+                        ),
                       ],
                     ),
 
+                    /// Password icon
+                    Column(
+                      children: [
+                        ///Text field
+                        Container(
+                          padding:
+                              EdgeInsets.only(left: 0.12 * width, bottom: 0),
+                          child: TextField(
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              fontFamily: 'Maven Pro',
+                              fontWeight: FontWeight.w100,
+                              color: Colors.white,
+                              fontSize: 20,
+                            ),
+                            decoration: const InputDecoration(
+                                prefixIcon: Align(
+                                  widthFactor: 1.0,
+                                  child: Icon(
+                                    IconData(0xf052b,
+                                        fontFamily: 'MaterialIcons'),
+                                    color: MyPalette.white,
+                                    size: 32,
+                                  ),
+                                ),
+                                hintStyle: TextStyle(color: Colors.white60),
+                                border: UnderlineInputBorder(
+                                  borderSide:
+                                      BorderSide(width: 0, color: Colors.white),
+                                ),
+                                labelText: 'Please enter your password',
+                                labelStyle: TextStyle(
+                                    fontSize: 15, color: Colors.white54)),
+                          ),
+                        ),
+
+                        ///Horizontal line
+                        Container(
+                          padding: EdgeInsets.only(
+                              left: 0.1 * width,
+                              right: 0.1 * width,
+                              top: 3,
+                              bottom: height * 0.045),
+                          child: const Divider(
+                            height: 5,
+                            thickness: 2,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
                     ///Buttons
                     //Login Button
                     Container(
@@ -452,7 +481,6 @@ class SmallScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-
                     ///Register button
                     Container(
                       child: TextButton(
@@ -497,7 +525,6 @@ class SmallScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-
                     ///Forgot Password
                     Container(
                       padding: EdgeInsets.only(top: 0.01 * height),
@@ -530,7 +557,6 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(Object context) {
-    //Materialapp debugger false
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Column(children: [Body()]),

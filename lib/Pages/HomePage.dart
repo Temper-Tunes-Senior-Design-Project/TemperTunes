@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mood_swing/Pages/SignupPage.dart';
 import 'package:mood_swing/Pages/UserPage.dart';
-import '../Widgets/widgets.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
-
-import 'UserPage.dart';
-
-
-
 
 class HomePage extends StatelessWidget {
   static Key UserButtonKey = Key("User Button");

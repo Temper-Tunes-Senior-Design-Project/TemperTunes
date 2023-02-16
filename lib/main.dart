@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mood_swing/Containers/LoginContainer.dart';
-import 'package:mood_swing/Pages/PreferencesPage.dart';
 import 'package:mood_swing/Pages/SignupPage.dart';
-import 'Pages/VerificationPage.dart';
-import 'Pages/HomePage.dart';
 import 'Widgets/MockNavigator.dart';
-import '../Widgets/widgets.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,10 +36,7 @@ class App extends StatelessWidget {
 
         iconTheme: const IconThemeData(color: Colors.white),
       ),
-     // home: LoginContainer(),
-
            home: SignupPage(),
-    //     home:const VerificationPage(phoneNumber: "jdoe@gmail.com",),
     );
   }
 }
