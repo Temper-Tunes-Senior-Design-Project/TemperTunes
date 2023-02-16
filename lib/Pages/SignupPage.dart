@@ -30,7 +30,7 @@ class LargeScreen extends StatelessWidget {
         height: height,
         decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/LoginPageLarge.png"),
+              image: AssetImage("assets/loginPageLarge.png"),
               fit: BoxFit.cover),
         ),
         child: Padding(
