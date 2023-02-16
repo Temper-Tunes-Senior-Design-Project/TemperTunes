@@ -13,22 +13,27 @@ class AuthRouter {
     return FirebaseAuth.instance.currentUser?.uid ?? "";
   }
 
-  void login(String email, String password, callback) async {
+  void login(String email, String password,Function callback) async {
     try {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch (e) {
+      print(e);
       callback.call();
     }
   }
 
-  void registerUser(String email, String password, Function callback) async {
+  Future<String> registerUser(String email, String password, String username, Function callback) async {
     try {
       UserCredential credentials = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
-      String uid = credentials.user?.uid ?? "-1";
+      FirebaseAuth.instance.currentUser?.updateDisplayName(username);
+      FirebaseAuth.instance.currentUser?.sendEmailVerification();
+      return credentials.user?.uid ?? "Invalid Credentials";
+
     } on FirebaseAuthException catch (e) {
       callback.call();
+      return "Invalid Credentials";
     }
   }
 

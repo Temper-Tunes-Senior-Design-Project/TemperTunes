@@ -1,14 +1,20 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mood_swing/Containers/LoginContainer.dart';
 import 'package:mood_swing/Pages/PreferencesPage.dart';
 import 'package:mood_swing/Pages/SignupPage.dart';
+import 'Pages/LoginPage.dart';
 import 'Pages/VerificationPage.dart';
 import 'Pages/HomePage.dart';
 import 'Widgets/MockNavigator.dart';
 import '../Widgets/widgets.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(App());
 }
 
@@ -41,10 +47,7 @@ class App extends StatelessWidget {
 
         iconTheme: const IconThemeData(color: Colors.white),
       ),
-     // home: LoginContainer(),
-
-           home: SignupPage(),
-    //     home:const VerificationPage(phoneNumber: "jdoe@gmail.com",),
+           home: LoginPage(),
     );
   }
 }

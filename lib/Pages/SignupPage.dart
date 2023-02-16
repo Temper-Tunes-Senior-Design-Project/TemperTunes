@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mood_swing/Pages/HomePage.dart';
 import 'package:mood_swing/Pages/LoginPage.dart';
+import 'package:mood_swing/Utilities/AuthRouter.dart';
+import 'package:mood_swing/Utilities/DatabaseRouter.dart';
 import '../Widgets/widgets.dart';
 
 class Body extends StatelessWidget {
@@ -11,6 +14,10 @@ class Body extends StatelessWidget {
     );
   }
 }
+TextEditingController _emailController = new TextEditingController();
+TextEditingController _usernameController = new TextEditingController();
+TextEditingController _passwordController = new TextEditingController();
+TextEditingController _passwordController2 = new TextEditingController();
 
 class LargeScreen extends StatelessWidget {
   @override
@@ -76,6 +83,7 @@ class LargeScreen extends StatelessWidget {
                               EdgeInsets.only(left: 0.03 * width, bottom: 0),
                           alignment: Alignment.topLeft,
                           child: TextField(
+                            controller: _usernameController,
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               fontFamily: 'Maven Pro',
@@ -116,6 +124,7 @@ class LargeScreen extends StatelessWidget {
                               left: 0.03 * width, top: height * 0.01),
                           alignment: Alignment.topLeft,
                           child: TextField(
+                            controller: _emailController,
                             style: TextStyle(
                               fontFamily: 'Maven Pro',
                               fontWeight: FontWeight.w100,
@@ -154,6 +163,7 @@ class LargeScreen extends StatelessWidget {
                               left: 0.03 * width, top: height * 0.01),
                           alignment: Alignment.topLeft,
                           child: TextField(
+                            controller: _passwordController,
                             style: TextStyle(
                               fontFamily: 'Maven Pro',
                               fontWeight: FontWeight.w100,
@@ -192,6 +202,7 @@ class LargeScreen extends StatelessWidget {
                               left: 0.03 * width, top: height * 0.01),
                           alignment: Alignment.topLeft,
                           child: TextField(
+                            controller: _passwordController2,
                             style: TextStyle(
                               fontFamily: 'Maven Pro',
                               fontWeight: FontWeight.w100,
@@ -253,12 +264,7 @@ class LargeScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SignupPage()));
-                        },
+                        onPressed: (){register(context);},
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.transparent,
                           foregroundColor: Colors.transparent,
@@ -378,6 +384,7 @@ class SmallScreen extends StatelessWidget {
                               EdgeInsets.only(left: 0.12 * width, bottom: 0),
                           alignment: Alignment.topLeft,
                           child: TextField(
+                            controller: _usernameController,
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               fontFamily: 'Maven Pro',
@@ -421,6 +428,7 @@ class SmallScreen extends StatelessWidget {
                               left: 0.12 * width, top: height * 0.005),
                           alignment: Alignment.topLeft,
                           child: TextField(
+                            controller: _emailController,
                             style: TextStyle(
                               fontFamily: 'Maven Pro',
                               fontWeight: FontWeight.w100,
@@ -461,6 +469,7 @@ class SmallScreen extends StatelessWidget {
                               left: 0.12 * width, top: height * 0.005),
                           alignment: Alignment.topLeft,
                           child: TextField(
+                            controller: _passwordController,
                             style: TextStyle(
                               fontFamily: 'Maven Pro',
                               fontWeight: FontWeight.w100,
@@ -500,6 +509,7 @@ class SmallScreen extends StatelessWidget {
                               left: 0.12 * width, top: height * 0.005),
                           alignment: Alignment.topLeft,
                           child: TextField(
+                            controller: _passwordController2,
                             style: TextStyle(
                               fontFamily: 'Maven Pro',
                               fontWeight: FontWeight.w100,
@@ -563,12 +573,7 @@ class SmallScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SignupPage()));
-                        },
+                        onPressed: (){register(context);},
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.transparent,
                           foregroundColor: Colors.transparent,
@@ -628,6 +633,14 @@ class SmallScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+Future<void> register(BuildContext context) async {
+  String uid = await AuthRouter().registerUser(_emailController.text, _passwordController.text, _usernameController.text,() {
+    print("Error occured");
+  });
+  DatabaseRouter().createUser(uid);
+  Navigator.push(context, MaterialPageRoute(builder: (ctxt)=> HomePage()));
 }
 
 class SignupPage extends StatelessWidget {

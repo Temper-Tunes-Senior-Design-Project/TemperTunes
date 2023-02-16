@@ -5,7 +5,6 @@ packages:
     dependency: transitive
     description:
       name: _fe_analyzer_shared
-<<<<<<< HEAD
       sha256: "569ddca58d535e601dd1584afa117710abc999d036c0cd2c51777fb257df78e8"
       url: "https://pub.dev"
     source: hosted
@@ -18,26 +17,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.13"
-=======
-      sha256: "3444216bfd127af50bbe4862d8843ed44db946dd933554f0d7285e89f10e28ac"
-      url: "https://pub.dev"
-    source: hosted
-    version: "50.0.0"
->>>>>>> origin/CSC-80-Preferences_Layout
   analyzer:
     dependency: transitive
     description:
       name: analyzer
-<<<<<<< HEAD
       sha256: "10927c4b7c7c88b1adbca278c3d5531db92e2f4b4abf04e2919a800af965f3f5"
       url: "https://pub.dev"
     source: hosted
     version: "5.5.0"
-=======
-      sha256: "68796c31f510c8455a06fed75fc97d8e5ad04d324a830322ab3efc9feb6201c1"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.2.0"
   animations:
     dependency: "direct main"
     description:
@@ -46,7 +33,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.7"
->>>>>>> origin/CSC-80-Preferences_Layout
   archive:
     dependency: transitive
     description:
@@ -267,17 +253,10 @@ packages:
     dependency: transitive
     description:
       name: fixnum
-<<<<<<< HEAD
       sha256: "25517a4deb0c03aa0f32fd12db525856438902d9c16536311e76cdc57b31d7d1"
       url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
-=======
-      sha256: "04be3e934c52e082558cc9ee21f42f5c1cd7a1262f4c63cd0357c08d5bba81ec"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.1"
->>>>>>> origin/CSC-80-Preferences_Layout
   flutter:
     dependency: "direct main"
     description: flutter
@@ -678,10 +657,10 @@ packages:
     dependency: transitive
     description:
       name: xml
-      sha256: ac0e3f4bf00ba2708c33fbabbbe766300e509f8c82dbd4ab6525039813f7e2fb
+      sha256: "979ee37d622dec6365e2efa4d906c37470995871fe9ae080d967e192d88286b5"
       url: "https://pub.dev"
     source: hosted
-    version: "6.1.0"
+    version: "6.2.2"
   yaml:
     dependency: transitive
     description:
@@ -691,5 +670,5 @@ packages:
     source: hosted
     version: "3.1.1"
 sdks:
-  dart: ">=2.18.0 <3.0.0"
+  dart: ">=2.19.0 <3.0.0"
   flutter: ">=3.0.0"
