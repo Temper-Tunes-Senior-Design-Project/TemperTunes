@@ -5,7 +5,7 @@ import 'package:mood_swing/Pages/SignupPage.dart';
 import 'Pages/VerificationPage.dart';
 import 'Pages/HomePage.dart';
 import 'Widgets/MockNavigator.dart';
-import '../Widgets/widgets.dart';
+import '../Widgets/MyPalette.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,13 +37,14 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: MaterialColor(0xd789ff, color),
+        scaffoldBackgroundColor: MaterialColor(0x0d0036,color,),
+    ///    canvasColor: MaterialColor(0x651fff, color),
         fontFamily: 'Maven Pro',
-
         iconTheme: const IconThemeData(color: Colors.white),
       ),
      // home: LoginContainer(),
 
-           home: SignupPage(),
+           home: HomePage(),
     //     home:const VerificationPage(phoneNumber: "jdoe@gmail.com",),
     );
   }

@@ -279,12 +279,9 @@ class SmallScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      padding: EdgeInsets.only(left:0.02*width),
-                      child: Icon(
-                        IconData(0xf05bc, fontFamily: 'MaterialIcons'),
-                        color: Colors.white,
-                        size: 40,
-                      ),
+                      height:height,
+                      child: SidebarSmall(),
+
                     ),
                   ],
                 ),
