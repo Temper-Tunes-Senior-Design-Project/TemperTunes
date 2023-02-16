@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'Pages/LoginPage.dart';
+import 'package:mood_swing/Pages/LandingPage.dart';
 import 'Widgets/MockNavigator.dart';
 import 'firebase_options.dart';
 
@@ -41,7 +41,7 @@ class App extends StatelessWidget {
 
         iconTheme: const IconThemeData(color: Colors.white),
       ),
-           home: LoginPage(),
+           home: LandingPage(),
     );
   }
 }
