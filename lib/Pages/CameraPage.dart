@@ -2,19 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:mood_swing/Widgets/widgets.dart';
 
-import '../Widgets/ResponsiveWidget.dart';
-
-class CameraPage extends StatefulWidget {
+class Body extends StatelessWidget {
   final List<CameraDescription>? cameras;
-  const CameraPage({required this.cameras, super.key});
+
+  const Body({required this.cameras, super.key});
 
   @override
-  State<CameraPage> createState() => _CameraPageState();
+  Widget build(BuildContext context) {
+    return ResponsiveWidget(
+      largeScreen: LargeScreen(cameras: cameras),
+    );
+  }
 }
 
-class _CameraPageState extends State<CameraPage> {
+class LargeScreen extends StatefulWidget {
+  final List<CameraDescription>? cameras;
+  const LargeScreen({required this.cameras, super.key});
+
+  @override
+  State<LargeScreen> createState() => _LargeScreenState();
+}
+
+class _LargeScreenState extends State<LargeScreen> {
   late CameraController cameraController;
   XFile? pictureFile;
+  XFile? videoFile;
+  bool recording = false;
+  int currentCameraIndex = 0;
 
   @override
   void initState() {
@@ -23,12 +37,38 @@ class _CameraPageState extends State<CameraPage> {
     if (widget.cameras == null || widget.cameras!.length == 0) {
       return;
     }
-    cameraController =
-        CameraController(widget.cameras![0], ResolutionPreset.max);
+    cameraController = CameraController(
+        widget.cameras![currentCameraIndex], ResolutionPreset.max);
     cameraController.initialize().then((_) {
       if (!mounted) {
         return;
       }
+      setState(() {});
+    }).catchError((error) {
+      if (error is CameraException) {
+        ///////Tell the user to allow the app to access their camera/audio
+        return;
+      }
+    });
+  }
+
+  void onNewCameraSelected(CameraDescription cameraDescription) async {
+    final previousCameraController = cameraController;
+    // Instantiating the camera controller
+    final CameraController newCameraController = CameraController(
+      cameraDescription,
+      ResolutionPreset.max,
+    );
+
+    // Dispose the previous controller
+    await previousCameraController.dispose();
+
+    cameraController = newCameraController;
+    cameraController.initialize().then((_) {
+      if (!mounted) {
+        return;
+      }
+
       setState(() {});
     }).catchError((error) {
       if (error is CameraException) {
@@ -49,15 +89,151 @@ class _CameraPageState extends State<CameraPage> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     if (!cameraController.value.isInitialized) {
-      return SizedBox(
-        height: height * 0.5,
-        width: width * 0.5,
+      return Container(
+        height: double.infinity,
+        width: double.infinity,
         child: Center(
-          child: CircularProgressIndicator(),
+          child: CircularProgressIndicator(
+            color: Colors.blue,
+          ),
         ),
       );
     }
+
+    return SingleChildScrollView(
+      child: Container(
+        width: width,
+        height: height,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("assets/loginPageLarge.png"),
+              fit: BoxFit.cover),
+        ),
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.all(height * 0.02),
+              child: Center(
+                child: SizedBox(
+                  height: height * 0.7,
+                  width: width * 0.7,
+                  child: Container(
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                              color: MyPalette.darkBlue, width: height * 0.01)),
+                      child: (pictureFile != null)
+                          ?
+                          //Display image to user
+                          Image.network(
+                              pictureFile!.path,
+                            )
+                          : (videoFile != null)
+                              ?
+                              //allow user to play video (video_player plugin)
+                              Material()
+                              : CameraPreview(cameraController)),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(height * 0.02),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  if (videoFile != null || pictureFile != null) ...{
+                    //back arrow and confirm arrow (FILL IN STUB)
+                    CameraButton(
+                      context: context,
+                      heroTag: "Back Button",
+                      icon: Icons.arrow_back_ios_rounded,
+                      onPressed: () async {
+                        pictureFile = null;
+                        videoFile = null;
+                        onNewCameraSelected(
+                            widget.cameras![currentCameraIndex]);
+                        setState(() {});
+                      },
+                    ),
+                    CameraButton(
+                      context: context,
+                      heroTag: "Confirm Button",
+                      icon: Icons.check_circle_rounded,
+                      onPressed: () {
+                        //FILL IN STUB WHEN PAGE IS COMPLETE
+                      },
+                    )
+                    ////make videofile null
+                  } else if (recording) ...{
+                    CameraButton(
+                      context: context,
+                      heroTag: "Stop Recording",
+                      icon: Icons.stop_circle_rounded,
+                      onPressed: () async {
+                        videoFile = await cameraController.stopVideoRecording();
+                        recording = false;
+                        setState(() {});
+                      },
+                    ),
+                  } else ...{
+                    CameraButton(
+                      context: context,
+                      heroTag: "Record Video",
+                      icon: Icons.fiber_manual_record_rounded,
+                      onPressed: () async {
+                        await cameraController.startVideoRecording();
+                        recording = true;
+                        setState(() {});
+                      },
+                    ),
+                    CameraButton(
+                      context: context,
+                      heroTag: "Snap Picture",
+                      icon: Icons.camera_rounded,
+                      onPressed: () async {
+                        pictureFile = await cameraController.takePicture();
+                        setState(() {});
+                      },
+                    ),
+                    CameraButton(
+                      context: context,
+                      heroTag: "Toggle Camera",
+                      icon: Icons.flip_camera_ios_rounded,
+                      onPressed: () async {
+                        currentCameraIndex =
+                            (currentCameraIndex + 1) % widget.cameras!.length;
+                        onNewCameraSelected(
+                            widget.cameras![currentCameraIndex]);
+                        setState(() {});
+                      },
+                    ),
+                  }
+                ],
+              ),
+            ),
+
+            // if (pictureFile != null)
+            //   Image.network(
+            //     pictureFile!.path,
+            //     height: height * 0.4,
+            //     width: height * 0.4,
+            //   )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class CameraPage extends StatelessWidget {
+  final List<CameraDescription>? cameras;
+
+  CameraPage({required this.cameras});
+
+  static const Key PageKey = Key("Camera Page");
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
+      key: PageKey,
       appBar: AppBar(
         title: Text("Emotion Identification",
             style: TextStyle(
@@ -65,50 +241,42 @@ class _CameraPageState extends State<CameraPage> {
         backgroundColor: MyPalette.darkTurqoise,
       ),
       resizeToAvoidBottomInset: false,
-      body: SingleChildScrollView(
-        child: Container(
-          width: width,
-          height: height,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("assets/loginPageLarge.png"),
-                fit: BoxFit.cover),
-          ),
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.all(height * 0.02),
-                child: Center(
-                  child: SizedBox(
-                    height: 400,
-                    width: 400,
-                    child: CameraPreview(cameraController),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(height * 0.02),
-                child: ElevatedButton(
-                    onPressed: () async {
-                      pictureFile = await cameraController.takePicture();
-                      setState(() {});
-                    },
-                    child: Text("Capture Image")),
-              ),
-              if (pictureFile != null)
-                Image.network(pictureFile!.path, height: 200)
-            ],
-          ),
-        ),
+      body: Body(cameras: cameras),
+    );
+  }
+}
+
+class CameraButton extends StatelessWidget {
+  final IconData icon;
+  final void Function()? onPressed;
+  final BuildContext context;
+  final String heroTag;
+  const CameraButton(
+      {required this.context,
+      required this.heroTag,
+      required this.icon,
+      required this.onPressed,
+      super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    return Padding(
+      padding: EdgeInsets.only(left: width * 0.05, right: width * 0.05),
+      child: Container(
+        decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(width: width * 0.002, color: Colors.black)),
+        child: FloatingActionButton(
+            hoverColor: Color.fromARGB(255, 81, 0, 95),
+            hoverElevation: height * 0.035,
+            heroTag: heroTag,
+            shape: CircleBorder(),
+            backgroundColor: MyPalette.brightMagenta,
+            onPressed: onPressed,
+            child: Icon(icon, size: height * 0.05)),
       ),
     );
   }
-
-  // @override
-  // Widget build(BuildContext context) {
-  //   return ResponsiveWidget(
-  //     largeScreen: LargeScreen(),
-  //     //smallScreen: SmallScreen(),
-  //   );
-  // }
 }
