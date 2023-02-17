@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:lecle_bubble_timeline/lecle_bubble_timeline.dart';
-import 'package:lecle_bubble_timeline/models/timeline_item.dart';
 import 'package:mood_swing/Pages/SignupPage.dart';
 import 'package:mood_swing/Pages/UserPage.dart';
+import 'package:simple_ripple_animation/simple_ripple_animation.dart';
 import '../Widgets/widgets.dart';
 import 'package:collapsible_sidebar/collapsible_sidebar.dart';
 import 'dart:math' as math show pi;
 import 'package:sidebarx/sidebarx.dart';
+import 'package:simple_ripple_animation/simple_ripple_animation.dart';
+
+
 
 
 import 'UserPage.dart';
@@ -80,84 +82,22 @@ class SmallScreen extends StatelessWidget {
         height: height,
         decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/userPageLarge.png"),
+              image: AssetImage("assets/appBarBG.png"),
               fit: BoxFit.cover),
         ),
-          child: Stack(
-            children:
-              [
-                BubbleTimeline(
-                  bubbleSize: 100,
-                  stripColor: Colors.teal,
-                  dividerCircleColor: Colors.white,
-                  // List of Timeline Bubble Items
-                  items: [
-                    TimelineItem(
-                      title: 'Boat',
-                      subtitle: 'Travel through Oceans',
-                      icon: Icon(
-                        Icons.directions_boat,
-                        color: Colors.black,
-                      ),
-                      bubbleColor: Colors.red,
-                      description: 'Description for boat',
-                      titleStyle: TextStyle(fontSize: 25.0, fontWeight: FontWeight.w700, color: Colors.white),
-                      subtitleStyle: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500, color: Colors.white70),
-                      descriptionStyle: TextStyle(fontSize: 12.0, color: Colors.white60),
-                    ),
-                    TimelineItem(
-                      title: 'Bike',
-                      subtitle: 'Road Trips are best',
-                      icon: Icon(
-                        Icons.directions_bike,
-                        color: Colors.black,
-                      ),
-                      bubbleColor: Colors.yellow,
-                      description: 'Description for bike',
-                      titleStyle: TextStyle(fontSize: 25.0, fontWeight: FontWeight.w700, color: Colors.white),
-                      subtitleStyle: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500, color: Colors.white70),
-                      descriptionStyle: TextStyle(fontSize: 12.0, color: Colors.white60),
-                    ),
-                    TimelineItem(
-                      title: 'Bus',
-                      subtitle: 'I like to go with friends',
-                      icon: Icon(
-                        Icons.directions_bus,
-                        color: Colors.black,
-                      ),
-                      bubbleColor: Colors.green,
-                      description: 'Description for bus',
-                      titleStyle: TextStyle(fontSize: 25.0, fontWeight: FontWeight.w700, color: Colors.white),
-                      subtitleStyle: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500, color: Colors.white70),
-                      descriptionStyle: TextStyle(fontSize: 12.0, color: Colors.white60),
-                    ),
+          child: Container(
+            alignment: Alignment.center,
+             padding: EdgeInsets.only(bottom: 0.1*height,),
+            child: Ripple(),
 
-                    TimelineItem(
-                      title: 'Bike',
-                      subtitle: 'Road Trips are best',
-                      icon: Icon(
-                        Icons.directions_bike,
-                        color: Colors.black,
-                      ),
-                      bubbleColor: Colors.yellow,
-                      description: 'Description for bike',
-                      titleStyle: TextStyle(fontSize: 25.0, fontWeight: FontWeight.w700, color: Colors.white),
-                      subtitleStyle: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500, color: Colors.white70),
-                      descriptionStyle: TextStyle(fontSize: 12.0, color: Colors.white60),
-                    ),
-                  ],
-
-                ),
-              ],
           ),
-
-
-
-
       ),
     );
   }
 }
+
+
+
 
 
 class HomePage extends StatelessWidget {
@@ -168,6 +108,48 @@ class HomePage extends StatelessWidget {
     return Scaffold(body: Body());
   }
 }
+
+
+
+
+///Ripple animation demo
+class Ripple extends StatefulWidget {
+  ///initialize the demo widget
+
+
+  ///title of the app
+
+  @override
+  State<Ripple> createState() => _Ripple();
+}
+
+class _Ripple extends State<Ripple> {
+  @override
+  Widget build(BuildContext context) => Scaffold(
+
+    body: Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          RippleAnimation(
+            child: CircleAvatar(
+              minRadius: 110,
+              maxRadius: 110,
+              backgroundImage: AssetImage("assets/circleLogoSmall.png"),
+            ),
+            color: MyPalette.circleIcon,
+            delay: const Duration(milliseconds: 300),
+            repeat: true,
+            minRadius: 85,
+            ripplesCount: 8,
+            duration: const Duration(milliseconds: 6 * 300),
+          )
+        ],
+      ),
+    ), // This trailing comma makes auto-formatting nicer for build methods.
+  );
+}
+
 
 
 
