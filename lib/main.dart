@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 //import 'package:mood_swing/Containers/LoginContainer.dart';
 import 'Pages/HomePage.dart';
+import 'Pages/VerificationPage.dart';
 import 'Widgets/MockNavigator.dart';
 
 void main() {
@@ -26,23 +27,22 @@ class App extends StatelessWidget {
     900: Color.fromRGBO(13, 0, 54, 1),
   };
 
-
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Mood Swing',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-  //      primarySwatch: MaterialColor(0xd789ff, color),
-    ///    canvasColor: MaterialColor(0x651fff, color),
+        primarySwatch: MaterialColor(0xd789ff, color),
+
+        ///    canvasColor: MaterialColor(0x651fff, color),
         fontFamily: 'Maven Pro',
         iconTheme: const IconThemeData(color: Colors.white),
       ),
-     // home: LoginContainer(),
+      // home: LoginContainer(),
+      home: HomePage(),
 
-           home: HomePage(),
-    //     home:const VerificationPage(phoneNumber: "jdoe@gmail.com",),
+      ///   home: const VerificationPage(),
     );
   }
 }

@@ -4,8 +4,6 @@ import 'package:mood_swing/Pages/UserPage.dart';
 import 'package:collapsible_sidebar/collapsible_sidebar.dart';
 import 'dart:math' as math show pi;
 
-
-
 ///Large Sidebar
 class SidebarLarge extends StatefulWidget {
   @override
@@ -30,32 +28,48 @@ class _SidebarLargeState extends State<SidebarLarge> {
         onPressed: () {},
         isSelected: true,
       ),
+
       ///User profile
       CollapsibleItem(
         text: 'User Profile',
         icon: IconData(0xe491, fontFamily: 'MaterialIcons'),
-        onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => UserPage()));},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => UserPage(),
+            ),
+          );
+        },
       ),
+
       ///Make New Playlist
       CollapsibleItem(
         text: 'Create New Playlist',
         icon: Icons.create_rounded,
         onPressed: () {},
       ),
+
       ///Existing Playlists
       CollapsibleItem(
         text: 'Existing Playlists',
         icon: IconData(0xe4d3, fontFamily: 'MaterialIcons'),
         onPressed: () {},
       ),
+
       ///User Preferences
       CollapsibleItem(
         text: 'User Preferences',
         icon: IconData(0xec76, fontFamily: 'MaterialIcons'),
-        onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => PreferencesPage()));},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => PreferencesPage(),
+            ),
+          );
+        },
       ),
-
-
     ];
   }
 
@@ -104,7 +118,6 @@ class _SidebarLargeState extends State<SidebarLarge> {
       child: Center(
         child: Transform.rotate(
           angle: math.pi / 1,
-
         ),
       ),
     );

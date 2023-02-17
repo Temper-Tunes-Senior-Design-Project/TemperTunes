@@ -6,69 +6,55 @@ import 'package:mood_swing/Pages/UserPage.dart';
 import '../Widgets/widgets.dart';
 import 'package:sidebarx/sidebarx.dart';
 
-
-
-
 ///Small Sidebar
 
 class SidebarSmall extends StatelessWidget {
-  SidebarSmall ({Key? key}) : super(key: key);
+  SidebarSmall(this.child, {Key? key}) : super(key: key);
 
+  Widget child;
   final _controller = SidebarXController(selectedIndex: 0, extended: true);
   final _key = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'SidebarX Example',
-      debugShowCheckedModeBanner: false,
-      // theme: ThemeData(
-      //   primaryColor: primaryColor,
-      //   canvasColor: canvasColor,
-      //   scaffoldBackgroundColor: Colors.orange,
-      //   textTheme: const TextTheme(
-      //     headlineSmall: TextStyle(
-      //       color: Colors.white,
-      //       fontSize: 46,
-      //       fontWeight: FontWeight.w800,
-      //     ),
-      //   ),
-      // ),
-      home: Builder(
-        builder: (context) {
-          return Scaffold(
-            key: _key,
-            floatingActionButton: IconButton(
-              onPressed: () {
-                // if (!Platform.isAndroid && !Platform.isIOS) {
-                //   _controller.setExtended(true);
-                // }
-                _key.currentState?.openDrawer();
-              },
-              icon: const Icon(
-                  Icons.menu,
-                  color: Colors.white,
-                  size: 35,),
-            ),
-            floatingActionButtonLocation: FloatingActionButtonLocation.miniStartTop,
-
-            drawer: SidebarDrawer(controller: _controller),
-            body: Row(
-              children: [
-                ///tiles
-                Expanded(
-                  child: Center(
-                    child: HomePage(
-                 ///     controller: _controller,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          );
+    //  return MaterialApp(
+    // title: 'SidebarX Example',
+    //   debugShowCheckedModeBanner: false,
+    // theme: ThemeData(
+    //   primaryColor: primaryColor,
+    //   canvasColor: canvasColor,
+    //   scaffoldBackgroundColor: Colors.orange,
+    //   textTheme: const TextTheme(
+    //     headlineSmall: TextStyle(
+    //       color: Colors.white,
+    //       fontSize: 46,
+    //       fontWeight: FontWeight.w800,
+    //     ),
+    //   ),
+    // ),
+    return Scaffold(
+      key: _key,
+      floatingActionButton: IconButton(
+        onPressed: () {
+          // if (!Platform.isAndroid && !Platform.isIOS) {
+          //   _controller.setExtended(true);
+          // }
+          _key.currentState?.openDrawer();
         },
+        icon: const Icon(
+          Icons.menu,
+          color: Colors.white,
+          size: 35,
+        ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.miniStartTop,
+      drawer: SidebarDrawer(controller: _controller),
+      appBar: null,
+      body: child,
     );
+    //    },
+    //  ),
+    // );
   }
 }
 
@@ -108,7 +94,11 @@ class SidebarDrawer extends StatelessWidget {
             color: actionColor.withOpacity(0.37),
           ),
           gradient: const LinearGradient(
-            colors: [MyPalette.turqoise, MyPalette.lightPurple, MyPalette.magenta],
+            colors: [
+              MyPalette.turqoise,
+              MyPalette.lightPurple,
+              MyPalette.magenta
+            ],
           ),
           boxShadow: [
             BoxShadow(
@@ -135,12 +125,14 @@ class SidebarDrawer extends StatelessWidget {
       footerDivider: divider,
       headerBuilder: (context, extended) {
         return Container(
-           height: height*0.28,
-           child: Padding(
-             padding: EdgeInsets.only(top: 0.1*height, right: 0.05*width),
-             child: Image.asset('assets/music_swing_logo_small.png'),
+          height: height * 0.28,
+          child: Padding(
+            padding: EdgeInsets.only(top: 0.1 * height, right: 0.05 * width),
+            child: Align(
+              alignment: Alignment.topCenter,
+              child: Image.asset('assets/music_swing_logo_small.png'),
             ),
-
+          ),
         );
       },
       items: [
@@ -151,30 +143,45 @@ class SidebarDrawer extends StatelessWidget {
             debugPrint('Home');
           },
         ),
+
         ///User Profile
-         SidebarXItem(
+        SidebarXItem(
           icon: IconData(0xe491, fontFamily: 'MaterialIcons'),
           label: 'User Profile',
-          onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => UserPage()));},
-         ),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => UserPage(),
+              ),
+            );
+          },
+        ),
 
         ///Make New Playlist
-         SidebarXItem(
+        SidebarXItem(
           icon: Icons.create_rounded,
           label: 'Create New Playlist',
         ),
 
         ///Existing Playlists
-         SidebarXItem(
+        SidebarXItem(
           icon: IconData(0xe4d3, fontFamily: 'MaterialIcons'),
           label: 'Existing Playlists',
         ),
 
         ///Settings/Preferences
-         SidebarXItem(
+        SidebarXItem(
           icon: IconData(0xec76, fontFamily: 'MaterialIcons'),
           label: 'User Preferences',
-          onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => PreferencesPage()));},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => PreferencesPage(),
+              ),
+            );
+          },
         ),
 
         ///IconWidget
@@ -223,4 +230,3 @@ const accentCanvasColor = Color(0xFF3E3E61);
 const white = Colors.white;
 final actionColor = const Color(0xFF5F5FA7).withOpacity(0.6);
 final divider = Divider(color: white.withOpacity(0.3), height: 1);
-
