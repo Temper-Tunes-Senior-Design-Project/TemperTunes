@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mood_swing/Pages/PreferencesPage.dart';
 import 'package:mood_swing/Pages/UserPage.dart';
-import '../Widgets/widgets.dart';
 import 'package:collapsible_sidebar/collapsible_sidebar.dart';
 import 'dart:math' as math show pi;
 
@@ -15,14 +14,12 @@ class SidebarLarge extends StatefulWidget {
 
 class _SidebarLargeState extends State<SidebarLarge> {
   late List<CollapsibleItem> _items;
-  late String _headline;
   AssetImage _avatarImg = AssetImage('assets/music_swing_logo_small.png');
 
   @override
   void initState() {
     super.initState();
     _items = _generateItems;
-    _headline = _items.firstWhere((item) => item.isSelected).text;
   }
 
   List<CollapsibleItem> get _generateItems {
@@ -30,7 +27,7 @@ class _SidebarLargeState extends State<SidebarLarge> {
       CollapsibleItem(
         text: 'Home',
         icon: Icons.home,
-        onPressed: () => setState(() => _headline = 'Home'),
+        onPressed: () {},
         isSelected: true,
       ),
       ///User profile
@@ -43,13 +40,13 @@ class _SidebarLargeState extends State<SidebarLarge> {
       CollapsibleItem(
         text: 'Create New Playlist',
         icon: Icons.create_rounded,
-        onPressed: () => setState(() => _headline = 'Search'),
+        onPressed: () {},
       ),
       ///Existing Playlists
       CollapsibleItem(
         text: 'Existing Playlists',
         icon: IconData(0xe4d3, fontFamily: 'MaterialIcons'),
-        onPressed: () => setState(() => _headline = 'Notifications'),
+        onPressed: () {},
       ),
       ///User Preferences
       CollapsibleItem(
@@ -64,7 +61,6 @@ class _SidebarLargeState extends State<SidebarLarge> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
     return SafeArea(
       child: CollapsibleSidebar(
         isCollapsed: MediaQuery.of(context).size.width <= 800,

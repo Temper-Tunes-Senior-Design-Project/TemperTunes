@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mood_swing/Containers/LoginContainer.dart';
-import 'package:mood_swing/Pages/PreferencesPage.dart';
-import 'package:mood_swing/Pages/SignupPage.dart';
-import 'Pages/VerificationPage.dart';
+//import 'package:mood_swing/Containers/LoginContainer.dart';
 import 'Pages/HomePage.dart';
 import 'Widgets/MockNavigator.dart';
-import '../Widgets/MyPalette.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,8 +34,7 @@ class App extends StatelessWidget {
       title: 'Mood Swing',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: MaterialColor(0xd789ff, color),
-        scaffoldBackgroundColor: MaterialColor(0x0d0036,color,),
+  //      primarySwatch: MaterialColor(0xd789ff, color),
     ///    canvasColor: MaterialColor(0x651fff, color),
         fontFamily: 'Maven Pro',
         iconTheme: const IconThemeData(color: Colors.white),

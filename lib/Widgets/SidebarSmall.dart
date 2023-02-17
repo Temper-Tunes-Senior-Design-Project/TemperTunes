@@ -5,9 +5,7 @@ import 'package:mood_swing/Pages/UserPage.dart';
 
 import '../Widgets/widgets.dart';
 import 'package:sidebarx/sidebarx.dart';
-import 'package:flutter/cupertino.dart';
 
-import 'package:mood_swing/main.dart';
 
 
 

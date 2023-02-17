@@ -1,18 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:mood_swing/Pages/SignupPage.dart';
-import 'package:mood_swing/Pages/UserPage.dart';
 import 'package:simple_ripple_animation/simple_ripple_animation.dart';
 import '../Widgets/widgets.dart';
-import 'package:collapsible_sidebar/collapsible_sidebar.dart';
-import 'dart:math' as math show pi;
-import 'package:sidebarx/sidebarx.dart';
-import 'package:simple_ripple_animation/simple_ripple_animation.dart';
+//import 'package:simple_ripple_animation/simple_ripple_animation.dart';
 
 
 
 
-import 'UserPage.dart';
-import 'LoginPage.dart';
 
 class Body extends StatelessWidget {
   @override
