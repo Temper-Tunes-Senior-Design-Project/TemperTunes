@@ -3,6 +3,7 @@ import 'package:mood_swing/Pages/PreferencesPage.dart';
 import 'package:mood_swing/Pages/UserPage.dart';
 import 'package:collapsible_sidebar/collapsible_sidebar.dart';
 import 'dart:math' as math show pi;
+import '../Widgets/widgets.dart';
 
 ///Large Sidebar
 class SidebarLarge extends StatefulWidget {
@@ -12,7 +13,7 @@ class SidebarLarge extends StatefulWidget {
 
 class _SidebarLargeState extends State<SidebarLarge> {
   late List<CollapsibleItem> _items;
-  AssetImage _avatarImg = AssetImage('assets/music_swing_logo_small.png');
+  AssetImage _avatarImg = AssetImage('assets/circleLogoSmall.png');
 
   @override
   void initState() {
@@ -81,13 +82,10 @@ class _SidebarLargeState extends State<SidebarLarge> {
         items: _items,
         avatarImg: _avatarImg,
         title: 'John Smith',
-        onTitleTap: () {
-          ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Yay! Flutter Collapsible Sidebar!')));
-        },
         body: _body(context),
-        backgroundColor: Colors.black,
-        selectedTextColor: Colors.limeAccent,
+        selectedIconBox: MyPalette.magenta,
+        backgroundColor: MyPalette.dark,
+        selectedTextColor: MyPalette.white,
         textStyle: TextStyle(fontSize: 15, fontStyle: FontStyle.italic),
         titleStyle: TextStyle(
             fontSize: 20,
@@ -96,7 +94,7 @@ class _SidebarLargeState extends State<SidebarLarge> {
         toggleTitleStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         sidebarBoxShadow: [
           BoxShadow(
-            color: Colors.indigo,
+            color: MyPalette.brightMagenta,
             blurRadius: 20,
             spreadRadius: 0.01,
             offset: Offset(3, 3),
@@ -114,7 +112,6 @@ class _SidebarLargeState extends State<SidebarLarge> {
 
   Widget _body(BuildContext context) {
     return Container(
-      width: 700,
       child: Center(
         child: Transform.rotate(
           angle: math.pi / 1,

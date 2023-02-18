@@ -7,3 +7,4 @@ export 'SidebarSmall.dart';
 export 'SidebarLarge.dart';
 export 'VerificationLarge.dart';
 export 'VerificationSmall.dart';
+export 'RippleSmall.dart';

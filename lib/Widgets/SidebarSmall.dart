@@ -11,7 +11,7 @@ import 'package:sidebarx/sidebarx.dart';
 class SidebarSmall extends StatelessWidget {
   SidebarSmall(this.child, {Key? key}) : super(key: key);
 
-  Widget child;
+  final Widget child;
   final _controller = SidebarXController(selectedIndex: 0, extended: true);
   final _key = GlobalKey<ScaffoldState>();
 
@@ -76,10 +76,10 @@ class SidebarDrawer extends StatelessWidget {
       theme: SidebarXTheme(
         margin: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: Colors.pink,
+          color: MyPalette.dark,
           borderRadius: BorderRadius.circular(20),
         ),
-        hoverColor: MyPalette.turqoise,
+        hoverColor: MyPalette.hanPurple,
         textStyle: TextStyle(color: Colors.white.withOpacity(0.7)),
         selectedTextStyle: const TextStyle(color: Colors.white),
         itemTextPadding: const EdgeInsets.only(left: 30),
@@ -102,7 +102,7 @@ class SidebarDrawer extends StatelessWidget {
           ),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.28),
+              color: MyPalette.magenta,
               blurRadius: 30,
             )
           ],
@@ -119,7 +119,10 @@ class SidebarDrawer extends StatelessWidget {
       extendedTheme: const SidebarXTheme(
         width: 205,
         decoration: BoxDecoration(
-          color: MyPalette.dark,
+          color: MyPalette.darkBlue,
+          borderRadius: BorderRadius.all(
+            Radius.circular(30),
+          ),
         ),
       ),
       footerDivider: divider,
@@ -127,7 +130,8 @@ class SidebarDrawer extends StatelessWidget {
         return Container(
           height: height * 0.28,
           child: Padding(
-            padding: EdgeInsets.only(top: 0.1 * height, right: 0.05 * width),
+            padding: EdgeInsets.only(
+                top: 0.1 * height, right: 0.05 * width, bottom: 0.01 * height),
             child: Align(
               alignment: Alignment.topCenter,
               child: Image.asset('assets/music_swing_logo_small.png'),
