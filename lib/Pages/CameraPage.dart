@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:mood_swing/Widgets/widgets.dart';
+import 'package:flutter/foundation.dart';
+import 'package:video_player/video_player.dart';
 
 class Body extends StatelessWidget {
   final List<CameraDescription>? cameras;
@@ -25,10 +27,13 @@ class LargeScreen extends StatefulWidget {
 
 class _LargeScreenState extends State<LargeScreen> {
   late CameraController cameraController;
+  VideoPlayerController? videoController;
+  bool initializedCamCtrl = false;
   XFile? pictureFile;
   XFile? videoFile;
   bool recording = false;
   int currentCameraIndex = 0;
+  late int maxNumCameras;
 
   @override
   void initState() {
@@ -37,12 +42,15 @@ class _LargeScreenState extends State<LargeScreen> {
     if (widget.cameras == null || widget.cameras!.length == 0) {
       return;
     }
+    maxNumCameras = (widget.cameras!.length >= 2) ? 2 : widget.cameras!.length;
     cameraController = CameraController(
-        widget.cameras![currentCameraIndex], ResolutionPreset.max);
+        widget.cameras![currentCameraIndex], ResolutionPreset.max,
+        enableAudio: false, imageFormatGroup: ImageFormatGroup.yuv420);
     cameraController.initialize().then((_) {
       if (!mounted) {
         return;
       }
+      initializedCamCtrl = true;
       setState(() {});
     }).catchError((error) {
       if (error is CameraException) {
@@ -56,11 +64,12 @@ class _LargeScreenState extends State<LargeScreen> {
     final previousCameraController = cameraController;
     // Instantiating the camera controller
     final CameraController newCameraController = CameraController(
-      cameraDescription,
-      ResolutionPreset.max,
-    );
+        cameraDescription, ResolutionPreset.max,
+        enableAudio: false, imageFormatGroup: ImageFormatGroup.yuv420);
 
     // Dispose the previous controller
+    initializedCamCtrl = false;
+    setState(() {});
     await previousCameraController.dispose();
 
     cameraController = newCameraController;
@@ -68,7 +77,7 @@ class _LargeScreenState extends State<LargeScreen> {
       if (!mounted) {
         return;
       }
-
+      initializedCamCtrl = true;
       setState(() {});
     }).catchError((error) {
       if (error is CameraException) {
@@ -81,32 +90,37 @@ class _LargeScreenState extends State<LargeScreen> {
   @override
   void dispose() {
     cameraController.dispose();
+    videoController?.dispose();
     super.dispose();
+  }
+
+  Future<void> _startVideoPlayer() async {
+    if (videoFile != null) {
+      videoController = VideoPlayerController.network(videoFile!.path);
+      await videoController!.initialize().then((_) {
+        // Ensure the first frame is shown after the video is initialized
+        setState(() {});
+      });
+
+      await videoController!.setLooping(true);
+      await videoController!.play();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    if (!cameraController.value.isInitialized) {
-      return Container(
-        height: double.infinity,
-        width: double.infinity,
-        child: Center(
-          child: CircularProgressIndicator(
-            color: Colors.blue,
-          ),
-        ),
-      );
-    }
-
     return SingleChildScrollView(
       child: Container(
         width: width,
         height: height,
         decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/loginPageLarge.png"),
+              image: (defaultTargetPlatform == TargetPlatform.iOS ||
+                      defaultTargetPlatform == TargetPlatform.android)
+                  ? AssetImage("assets/userPageSmall.png")
+                  : AssetImage("assets/userPageLarge.png"),
               fit: BoxFit.cover),
         ),
         child: Column(
@@ -119,6 +133,7 @@ class _LargeScreenState extends State<LargeScreen> {
                   width: width * 0.7,
                   child: Container(
                       decoration: BoxDecoration(
+                          color: Colors.black,
                           border: Border.all(
                               color: MyPalette.darkBlue, width: height * 0.01)),
                       child: (pictureFile != null)
@@ -130,8 +145,21 @@ class _LargeScreenState extends State<LargeScreen> {
                           : (videoFile != null)
                               ?
                               //allow user to play video (video_player plugin)
-                              Material()
-                              : CameraPreview(cameraController)),
+                              (videoController != null &&
+                                      videoController!.value.isInitialized)
+                                  //display the video
+                                  ? VideoPlayer(videoController!)
+                                  //controller not ready means that video is loading
+                                  : Center(
+                                      child: CircularProgressIndicator(
+                                          color: Colors.white))
+                              //show camera preview if initialized
+                              : (initializedCamCtrl)
+                                  ? CameraPreview(cameraController)
+                                  //otherwise show black container
+                                  : Material(
+                                      color: Colors.black,
+                                    )),
                 ),
               ),
             ),
@@ -141,7 +169,6 @@ class _LargeScreenState extends State<LargeScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   if (videoFile != null || pictureFile != null) ...{
-                    //back arrow and confirm arrow (FILL IN STUB)
                     CameraButton(
                       context: context,
                       heroTag: "Back Button",
@@ -159,10 +186,9 @@ class _LargeScreenState extends State<LargeScreen> {
                       heroTag: "Confirm Button",
                       icon: Icons.check_circle_rounded,
                       onPressed: () {
-                        //FILL IN STUB WHEN PAGE IS COMPLETE
+                        //NEXT PAGE TBD
                       },
                     )
-                    ////make videofile null
                   } else if (recording) ...{
                     CameraButton(
                       context: context,
@@ -172,6 +198,7 @@ class _LargeScreenState extends State<LargeScreen> {
                         videoFile = await cameraController.stopVideoRecording();
                         recording = false;
                         setState(() {});
+                        await _startVideoPlayer();
                       },
                     ),
                   } else ...{
@@ -200,7 +227,7 @@ class _LargeScreenState extends State<LargeScreen> {
                       icon: Icons.flip_camera_ios_rounded,
                       onPressed: () async {
                         currentCameraIndex =
-                            (currentCameraIndex + 1) % widget.cameras!.length;
+                            (currentCameraIndex + 1) % maxNumCameras;
                         onNewCameraSelected(
                             widget.cameras![currentCameraIndex]);
                         setState(() {});
@@ -210,13 +237,6 @@ class _LargeScreenState extends State<LargeScreen> {
                 ],
               ),
             ),
-
-            // if (pictureFile != null)
-            //   Image.network(
-            //     pictureFile!.path,
-            //     height: height * 0.4,
-            //     width: height * 0.4,
-            //   )
           ],
         ),
       ),
