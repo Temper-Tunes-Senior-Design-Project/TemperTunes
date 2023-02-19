@@ -38,10 +38,9 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: MaterialColor(0xd789ff, color),
         fontFamily: 'Maven Pro',
-
         iconTheme: const IconThemeData(color: Colors.white),
       ),
-           home: LandingPage(),
+      home: LandingPage(),
     );
   }
 }

@@ -14,6 +14,7 @@ class Body extends StatelessWidget {
     );
   }
 }
+
 TextEditingController _emailController = new TextEditingController();
 TextEditingController _usernameController = new TextEditingController();
 TextEditingController _passwordController = new TextEditingController();
@@ -264,7 +265,9 @@ class LargeScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        onPressed: (){register(context);},
+                        onPressed: () {
+                          register(context);
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.transparent,
                           foregroundColor: Colors.transparent,
@@ -573,7 +576,9 @@ class SmallScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        onPressed: (){register(context);},
+                        onPressed: () {
+                          register(context);
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.transparent,
                           foregroundColor: Colors.transparent,
@@ -636,7 +641,9 @@ class SmallScreen extends StatelessWidget {
 }
 
 Future<void> register(BuildContext context) async {
-  String uid = await AuthRouter().registerUser(_emailController.text, _passwordController.text, _usernameController.text,() {
+  String uid = await AuthRouter().registerUser(
+      _emailController.text, _passwordController.text, _usernameController.text,
+      () {
     print("Error occurred");
   });
   DatabaseRouter().createUser(uid);

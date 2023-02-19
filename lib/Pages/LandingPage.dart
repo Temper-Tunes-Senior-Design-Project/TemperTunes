@@ -25,8 +25,6 @@ class LargeScreen extends StatelessWidget {
           children: <Widget>[
             Container(
               alignment: Alignment.center,
-
-              //padding: EdgeInsets.only(right: 0.02*width),
               child: new Image.asset(
                 "assets/music_swing_logo_med.png",
                 height: height * 0.5,
@@ -120,7 +118,6 @@ class LargeScreen extends StatelessWidget {
 class SmallScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    //  final PageController controller = PageController();
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return SingleChildScrollView(

@@ -188,7 +188,9 @@ class LargeScreen extends StatelessWidget {
                     Container(
                       padding: EdgeInsets.only(top: 0.016 * height),
                       child: GestureDetector(
-                        onTap: (){login(context);},
+                        onTap: () {
+                          login(context);
+                        },
                         child: Container(
                           width: 0.27 * width,
                           height: 0.075 * height,
@@ -381,13 +383,14 @@ class SmallScreen extends StatelessWidget {
                                 ),
                                 hintStyle: TextStyle(color: Colors.white60),
                                 border: UnderlineInputBorder(
-                                  borderSide: BorderSide(width:10, color:Colors.white),),
-                                labelText: 'Please enter your email',
-                                labelStyle: TextStyle(fontSize: 15,color: Colors.white54)
-                              ),
-                            ),
+                                  borderSide: BorderSide(
+                                      width: 10, color: Colors.white),
+                                ),
+                                labelText: 'Please enter your username',
+                                labelStyle: TextStyle(
+                                    fontSize: 15, color: Colors.white54)),
                           ),
-
+                        ),
 
                         ///Horizontal line
                         Container(
@@ -434,12 +437,15 @@ class SmallScreen extends StatelessWidget {
                                 ),
                                 hintStyle: TextStyle(color: Colors.white60),
                                 border: UnderlineInputBorder(
-                                  borderSide: BorderSide(width:0, color:Colors.white),),
+                                  borderSide:
+                                      BorderSide(width: 0, color: Colors.white),
+                                ),
                                 labelText: 'Please enter your password',
                                 labelStyle: TextStyle(
                                     fontSize: 15, color: Colors.white54)),
                           ),
                         ),
+
                         ///Horizontal line
                         Container(
                           padding: EdgeInsets.only(
@@ -461,7 +467,9 @@ class SmallScreen extends StatelessWidget {
                     Container(
                       //padding: EdgeInsets.only(top: height*0.03),
                       child: GestureDetector(
-                        onTap: (){login(context);},
+                        onTap: () {
+                          login(context);
+                        },
                         child: Container(
                           width: 0.8 * width,
                           height: 0.07 * height,
@@ -568,11 +576,10 @@ class SmallScreen extends StatelessWidget {
 
 void login(BuildContext context) async {
   AuthRouter().login(_emailController.text, _passwordController.text, () {});
-  if(AuthRouter().isLoggedIn()) {
+  if (AuthRouter().isLoggedIn()) {
     Navigator.push(context, MaterialPageRoute(builder: (ctxt) => HomePage()));
   }
 }
-
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
