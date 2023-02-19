@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mood_swing/Containers/LoginContainer.dart';
+import 'package:mood_swing/Pages/SignupPage.dart';
 import 'Widgets/MockNavigator.dart';
 
 void main() {
@@ -31,9 +31,12 @@ class App extends StatelessWidget {
       title: 'Mood Swing',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          primarySwatch: MaterialColor(0x0d0036, color),
-          fontFamily: 'Maven Pro'),
-      home: LoginContainer(),
+        primarySwatch: MaterialColor(0xd789ff, color),
+        fontFamily: 'Maven Pro',
+
+        iconTheme: const IconThemeData(color: Colors.white),
+      ),
+           home: SignupPage(),
     );
   }
 }
