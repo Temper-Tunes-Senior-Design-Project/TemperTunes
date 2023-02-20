@@ -67,7 +67,7 @@ class _VerificationLargeState extends State<VerificationLarge> {
           width: width,
           decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("assets/loginPageLarge.png"),
+                image: AssetImage("assets/userPageLarge.png"),
                 fit: BoxFit.cover),
           ),
           child: ListView(
@@ -75,7 +75,8 @@ class _VerificationLargeState extends State<VerificationLarge> {
             children: <Widget>[
               ///Back button
               Container(
-                padding: EdgeInsets.only(top: 0.03 * height),
+                padding:
+                    EdgeInsets.only(top: 0.03 * height, bottom: 0.02 * height),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -95,225 +96,268 @@ class _VerificationLargeState extends State<VerificationLarge> {
                 ),
               ),
 
-              /// Logo
-              SizedBox(
-                height: height * 0.2,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(30),
-                  child: Image.asset("assets/music_swing_logo_small.png"),
-                ),
-              ),
-
-              ///spacer
-              SizedBox(height: height * 0.02),
-
-              ///Heading
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 0.01),
-                child: Text(
-                  'Verification',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 35,
-                      fontFamily: 'Share Tech',
-                      color: MyPalette.lightPurple),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-
-              ///subheading
-              Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: width * 0.04, vertical: height * 0.01),
-                child: RichText(
-                  //phone number
-                  text: TextSpan(
-                    text: "Pin sent to ",
-                    children: [
-                      TextSpan(
-                        text: "${widget.email}",
-                        style: const TextStyle(
-                          color: MyPalette.darkTurqoise,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          fontFamily: 'Maven Pro',
+              ///Main Container
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    height: height * 0.8,
+                    width: width * 0.4,
+                    decoration: BoxDecoration(
+                      color: Colors.grey.withOpacity(0.3),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(20),
+                      ),
+                    ),
+                    child: Column(
+                      children: [
+                        ///logo
+                        Container(
+                          padding: EdgeInsets.only(top: 0.02 * height),
+                          child: Image.asset(
+                              "assets/music_swing_logo_small.png",
+                              scale: 2.3),
                         ),
-                      ),
-                    ],
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontFamily: 'Maven Pro',
-                    ),
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
 
-              ///Spacer
-              SizedBox(
-                height: 0.02 * height,
-              ),
+                        ///spacer
+                        SizedBox(height: height * 0.02),
 
-              Form(
-                key: formKey,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 0.01 * height,
-                    horizontal: 0.05 * width,
-                  ),
-                  child: PinCodeTextField(
-                    appContext: context,
-                    pastedTextStyle: TextStyle(
-                      color: MyPalette.turqoise,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    length: 4,
-                    animationType: AnimationType.fade,
-                    validator: (v) {
-                      if (v!.length < 3) {
-                        return "I'm from validator";
-                      } else {
-                        return null;
-                      }
-                    },
-                    pinTheme: PinTheme(
-                      shape: PinCodeFieldShape.box,
-                      borderRadius: BorderRadius.circular(5),
-                      fieldHeight: 50,
-                      fieldWidth: 40,
-                      activeFillColor: MyPalette.brightMagenta,
-                    ),
-                    cursorColor: Colors.black,
-                    animationDuration: const Duration(milliseconds: 300),
-                    enableActiveFill: true,
-                    errorAnimationController: errorController,
-                    controller: textEditingController,
-                    keyboardType: TextInputType.number,
-                    boxShadows: const [
-                      BoxShadow(
-                        offset: Offset(0, 1),
-                        color: MyPalette.brightMagenta,
-                        blurRadius: 10,
-                      )
-                    ],
-                    onCompleted: (v) {
-                      debugPrint("Completed");
-                    },
-                    // onTap: () {
-                    //   print("Pressed");
-                    // },
-                    onChanged: (value) {
-                      debugPrint(value);
-                      setState(() {
-                        currentText = value;
-                      });
-                    },
-                    beforeTextPaste: (text) {
-                      debugPrint("Allowing to paste $text");
-                      //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
-                      //but you can show anything you want here, like your pop up saying wrong paste format or etc
-                      return true;
-                    },
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                child: Text(
-                  hasError ? "*Please fill up all the cells properly" : "",
-                  style: const TextStyle(
-                    color: Colors.red,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 0.01 * height,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    "Didn't receive the code? ",
-                    style: TextStyle(color: Colors.white, fontSize: 15),
-                  ),
-                  TextButton(
-                    onPressed: () => snackBar("OTP resend!!"),
-                    child: const Text(
-                      "RESEND",
-                      style: TextStyle(
-                        color: MyPalette.turqoise,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
+                        ///Heading
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 0.01),
+                          child: Text(
+                            'Verification',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 40,
+                              fontFamily: 'Share Tech',
+                              color: MyPalette.lightPurple,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+
+                        ///subheading
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: width * 0.04,
+                              vertical: height * 0.01),
+                          child: RichText(
+                            //email
+                            text: TextSpan(
+                              text: "Pin sent to ",
+                              children: [
+                                TextSpan(
+                                  text: "${widget.email}",
+                                  style: const TextStyle(
+                                    color: MyPalette.darkTurqoise,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                    fontFamily: 'Maven Pro',
+                                  ),
+                                ),
+                              ],
+                              style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontFamily: 'Maven Pro'),
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+
+                        ///Spacer
+                        SizedBox(height: height * 0.02),
+
+                        ///form portion
+                        Expanded(
+                          flex: 1,
+                          child: Column(
+                            children: [
+                              Form(
+                                key: formKey,
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(
+                                    vertical: height * 0.004,
+                                    horizontal: width * 0.05,
+                                  ),
+                                  child: PinCodeTextField(
+                                    appContext: context,
+
+                                    pastedTextStyle: TextStyle(
+                                      color: MyPalette.turqoise,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    length: 5,
+                                    animationType: AnimationType.fade,
+                                    validator: (v) {
+                                      if (v!.length < 3) {
+                                        return "I'm from validator";
+                                      } else {
+                                        return null;
+                                      }
+                                    },
+                                    pinTheme: PinTheme(
+                                      shape: PinCodeFieldShape.box,
+                                      borderRadius: BorderRadius.circular(5),
+                                      fieldHeight: 70,
+                                      fieldWidth: 45,
+                                      inactiveColor: MyPalette.magenta,
+                                      inactiveFillColor: MyPalette.slateBlue,
+                                      activeFillColor: MyPalette.darkTurqoise,
+                                      selectedFillColor: MyPalette.magenta,
+                                    ),
+                                    cursorColor: Colors.black,
+                                    animationDuration:
+                                        const Duration(milliseconds: 300),
+                                    enableActiveFill: true,
+                                    errorAnimationController: errorController,
+                                    controller: textEditingController,
+                                    keyboardType: TextInputType.number,
+                                    boxShadows: const [
+                                      BoxShadow(
+                                        offset: Offset(0, 1),
+                                        color: MyPalette.brightMagenta,
+                                        blurRadius: 10,
+                                      )
+                                    ],
+                                    onCompleted: (v) {
+                                      debugPrint("Completed");
+                                    },
+                                    // onTap: () {
+                                    //   print("Pressed");
+                                    // },
+                                    onChanged: (value) {
+                                      debugPrint(value);
+                                      setState(() {
+                                        currentText = value;
+                                      });
+                                    },
+                                    beforeTextPaste: (text) {
+                                      debugPrint("Allowing to paste $text");
+                                      //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
+                                      //but you can show anything you want here, like your pop up saying wrong paste format or etc
+                                      return true;
+                                    },
+                                  ),
+                                ),
+                              ),
+
+                              ///error message
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
+                                child: Text(
+                                  hasError ? "*Incorrect pin" : "",
+                                  style: const TextStyle(
+                                    color: Colors.red,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ),
+
+                              ///spacer
+                              SizedBox(height: 0.01 * height),
+
+                              ///Snackbar message and resend button
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Text(
+                                    "Didn't receive the code? ",
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 15),
+                                  ),
+                                  TextButton(
+                                    onPressed: () => snackBar("OTP resend!!"),
+                                    child: const Text(
+                                      "RESEND",
+                                      style: TextStyle(
+                                        color: MyPalette.turqoise,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+
+                              ////spacer
+                              SizedBox(
+                                height: 0.001 * height,
+                              ),
+
+                              ///Verifier
+                              Container(
+                                height: height * 0.07,
+                                width: width * 0.19,
+                                margin: EdgeInsets.symmetric(
+                                    vertical: 0.01 * height,
+                                    horizontal: width * 0.01),
+                                child: ButtonTheme(
+                                  height: height * 0.02,
+                                  child: TextButton(
+                                    onPressed: () {
+                                      formKey.currentState!.validate();
+                                      // conditions for validating
+                                      if (currentText.length != 5 ||
+                                          currentText != "12345") {
+                                        errorController!.add(ErrorAnimationType
+                                            .shake); // Triggering error shake animation
+                                        setState(() => hasError = true);
+                                      } else {
+                                        setState(
+                                          () {
+                                            hasError = false;
+                                            snackBar("OTP Verified!!");
+                                          },
+                                        );
+                                      }
+                                    },
+                                    child: Center(
+                                      child: Text(
+                                        "VERIFY".toUpperCase(),
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    begin: Alignment.topRight,
+                                    end: Alignment.bottomLeft,
+                                    colors: [
+                                      MyPalette.slateBlue,
+                                      MyPalette.brightMagenta,
+                                      MyPalette.turqoise,
+                                    ],
+                                  ),
+                                  borderRadius: BorderRadius.circular(5),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: MyPalette.magenta,
+                                        offset: const Offset(1, -2),
+                                        blurRadius: 5),
+                                    BoxShadow(
+                                        color: MyPalette.magenta,
+                                        offset: const Offset(-1, 2),
+                                        blurRadius: 5)
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
               ),
-              SizedBox(
-                height: 0.001 * height,
-              ),
-
-              ///Verifier
-              Container(
-                margin: EdgeInsets.symmetric(
-                    vertical: 0.001 * height, horizontal: 30),
-                child: ButtonTheme(
-                  height: 50,
-                  child: TextButton(
-                    onPressed: () {
-                      formKey.currentState!.validate();
-                      // conditions for validating
-                      if (currentText.length != 4 || currentText != "1234") {
-                        errorController!.add(ErrorAnimationType
-                            .shake); // Triggering error shake animation
-                        setState(() => hasError = true);
-                      } else {
-                        setState(
-                          () {
-                            hasError = false;
-                            snackBar("OTP Verified!!");
-                          },
-                        );
-                      }
-                    },
-                    child: Center(
-                      child: Text(
-                        "VERIFY".toUpperCase(),
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topRight,
-                      end: Alignment.bottomLeft,
-                      colors: [
-                        MyPalette.slateBlue,
-                        MyPalette.brightMagenta,
-                        MyPalette.turqoise,
-                      ],
-                    ),
-                    borderRadius: BorderRadius.circular(5),
-                    boxShadow: [
-                      BoxShadow(
-                          color: MyPalette.magenta,
-                          offset: const Offset(1, -2),
-                          blurRadius: 5),
-                      BoxShadow(
-                          color: MyPalette.magenta,
-                          offset: const Offset(-1, 2),
-                          blurRadius: 5)
-                    ]),
-              ),
-              const SizedBox(height: 16),
             ],
           ),
         ),

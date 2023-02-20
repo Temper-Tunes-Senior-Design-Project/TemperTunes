@@ -63,7 +63,7 @@ class _VerificationSmallState extends State<VerificationSmall> {
           width: width,
           decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("assets/ribbon_lowered.png"),
+                image: AssetImage("assets/userPageLarge.png"),
                 fit: BoxFit.cover),
           ),
           child: ListView(
@@ -93,7 +93,7 @@ class _VerificationSmallState extends State<VerificationSmall> {
               /// Logo
 
               SizedBox(
-                height: height * 0.2,
+                height: height * 0.23,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(30),
                   child: Image.asset("assets/music_swing_logo_small.png"),
@@ -110,7 +110,7 @@ class _VerificationSmallState extends State<VerificationSmall> {
                   'Verification',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 35,
+                      fontSize: 50,
                       fontFamily: 'Share Tech',
                       color: MyPalette.lightPurple),
                   textAlign: TextAlign.center,
@@ -156,7 +156,7 @@ class _VerificationSmallState extends State<VerificationSmall> {
                 child: Padding(
                   padding: EdgeInsets.symmetric(
                     vertical: 0.01 * height,
-                    horizontal: 0.05 * width,
+                    horizontal: 0.08 * width,
                   ),
                   child: PinCodeTextField(
                     appContext: context,
@@ -164,7 +164,7 @@ class _VerificationSmallState extends State<VerificationSmall> {
                       color: MyPalette.turqoise,
                       fontWeight: FontWeight.bold,
                     ),
-                    length: 4,
+                    length: 5,
                     animationType: AnimationType.fade,
                     validator: (v) {
                       if (v!.length < 3) {
@@ -176,13 +176,17 @@ class _VerificationSmallState extends State<VerificationSmall> {
                     pinTheme: PinTheme(
                       shape: PinCodeFieldShape.box,
                       borderRadius: BorderRadius.circular(5),
-                      fieldHeight: 50,
-                      fieldWidth: 40,
-                      activeFillColor: MyPalette.brightMagenta,
+                      fieldHeight: height * 0.12,
+                      fieldWidth: width * 0.1,
+                      inactiveColor: MyPalette.magenta,
+                      inactiveFillColor: MyPalette.slateBlue,
+                      activeFillColor: MyPalette.darkTurqoise,
+                      selectedFillColor: MyPalette.magenta,
                     ),
                     cursorColor: Colors.black,
                     animationDuration: const Duration(milliseconds: 300),
                     enableActiveFill: true,
+
                     errorAnimationController: errorController,
                     controller: textEditingController,
                     keyboardType: TextInputType.number,
@@ -254,15 +258,17 @@ class _VerificationSmallState extends State<VerificationSmall> {
 
               ///Verifier
               Container(
+                height: 0.07 * height,
+                // width: 0.02 * width,
                 margin: EdgeInsets.symmetric(
-                    vertical: 0.001 * height, horizontal: 30),
+                    vertical: 0.01 * height, horizontal: 0.15 * width),
                 child: ButtonTheme(
-                  height: 50,
+                  height: 0.02 * height,
                   child: TextButton(
                     onPressed: () {
                       formKey.currentState!.validate();
                       // conditions for validating
-                      if (currentText.length != 4 || currentText != "1234") {
+                      if (currentText.length != 5 || currentText != "12345") {
                         errorController!.add(ErrorAnimationType
                             .shake); // Triggering error shake animation
                         setState(() => hasError = true);

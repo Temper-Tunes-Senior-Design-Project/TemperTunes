@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mood_swing/Containers/LoginContainer.dart';
 import 'Pages/HomePage.dart';
+import 'Pages/PreferencesPage.dart';
 import 'Pages/VerificationPage.dart';
 import 'Widgets/MockNavigator.dart';
 
@@ -40,9 +41,9 @@ class App extends StatelessWidget {
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       //   home: LoginContainer(),
-      home: HomePage(),
-
-      ///   home: const VerificationPage(),
+      /// home: HomePage(),
+      home: VerificationPage(),
+      // home: VerificationPage(),
     );
   }
 }

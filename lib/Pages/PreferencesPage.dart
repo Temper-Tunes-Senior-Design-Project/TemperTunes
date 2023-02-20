@@ -59,8 +59,11 @@ class LargeScreen extends StatelessWidget {
               height: height * 0.8,
               width: width * 0.3,
               decoration: BoxDecoration(
-                  color: Colors.grey.withOpacity(0.3),
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
+                color: Colors.grey.withOpacity(0.3),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(20),
+                ),
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
