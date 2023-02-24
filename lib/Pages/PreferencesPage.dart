@@ -23,7 +23,7 @@ class LargeScreen extends StatelessWidget {
         height: height,
         decoration:BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/LoginPageLarge.png"), fit: BoxFit.cover),
+              image: AssetImage("assets/loginPageLarge.png"), fit: BoxFit.cover),
         ),
           ///back arrow
           child: Column(
@@ -490,7 +490,6 @@ class PreferencesPage extends StatelessWidget {
 
   @override
   Widget build(Object context) {
-    //Materialapp debugger false
     return Scaffold(
         resizeToAvoidBottomInset: false,
         body: Column(
