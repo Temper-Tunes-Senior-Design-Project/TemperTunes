@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mood_swing/Pages/ChangeEmailPage.dart';
 import 'package:mood_swing/Pages/UserPage.dart';
 import '../Widgets/widgets.dart';
+import 'ChangePasswordPage.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -106,7 +107,7 @@ class LargeScreen extends StatelessWidget {
                               ),
                             ),
 
-                            ///Name
+                            ///label
                             Container(
                               padding: EdgeInsets.only(left: 0.01 * width),
                               alignment: Alignment.topLeft,
@@ -138,63 +139,80 @@ class LargeScreen extends StatelessWidget {
                   ///Change Email
                   Container(
                     padding: EdgeInsets.only(top: 0.035 * height),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                            alignment: Alignment.topLeft,
-                            child: Icon(
-                              IconData(0xe22a, fontFamily: 'MaterialIcons'),
-                              color: MyPalette.white,
-                              size: 24,
-                            )),
+                    child: TextButton(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                                alignment: Alignment.topLeft,
+                                child: Icon(
+                                  IconData(0xe22a, fontFamily: 'MaterialIcons'),
+                                  color: MyPalette.white,
+                                  size: 24,
+                                )),
 
-                        ///Name
-                        Container(
-                          padding: EdgeInsets.only(left: 0.01 * width),
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            'Change Email',
-                            style: TextStyle(
-                              fontFamily: 'Maven Pro',
-                              color: Colors.white,
-                              fontSize: 24,
+                            ///Name
+                            Container(
+                              padding: EdgeInsets.only(left: 0.01 * width),
+                              alignment: Alignment.topLeft,
+                              child: Text(
+                                'Change Email',
+                                style: TextStyle(
+                                  fontFamily: 'Maven Pro',
+                                  color: Colors.white,
+                                  fontSize: 24,
+                                ),
+                              ),
                             ),
-                          ),
+                          ],
                         ),
-                      ],
-                    ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ChangeEmailPage(),
+                            ),
+                          );
+                        }),
                   ),
 
                   ///Change Password
                   Container(
                     padding: EdgeInsets.only(top: 0.035 * height),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                            alignment: Alignment.topLeft,
-                            child: Icon(
-                              IconData(0xf052b, fontFamily: 'MaterialIcons'),
-                              color: MyPalette.white,
-                              size: 24,
-                            )),
-
-                        ///Name
-                        Container(
-                          padding: EdgeInsets.only(left: 0.01 * width),
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            'Change Password',
-                            style: TextStyle(
-                              fontFamily: 'Maven Pro',
-                              color: Colors.white,
-                              fontSize: 24,
+                    child: TextButton(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                                alignment: Alignment.topLeft,
+                                child: Icon(
+                                  IconData(0xf052b,
+                                      fontFamily: 'MaterialIcons'),
+                                  color: MyPalette.white,
+                                  size: 24,
+                                )),
+                            Container(
+                              padding: EdgeInsets.only(left: 0.01 * width),
+                              alignment: Alignment.topLeft,
+                              child: Text(
+                                'Change Password',
+                                style: TextStyle(
+                                  fontFamily: 'Maven Pro',
+                                  color: Colors.white,
+                                  fontSize: 24,
+                                ),
+                              ),
                             ),
-                          ),
+                          ],
                         ),
-                      ],
-                    ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ChangePasswordPage(),
+                            ),
+                          );
+                        }),
                   ),
 
                   ///Adjust Presets
@@ -353,16 +371,16 @@ class SmallScreen extends StatelessWidget {
                                       child: Row(
                                         children: [
                                           Container(
-                                              padding: EdgeInsets.only(
-                                                  left: 0.12 * width),
-                                              alignment: Alignment.topLeft,
-                                              child: Icon(
-                                                IconData(0xe491,
-                                                    fontFamily:
-                                                        'MaterialIcons'),
-                                                color: MyPalette.white,
-                                                size: 40,
-                                              )),
+                                            padding: EdgeInsets.only(
+                                                left: 0.12 * width),
+                                            alignment: Alignment.topLeft,
+                                            child: Icon(
+                                              IconData(0xe491,
+                                                  fontFamily: 'MaterialIcons'),
+                                              color: MyPalette.white,
+                                              size: 40,
+                                            ),
+                                          ),
                                           Container(
                                             padding: EdgeInsets.only(
                                                 left: 0.04 * width, bottom: 0),
@@ -442,33 +460,46 @@ class SmallScreen extends StatelessWidget {
                                 ///Change Password
                                 Container(
                                   padding: EdgeInsets.only(top: 0.04 * height),
-                                  child: Row(
-                                    children: [
-                                      ///icon
-                                      Container(
+                                  child: TextButton(
+                                    child: Row(
+                                      children: [
+                                        ///icon
+                                        Container(
+                                            padding: EdgeInsets.only(
+                                                left: 0.12 * width),
+                                            alignment: Alignment.topLeft,
+                                            child: Icon(
+                                              IconData(0xf052b,
+                                                  fontFamily: 'MaterialIcons'),
+                                              color: MyPalette.white,
+                                              size: 40,
+                                            )),
+                                        Container(
                                           padding: EdgeInsets.only(
-                                              left: 0.12 * width),
+                                              left: 0.04 * width),
                                           alignment: Alignment.topLeft,
-                                          child: Icon(
-                                            IconData(0xf052b,
-                                                fontFamily: 'MaterialIcons'),
-                                            color: MyPalette.white,
-                                            size: 40,
-                                          )),
-                                      Container(
-                                        padding:
-                                            EdgeInsets.only(left: 0.04 * width),
-                                        alignment: Alignment.topLeft,
-                                        child: Text(
-                                          'Change Password',
-                                          style: TextStyle(
-                                            fontFamily: 'Maven Pro',
-                                            color: Colors.white,
-                                            fontSize: 28,
+                                          child: Text(
+                                            'Change Password',
+                                            style: TextStyle(
+                                              fontFamily: 'Maven Pro',
+                                              color: Colors.white,
+                                              fontSize: 28,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ChangePasswordPage()));
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      foregroundColor: Colors.transparent,
+                                    ),
                                   ),
                                 ),
 

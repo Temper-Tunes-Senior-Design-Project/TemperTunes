@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mood_swing/Pages/SignupPage.dart';
 import '../Widgets/widgets.dart';
+import 'HomePage.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -39,7 +40,7 @@ class LargeScreen extends StatelessWidget {
                     Container(
                       child: Row(
                         children: [
-                          ElevatedButton(
+                          TextButton(
                             style: ElevatedButton.styleFrom(
                               shape: CircleBorder(),
                             ),
@@ -181,34 +182,43 @@ class LargeScreen extends StatelessWidget {
                     //Login button
                     Container(
                       padding: EdgeInsets.only(top: 0.016 * height),
-                      child: Container(
-                        width: 0.27 * width,
-                        height: 0.075 * height,
-                        decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topRight,
-                              end: Alignment.bottomLeft,
-                              colors: [
-                                MyPalette.slateBlue,
-                                MyPalette.brightMagenta,
-                                MyPalette.turqoise,
-                              ],
-                            ),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(15))),
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            "Login",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 25,
-                              fontFamily: 'Share Tech',
-                              color: Colors.white,
+                      child: TextButton(
+                          child: Container(
+                            width: 0.27 * width,
+                            height: 0.075 * height,
+                            decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topRight,
+                                  end: Alignment.bottomLeft,
+                                  colors: [
+                                    MyPalette.slateBlue,
+                                    MyPalette.brightMagenta,
+                                    MyPalette.turqoise,
+                                  ],
+                                ),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(15))),
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Text(
+                                "Login",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 25,
+                                  fontFamily: 'Share Tech',
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                      ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => HomePage(),
+                              ),
+                            );
+                          }),
                     ),
 
                     //Register Button
@@ -453,35 +463,44 @@ class SmallScreen extends StatelessWidget {
                     //Login Button
                     Container(
                       //padding: EdgeInsets.only(top: height*0.03),
-                      child: Container(
-                        width: 0.8 * width,
-                        height: 0.07 * height,
-                        decoration: BoxDecoration(
-                            //color: MyPalette.slateBlue,
-                            gradient: LinearGradient(
-                              begin: Alignment.topRight,
-                              end: Alignment.bottomLeft,
-                              colors: [
-                                MyPalette.slateBlue,
-                                MyPalette.brightMagenta,
-                                MyPalette.turqoise,
-                              ],
-                            ),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(15))),
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            "Login",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 25,
-                              fontFamily: 'Share Tech',
-                              color: Colors.white,
+                      child: TextButton(
+                          child: Container(
+                            width: 0.8 * width,
+                            height: 0.07 * height,
+                            decoration: BoxDecoration(
+                                //color: MyPalette.slateBlue,
+                                gradient: LinearGradient(
+                                  begin: Alignment.topRight,
+                                  end: Alignment.bottomLeft,
+                                  colors: [
+                                    MyPalette.slateBlue,
+                                    MyPalette.brightMagenta,
+                                    MyPalette.turqoise,
+                                  ],
+                                ),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(15))),
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Text(
+                                "Login",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 25,
+                                  fontFamily: 'Share Tech',
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                      ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => HomePage(),
+                              ),
+                            );
+                          }),
                     ),
 
                     ///Register button

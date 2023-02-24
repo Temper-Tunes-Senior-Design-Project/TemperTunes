@@ -67,7 +67,7 @@ class LargeScreen extends StatelessWidget {
                           scale: 2.3),
                     ),
 
-                    ///Username
+                    ///Current password
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
@@ -86,7 +86,8 @@ class LargeScreen extends StatelessWidget {
                             decoration: const InputDecoration(
                                 hintStyle: TextStyle(color: Colors.white60),
                                 enabledBorder: InputBorder.none,
-                                labelText: 'Please enter your username',
+                                hintText: 'Current Password',
+                                labelText: 'Please enter your current username',
                                 labelStyle: TextStyle(
                                     fontSize: 15, color: Colors.white54)),
                           ),
@@ -108,7 +109,7 @@ class LargeScreen extends StatelessWidget {
                       ],
                     ),
 
-                    ///Enter Email
+                    ///New Password
                     Column(
                       children: [
                         Container(
@@ -124,9 +125,9 @@ class LargeScreen extends StatelessWidget {
                             ),
                             decoration: const InputDecoration(
                                 hintStyle: TextStyle(color: Colors.white60),
-                                hintText: 'Email',
+                                hintText: 'New Password',
                                 enabledBorder: InputBorder.none,
-                                labelText: 'Please your email',
+                                labelText: 'Please your new password',
                                 labelStyle: TextStyle(
                                     fontSize: 15, color: Colors.white54)),
                           ),
@@ -145,7 +146,7 @@ class LargeScreen extends StatelessWidget {
                       ],
                     ),
 
-                    ///Password
+                    ///Confirm new password
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
@@ -162,47 +163,9 @@ class LargeScreen extends StatelessWidget {
                             ),
                             decoration: const InputDecoration(
                                 hintStyle: TextStyle(color: Colors.white60),
-                                hintText: 'Confirm Password',
+                                hintText: 'Confirm New Password',
                                 enabledBorder: InputBorder.none,
-                                labelText: 'Please confirm your password',
-                                labelStyle: TextStyle(
-                                    fontSize: 15, color: Colors.white54)),
-                          ),
-                        ),
-
-                        ///Horizontal line
-                        Container(
-                            padding: EdgeInsets.only(
-                                left: 0.02 * width,
-                                right: 0.02 * width,
-                                top: 0),
-                            child: const Divider(
-                              height: 8,
-                              thickness: 2,
-                              color: Colors.white,
-                            )),
-                      ],
-                    ),
-
-                    ///Confirm Password
-                    Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.only(
-                              left: 0.03 * width, top: height * 0.01),
-                          alignment: Alignment.topLeft,
-                          child: TextField(
-                            style: TextStyle(
-                              fontFamily: 'Maven Pro',
-                              fontWeight: FontWeight.w100,
-                              color: Colors.white,
-                              fontSize: 20,
-                            ),
-                            decoration: const InputDecoration(
-                                hintStyle: TextStyle(color: Colors.white60),
-                                hintText: 'Confirm Password',
-                                enabledBorder: InputBorder.none,
-                                labelText: 'Please confirm your password',
+                                labelText: 'Please confirm your new password',
                                 labelStyle: TextStyle(
                                     fontSize: 15, color: Colors.white54)),
                           ),
@@ -381,7 +344,7 @@ class SmallScreen extends StatelessWidget {
                           scale: 2.5),
                     ),
 
-                    ///current email
+                    ///current password
                     Column(
                       children: [
                         Container(
@@ -398,12 +361,12 @@ class SmallScreen extends StatelessWidget {
                             ),
                             decoration: const InputDecoration(
                                 hintStyle: TextStyle(color: Colors.white60),
-                                hintText: 'abe@gmail.com',
+                                hintText: 'Current Password',
                                 border: UnderlineInputBorder(
                                   borderSide:
                                       BorderSide(width: 3, color: Colors.white),
                                 ),
-                                labelText: 'Please enter your current email',
+                                labelText: 'Please enter your current password',
                                 labelStyle: TextStyle(
                                     fontSize: 15, color: Colors.white54)),
                           ),
@@ -425,7 +388,7 @@ class SmallScreen extends StatelessWidget {
                       ],
                     ),
 
-                    ///New Email
+                    ///New password
                     Column(
                       children: [
                         Container(
@@ -441,12 +404,12 @@ class SmallScreen extends StatelessWidget {
                             ),
                             decoration: const InputDecoration(
                                 hintStyle: TextStyle(color: Colors.white60),
-                                hintText: 'Email',
+                                hintText: 'New Password',
                                 border: UnderlineInputBorder(
                                   borderSide:
                                       BorderSide(width: 3, color: Colors.white),
                                 ),
-                                labelText: 'Please enter your new email',
+                                labelText: 'Please enter your new password',
                                 labelStyle: TextStyle(
                                     fontSize: 15, color: Colors.white54)),
                           ),
@@ -465,7 +428,7 @@ class SmallScreen extends StatelessWidget {
                       ],
                     ),
 
-                    ///Confirm Email
+                    ///Confirm new password
                     Column(
                       children: [
                         Container(
@@ -481,51 +444,12 @@ class SmallScreen extends StatelessWidget {
                             ),
                             decoration: const InputDecoration(
                                 hintStyle: TextStyle(color: Colors.white60),
-                                hintText: 'Email',
+                                hintText: 'Confirm Password',
                                 border: UnderlineInputBorder(
                                   borderSide:
                                       BorderSide(width: 3, color: Colors.white),
                                 ),
-                                labelText: 'Please confirm your new email',
-                                labelStyle: TextStyle(
-                                    fontSize: 15, color: Colors.white54)),
-                          ),
-                        ),
-
-                        ///Horizontal line
-                        Container(
-                            padding: EdgeInsets.only(
-                                left: 0.1 * width, right: 0.1 * width, top: 0),
-                            child: const Divider(
-                              height: 8,
-                              thickness: 2,
-                              color: Colors.white,
-                            )),
-                      ],
-                    ),
-
-                    ///enter password
-                    Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.only(
-                              left: 0.12 * width, top: height * 0.005),
-                          alignment: Alignment.topLeft,
-                          child: TextField(
-                            style: TextStyle(
-                              fontFamily: 'Maven Pro',
-                              fontWeight: FontWeight.w100,
-                              color: Colors.white,
-                              fontSize: 20,
-                            ),
-                            decoration: const InputDecoration(
-                                hintStyle: TextStyle(color: Colors.white60),
-                                hintText: 'Password',
-                                border: UnderlineInputBorder(
-                                  borderSide:
-                                      BorderSide(width: 3, color: Colors.white),
-                                ),
-                                labelText: 'Please enter your password',
+                                labelText: 'Please confirm your new password',
                                 labelStyle: TextStyle(
                                     fontSize: 15, color: Colors.white54)),
                           ),

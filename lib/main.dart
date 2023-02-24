@@ -5,6 +5,8 @@ import 'Pages/ChangeEmailPage.dart';
 import 'Pages/HomePage.dart';
 import 'Pages/PreferencesPage.dart';
 import 'Pages/VerificationPage.dart';
+import 'Pages/LoginPage.dart';
+
 import 'Widgets/MockNavigator.dart';
 
 void main() {
@@ -43,7 +45,7 @@ class App extends StatelessWidget {
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       //   home: LoginContainer(),
-      home: ChangeEmailPage(),
+      home: LoginPage(),
       // home: VerificationPage(),
     );
   }

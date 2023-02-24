@@ -23,6 +23,7 @@ dependencies:
   sidebarx: ^0.14.0
   easy_stepper: ^0.3.1
   simple_ripple_animation: ^0.0.7
+  flutter_login: ^4.1.1
 
 
 

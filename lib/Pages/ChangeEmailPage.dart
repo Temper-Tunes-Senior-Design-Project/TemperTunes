@@ -67,7 +67,7 @@ class LargeScreen extends StatelessWidget {
                           scale: 2.3),
                     ),
 
-                    ///Username
+                    ///Current Email
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
@@ -84,9 +84,10 @@ class LargeScreen extends StatelessWidget {
                               fontSize: 20,
                             ),
                             decoration: const InputDecoration(
+                                hintText: 'Current Email',
                                 hintStyle: TextStyle(color: Colors.white60),
                                 enabledBorder: InputBorder.none,
-                                labelText: 'Please enter your username',
+                                labelText: 'Please enter your current email',
                                 labelStyle: TextStyle(
                                     fontSize: 15, color: Colors.white54)),
                           ),
@@ -108,7 +109,7 @@ class LargeScreen extends StatelessWidget {
                       ],
                     ),
 
-                    ///Enter Email
+                    ///New Email
                     Column(
                       children: [
                         Container(
@@ -124,9 +125,9 @@ class LargeScreen extends StatelessWidget {
                             ),
                             decoration: const InputDecoration(
                                 hintStyle: TextStyle(color: Colors.white60),
-                                hintText: 'Email',
+                                hintText: 'New Email',
                                 enabledBorder: InputBorder.none,
-                                labelText: 'Please your email',
+                                labelText: 'Please your new email',
                                 labelStyle: TextStyle(
                                     fontSize: 15, color: Colors.white54)),
                           ),
@@ -145,7 +146,7 @@ class LargeScreen extends StatelessWidget {
                       ],
                     ),
 
-                    ///Password
+                    ///Confirm new email
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
@@ -162,9 +163,9 @@ class LargeScreen extends StatelessWidget {
                             ),
                             decoration: const InputDecoration(
                                 hintStyle: TextStyle(color: Colors.white60),
-                                hintText: 'Confirm Password',
+                                hintText: 'Confirm Email',
                                 enabledBorder: InputBorder.none,
-                                labelText: 'Please confirm your password',
+                                labelText: 'Please confirm your new email',
                                 labelStyle: TextStyle(
                                     fontSize: 15, color: Colors.white54)),
                           ),
@@ -184,7 +185,7 @@ class LargeScreen extends StatelessWidget {
                       ],
                     ),
 
-                    ///Confirm Password
+                    ///Password
                     Column(
                       children: [
                         Container(
@@ -200,9 +201,9 @@ class LargeScreen extends StatelessWidget {
                             ),
                             decoration: const InputDecoration(
                                 hintStyle: TextStyle(color: Colors.white60),
-                                hintText: 'Confirm Password',
+                                hintText: 'Password',
                                 enabledBorder: InputBorder.none,
-                                labelText: 'Please confirm your password',
+                                labelText: 'Please enter your password',
                                 labelStyle: TextStyle(
                                     fontSize: 15, color: Colors.white54)),
                           ),
@@ -398,7 +399,7 @@ class SmallScreen extends StatelessWidget {
                             ),
                             decoration: const InputDecoration(
                                 hintStyle: TextStyle(color: Colors.white60),
-                                hintText: 'abe@gmail.com',
+                                hintText: 'Current Email',
                                 border: UnderlineInputBorder(
                                   borderSide:
                                       BorderSide(width: 3, color: Colors.white),
@@ -441,7 +442,7 @@ class SmallScreen extends StatelessWidget {
                             ),
                             decoration: const InputDecoration(
                                 hintStyle: TextStyle(color: Colors.white60),
-                                hintText: 'Email',
+                                hintText: 'New Email',
                                 border: UnderlineInputBorder(
                                   borderSide:
                                       BorderSide(width: 3, color: Colors.white),
@@ -481,7 +482,7 @@ class SmallScreen extends StatelessWidget {
                             ),
                             decoration: const InputDecoration(
                                 hintStyle: TextStyle(color: Colors.white60),
-                                hintText: 'Email',
+                                hintText: 'Confirm Email',
                                 border: UnderlineInputBorder(
                                   borderSide:
                                       BorderSide(width: 3, color: Colors.white),
