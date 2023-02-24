@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mood_swing/Pages/LoginPage.dart';
 import '../Widgets/widgets.dart';
+import 'package:mood_swing/Pages/HomePage.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -126,7 +126,7 @@ class LargeScreen extends StatelessWidget {
                                 hintStyle: TextStyle(color: Colors.white60),
                                 hintText: 'Email',
                                 enabledBorder: InputBorder.none,
-                                labelText: 'Please enter your email',
+                                labelText: 'Please your email',
                                 labelStyle: TextStyle(
                                     fontSize: 15, color: Colors.white54)),
                           ),
@@ -257,7 +257,7 @@ class LargeScreen extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => SignupPage()));
+                                  builder: (context) => HomePage()));
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.transparent,
@@ -299,7 +299,7 @@ class LargeScreen extends StatelessWidget {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => LoginPage()));
+                                            builder: (context) => HomePage()));
                                   },
                                 ),
                               ],
@@ -316,6 +316,17 @@ class LargeScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class _ChangePasswordPageState extends State<ChangePasswordPage> {
+  GlobalKey<FormState> _key = new GlobalKey();
+  bool _validate = false;
+  bool _obscureText = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(body: Body());
   }
 }
 
@@ -370,7 +381,7 @@ class SmallScreen extends StatelessWidget {
                           scale: 2.5),
                     ),
 
-                    ///Username
+                    ///current email
                     Column(
                       children: [
                         Container(
@@ -387,11 +398,12 @@ class SmallScreen extends StatelessWidget {
                             ),
                             decoration: const InputDecoration(
                                 hintStyle: TextStyle(color: Colors.white60),
+                                hintText: 'abe@gmail.com',
                                 border: UnderlineInputBorder(
                                   borderSide:
                                       BorderSide(width: 3, color: Colors.white),
                                 ),
-                                labelText: 'Please enter your username',
+                                labelText: 'Please enter your current email',
                                 labelStyle: TextStyle(
                                     fontSize: 15, color: Colors.white54)),
                           ),
@@ -413,7 +425,7 @@ class SmallScreen extends StatelessWidget {
                       ],
                     ),
 
-                    ///Email
+                    ///New Email
                     Column(
                       children: [
                         Container(
@@ -434,7 +446,7 @@ class SmallScreen extends StatelessWidget {
                                   borderSide:
                                       BorderSide(width: 3, color: Colors.white),
                                 ),
-                                labelText: 'Please enter your email',
+                                labelText: 'Please enter your new email',
                                 labelStyle: TextStyle(
                                     fontSize: 15, color: Colors.white54)),
                           ),
@@ -453,7 +465,46 @@ class SmallScreen extends StatelessWidget {
                       ],
                     ),
 
-                    ///Password
+                    ///Confirm Email
+                    Column(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.only(
+                              left: 0.12 * width, top: height * 0.005),
+                          alignment: Alignment.topLeft,
+                          child: TextField(
+                            style: TextStyle(
+                              fontFamily: 'Maven Pro',
+                              fontWeight: FontWeight.w100,
+                              color: Colors.white,
+                              fontSize: 20,
+                            ),
+                            decoration: const InputDecoration(
+                                hintStyle: TextStyle(color: Colors.white60),
+                                hintText: 'Email',
+                                border: UnderlineInputBorder(
+                                  borderSide:
+                                      BorderSide(width: 3, color: Colors.white),
+                                ),
+                                labelText: 'Please confirm your new email',
+                                labelStyle: TextStyle(
+                                    fontSize: 15, color: Colors.white54)),
+                          ),
+                        ),
+
+                        ///Horizontal line
+                        Container(
+                            padding: EdgeInsets.only(
+                                left: 0.1 * width, right: 0.1 * width, top: 0),
+                            child: const Divider(
+                              height: 8,
+                              thickness: 2,
+                              color: Colors.white,
+                            )),
+                      ],
+                    ),
+
+                    ///enter password
                     Column(
                       children: [
                         Container(
@@ -475,45 +526,6 @@ class SmallScreen extends StatelessWidget {
                                       BorderSide(width: 3, color: Colors.white),
                                 ),
                                 labelText: 'Please enter your password',
-                                labelStyle: TextStyle(
-                                    fontSize: 15, color: Colors.white54)),
-                          ),
-                        ),
-
-                        ///Horizontal line
-                        Container(
-                            padding: EdgeInsets.only(
-                                left: 0.1 * width, right: 0.1 * width, top: 0),
-                            child: const Divider(
-                              height: 8,
-                              thickness: 2,
-                              color: Colors.white,
-                            )),
-                      ],
-                    ),
-
-                    ///Confirm Password
-                    Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.only(
-                              left: 0.12 * width, top: height * 0.005),
-                          alignment: Alignment.topLeft,
-                          child: TextField(
-                            style: TextStyle(
-                              fontFamily: 'Maven Pro',
-                              fontWeight: FontWeight.w100,
-                              color: Colors.white,
-                              fontSize: 20,
-                            ),
-                            decoration: const InputDecoration(
-                                hintStyle: TextStyle(color: Colors.white60),
-                                hintText: 'Confirm Password',
-                                border: UnderlineInputBorder(
-                                  borderSide:
-                                      BorderSide(width: 3, color: Colors.white),
-                                ),
-                                labelText: 'Please confirm your password',
                                 labelStyle: TextStyle(
                                     fontSize: 15, color: Colors.white54)),
                           ),
@@ -553,7 +565,7 @@ class SmallScreen extends StatelessWidget {
                                     BorderRadius.all(Radius.circular(15))),
                             child: Align(
                               alignment: Alignment.center,
-                              child: Text("Register",
+                              child: Text("Submit",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 25,
@@ -567,7 +579,7 @@ class SmallScreen extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => SignupPage()));
+                                  builder: (context) => HomePage()));
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.transparent,
@@ -578,45 +590,18 @@ class SmallScreen extends StatelessWidget {
 
                     ///Already Have an account
                     Container(
-                      padding: EdgeInsets.only(top: 0.01 * height, bottom: 0),
-                      child: Column(
-                        children: [
-                          ///Regular Text
-                          Text(
-                            'Already have an account?',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: 'Maven Pro',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                              color: Colors.white,
-                            ),
+                      padding: EdgeInsets.only(top: 0.01 * height),
+                      child: Container(
+                        child: Text(
+                          'Forgot your password?',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: 'Maven Pro',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: MyPalette.turqoise,
                           ),
-
-                          ///Linked text to login
-                          Container(
-                            alignment: Alignment.center,
-                            padding: EdgeInsets.only(top: 0),
-                            child: TextButton(
-                              child: Text(
-                                'Go to login',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontFamily: 'Maven Pro',
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                  color: MyPalette.turqoise,
-                                ),
-                              ),
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => LoginPage()));
-                              },
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
                     ),
                   ],
@@ -630,9 +615,8 @@ class SmallScreen extends StatelessWidget {
   }
 }
 
-class SignupPage extends StatelessWidget {
-  const SignupPage({super.key});
-
+class ChangePasswordPage extends StatefulWidget {
+  _ChangePasswordPageState createState() => _ChangePasswordPageState();
   @override
   Widget build(Object context) {
     return Scaffold(

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mood_swing/Containers/LoginContainer.dart';
+import 'package:mood_swing/Pages/UserPage.dart';
+import 'Pages/ChangeEmailPage.dart';
 import 'Pages/HomePage.dart';
 import 'Pages/PreferencesPage.dart';
 import 'Pages/VerificationPage.dart';
@@ -41,8 +43,7 @@ class App extends StatelessWidget {
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       //   home: LoginContainer(),
-      /// home: HomePage(),
-      home: VerificationPage(),
+      home: ChangeEmailPage(),
       // home: VerificationPage(),
     );
   }

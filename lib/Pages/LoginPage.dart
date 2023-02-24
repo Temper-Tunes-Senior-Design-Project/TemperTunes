@@ -32,7 +32,7 @@ class LargeScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Container(
-                //backbutton
+                //back button
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

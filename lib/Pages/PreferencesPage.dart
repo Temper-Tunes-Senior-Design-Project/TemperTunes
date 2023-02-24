@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mood_swing/Pages/ChangeEmailPage.dart';
 import 'package:mood_swing/Pages/UserPage.dart';
 import '../Widgets/widgets.dart';
 
@@ -296,6 +297,10 @@ class SmallScreen extends StatelessWidget {
                       child: Row(
                         children: [
                           ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.transparent,
+                              foregroundColor: Colors.transparent,
+                            ),
                             child: Icon(
                               IconData(0xf05bc, fontFamily: 'MaterialIcons'),
                               color: Colors.white,
@@ -337,6 +342,7 @@ class SmallScreen extends StatelessWidget {
                             padding: EdgeInsets.only(
                                 right: 0.03 * width, left: 0.03 * width),
                             child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 ///Account
                                 Container(
@@ -359,7 +365,7 @@ class SmallScreen extends StatelessWidget {
                                               )),
                                           Container(
                                             padding: EdgeInsets.only(
-                                                left: 0.04 * width),
+                                                left: 0.04 * width, bottom: 0),
                                             alignment: Alignment.topLeft,
                                             child: Text(
                                               'Account',
@@ -390,33 +396,46 @@ class SmallScreen extends StatelessWidget {
                                 ///Change Email
                                 Container(
                                   padding: EdgeInsets.only(top: 0.04 * height),
-                                  child: Row(
-                                    children: [
-                                      ///icon
-                                      Container(
+                                  child: TextButton(
+                                    child: Row(
+                                      children: [
+                                        ///icon
+                                        Container(
+                                            padding: EdgeInsets.only(
+                                                left: 0.12 * width),
+                                            alignment: Alignment.topLeft,
+                                            child: Icon(
+                                              IconData(0xe22a,
+                                                  fontFamily: 'MaterialIcons'),
+                                              color: MyPalette.white,
+                                              size: 40,
+                                            )),
+                                        Container(
                                           padding: EdgeInsets.only(
-                                              left: 0.12 * width),
+                                              left: 0.04 * width),
                                           alignment: Alignment.topLeft,
-                                          child: Icon(
-                                            IconData(0xe22a,
-                                                fontFamily: 'MaterialIcons'),
-                                            color: MyPalette.white,
-                                            size: 40,
-                                          )),
-                                      Container(
-                                        padding:
-                                            EdgeInsets.only(left: 0.04 * width),
-                                        alignment: Alignment.topLeft,
-                                        child: Text(
-                                          'Change Email',
-                                          style: TextStyle(
-                                            fontFamily: 'Maven Pro',
-                                            color: Colors.white,
-                                            fontSize: 28,
+                                          child: Text(
+                                            'Change Email',
+                                            style: TextStyle(
+                                              fontFamily: 'Maven Pro',
+                                              color: Colors.white,
+                                              fontSize: 28,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ChangeEmailPage()));
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      foregroundColor: Colors.transparent,
+                                    ),
                                   ),
                                 ),
 

@@ -576,95 +576,103 @@ class SmallScreen extends StatelessWidget {
         decoration: BoxDecoration(
           //set img to bg of body
           image: DecorationImage(
-              image: AssetImage("assets/UserPageLarge.png"), fit: BoxFit.cover),
+              image: AssetImage("assets/userPageLarge.png"), fit: BoxFit.cover),
         ),
         child: Container(
           child: Column(
             children: <Widget>[
               ///top container
-              Container(
+              Stack(
                 alignment: Alignment.topCenter,
-                width: width,
-                height: 0.38 * height,
-                decoration: BoxDecoration(
-                  color: MyPalette.darkTurqoise,
-                  borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(50),
-                    bottomLeft: Radius.circular(50),
+                children: <Widget>[
+                  Container(
+                    height: height * 0.25,
+                    width: width,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage("assets/profileBackdrop.png"),
+                        fit: BoxFit.cover,
+                      ),
+                      borderRadius: BorderRadius.only(
+                        bottomRight: Radius.circular(50),
+                        bottomLeft: Radius.circular(50),
+                      ),
+                    ),
                   ),
-                ),
-                child: Container(
-                  padding: EdgeInsets.only(top: height * 0.06),
-                  child: Container(
-                    alignment: Alignment.center,
-                    child: Column(
-                      children: [
-                        ///Back button
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              padding: EdgeInsets.only(
-                                left: 0.01 * width,
-                              ),
-                              child: Row(
-                                children: [
-                                  ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      shape: CircleBorder(),
-                                    ),
-                                    child: Icon(
-                                      IconData(0xf05bc,
-                                          fontFamily: 'MaterialIcons'),
-                                      color: Colors.white,
-                                      size: 40,
-                                    ),
-                                    onPressed: () => Navigator.pop(context),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-
-                        ///Profile picture
-                        Container(
-                          alignment: Alignment.center,
-                          child: CircleAvatar(
-                            backgroundImage:
-                                AssetImage("assets/profilepic.png"),
-                            radius: 60,
-                          ),
-                        ),
-                        //User's name and membership
-                        Container(
-                          padding: EdgeInsets.only(top: height * 0.001),
-                          child: Column(
+                  Container(
+                    padding: EdgeInsets.only(top: height * 0.06),
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: Column(
+                        children: [
+                          ///Back button
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              //Name
-                              Text("John Doe",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: 'Share Tech',
-                                      fontSize: 40)),
-                              //Membership
                               Container(
-                                padding: EdgeInsets.only(top: 3),
-                                child: Text(
-                                  "Member since September 2022",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: 'Maven Pro',
-                                      fontSize: 18),
+                                padding: EdgeInsets.only(
+                                  left: 0.01 * width,
+                                ),
+                                child: Row(
+                                  children: [
+                                    ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        shape: CircleBorder(),
+                                      ),
+                                      child: Icon(
+                                        IconData(0xf05bc,
+                                            fontFamily: 'MaterialIcons'),
+                                        color: Colors.white,
+                                        size: 40,
+                                      ),
+                                      onPressed: () => Navigator.pop(context),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],
                           ),
-                        ),
-                      ],
+
+                          ///Profile picture
+                          Container(
+                            padding: EdgeInsets.only(top: height * 0.03),
+                            alignment: Alignment.center,
+                            child: CircleAvatar(
+                              backgroundImage:
+                                  AssetImage("assets/profilepic.png"),
+                              radius: 60,
+                            ),
+                          ),
+                          //User's name and membership
+                          Container(
+                            padding: EdgeInsets.only(top: height * 0.001),
+                            child: Column(
+                              children: [
+                                //Name
+                                Text("John Doe",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: 'Share Tech',
+                                        fontSize: 40)),
+                                //Membership
+                                Container(
+                                  padding: EdgeInsets.only(top: 3),
+                                  child: Text(
+                                    "Member since September 2022",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: 'Maven Pro',
+                                        fontSize: 18),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
+                ],
               ),
 
               SizedBox(
@@ -676,7 +684,7 @@ class SmallScreen extends StatelessWidget {
                 alignment: Alignment.topRight,
                 child: Container(
                   alignment: Alignment.topRight,
-                  height: height * 0.075,
+                  height: height * 0.08,
                   width: width * 0.9,
                   decoration: BoxDecoration(
                     color: MyPalette.magenta,
@@ -770,7 +778,7 @@ class SmallScreen extends StatelessWidget {
                 alignment: Alignment.topLeft,
                 child: Container(
                   alignment: Alignment.topLeft,
-                  height: height * 0.075,
+                  height: height * 0.08,
                   width: width * 0.9,
                   decoration: BoxDecoration(
                     color: MyPalette.darkTurqoise,
