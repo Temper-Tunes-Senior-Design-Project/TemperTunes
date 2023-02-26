@@ -192,7 +192,8 @@ class SmallScreen extends StatelessWidget {
                                                 MaterialPageRoute(
                                                     builder: (context) =>
                                                         LoginPage()));
-                                          }),
+                                          },
+                                      ),
                                     ],
                                   ),
                                 ),
