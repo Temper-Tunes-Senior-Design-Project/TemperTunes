@@ -646,7 +646,7 @@ Future<void> register(BuildContext context) async {
       () {
     print("Error occurred");
   });
-  DatabaseRouter().createUser(uid);
+  DatabaseRouter().createUser(_usernameController.text);
   Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
 }
 
