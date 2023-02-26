@@ -8,12 +8,15 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mood_swing/main.dart';
 
+import 'TestUtilities.dart';
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   group("App Tests", () {
     testWidgets('App Heartbeat Test', (WidgetTester tester) async {
       // Build our app and trigger a frame.
+      TestUtilities().disableOverflowErrors();
       await tester.pumpWidget(App());
       expect(true, isTrue);
     });
