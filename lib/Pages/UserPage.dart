@@ -181,10 +181,7 @@ class LargeScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    padding: EdgeInsets.only(
-                        left: 0.03 * width,
-                        bottom: height * 0.02,
-                        top: 0.03 * height),
+                    padding: EdgeInsets.only(top: 0.03 * height, left: 0.06 * width, bottom: 0.02*height),
                     child: Row(
                       children: [
                         ElevatedButton(
