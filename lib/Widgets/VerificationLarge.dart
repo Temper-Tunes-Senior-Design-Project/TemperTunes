@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mood_swing/Pages/LoginPage.dart';
-import 'package:mood_swing/Pages/PreferencesPage.dart';
-import 'package:mood_swing/Pages/SignupPage.dart';
-import 'package:mood_swing/Pages/UserPage.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../Widgets/widgets.dart';

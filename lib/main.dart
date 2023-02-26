@@ -1,16 +1,15 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:mood_swing/Containers/LoginContainer.dart';
-import 'package:mood_swing/Pages/UserPage.dart';
-import 'Pages/ChangeEmailPage.dart';
-import 'Pages/HomePage.dart';
-import 'Pages/PreferencesPage.dart';
-import 'Pages/VerificationPage.dart';
-import 'Pages/LoginPage.dart';
 
 import 'Widgets/MockNavigator.dart';
+import 'package:mood_swing/Pages/LandingPage.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(App());
 }
 
@@ -39,8 +38,6 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: MaterialColor(0xd789ff, color),
-
-        ///    canvasColor: MaterialColor(0x651fff, color),
         fontFamily: 'Maven Pro',
         iconTheme: const IconThemeData(color: Colors.white),
       ),

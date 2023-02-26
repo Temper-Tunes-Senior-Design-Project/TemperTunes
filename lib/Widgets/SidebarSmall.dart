@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mood_swing/Pages/HomePage.dart';
 import 'package:mood_swing/Pages/PreferencesPage.dart';
 import 'package:mood_swing/Pages/UserPage.dart';
 
