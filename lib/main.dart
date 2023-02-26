@@ -45,7 +45,7 @@ class App extends StatelessWidget {
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       //   home: LoginContainer(),
-      home: LoginPage(),
+      home: PreferencesPage(),
       // home: VerificationPage(),
     );
   }

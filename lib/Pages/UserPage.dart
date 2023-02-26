@@ -589,13 +589,9 @@ class SmallScreen extends StatelessWidget {
                     height: height * 0.25,
                     width: width,
                     decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage("assets/profileBackdrop.png"),
-                        fit: BoxFit.cover,
-                      ),
                       borderRadius: BorderRadius.only(
-                        bottomRight: Radius.circular(50),
-                        bottomLeft: Radius.circular(50),
+                        bottomRight: Radius.circular(30),
+                        bottomLeft: Radius.circular(30),
                       ),
                     ),
                   ),
