@@ -283,9 +283,9 @@ class LargeScreen extends StatelessWidget {
 }
 
 class _ChangePasswordPageState extends State<ChangePasswordPage> {
-  GlobalKey<FormState> _key = new GlobalKey();
-  bool _validate = false;
-  bool _obscureText = true;
+  //GlobalKey<FormState> _key = new GlobalKey();
+  //bool _validate = false;
+  //bool _obscureText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -541,7 +541,8 @@ class SmallScreen extends StatelessWidget {
 
 class ChangePasswordPage extends StatefulWidget {
   _ChangePasswordPageState createState() => _ChangePasswordPageState();
-  @override
+
+
   Widget build(Object context) {
     return Scaffold(
         resizeToAvoidBottomInset: false, body: Column(children: [Body()]));

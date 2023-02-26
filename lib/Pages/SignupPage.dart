@@ -48,7 +48,7 @@ class LargeScreen extends StatelessWidget {
                         shape: CircleBorder(),
                       ),
                       child: Icon(
-                        IconData(0xf05bc, fontFamily: 'MaterialIcons'),
+                        const IconData(0xf05bc, fontFamily: 'MaterialIcons'),
                         color: Colors.white,
                         size: 40,
                       ),
@@ -358,7 +358,7 @@ class SmallScreen extends StatelessWidget {
                           shape: CircleBorder(),
                         ),
                         child: Icon(
-                          IconData(0xf05bc, fontFamily: 'MaterialIcons'),
+                          const IconData(0xf05bc, fontFamily: 'MaterialIcons'),
                           color: Colors.white,
                           size: 40,
                         ),
@@ -641,12 +641,12 @@ class SmallScreen extends StatelessWidget {
 }
 
 Future<void> register(BuildContext context) async {
-  String uid = await AuthRouter().registerUser(
+  await AuthRouter().registerUser(
       _emailController.text, _passwordController.text, _usernameController.text,
       () {
     print("Error occurred");
   });
-  DatabaseRouter().createUser(uid);
+  DatabaseRouter().createUser(_usernameController.text);
   Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
 }
 

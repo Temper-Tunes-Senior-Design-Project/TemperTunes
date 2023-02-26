@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mood_swing/Widgets/RippleLarge.dart';
-//import 'package:simple_ripple_animation/simple_ripple_animation.dart';
 import '../Widgets/widgets.dart';
 
 Key UserButtonKey = Key("User Button");

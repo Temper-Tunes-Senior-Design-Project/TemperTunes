@@ -321,9 +321,9 @@ class LargeScreen extends StatelessWidget {
 }
 
 class _ChangeEmailPageState extends State<ChangeEmailPage> {
-  GlobalKey<FormState> _key = new GlobalKey();
-  bool _validate = false;
-  bool _obscureText = true;
+  //GlobalKey<FormState> _key = new GlobalKey();
+  //bool _validate = false;
+  //bool _obscureText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -618,7 +618,7 @@ class SmallScreen extends StatelessWidget {
 
 class ChangeEmailPage extends StatefulWidget {
   _ChangeEmailPageState createState() => _ChangeEmailPageState();
-  @override
+
   Widget build(Object context) {
     return Scaffold(
         resizeToAvoidBottomInset: false, body: Column(children: [Body()]));
