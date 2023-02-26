@@ -25,7 +25,7 @@ class LargeScreen extends StatelessWidget {
         height: height,
         decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/LoginPageLarge.png"),
+              image: AssetImage("assets/loginPageLarge.png"),
               fit: BoxFit.cover),
         ),
 
@@ -590,7 +590,6 @@ class PreferencesPage extends StatelessWidget {
 
   @override
   Widget build(Object context) {
-    //Materialapp debugger false
     return Scaffold(
         resizeToAvoidBottomInset: false, body: Column(children: [Body()]));
   }
