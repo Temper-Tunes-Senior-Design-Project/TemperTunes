@@ -641,7 +641,7 @@ class SmallScreen extends StatelessWidget {
 }
 
 Future<void> register(BuildContext context) async {
-  String uid = await AuthRouter().registerUser(
+  await AuthRouter().registerUser(
       _emailController.text, _passwordController.text, _usernameController.text,
       () {
     print("Error occurred");
