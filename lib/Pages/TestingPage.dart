@@ -1,6 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:mood_swing/Pages/CameraPage.dart';
+import 'package:mood_swing/Widgets/CloudFunctions.dart';
 import '../Widgets/widgets.dart';
 import 'package:flutter/foundation.dart';
 
@@ -34,11 +35,15 @@ class LargeScreen extends StatelessWidget {
         child: ElevatedButton(
             //Goto: Camera Page
             onPressed: () async {
-              await availableCameras().then((value) => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => CameraPage(cameras: value))));
+              var response = await CloudFunctions().get_mood();
+              print(response);
+              // await availableCameras().then((value) => Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //         builder: (context) => CameraPage(cameras: value))));
             },
+            style: ButtonStyle(
+                backgroundColor: MaterialStatePropertyAll<Color>(Colors.red)),
             child: Text("TEST WIDGET")),
       ),
     ));
