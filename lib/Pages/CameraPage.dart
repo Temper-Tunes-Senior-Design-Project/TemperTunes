@@ -3,6 +3,7 @@ import 'package:camera/camera.dart';
 import 'package:mood_swing/Widgets/widgets.dart';
 import 'package:flutter/foundation.dart';
 import 'package:video_player/video_player.dart';
+import 'package:mood_swing/Widgets/CloudFunctions.dart';
 
 class Body extends StatelessWidget {
   final List<CameraDescription>? cameras;
@@ -38,6 +39,10 @@ class _LargeScreenState extends State<LargeScreen> {
   @override
   void initState() {
     super.initState();
+    _initCamera();
+  }
+
+  void _initCamera() {
     ////COME BACK TO THIS
     if (widget.cameras == null || widget.cameras!.length == 0) {
       return;
@@ -115,6 +120,7 @@ class _LargeScreenState extends State<LargeScreen> {
       child: Container(
         width: width,
         height: height,
+        //background
         decoration: BoxDecoration(
           image: DecorationImage(
               image: (defaultTargetPlatform == TargetPlatform.iOS ||
@@ -125,6 +131,7 @@ class _LargeScreenState extends State<LargeScreen> {
         ),
         child: Column(
           children: [
+            //Camera Box
             Padding(
               padding: EdgeInsets.all(height * 0.02),
               child: Center(
@@ -163,6 +170,8 @@ class _LargeScreenState extends State<LargeScreen> {
                 ),
               ),
             ),
+
+            //Buttons
             Padding(
               padding: EdgeInsets.all(height * 0.02),
               child: Row(
@@ -185,7 +194,9 @@ class _LargeScreenState extends State<LargeScreen> {
                       context: context,
                       heroTag: "Confirm Button",
                       icon: Icons.check_circle_rounded,
-                      onPressed: () {
+                      onPressed: () async {
+                        var res = await CloudFunctions().get_mood();
+                        print(res);
                         //NEXT PAGE TBD
                       },
                     )
@@ -218,6 +229,7 @@ class _LargeScreenState extends State<LargeScreen> {
                       icon: Icons.camera_rounded,
                       onPressed: () async {
                         pictureFile = await cameraController.takePicture();
+                        // runModel();
                         setState(() {});
                       },
                     ),
@@ -266,6 +278,7 @@ class CameraPage extends StatelessWidget {
   }
 }
 
+//CameraButton Widget
 class CameraButton extends StatelessWidget {
   final IconData icon;
   final void Function()? onPressed;
