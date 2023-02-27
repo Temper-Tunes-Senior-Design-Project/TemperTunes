@@ -112,11 +112,10 @@ class SidebarDrawer extends StatelessWidget {
         return Container(
           height: height * 0.28,
           child: Padding(
-            padding: EdgeInsets.only(
-                top: 0.1 * height, right: 0.05 * width, bottom: 0.01 * height),
+            padding: EdgeInsets.only(top: 0.1 * height, bottom: 0.01 * height),
             child: Align(
               alignment: Alignment.topCenter,
-              //child: Image.asset('assets/music_swing_logo_small.png'),
+              child: Image.asset('assets/music_swing_logo_small.png'),
             ),
           ),
         );
