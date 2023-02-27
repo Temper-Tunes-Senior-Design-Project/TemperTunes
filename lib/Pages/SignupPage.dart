@@ -552,7 +552,7 @@ class SmallScreen extends StatelessWidget {
                     Container(
                       child: TextButton(
                         child: Container(
-                          padding: EdgeInsets.only(top: height * 0.015),
+                          padding: EdgeInsets.only(top: height * 0.02),
                           child: Container(
                             width: 0.8 * width,
                             height: 0.05 * height,

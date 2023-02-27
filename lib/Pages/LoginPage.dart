@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../Utilities/AuthRouter.dart';
 import '../Widgets/widgets.dart';
 import 'HomePage.dart';
+import 'OTPEmailPage.dart';
 import 'SignupPage.dart';
 
 class Body extends StatelessWidget {
@@ -278,16 +279,25 @@ class LargeScreen extends StatelessWidget {
                     ///Forgot Password
                     Container(
                       padding: EdgeInsets.only(top: 0.08 * height),
-                      child: Text(
-                        'Forgot your password?',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontFamily: 'Maven Pro',
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
-                          color: MyPalette.turqoise,
-                        ),
-                      ),
+                      child: TextButton(
+                          child: Text(
+                            'Forgot your password?',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontFamily: 'Maven Pro',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                              color: MyPalette.turqoise,
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => OTPEmailPage(),
+                              ),
+                            );
+                          }),
                     ),
                   ],
                 ),
@@ -555,18 +565,27 @@ class SmallScreen extends StatelessWidget {
                     ///Forgot Password
                     Container(
                       padding: EdgeInsets.only(top: 0.01 * height),
-                      child: Container(
-                        child: Text(
-                          'Forgot your password?',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontFamily: 'Maven Pro',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            color: MyPalette.turqoise,
+                      child: TextButton(
+                          child: Container(
+                            child: Text(
+                              'Forgot your password?',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontFamily: 'Maven Pro',
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: MyPalette.turqoise,
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => OTPEmailPage(),
+                              ),
+                            );
+                          }),
                     ),
                   ],
                 ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mood_swing/Pages/OTPEmailPage.dart';
 import '../Widgets/widgets.dart';
 import 'package:mood_swing/Pages/HomePage.dart';
 
@@ -184,35 +185,46 @@ class LargeScreen extends StatelessWidget {
                       ],
                     ),
 
-                    ///Register button
+                    ///Submit button
                     Container(
                       child: TextButton(
                         child: Container(
                           padding: EdgeInsets.only(top: height * 0.02),
                           child: Container(
-                            width: 0.5 * width,
+                            width: 0.2 * width,
                             height: 0.056 * height,
                             decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  begin: Alignment.topRight,
-                                  end: Alignment.bottomLeft,
-                                  colors: [
-                                    MyPalette.slateBlue,
-                                    MyPalette.brightMagenta,
-                                    MyPalette.turqoise,
-                                  ],
+                              gradient: LinearGradient(
+                                begin: Alignment.topRight,
+                                end: Alignment.bottomLeft,
+                                colors: [
+                                  MyPalette.slateBlue,
+                                  MyPalette.brightMagenta,
+                                  MyPalette.turqoise,
+                                ],
+                              ),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(15),
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  offset: Offset(0, 1),
+                                  color: MyPalette.brightMagenta,
+                                  blurRadius: 16,
                                 ),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15))),
+                              ],
+                            ),
                             child: Align(
                               alignment: Alignment.center,
-                              child: Text("Register",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 25,
-                                    fontFamily: 'Share Tech',
-                                    color: Colors.white,
-                                  )),
+                              child: Text(
+                                "Submit",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 25,
+                                  fontFamily: 'Share Tech',
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
                           ),
                         ),
@@ -232,43 +244,31 @@ class LargeScreen extends StatelessWidget {
                     ///Forgot Password
                     Container(
                       padding: EdgeInsets.only(top: 0.02 * height),
-                      child: Column(
-                        children: [
-                          Text(
-                            'Already have an account?',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: 'Maven Pro',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Container(
-                            alignment: Alignment.center,
-                            child: Column(
-                              children: [
-                                TextButton(
-                                  child: Text(
-                                    'Go to login',
-                                    style: TextStyle(
-                                      fontFamily: 'Maven Pro',
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
-                                      color: MyPalette.turqoise,
-                                    ),
-                                  ),
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => HomePage()));
-                                  },
+                      child: Container(
+                        alignment: Alignment.center,
+                        child: Column(
+                          children: [
+                            TextButton(
+                              child: Text(
+                                'Forgot your password?',
+                                style: TextStyle(
+                                  fontFamily: 'Maven Pro',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                  color: MyPalette.turqoise,
                                 ),
-                              ],
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => OTPEmailPage(),
+                                  ),
+                                );
+                              },
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -474,37 +474,50 @@ class SmallScreen extends StatelessWidget {
                         child: Container(
                           padding: EdgeInsets.only(top: height * 0.015),
                           child: Container(
-                            width: 0.8 * width,
+                            width: 0.4 * width,
                             height: 0.05 * height,
                             decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  begin: Alignment.topRight,
-                                  end: Alignment.bottomLeft,
-                                  colors: [
-                                    MyPalette.slateBlue,
-                                    MyPalette.brightMagenta,
-                                    MyPalette.turqoise,
-                                  ],
+                              gradient: LinearGradient(
+                                begin: Alignment.topRight,
+                                end: Alignment.bottomLeft,
+                                colors: [
+                                  MyPalette.slateBlue,
+                                  MyPalette.brightMagenta,
+                                  MyPalette.turqoise,
+                                ],
+                              ),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(15),
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  offset: Offset(0, 1),
+                                  color: MyPalette.brightMagenta,
+                                  blurRadius: 16,
                                 ),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15))),
+                              ],
+                            ),
                             child: Align(
                               alignment: Alignment.center,
-                              child: Text("Submit",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 25,
-                                    fontFamily: 'Share Tech',
-                                    color: Colors.white,
-                                  )),
+                              child: Text(
+                                "Submit",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 25,
+                                  fontFamily: 'Share Tech',
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
                           ),
                         ),
                         onPressed: () {
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => HomePage()));
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HomePage(),
+                            ),
+                          );
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.transparent,
@@ -512,6 +525,9 @@ class SmallScreen extends StatelessWidget {
                         ),
                       ),
                     ),
+
+                    ///spacer
+                    SizedBox(height: 0.02 * height),
 
                     ///Already Have an account
                     Container(
@@ -542,7 +558,6 @@ class SmallScreen extends StatelessWidget {
 
 class ChangePasswordPage extends StatefulWidget {
   _ChangePasswordPageState createState() => _ChangePasswordPageState();
-
 
   Widget build(Object context) {
     return Scaffold(

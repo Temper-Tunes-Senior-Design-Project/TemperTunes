@@ -3,13 +3,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mood_swing/Pages/CameraPage.dart';
 import 'package:mood_swing/Pages/HomePage.dart';
+import 'package:mood_swing/Pages/PreferencesPage.dart';
 import 'Pages/LoginPage.dart';
+import 'Pages/SignupPage.dart';
 import 'Widgets/MockNavigator.dart';
 import 'package:mood_swing/Pages/LandingPage.dart';
 import 'firebase_options.dart';
-import 'package:mood_swing/Pages/OTPEmailPage.dart';
-import 'package:mood_swing/Pages/VerificationPage.dart';
-import 'package:mood_swing/Pages/PreferencesPage.dart';
 
 List<CameraDescription> cameras = [];
 
@@ -51,7 +50,7 @@ class App extends StatelessWidget {
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       //   home: LoginContainer(),
-      home: OTPEmailPage(),
+      home: PreferencesPage(),
     );
   }
 }

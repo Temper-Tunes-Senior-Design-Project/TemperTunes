@@ -91,7 +91,6 @@ class _VerificationSmallState extends State<VerificationSmall> {
               ),
 
               /// Logo
-
               SizedBox(
                 height: height * 0.23,
                 child: ClipRRect(
@@ -110,7 +109,7 @@ class _VerificationSmallState extends State<VerificationSmall> {
                   'Verification',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 50,
+                      fontSize: 48,
                       fontFamily: 'Share Tech',
                       color: MyPalette.lightPurple),
                   textAlign: TextAlign.center,
