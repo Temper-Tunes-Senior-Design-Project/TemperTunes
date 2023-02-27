@@ -4,10 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mood_swing/Pages/CameraPage.dart';
 import 'package:mood_swing/Pages/HomePage.dart';
 import 'package:mood_swing/Pages/PreferencesPage.dart';
-import 'Pages/LoginPage.dart';
-import 'Pages/SignupPage.dart';
 import 'Widgets/MockNavigator.dart';
-import 'package:mood_swing/Pages/LandingPage.dart';
 import 'firebase_options.dart';
 
 List<CameraDescription> cameras = [];
@@ -50,7 +47,7 @@ class App extends StatelessWidget {
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       //   home: LoginContainer(),
-      home: PreferencesPage(),
+      home: HomePage(),
     );
   }
 }

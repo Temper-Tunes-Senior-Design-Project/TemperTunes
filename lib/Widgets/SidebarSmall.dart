@@ -6,17 +6,6 @@ import 'package:mood_swing/Pages/UserPage.dart';
 import '../Widgets/widgets.dart';
 import 'package:sidebarx/sidebarx.dart';
 
-List<CameraDescription> cameras = [];
-
-void loadCamera() async {
-  try {
-    WidgetsFlutterBinding.ensureInitialized();
-    final cameras = await availableCameras();
-  } on CameraException catch (e) {
-    print('Error in fetching the cameras: $e');
-  }
-}
-
 class SidebarSmall extends StatelessWidget {
   SidebarSmall(this.child, {Key? key}) : super(key: key);
 
@@ -127,7 +116,7 @@ class SidebarDrawer extends StatelessWidget {
                 top: 0.1 * height, right: 0.05 * width, bottom: 0.01 * height),
             child: Align(
               alignment: Alignment.topCenter,
-              child: Image.asset('assets/music_swing_logo_small.png'),
+              //child: Image.asset('assets/music_swing_logo_small.png'),
             ),
           ),
         );
@@ -159,11 +148,13 @@ class SidebarDrawer extends StatelessWidget {
         SidebarXItem(
           icon: Icons.create_rounded,
           label: 'Create New Playlist',
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => CameraPage(cameras: cameras),
+          onTap: () async {
+            await availableCameras().then(
+              (smallScreenCameras) => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => CameraPage(cameras: smallScreenCameras),
+                ),
               ),
             );
           },

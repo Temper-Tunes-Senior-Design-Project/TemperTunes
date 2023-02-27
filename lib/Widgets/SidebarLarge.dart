@@ -4,6 +4,8 @@ import 'package:mood_swing/Pages/UserPage.dart';
 import 'package:collapsible_sidebar/collapsible_sidebar.dart';
 import 'dart:math' as math show pi;
 import '../Widgets/widgets.dart';
+import 'package:camera/camera.dart';
+import 'package:mood_swing/Pages/CameraPage.dart';
 
 ///Large Sidebar
 class SidebarLarge extends StatefulWidget {
@@ -48,7 +50,16 @@ class _SidebarLargeState extends State<SidebarLarge> {
       CollapsibleItem(
         text: 'Create New Playlist',
         icon: Icons.create_rounded,
-        onPressed: () {},
+        onPressed: () async {
+          await availableCameras().then(
+            (largeScreenCameras) => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => CameraPage(cameras: largeScreenCameras),
+              ),
+            ),
+          );
+        },
       ),
 
       ///Existing Playlists
