@@ -1,11 +1,21 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:mood_swing/Pages/CameraPage.dart';
 import 'package:mood_swing/Pages/PreferencesPage.dart';
 import 'package:mood_swing/Pages/UserPage.dart';
-
 import '../Widgets/widgets.dart';
 import 'package:sidebarx/sidebarx.dart';
 
-///Small Sidebar
+List<CameraDescription> cameras = [];
+
+void loadCamera() async {
+  try {
+    WidgetsFlutterBinding.ensureInitialized();
+    final cameras = await availableCameras();
+  } on CameraException catch (e) {
+    print('Error in fetching the cameras: $e');
+  }
+}
 
 class SidebarSmall extends StatelessWidget {
   SidebarSmall(this.child, {Key? key}) : super(key: key);
@@ -16,21 +26,6 @@ class SidebarSmall extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //  return MaterialApp(
-    // title: 'SidebarX Example',
-    //   debugShowCheckedModeBanner: false,
-    // theme: ThemeData(
-    //   primaryColor: primaryColor,
-    //   canvasColor: canvasColor,
-    //   scaffoldBackgroundColor: Colors.orange,
-    //   textTheme: const TextTheme(
-    //     headlineSmall: TextStyle(
-    //       color: Colors.white,
-    //       fontSize: 46,
-    //       fontWeight: FontWeight.w800,
-    //     ),
-    //   ),
-    // ),
     return Scaffold(
       key: _key,
       floatingActionButton: IconButton(
@@ -73,7 +68,6 @@ class SidebarDrawer extends StatelessWidget {
     return SidebarX(
       controller: _controller,
       theme: SidebarXTheme(
-        margin: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: MyPalette.dark,
           borderRadius: BorderRadius.circular(20),
@@ -165,6 +159,14 @@ class SidebarDrawer extends StatelessWidget {
         SidebarXItem(
           icon: Icons.create_rounded,
           label: 'Create New Playlist',
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => CameraPage(cameras: cameras),
+              ),
+            );
+          },
         ),
 
         ///Existing Playlists

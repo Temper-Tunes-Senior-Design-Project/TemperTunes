@@ -49,7 +49,8 @@ class LargeScreen extends StatelessWidget {
                               shape: CircleBorder(),
                             ),
                             child: Icon(
-                              const IconData(0xf05bc, fontFamily: 'MaterialIcons'),
+                              const IconData(0xf05bc,
+                                  fontFamily: 'MaterialIcons'),
                               color: Colors.white,
                               size: 35,
                             ),
@@ -94,9 +95,9 @@ class LargeScreen extends StatelessWidget {
                               fontFamily: 'Maven Pro',
                               fontWeight: FontWeight.w100,
                               color: Colors.white,
-                              fontSize: 16,
+                              fontSize: 20,
                             ),
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
                               prefixIcon: Icon(
                                 IconData(0xe491, fontFamily: 'MaterialIcons'),
                                 color: MyPalette.white,
@@ -149,9 +150,9 @@ class LargeScreen extends StatelessWidget {
                               color: Colors.white,
                               fontSize: 20,
                             ),
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
                               prefixIcon: Icon(
-                                IconData(0xf052b, fontFamily: 'MaterialIcons'),
+                                IconData(0xe3ae, fontFamily: 'MaterialIcons'),
                                 color: MyPalette.white,
                                 size: 34,
                               ),
@@ -330,7 +331,8 @@ class SmallScreen extends StatelessWidget {
                               shape: CircleBorder(),
                             ),
                             child: Icon(
-                              const IconData(0xf05bc, fontFamily: 'MaterialIcons'),
+                              const IconData(0xf05bc,
+                                  fontFamily: 'MaterialIcons'),
                               color: Colors.white,
                               size: 40,
                             ),
@@ -430,7 +432,7 @@ class SmallScreen extends StatelessWidget {
                                 prefixIcon: Align(
                                   widthFactor: 1.0,
                                   child: Icon(
-                                    IconData(0xf052b,
+                                    IconData(0xe3ae,
                                         fontFamily: 'MaterialIcons'),
                                     color: MyPalette.white,
                                     size: 32,
@@ -452,7 +454,7 @@ class SmallScreen extends StatelessWidget {
                           padding: EdgeInsets.only(
                               left: 0.1 * width,
                               right: 0.1 * width,
-                              top: 3,
+                              top: 0,
                               bottom: height * 0.045),
                           child: const Divider(
                             height: 5,

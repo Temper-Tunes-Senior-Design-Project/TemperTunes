@@ -1,15 +1,24 @@
+import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
+import 'package:mood_swing/Pages/CameraPage.dart';
+import 'package:mood_swing/Pages/HomePage.dart';
+import 'Pages/LoginPage.dart';
 import 'Widgets/MockNavigator.dart';
 import 'package:mood_swing/Pages/LandingPage.dart';
 import 'firebase_options.dart';
+import 'package:mood_swing/Pages/OTPEmailPage.dart';
+import 'package:mood_swing/Pages/VerificationPage.dart';
+import 'package:mood_swing/Pages/PreferencesPage.dart';
+
+List<CameraDescription> cameras = [];
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  cameras = await availableCameras();
   runApp(App());
 }
 
@@ -42,8 +51,7 @@ class App extends StatelessWidget {
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       //   home: LoginContainer(),
-      home: PreferencesPage(),
-      // home: VerificationPage(),
+      home: VerificationPage(),
     );
   }
 }
