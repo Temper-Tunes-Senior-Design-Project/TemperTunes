@@ -51,7 +51,7 @@ class App extends StatelessWidget {
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       //   home: LoginContainer(),
-      home: VerificationPage(),
+      home: OTPEmailPage(),
     );
   }
 }

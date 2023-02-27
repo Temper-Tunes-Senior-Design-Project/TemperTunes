@@ -143,6 +143,8 @@ class LargeScreen extends StatelessWidget {
                           child: TextField(
                             controller: _passwordController,
                             textAlign: TextAlign.left,
+                            obscureText: true,
+                            obscuringCharacter: "*",
                             cursorColor: Colors.white,
                             style: TextStyle(
                               fontFamily: 'Maven Pro',

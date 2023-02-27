@@ -70,7 +70,7 @@ class LargeScreen extends StatelessWidget {
                     Container(
                       alignment: Alignment.topCenter,
                       padding: EdgeInsets.only(
-                          top: height * 0.02, bottom: 0.04 * height),
+                          top: height * 0.03, bottom: 0.04 * height),
                       child: Image.asset("assets/music_swing_logo_small.png",
                           scale: 2.0),
                     ),
@@ -91,15 +91,23 @@ class LargeScreen extends StatelessWidget {
 
                     ///Subheading
                     Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: width * 0.04, vertical: height * 0.01),
+                      padding: EdgeInsets.only(
+                          left: width * 0.02,
+                          right: width * 0.02,
+                          top: 0.02 * height),
                       child: Text(
                         'We will send you a one-time passcode to your registered email.',
                         style: TextStyle(
                             color: Colors.white,
-                            fontSize: 20,
+                            fontSize: 15,
                             fontFamily: 'Maven Pro'),
+                        textAlign: TextAlign.center,
                       ),
+                    ),
+
+                    ///Spacer
+                    SizedBox(
+                      height: 0.03 * height,
                     ),
 
                     ///Email Input Area
@@ -119,16 +127,16 @@ class LargeScreen extends StatelessWidget {
                               color: Colors.white,
                               fontSize: 20,
                             ),
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
                               prefixIcon: Icon(
-                                IconData(0xf052b, fontFamily: 'MaterialIcons'),
-                                color: MyPalette.white,
-                                size: 34,
+                                IconData(0xe22a, fontFamily: 'MaterialIcons'),
+                                color: Colors.white,
+                                size: 35,
                               ),
                               hintStyle: TextStyle(color: Colors.white60),
                               enabledBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(
-                                    width: 3, color: Colors.transparent),
+                                    width: 20, color: Colors.transparent),
                               ),
                               labelText: 'Please enter your email',
                               labelStyle: TextStyle(
@@ -146,7 +154,7 @@ class LargeScreen extends StatelessWidget {
                             bottom: height * 0.03,
                           ),
                           child: const Divider(
-                            height: 5,
+                            height: 0,
                             thickness: 2,
                             color: Colors.white,
                           ),
@@ -160,7 +168,7 @@ class LargeScreen extends StatelessWidget {
                       padding: EdgeInsets.only(top: 0.016 * height),
                       child: TextButton(
                           child: Container(
-                            width: 0.27 * width,
+                            width: 0.2 * width,
                             height: 0.075 * height,
                             decoration: BoxDecoration(
                                 gradient: LinearGradient(
@@ -177,7 +185,7 @@ class LargeScreen extends StatelessWidget {
                             child: Align(
                               alignment: Alignment.center,
                               child: Text(
-                                "Login",
+                                "Send Code",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: 25,
@@ -195,21 +203,6 @@ class LargeScreen extends StatelessWidget {
                               ),
                             );
                           }),
-                    ),
-
-                    ///Forgot Password
-                    Container(
-                      padding: EdgeInsets.only(top: 0.08 * height),
-                      child: Text(
-                        'Forgot your password?',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontFamily: 'Maven Pro',
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
-                          color: MyPalette.turqoise,
-                        ),
-                      ),
                     ),
                   ],
                 ),

@@ -193,6 +193,8 @@ class LargeScreen extends StatelessWidget {
                               left: 0.03 * width, top: height * 0.01),
                           alignment: Alignment.topLeft,
                           child: TextField(
+                            obscureText: true,
+                            obscuringCharacter: "*",
                             style: TextStyle(
                               fontFamily: 'Maven Pro',
                               fontWeight: FontWeight.w100,
@@ -513,6 +515,8 @@ class SmallScreen extends StatelessWidget {
                               left: 0.12 * width, top: height * 0.005),
                           alignment: Alignment.topLeft,
                           child: TextField(
+                            obscureText: true,
+                            obscuringCharacter: "*",
                             style: TextStyle(
                               fontFamily: 'Maven Pro',
                               fontWeight: FontWeight.w100,
