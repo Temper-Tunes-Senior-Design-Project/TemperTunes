@@ -433,6 +433,8 @@ class SmallScreen extends StatelessWidget {
                               EdgeInsets.only(left: 0.12 * width, bottom: 0),
                           child: TextField(
                             controller: _passwordController,
+                            obscureText: true,
+                            obscuringCharacter: "*",
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               fontFamily: 'Maven Pro',

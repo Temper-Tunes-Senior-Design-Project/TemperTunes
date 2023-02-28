@@ -178,12 +178,6 @@ class SidebarDrawer extends StatelessWidget {
             );
           },
         ),
-
-        ///IconWidget
-        const SidebarXItem(
-          iconWidget: FlutterLogo(size: 20),
-          label: 'Flutter',
-        ),
       ],
     );
   }

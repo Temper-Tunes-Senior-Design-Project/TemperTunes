@@ -784,7 +784,7 @@ class SmallScreen extends StatelessWidget {
                   height: height * 0.1,
                   width: width * 0.9,
                   decoration: BoxDecoration(
-                    color: MyPalette.darkTurqoise,
+                    color: MyPalette.hanPurple.withOpacity(0.5),
                     borderRadius: BorderRadius.only(
                       bottomRight: Radius.circular(80),
                       topRight: Radius.circular(80),
@@ -930,7 +930,7 @@ class SmallScreen extends StatelessWidget {
                   height: height * 0.1,
                   width: width * 0.9,
                   decoration: BoxDecoration(
-                    color: MyPalette.darkTurqoise,
+                    color: MyPalette.hanPurple.withOpacity(0.5),
                     borderRadius: BorderRadius.only(
                       bottomRight: Radius.circular(80),
                       topRight: Radius.circular(80),
