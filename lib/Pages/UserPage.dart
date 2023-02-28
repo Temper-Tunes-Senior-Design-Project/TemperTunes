@@ -681,7 +681,7 @@ class SmallScreen extends StatelessWidget {
                 alignment: Alignment.topRight,
                 child: Container(
                   alignment: Alignment.topRight,
-                  height: height * 0.08,
+                  height: height * 0.1,
                   width: width * 0.9,
                   decoration: BoxDecoration(
                     color: MyPalette.magenta,
@@ -714,13 +714,16 @@ class SmallScreen extends StatelessWidget {
                               ),
                               Container(
                                 alignment: Alignment.topCenter,
-                                child: Text(
-                                  "14",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 26,
+                                child: FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  child: Text(
+                                    "14",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 26,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -748,13 +751,16 @@ class SmallScreen extends StatelessWidget {
                               ),
                               Container(
                                 alignment: Alignment.topCenter,
-                                child: Text(
-                                  "14",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 26,
+                                child: FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  child: Text(
+                                    "14",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 26,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -775,7 +781,7 @@ class SmallScreen extends StatelessWidget {
                 alignment: Alignment.topLeft,
                 child: Container(
                   alignment: Alignment.topLeft,
-                  height: height * 0.08,
+                  height: height * 0.1,
                   width: width * 0.9,
                   decoration: BoxDecoration(
                     color: MyPalette.darkTurqoise,
@@ -808,13 +814,16 @@ class SmallScreen extends StatelessWidget {
                               Container(
                                 padding: EdgeInsets.only(right: 0.1 * width),
                                 alignment: Alignment.topCenter,
-                                child: Text(
-                                  "14",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 26,
+                                child: FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  child: Text(
+                                    "14",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 26,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -841,17 +850,19 @@ class SmallScreen extends StatelessWidget {
                                 ),
                               ),
                               Container(
-                                alignment: Alignment.topCenter,
-                                child: Text(
-                                  "14",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 26,
-                                  ),
-                                ),
-                              ),
+                                  alignment: Alignment.topCenter,
+                                  child: FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                    child: Text(
+                                      "14",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 26,
+                                      ),
+                                    ),
+                                  )),
                             ],
                           ),
                         ),

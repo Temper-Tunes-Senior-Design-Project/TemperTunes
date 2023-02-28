@@ -6,6 +6,8 @@ import 'package:mood_swing/Pages/HomePage.dart';
 import 'package:mood_swing/Pages/PreferencesPage.dart';
 import 'Widgets/MockNavigator.dart';
 import 'firebase_options.dart';
+import 'package:mood_swing/Pages/UserPage.dart';
+import 'package:mood_swing/Pages/LandingPage.dart';
 
 List<CameraDescription> cameras = [];
 
@@ -47,7 +49,7 @@ class App extends StatelessWidget {
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       //   home: LoginContainer(),
-      home: HomePage(),
+      home: LandingPage(),
     );
   }
 }

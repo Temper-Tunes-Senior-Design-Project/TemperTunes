@@ -89,10 +89,12 @@ class LargeScreen extends StatelessWidget {
                                         ),
                                         onPressed: () {
                                           Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      SignupPage()));
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  SignupPage(),
+                                            ),
+                                          );
                                         },
                                       ),
                                     ],
@@ -197,38 +199,31 @@ class SmallScreen extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                const Text(
-                                  'Select to begin',
-                                  style: TextStyle(
-                                      fontFamily: 'Maven Pro',
-                                      color: MyPalette.white,
-                                      fontSize: 18),
-                                  textAlign: TextAlign.center,
-                                ),
-                                Container(
-                                  padding: EdgeInsets.only(top: height * 0.07),
-                                  child: Column(
-                                    children: [
-                                      ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                            shape: CircleBorder(),
-                                          ),
-                                          child: Icon(
-                                            const IconData(0xe095,
-                                                fontFamily: 'MaterialIcons'),
-                                            color: MyPalette.white,
-                                            size: 50,
-                                          ),
-                                          onPressed: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        LoginPage()));
-                                          }),
-                                    ],
-                                  ),
-                                ),
+
+                                // Container(
+                                //   padding: EdgeInsets.only(top: height * 0.07),
+                                //   child: Column(
+                                //     children: [
+                                //       ElevatedButton(
+                                //           style: ElevatedButton.styleFrom(
+                                //             shape: CircleBorder(),
+                                //           ),
+                                //           child: Icon(
+                                //             const IconData(0xe095,
+                                //                 fontFamily: 'MaterialIcons'),
+                                //             color: MyPalette.white,
+                                //             size: 50,
+                                //           ),
+                                //           onPressed: () {
+                                //             Navigator.push(
+                                //                 context,
+                                //                 MaterialPageRoute(
+                                //                     builder: (context) =>
+                                //                         LoginPage()));
+                                //           }),
+                                //     ],
+                                //   ),
+                                // ),
                               ],
                             ),
                           ),
