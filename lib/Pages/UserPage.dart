@@ -181,10 +181,7 @@ class LargeScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    padding: EdgeInsets.only(
-                        left: 0.03 * width,
-                        bottom: height * 0.02,
-                        top: 0.03 * height),
+                    padding: EdgeInsets.only(top: 0.03 * height, left: 0.06 * width, bottom: 0.02*height),
                     child: Row(
                       children: [
                         ElevatedButton(
@@ -192,7 +189,7 @@ class LargeScreen extends StatelessWidget {
                             shape: CircleBorder(),
                           ),
                           child: Icon(
-                            IconData(0xf05bc, fontFamily: 'MaterialIcons'),
+                            const IconData(0xf05bc, fontFamily: 'MaterialIcons'),
                             color: Colors.white,
                             size: 40,
                           ),
@@ -291,7 +288,7 @@ class LargeScreen extends StatelessWidget {
                                                                                   height),
                                                                           child:
                                                                               Icon(
-                                                                            IconData(0xf4b2,
+                                                                            const IconData(0xf4b2,
                                                                                 fontFamily: 'MaterialIcons'),
                                                                             color:
                                                                                 MyPalette.white,
@@ -500,7 +497,7 @@ class SmallScreen extends StatelessWidget {
                                 padding: EdgeInsets.only(
                                     left: 0.02 * width, top: 0.04 * height),
                                 child: Icon(
-                                  IconData(0xf05bc,
+                                  const IconData(0xf05bc,
                                       fontFamily: 'MaterialIcons'),
                                   color: Colors.white,
                                   size: 40,
