@@ -34,6 +34,7 @@ class _LargeScreenState extends State<LargeScreen> {
   XFile? videoFile;
   bool recording = false;
   int currentCameraIndex = 0;
+  double aspectRatio = 0;
   late int maxNumCameras;
 
   @override
@@ -81,6 +82,7 @@ class _LargeScreenState extends State<LargeScreen> {
         return;
       }
       initializedCamCtrl = true;
+      aspectRatio = newCameraController.value.aspectRatio;
       setState(() {});
     }).catchError((error) {
       if (error is CameraException) {
@@ -114,6 +116,10 @@ class _LargeScreenState extends State<LargeScreen> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+    // Ratio of device screen
+    double screenRatio = MediaQuery.of(context).size.aspectRatio;
+    // Ratio of camera or device screen if the camera isn't initialized
+    var tempRatio = (aspectRatio != 0) ? aspectRatio : (screenRatio);
     return SingleChildScrollView(
       child: Container(
         width: width,
@@ -134,8 +140,10 @@ class _LargeScreenState extends State<LargeScreen> {
               padding: EdgeInsets.all(height * 0.02),
               child: Center(
                 child: SizedBox(
-                  height: height * 0.7,
-                  width: width * 0.7,
+                  height: (height *
+                      0.7 *
+                      ((tempRatio < 1) ? ((1 / tempRatio / screenRatio)) : 1)),
+                  width: (width * 0.7 * (tempRatio / screenRatio)),
                   child: Container(
                       decoration: BoxDecoration(
                           color: Colors.black,
