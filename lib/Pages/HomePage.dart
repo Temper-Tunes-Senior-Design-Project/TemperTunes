@@ -60,7 +60,7 @@ class SmallScreen extends StatelessWidget {
                         shape: CircleBorder(),
                       ),
                       child: Icon(
-                        IconData(0xe491, fontFamily: 'MaterialIcons'),
+                        const IconData(0xe491, fontFamily: 'MaterialIcons'),
                         color: Colors.white,
                         size: 40,
                       ),
