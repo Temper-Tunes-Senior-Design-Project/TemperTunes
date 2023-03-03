@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mood_swing/Pages/LandingPage.dart';
+import 'package:mood_swing/Pages/TestingPage.dart';
 import 'Widgets/MockNavigator.dart';
 import 'firebase_options.dart';
 
@@ -40,7 +41,7 @@ class App extends StatelessWidget {
         fontFamily: 'Maven Pro',
         iconTheme: const IconThemeData(color: Colors.white),
       ),
-      home: LandingPage(),
+      home: TestingPage(),
     );
   }
 }

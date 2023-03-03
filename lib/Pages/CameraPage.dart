@@ -27,7 +27,7 @@ class LargeScreen extends StatefulWidget {
 }
 
 class _LargeScreenState extends State<LargeScreen> {
-  late CameraController cameraController;
+  CameraController? cameraController;
   VideoPlayerController? videoController;
   bool initializedCamCtrl = false;
   XFile? pictureFile;
@@ -39,46 +39,44 @@ class _LargeScreenState extends State<LargeScreen> {
   @override
   void initState() {
     super.initState();
-    _initCamera();
-  }
-
-  void _initCamera() {
-    ////COME BACK TO THIS
     if (widget.cameras == null || widget.cameras!.length == 0) {
+      //camera not found
       return;
     }
     maxNumCameras = (widget.cameras!.length >= 2) ? 2 : widget.cameras!.length;
-    cameraController = CameraController(
-        widget.cameras![currentCameraIndex], ResolutionPreset.max,
-        enableAudio: false, imageFormatGroup: ImageFormatGroup.yuv420);
-    cameraController.initialize().then((_) {
-      if (!mounted) {
-        return;
-      }
-      initializedCamCtrl = true;
-      setState(() {});
-    }).catchError((error) {
-      if (error is CameraException) {
-        ///////Tell the user to allow the app to access their camera/audio
-        return;
-      }
-    });
+    onNewCameraSelected(toggle: true);
   }
 
-  void onNewCameraSelected(CameraDescription cameraDescription) async {
+  void onNewCameraSelected({required bool toggle}) async {
+    if (toggle) {
+      currentCameraIndex = (currentCameraIndex + 1) % maxNumCameras;
+    }
+
     final previousCameraController = cameraController;
     // Instantiating the camera controller
     final CameraController newCameraController = CameraController(
-        cameraDescription, ResolutionPreset.max,
+        widget.cameras![currentCameraIndex], ResolutionPreset.max,
         enableAudio: false, imageFormatGroup: ImageFormatGroup.yuv420);
 
-    // Dispose the previous controller
+    // Dispose the previous controller if it exists
     initializedCamCtrl = false;
     setState(() {});
-    await previousCameraController.dispose();
+    await previousCameraController?.dispose();
 
-    cameraController = newCameraController;
-    cameraController.initialize().then((_) {
+    // Replace with the new controller
+    if (mounted) {
+      setState(() {
+        cameraController = newCameraController;
+      });
+    }
+
+    // Update UI if controller updated
+    newCameraController.addListener(() {
+      if (mounted) setState(() {});
+    });
+
+    // Initialize Controller
+    newCameraController.initialize().then((_) {
       if (!mounted) {
         return;
       }
@@ -94,7 +92,7 @@ class _LargeScreenState extends State<LargeScreen> {
 
   @override
   void dispose() {
-    cameraController.dispose();
+    cameraController?.dispose();
     videoController?.dispose();
     super.dispose();
   }
@@ -162,7 +160,7 @@ class _LargeScreenState extends State<LargeScreen> {
                                           color: Colors.white))
                               //show camera preview if initialized
                               : (initializedCamCtrl)
-                                  ? CameraPreview(cameraController)
+                                  ? CameraPreview(cameraController!)
                                   //otherwise show black container
                                   : Material(
                                       color: Colors.black,
@@ -185,8 +183,7 @@ class _LargeScreenState extends State<LargeScreen> {
                       onPressed: () async {
                         pictureFile = null;
                         videoFile = null;
-                        onNewCameraSelected(
-                            widget.cameras![currentCameraIndex]);
+                        onNewCameraSelected(toggle: false);
                         setState(() {});
                       },
                     ),
@@ -206,7 +203,10 @@ class _LargeScreenState extends State<LargeScreen> {
                       heroTag: "Stop Recording",
                       icon: Icons.stop_circle_rounded,
                       onPressed: () async {
-                        videoFile = await cameraController.stopVideoRecording();
+                        videoFile =
+                            await cameraController?.stopVideoRecording();
+                        cameraController?.dispose();
+                        initializedCamCtrl = false;
                         recording = false;
                         setState(() {});
                         await _startVideoPlayer();
@@ -218,7 +218,7 @@ class _LargeScreenState extends State<LargeScreen> {
                       heroTag: "Record Video",
                       icon: Icons.fiber_manual_record_rounded,
                       onPressed: () async {
-                        await cameraController.startVideoRecording();
+                        await cameraController?.startVideoRecording();
                         recording = true;
                         setState(() {});
                       },
@@ -228,7 +228,9 @@ class _LargeScreenState extends State<LargeScreen> {
                       heroTag: "Snap Picture",
                       icon: Icons.camera_rounded,
                       onPressed: () async {
-                        pictureFile = await cameraController.takePicture();
+                        pictureFile = await cameraController?.takePicture();
+                        cameraController?.dispose();
+                        initializedCamCtrl = false;
                         // runModel();
                         setState(() {});
                       },
@@ -238,10 +240,7 @@ class _LargeScreenState extends State<LargeScreen> {
                       heroTag: "Toggle Camera",
                       icon: Icons.flip_camera_ios_rounded,
                       onPressed: () async {
-                        currentCameraIndex =
-                            (currentCameraIndex + 1) % maxNumCameras;
-                        onNewCameraSelected(
-                            widget.cameras![currentCameraIndex]);
+                        onNewCameraSelected(toggle: true);
                         setState(() {});
                       },
                     ),
