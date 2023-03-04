@@ -4,6 +4,7 @@ import '../Widgets/widgets.dart';
 import 'HomePage.dart';
 import 'OTPEmailPage.dart';
 import 'SignupPage.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -17,6 +18,10 @@ class Body extends StatelessWidget {
 
 TextEditingController _emailController = new TextEditingController();
 TextEditingController _passwordController = new TextEditingController();
+MultiValidator emailValidator = MultiValidator([
+  RequiredValidator(errorText: "* Required"),
+  //EmailValidator(errorText: "Enter valid email ID"),
+]);
 
 class LargeScreen extends StatelessWidget {
   @override
@@ -310,7 +315,16 @@ class LargeScreen extends StatelessWidget {
   }
 }
 
-class SmallScreen extends StatelessWidget {
+class SmallScreen extends StatefulWidget {
+  _SmallScreenState createState() => _SmallScreenState();
+}
+
+class _SmallScreenState extends State<SmallScreen> {
+  //lets user see their password if they choose to
+  bool _isVisible = false;
+
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -356,38 +370,43 @@ class SmallScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              Container(
-                child: Column(
-                  children: [
-                    ///Logo
-                    Container(
-                      alignment: Alignment.topCenter,
-                      padding: EdgeInsets.only(
-                          top: height * 0.01, bottom: height * 0.012),
-                      child: Image.asset("assets/music_swing_logo_small.png",
-                          scale: 2.5),
-                    ),
+              Form(
+                key: _formKey,
+                child: Container(
+                  child: Column(
+                    children: [
+                      ///Logo
+                      Container(
+                        alignment: Alignment.topCenter,
+                        padding: EdgeInsets.only(
+                            top: height * 0.01, bottom: height * 0.012),
+                        child: Image.asset("assets/music_swing_logo_small.png",
+                            scale: 2.5),
+                      ),
 
-                    ///User input area
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        ///TextField
-                        Container(
-                          padding:
-                              EdgeInsets.only(left: 0.12 * width, bottom: 0),
-                          child: TextField(
-                            controller: _emailController,
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              fontFamily: 'Maven Pro',
-                              fontWeight: FontWeight.w100,
-                              color: Colors.white,
-                              fontSize: 20,
+                      ///User input area
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          ///TextField
+                          Container(
+                            padding: EdgeInsets.only(
+                              left: 0.10 * width,
+                              right: 0.10 * width,
                             ),
-                            decoration: const InputDecoration(
+                            child: TextFormField(
+                              controller: _emailController,
+                              validator: emailValidator,
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                fontFamily: 'Maven Pro',
+                                fontWeight: FontWeight.w100,
+                                color: Colors.white,
+                                fontSize: 20,
+                              ),
+                              decoration: InputDecoration(
                                 prefixIcon: Align(
-                                  widthFactor: 1.0,
+                                  widthFactor: 0,
                                   heightFactor: 1.0,
                                   child: Icon(
                                     IconData(0xe491,
@@ -397,52 +416,68 @@ class SmallScreen extends StatelessWidget {
                                   ),
                                 ),
                                 hintStyle: TextStyle(color: Colors.white60),
-                                border: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      width: 10, color: Colors.white),
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.white, width: 4),
                                 ),
-                                labelText: 'Please enter your username',
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: new BorderSide(
+                                      color: MyPalette.darkTurqoise, width: 4),
+                                ),
+                                labelText: 'Please enter your email',
                                 labelStyle: TextStyle(
-                                    fontSize: 15, color: Colors.white54)),
-                          ),
-                        ),
-
-                        ///Horizontal line
-                        Container(
-                          padding: EdgeInsets.only(
-                            left: 0.1 * width,
-                            right: 0.1 * width,
-                            top: 0,
-                            bottom: height * 0.03,
-                          ),
-                          child: const Divider(
-                            height: 5,
-                            thickness: 2,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    /// Password icon
-                    Column(
-                      children: [
-                        ///Text field
-                        Container(
-                          padding:
-                              EdgeInsets.only(left: 0.12 * width, bottom: 0),
-                          child: TextField(
-                            controller: _passwordController,
-                            obscureText: true,
-                            obscuringCharacter: "*",
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              fontFamily: 'Maven Pro',
-                              fontWeight: FontWeight.w100,
-                              color: Colors.white,
-                              fontSize: 20,
+                                    fontSize: 15, color: Colors.white54),
+                                //  errorText: _emailErrorText,
+                              ),
                             ),
-                            decoration: const InputDecoration(
+                          ),
+                        ],
+                      ),
+
+                      ///spacer
+                      SizedBox(height: height * 0.03),
+
+                      /// Password icon
+                      Column(
+                        children: [
+                          //errorText getter
+                          ///Text field
+                          Container(
+                            padding: EdgeInsets.only(
+                                left: 0.1 * width, right: 0.1 * width),
+                            child: TextFormField(
+                              controller: _passwordController,
+                              validator:
+                                  RequiredValidator(errorText: "Required"),
+                              obscureText: !_isVisible,
+                              obscuringCharacter: "*",
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                fontFamily: 'Maven Pro',
+                                fontWeight: FontWeight.w100,
+                                color: Colors.white,
+                                fontSize: 20,
+                              ),
+                              decoration: InputDecoration(
+                                suffixIcon: Align(
+                                  widthFactor: 0,
+                                  child: IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        _isVisible = !_isVisible;
+                                      });
+                                    },
+                                    icon: _isVisible
+                                        ? Icon(
+                                            Icons.visibility,
+                                            color: MyPalette.darkTurqoise,
+                                          )
+                                        : Icon(
+                                            Icons.visibility_off,
+                                            color: Colors.grey,
+                                          ),
+                                  ),
+                                ),
                                 prefixIcon: Align(
                                   widthFactor: 1.0,
                                   child: Icon(
@@ -453,81 +488,36 @@ class SmallScreen extends StatelessWidget {
                                   ),
                                 ),
                                 hintStyle: TextStyle(color: Colors.white60),
-                                border: UnderlineInputBorder(
+                                enabledBorder: UnderlineInputBorder(
                                   borderSide:
-                                      BorderSide(width: 0, color: Colors.white),
+                                      BorderSide(color: Colors.white, width: 4),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: new BorderSide(
+                                      color: MyPalette.darkTurqoise, width: 4),
                                 ),
                                 labelText: 'Please enter your password',
                                 labelStyle: TextStyle(
-                                    fontSize: 15, color: Colors.white54)),
-                          ),
-                        ),
-
-                        ///Horizontal line
-                        Container(
-                          padding: EdgeInsets.only(
-                              left: 0.1 * width,
-                              right: 0.1 * width,
-                              top: 0,
-                              bottom: height * 0.045),
-                          child: const Divider(
-                            height: 5,
-                            thickness: 2,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    ///Buttons
-                    //Login Button
-                    Container(
-                      //padding: EdgeInsets.only(top: height*0.03),
-                      child: TextButton(
-                        child: Container(
-                          width: 0.8 * width,
-                          height: 0.07 * height,
-                          decoration: BoxDecoration(
-                              //color: MyPalette.slateBlue,
-                              gradient: LinearGradient(
-                                begin: Alignment.topRight,
-                                end: Alignment.bottomLeft,
-                                colors: [
-                                  MyPalette.slateBlue,
-                                  MyPalette.brightMagenta,
-                                  MyPalette.turqoise,
-                                ],
-                              ),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15))),
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: Text(
-                              "Login",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: 25,
-                                fontFamily: 'Share Tech',
-                                color: Colors.white,
+                                    fontSize: 15, color: Colors.white54),
+                                //d errorText: _passwordErrorText,
                               ),
                             ),
                           ),
-                        ),
-                        onPressed: () {
-                          login(context);
-                        },
+                        ],
                       ),
-                    ),
 
-                    ///Register button
-                    Container(
-                      child: TextButton(
-                        child: Container(
-                          padding: EdgeInsets.only(top: height * 0.015),
+                      SizedBox(height: 0.06 * height),
+
+                      ///Buttons
+                      //Login Button
+                      Container(
+                        //padding: EdgeInsets.only(top: height*0.03),
+                        child: TextButton(
                           child: Container(
                             width: 0.8 * width,
                             height: 0.07 * height,
                             decoration: BoxDecoration(
+                                //color: MyPalette.slateBlue,
                                 gradient: LinearGradient(
                                   begin: Alignment.topRight,
                                   end: Alignment.bottomLeft,
@@ -541,57 +531,99 @@ class SmallScreen extends StatelessWidget {
                                     BorderRadius.all(Radius.circular(15))),
                             child: Align(
                               alignment: Alignment.center,
-                              child: Text("Register",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 25,
-                                    fontFamily: 'Share Tech',
-                                    color: Colors.white,
-                                  )),
+                              child: Text(
+                                "Login",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 25,
+                                  fontFamily: 'Share Tech',
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SignupPage()));
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.transparent,
-                          foregroundColor: Colors.transparent,
+                          onPressed: () {
+                            _formKey.currentState?.validate();
+
+                            login(context);
+                          },
                         ),
                       ),
-                    ),
 
-                    ///Forgot Password
-                    Container(
-                      padding: EdgeInsets.only(top: 0.01 * height),
-                      child: TextButton(
+                      ///Register button
+                      Container(
+                        child: TextButton(
                           child: Container(
-                            child: Text(
-                              'Forgot your password?',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontFamily: 'Maven Pro',
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                                color: MyPalette.turqoise,
+                            padding: EdgeInsets.only(top: height * 0.015),
+                            child: Container(
+                              width: 0.8 * width,
+                              height: 0.07 * height,
+                              decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    begin: Alignment.topRight,
+                                    end: Alignment.bottomLeft,
+                                    colors: [
+                                      MyPalette.slateBlue,
+                                      MyPalette.brightMagenta,
+                                      MyPalette.turqoise,
+                                    ],
+                                  ),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(15))),
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text("Register",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      fontFamily: 'Share Tech',
+                                      color: Colors.white,
+                                    )),
                               ),
                             ),
                           ),
                           onPressed: () {
                             Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => OTPEmailPage(),
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SignupPage()));
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.transparent,
+                            foregroundColor: Colors.transparent,
+                          ),
+                        ),
+                      ),
+
+                      ///Forgot Password
+                      Container(
+                        padding: EdgeInsets.only(top: 0.01 * height),
+                        child: TextButton(
+                            child: Container(
+                              child: Text(
+                                'Forgot your password?',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontFamily: 'Maven Pro',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                  color: MyPalette.turqoise,
+                                ),
                               ),
-                            );
-                          }),
-                    ),
-                  ],
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => OTPEmailPage(),
+                                ),
+                              );
+                            }),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
+              )
             ],
           ),
         ),
@@ -601,14 +633,20 @@ class SmallScreen extends StatelessWidget {
 }
 
 void login(BuildContext context) async {
-  AuthRouter().login(_emailController.text, _passwordController.text, () {});
+  AuthRouter().login(_emailController.text, _passwordController.text, () {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Invalid credentials'),
+      ),
+    );
+  });
   if (AuthRouter().isLoggedIn()) {
     Navigator.push(context, MaterialPageRoute(builder: (ctxt) => HomePage()));
   }
 }
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(Object context) {

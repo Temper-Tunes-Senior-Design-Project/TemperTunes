@@ -155,7 +155,7 @@ class _VerificationSmallState extends State<VerificationSmall> {
                 child: Padding(
                   padding: EdgeInsets.symmetric(
                     vertical: 0.01 * height,
-                    horizontal: 0.08 * width,
+                    horizontal: 0.04 * width,
                   ),
                   child: PinCodeTextField(
                     appContext: context,
@@ -167,7 +167,7 @@ class _VerificationSmallState extends State<VerificationSmall> {
                     animationType: AnimationType.fade,
                     validator: (v) {
                       if (v!.length < 3) {
-                        return "I'm from validator";
+                        return "Cannot leave blank";
                       } else {
                         return null;
                       }
@@ -176,7 +176,7 @@ class _VerificationSmallState extends State<VerificationSmall> {
                       shape: PinCodeFieldShape.box,
                       borderRadius: BorderRadius.circular(5),
                       fieldHeight: height * 0.12,
-                      fieldWidth: width * 0.1,
+                      fieldWidth: width * 0.16,
                       inactiveColor: MyPalette.magenta,
                       inactiveFillColor: MyPalette.slateBlue,
                       activeFillColor: MyPalette.darkTurqoise,
