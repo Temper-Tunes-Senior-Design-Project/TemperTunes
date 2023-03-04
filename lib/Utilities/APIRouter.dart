@@ -11,11 +11,7 @@ class APIRouter {
             "https://moodswing-mood-classifier-ilvif34q5a-ue.a.run.app"))
         .timeout(Duration(minutes: 1));
     if (response.statusCode == 200) {
-      //Temporary logic to sanitize the JSON response
-      String jsonifyResponse =
-          response.body.substring(1, response.body.length - 1);
-      jsonifyResponse = jsonifyResponse.replaceAll("'", "\"");
-      Map<String, dynamic> resBody = jsonDecode(jsonifyResponse);
+      Map<String, dynamic> resBody = jsonDecode(response.body);
 
       //Aggregate the moods to find the maximum value
       Mood m = Mood.values
@@ -23,7 +19,7 @@ class APIRouter {
               element.name.toLowerCase() ==
               resBody.entries
                   .reduce((value, element2) =>
-                      value.value >= element2.value ? value : element2)
+              (double.tryParse(value.value)??0.0) >= (double.tryParse(element2.value)??0.0) ? value : element2)
                   .key)
           .first;
       print(m.name);
