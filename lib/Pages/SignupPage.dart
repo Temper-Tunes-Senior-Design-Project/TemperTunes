@@ -463,7 +463,6 @@ class SmallScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-
                     ///Password
                     Column(
                       children: [
