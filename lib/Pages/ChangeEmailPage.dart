@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mood_swing/Pages/HomePage.dart';
-import 'package:mood_swing/Pages/LoginPage.dart';
-import 'package:mood_swing/Utilities/AuthRouter.dart';
-import 'package:mood_swing/Utilities/DatabaseRouter.dart';
 import '../Widgets/widgets.dart';
+import 'package:mood_swing/Pages/HomePage.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -14,11 +11,6 @@ class Body extends StatelessWidget {
     );
   }
 }
-
-TextEditingController _emailController = new TextEditingController();
-TextEditingController _usernameController = new TextEditingController();
-TextEditingController _passwordController = new TextEditingController();
-TextEditingController _passwordController2 = new TextEditingController();
 
 class LargeScreen extends StatelessWidget {
   @override
@@ -48,7 +40,7 @@ class LargeScreen extends StatelessWidget {
                         shape: CircleBorder(),
                       ),
                       child: Icon(
-                        const IconData(0xf05bc, fontFamily: 'MaterialIcons'),
+                        IconData(0xf05bc, fontFamily: 'MaterialIcons'),
                         color: Colors.white,
                         size: 40,
                       ),
@@ -75,7 +67,7 @@ class LargeScreen extends StatelessWidget {
                           scale: 2.3),
                     ),
 
-                    ///Username
+                    ///Current Email
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
@@ -84,7 +76,6 @@ class LargeScreen extends StatelessWidget {
                               EdgeInsets.only(left: 0.03 * width, bottom: 0),
                           alignment: Alignment.topLeft,
                           child: TextField(
-                            controller: _usernameController,
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               fontFamily: 'Maven Pro',
@@ -93,9 +84,10 @@ class LargeScreen extends StatelessWidget {
                               fontSize: 20,
                             ),
                             decoration: const InputDecoration(
+                                hintText: 'Current Email',
                                 hintStyle: TextStyle(color: Colors.white60),
                                 enabledBorder: InputBorder.none,
-                                labelText: 'Please enter your username',
+                                labelText: 'Please enter your current email',
                                 labelStyle: TextStyle(
                                     fontSize: 15, color: Colors.white54)),
                           ),
@@ -117,7 +109,7 @@ class LargeScreen extends StatelessWidget {
                       ],
                     ),
 
-                    ///Enter Email
+                    ///New Email
                     Column(
                       children: [
                         Container(
@@ -125,7 +117,6 @@ class LargeScreen extends StatelessWidget {
                               left: 0.03 * width, top: height * 0.01),
                           alignment: Alignment.topLeft,
                           child: TextField(
-                            controller: _emailController,
                             style: TextStyle(
                               fontFamily: 'Maven Pro',
                               fontWeight: FontWeight.w100,
@@ -134,9 +125,9 @@ class LargeScreen extends StatelessWidget {
                             ),
                             decoration: const InputDecoration(
                                 hintStyle: TextStyle(color: Colors.white60),
-                                hintText: 'Email',
+                                hintText: 'New Email',
                                 enabledBorder: InputBorder.none,
-                                labelText: 'Please enter your email',
+                                labelText: 'Please your new email',
                                 labelStyle: TextStyle(
                                     fontSize: 15, color: Colors.white54)),
                           ),
@@ -155,7 +146,7 @@ class LargeScreen extends StatelessWidget {
                       ],
                     ),
 
-                    ///Password
+                    ///Confirm new email
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
@@ -164,7 +155,6 @@ class LargeScreen extends StatelessWidget {
                               left: 0.03 * width, top: height * 0.01),
                           alignment: Alignment.topLeft,
                           child: TextField(
-                            controller: _passwordController,
                             style: TextStyle(
                               fontFamily: 'Maven Pro',
                               fontWeight: FontWeight.w100,
@@ -173,9 +163,9 @@ class LargeScreen extends StatelessWidget {
                             ),
                             decoration: const InputDecoration(
                                 hintStyle: TextStyle(color: Colors.white60),
-                                hintText: 'Confirm Password',
+                                hintText: 'Confirm Email',
                                 enabledBorder: InputBorder.none,
-                                labelText: 'Please confirm your password',
+                                labelText: 'Please confirm your new email',
                                 labelStyle: TextStyle(
                                     fontSize: 15, color: Colors.white54)),
                           ),
@@ -195,7 +185,7 @@ class LargeScreen extends StatelessWidget {
                       ],
                     ),
 
-                    ///Confirm Password
+                    ///Password
                     Column(
                       children: [
                         Container(
@@ -203,7 +193,6 @@ class LargeScreen extends StatelessWidget {
                               left: 0.03 * width, top: height * 0.01),
                           alignment: Alignment.topLeft,
                           child: TextField(
-                            controller: _passwordController2,
                             style: TextStyle(
                               fontFamily: 'Maven Pro',
                               fontWeight: FontWeight.w100,
@@ -212,9 +201,9 @@ class LargeScreen extends StatelessWidget {
                             ),
                             decoration: const InputDecoration(
                                 hintStyle: TextStyle(color: Colors.white60),
-                                hintText: 'Confirm Password',
+                                hintText: 'Password',
                                 enabledBorder: InputBorder.none,
-                                labelText: 'Please confirm your password',
+                                labelText: 'Please enter your password',
                                 labelStyle: TextStyle(
                                     fontSize: 15, color: Colors.white54)),
                           ),
@@ -266,7 +255,10 @@ class LargeScreen extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {
-                          register(context);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomePage()));
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.transparent,
@@ -308,7 +300,7 @@ class LargeScreen extends StatelessWidget {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => LoginPage()));
+                                            builder: (context) => HomePage()));
                                   },
                                 ),
                               ],
@@ -325,6 +317,17 @@ class LargeScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class _ChangeEmailPageState extends State<ChangeEmailPage> {
+  //GlobalKey<FormState> _key = new GlobalKey();
+  //bool _validate = false;
+  //bool _obscureText = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(body: Body());
   }
 }
 
@@ -358,7 +361,7 @@ class SmallScreen extends StatelessWidget {
                           shape: CircleBorder(),
                         ),
                         child: Icon(
-                          const IconData(0xf05bc, fontFamily: 'MaterialIcons'),
+                          IconData(0xf05bc, fontFamily: 'MaterialIcons'),
                           color: Colors.white,
                           size: 40,
                         ),
@@ -379,7 +382,7 @@ class SmallScreen extends StatelessWidget {
                           scale: 2.5),
                     ),
 
-                    ///Username
+                    ///current email
                     Column(
                       children: [
                         Container(
@@ -387,7 +390,6 @@ class SmallScreen extends StatelessWidget {
                               EdgeInsets.only(left: 0.12 * width, bottom: 0),
                           alignment: Alignment.topLeft,
                           child: TextField(
-                            controller: _usernameController,
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               fontFamily: 'Maven Pro',
@@ -397,11 +399,12 @@ class SmallScreen extends StatelessWidget {
                             ),
                             decoration: const InputDecoration(
                                 hintStyle: TextStyle(color: Colors.white60),
+                                hintText: 'Current Email',
                                 border: UnderlineInputBorder(
                                   borderSide:
                                       BorderSide(width: 3, color: Colors.white),
                                 ),
-                                labelText: 'Please enter your username',
+                                labelText: 'Please enter your current email',
                                 labelStyle: TextStyle(
                                     fontSize: 15, color: Colors.white54)),
                           ),
@@ -423,7 +426,7 @@ class SmallScreen extends StatelessWidget {
                       ],
                     ),
 
-                    ///Email
+                    ///New Email
                     Column(
                       children: [
                         Container(
@@ -431,7 +434,6 @@ class SmallScreen extends StatelessWidget {
                               left: 0.12 * width, top: height * 0.005),
                           alignment: Alignment.topLeft,
                           child: TextField(
-                            controller: _emailController,
                             style: TextStyle(
                               fontFamily: 'Maven Pro',
                               fontWeight: FontWeight.w100,
@@ -440,12 +442,12 @@ class SmallScreen extends StatelessWidget {
                             ),
                             decoration: const InputDecoration(
                                 hintStyle: TextStyle(color: Colors.white60),
-                                hintText: 'Email',
+                                hintText: 'New Email',
                                 border: UnderlineInputBorder(
                                   borderSide:
                                       BorderSide(width: 3, color: Colors.white),
                                 ),
-                                labelText: 'Please enter your email',
+                                labelText: 'Please enter your new email',
                                 labelStyle: TextStyle(
                                     fontSize: 15, color: Colors.white54)),
                           ),
@@ -463,7 +465,8 @@ class SmallScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    ///Password
+
+                    ///Confirm Email
                     Column(
                       children: [
                         Container(
@@ -471,7 +474,6 @@ class SmallScreen extends StatelessWidget {
                               left: 0.12 * width, top: height * 0.005),
                           alignment: Alignment.topLeft,
                           child: TextField(
-                            controller: _passwordController,
                             style: TextStyle(
                               fontFamily: 'Maven Pro',
                               fontWeight: FontWeight.w100,
@@ -480,12 +482,12 @@ class SmallScreen extends StatelessWidget {
                             ),
                             decoration: const InputDecoration(
                                 hintStyle: TextStyle(color: Colors.white60),
-                                hintText: 'Password',
+                                hintText: 'Confirm Email',
                                 border: UnderlineInputBorder(
                                   borderSide:
                                       BorderSide(width: 3, color: Colors.white),
                                 ),
-                                labelText: 'Please enter your password',
+                                labelText: 'Please confirm your new email',
                                 labelStyle: TextStyle(
                                     fontSize: 15, color: Colors.white54)),
                           ),
@@ -503,7 +505,7 @@ class SmallScreen extends StatelessWidget {
                       ],
                     ),
 
-                    ///Confirm Password
+                    ///enter password
                     Column(
                       children: [
                         Container(
@@ -511,7 +513,6 @@ class SmallScreen extends StatelessWidget {
                               left: 0.12 * width, top: height * 0.005),
                           alignment: Alignment.topLeft,
                           child: TextField(
-                            controller: _passwordController2,
                             style: TextStyle(
                               fontFamily: 'Maven Pro',
                               fontWeight: FontWeight.w100,
@@ -520,12 +521,12 @@ class SmallScreen extends StatelessWidget {
                             ),
                             decoration: const InputDecoration(
                                 hintStyle: TextStyle(color: Colors.white60),
-                                hintText: 'Confirm Password',
+                                hintText: 'Password',
                                 border: UnderlineInputBorder(
                                   borderSide:
                                       BorderSide(width: 3, color: Colors.white),
                                 ),
-                                labelText: 'Please confirm your password',
+                                labelText: 'Please enter your password',
                                 labelStyle: TextStyle(
                                     fontSize: 15, color: Colors.white54)),
                           ),
@@ -565,7 +566,7 @@ class SmallScreen extends StatelessWidget {
                                     BorderRadius.all(Radius.circular(15))),
                             child: Align(
                               alignment: Alignment.center,
-                              child: Text("Register",
+                              child: Text("Submit",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 25,
@@ -576,7 +577,10 @@ class SmallScreen extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {
-                          register(context);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomePage()));
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.transparent,
@@ -587,45 +591,18 @@ class SmallScreen extends StatelessWidget {
 
                     ///Already Have an account
                     Container(
-                      padding: EdgeInsets.only(top: 0.01 * height, bottom: 0),
-                      child: Column(
-                        children: [
-                          ///Regular Text
-                          Text(
-                            'Forgot your password?',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: 'Maven Pro',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                              color: Colors.white,
-                            ),
+                      padding: EdgeInsets.only(top: 0.01 * height),
+                      child: Container(
+                        child: Text(
+                          'Forgot your password?',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontFamily: 'Maven Pro',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: MyPalette.turqoise,
                           ),
-
-                          ///Linked text to login
-                          Container(
-                            alignment: Alignment.center,
-                            padding: EdgeInsets.only(top: 0),
-                            child: TextButton(
-                              child: Text(
-                                'Go to login',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontFamily: 'Maven Pro',
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                  color: MyPalette.turqoise,
-                                ),
-                              ),
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => LoginPage()));
-                              },
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
                     ),
                   ],
@@ -639,20 +616,9 @@ class SmallScreen extends StatelessWidget {
   }
 }
 
-Future<void> register(BuildContext context) async {
-  await AuthRouter().registerUser(
-      _emailController.text, _passwordController.text, _usernameController.text,
-      () {
-    print("Error occurred");
-  });
-  DatabaseRouter().createUser(_usernameController.text);
-  Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
-}
+class ChangeEmailPage extends StatefulWidget {
+  _ChangeEmailPageState createState() => _ChangeEmailPageState();
 
-class SignupPage extends StatelessWidget {
-  const SignupPage({super.key});
-
-  @override
   Widget build(Object context) {
     return Scaffold(
         resizeToAvoidBottomInset: false, body: Column(children: [Body()]));
