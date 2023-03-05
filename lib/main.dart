@@ -3,9 +3,8 @@ import 'dart:ui';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
-
+import 'Pages/LandingPage.dart';
 import 'Widgets/MockNavigator.dart';
-import 'package:mood_swing/Pages/LandingPage.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -54,9 +53,7 @@ class App extends StatelessWidget {
         fontFamily: 'Maven Pro',
         iconTheme: const IconThemeData(color: Colors.white),
       ),
-      //   home: LoginContainer(),
-      home: PreferencesPage(),
-      // home: VerificationPage(),
-    );
+      home: LandingPage(),
+      );
   }
 }
