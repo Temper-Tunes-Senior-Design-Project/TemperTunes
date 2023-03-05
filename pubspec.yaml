@@ -28,6 +28,8 @@ dependencies:
   flutter_login: ^4.1.1
   firebase_crashlytics: ^3.0.14
   cloud_firestore: ^4.4.2
+  spotify_sdk: ^2.3.1
+  flutter_dotenv: ^5.0.2
 
 dev_dependencies:
   flutter_test:
@@ -65,3 +67,4 @@ flutter:
         - asset: fonts/MavenPro-VariableFont_wght.ttf
   assets:
     - assets/
+    - .env
