@@ -54,7 +54,9 @@ class App extends StatelessWidget {
         fontFamily: 'Maven Pro',
         iconTheme: const IconThemeData(color: Colors.white),
       ),
-      home: LandingPage(),
+      //   home: LoginContainer(),
+      home: PreferencesPage(),
+      // home: VerificationPage(),
     );
   }
 }
