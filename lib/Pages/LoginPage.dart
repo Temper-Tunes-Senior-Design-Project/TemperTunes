@@ -19,7 +19,7 @@ class Body extends StatelessWidget {
 TextEditingController _emailController = new TextEditingController();
 TextEditingController _passwordController = new TextEditingController();
 MultiValidator emailValidator = MultiValidator([
-  RequiredValidator(errorText: "* Required"),
+  /// RequiredValidator(errorText: "* Required"),
   //EmailValidator(errorText: "Enter valid email ID"),
 ]);
 
@@ -95,7 +95,7 @@ class _LargeScreenState extends State<LargeScreen> {
                         alignment: Alignment.topCenter,
                         padding: EdgeInsets.only(top: height * 0.02),
                         child: Image.asset("assets/music_swing_logo_small.png",
-                            scale: 2.3),
+                            scale: 2.5),
                       ),
 
                       ///User input area
@@ -109,7 +109,8 @@ class _LargeScreenState extends State<LargeScreen> {
                             ///TextFormField
                             child: TextFormField(
                               controller: _emailController,
-                              validator: emailValidator,
+                              validator: RequiredValidator(
+                                  errorText: AutofillHints.email),
                               textAlign: TextAlign.left,
                               cursorColor: Colors.white,
                               style: TextStyle(
@@ -159,8 +160,8 @@ class _LargeScreenState extends State<LargeScreen> {
                             //textformfield
                             child: TextFormField(
                               controller: _passwordController,
-                              validator:
-                                  RequiredValidator(errorText: "Required"),
+                              validator: RequiredValidator(
+                                  errorText: AutofillHints.password),
                               textAlign: TextAlign.left,
                               obscureText: !_isVisible,
                               obscuringCharacter: "*",
@@ -263,9 +264,9 @@ class _LargeScreenState extends State<LargeScreen> {
                             ),
                           ),
                           onPressed: () {
-                            _formKey.currentState?.validate();
-
-                            login(context);
+                            if (_formKey.currentState!.validate()) {
+                              login(context);
+                            }
                           },
                         ),
                       ),
@@ -448,7 +449,8 @@ class _SmallScreenState extends State<SmallScreen> {
                             ),
                             child: TextFormField(
                               controller: _emailController,
-                              validator: emailValidator,
+                              validator: RequiredValidator(
+                                  errorText: AutofillHints.email),
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                 fontFamily: 'Maven Pro',
@@ -499,8 +501,8 @@ class _SmallScreenState extends State<SmallScreen> {
                                 left: 0.1 * width, right: 0.1 * width),
                             child: TextFormField(
                               controller: _passwordController,
-                              validator:
-                                  RequiredValidator(errorText: "Required"),
+                              validator: RequiredValidator(
+                                  errorText: AutofillHints.password),
                               obscureText: !_isVisible,
                               obscuringCharacter: "*",
                               textAlign: TextAlign.left,
@@ -603,9 +605,9 @@ class _SmallScreenState extends State<SmallScreen> {
                             ),
                           ),
                           onPressed: () {
-                            _formKey.currentState?.validate();
-
-                            login(context);
+                            if (_formKey.currentState!.validate()) {
+                              login(context);
+                            }
                           },
                         ),
                       ),
@@ -655,9 +657,11 @@ class _SmallScreenState extends State<SmallScreen> {
                           ),
                           onPressed: () {
                             Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SignupPage()));
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SignupPage(),
+                              ),
+                            );
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.transparent,

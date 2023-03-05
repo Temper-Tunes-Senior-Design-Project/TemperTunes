@@ -23,7 +23,7 @@ TextEditingController _usernameController = new TextEditingController();
 TextEditingController _passwordController = new TextEditingController();
 TextEditingController _passwordController2 = new TextEditingController();
 MultiValidator emailValidator = MultiValidator([
-  RequiredValidator(errorText: "*Required"),
+  // RequiredValidator(errorText: "*Required"),
   //EmailValidator(errorText: "Enter valid email ID"),
 ]);
 
@@ -32,25 +32,9 @@ class LargeScreen extends StatefulWidget {
 }
 
 class _LargeScreenState extends State<LargeScreen> {
-  TextEditingController textEditingController = TextEditingController();
-
   final _formKey = GlobalKey<FormState>();
   //show password
   bool _isVisible = false;
-
-  late final StreamController<ErrorAnimationType>? errorController;
-
-  @override
-  void initState() {
-    errorController = StreamController<ErrorAnimationType>();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    errorController!.close();
-    super.dispose();
-  }
 
   // snackBar Widget
   snackBar(String? message) {
@@ -120,7 +104,7 @@ class _LargeScreenState extends State<LargeScreen> {
                         alignment: Alignment.topCenter,
                         padding: EdgeInsets.only(top: height * 0.02),
                         child: Image.asset("assets/music_swing_logo_small.png",
-                            scale: 2.3),
+                            scale: 2.5),
                       ),
 
                       ///Username
@@ -131,8 +115,8 @@ class _LargeScreenState extends State<LargeScreen> {
                             alignment: Alignment.topLeft,
                             child: TextFormField(
                               controller: _usernameController,
-                              validator:
-                                  RequiredValidator(errorText: "Required"),
+                              validator: RequiredValidator(
+                                  errorText: AutofillHints.username),
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                 fontFamily: 'Maven Pro',
@@ -168,7 +152,8 @@ class _LargeScreenState extends State<LargeScreen> {
                             alignment: Alignment.topLeft,
                             child: TextFormField(
                               controller: _emailController,
-                              validator: emailValidator,
+                              validator: RequiredValidator(
+                                  errorText: AutofillHints.email),
                               style: TextStyle(
                                 fontFamily: 'Maven Pro',
                                 fontWeight: FontWeight.w100,
@@ -204,8 +189,8 @@ class _LargeScreenState extends State<LargeScreen> {
                             alignment: Alignment.topLeft,
                             child: TextFormField(
                               controller: _passwordController,
-                              validator:
-                                  RequiredValidator(errorText: "Required"),
+                              validator: RequiredValidator(
+                                  errorText: AutofillHints.password),
                               obscureText: !_isVisible,
                               obscuringCharacter: "*",
                               style: TextStyle(
@@ -263,8 +248,8 @@ class _LargeScreenState extends State<LargeScreen> {
                             alignment: Alignment.topLeft,
                             child: TextFormField(
                               controller: _passwordController2,
-                              validator:
-                                  RequiredValidator(errorText: "Required"),
+                              validator: RequiredValidator(
+                                  errorText: AutofillHints.password),
                               obscureText: !_isVisible,
                               obscuringCharacter: "*",
                               style: TextStyle(
@@ -314,7 +299,7 @@ class _LargeScreenState extends State<LargeScreen> {
                         ],
                       ),
 
-                      SizedBox(height: height * 0.015),
+                      SizedBox(height: height * 0.023),
 
                       ///Register button
                       Container(
@@ -434,6 +419,8 @@ class _SmallScreenState extends State<SmallScreen> {
 
   final _formKey = GlobalKey<FormState>();
 
+  String errorTextvalue = '';
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -445,8 +432,7 @@ class _SmallScreenState extends State<SmallScreen> {
         decoration: BoxDecoration(
           //set img to bg of body
           image: DecorationImage(
-              image: AssetImage("assets/loginPageSmall.png"),
-              fit: BoxFit.cover),
+              image: AssetImage("assets/userPageLarge.png"), fit: BoxFit.cover),
         ),
         child: Padding(
           padding: EdgeInsets.only(left: 0.01 * width, top: 0.06 * height),
@@ -484,7 +470,7 @@ class _SmallScreenState extends State<SmallScreen> {
                       Container(
                         alignment: Alignment.topCenter,
                         padding: EdgeInsets.only(
-                            top: height * 0.02, bottom: height * 0.005),
+                            top: height * 0.01, bottom: height * 0.005),
                         child: Image.asset("assets/music_swing_logo_small.png",
                             scale: 2.5),
                       ),
@@ -497,7 +483,8 @@ class _SmallScreenState extends State<SmallScreen> {
                             alignment: Alignment.topLeft,
                             child: TextFormField(
                               controller: _usernameController,
-                              validator: emailValidator,
+                              validator: RequiredValidator(
+                                  errorText: AutofillHints.username),
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                 fontFamily: 'Maven Pro',
@@ -524,15 +511,18 @@ class _SmallScreenState extends State<SmallScreen> {
                         ],
                       ),
 
+                      ///spacer
+                      SizedBox(height: height * 0.015),
+
                       ///Email
                       Column(
                         children: [
                           Container(
-                            padding: EdgeInsets.only(top: height * 0.005),
                             alignment: Alignment.topLeft,
                             child: TextFormField(
                               controller: _emailController,
-                              validator: emailValidator,
+                              validator: RequiredValidator(
+                                  errorText: AutofillHints.email),
                               style: TextStyle(
                                 fontFamily: 'Maven Pro',
                                 fontWeight: FontWeight.w100,
@@ -559,16 +549,18 @@ class _SmallScreenState extends State<SmallScreen> {
                         ],
                       ),
 
+                      ///spacer
+                      SizedBox(height: height * 0.015),
+
                       ///Password
                       Column(
                         children: [
                           Container(
-                            padding: EdgeInsets.only(top: height * 0.005),
                             alignment: Alignment.topLeft,
                             child: TextFormField(
                               controller: _passwordController,
-                              validator:
-                                  RequiredValidator(errorText: "Required"),
+                              validator: RequiredValidator(
+                                  errorText: AutofillHints.password),
                               obscureText: !_isVisible,
                               obscuringCharacter: "*",
                               style: TextStyle(
@@ -617,16 +609,18 @@ class _SmallScreenState extends State<SmallScreen> {
                         ],
                       ),
 
+                      ///spacer
+                      SizedBox(height: height * 0.015),
+
                       ///Confirm Password
                       Column(
                         children: [
                           Container(
-                            padding: EdgeInsets.only(top: height * 0.005),
                             alignment: Alignment.topLeft,
                             child: TextFormField(
                               controller: _passwordController2,
-                              validator:
-                                  RequiredValidator(errorText: "Required"),
+                              validator: RequiredValidator(
+                                  errorText: AutofillHints.password),
                               obscureText: !_isVisible,
                               obscuringCharacter: "*",
                               style: TextStyle(
@@ -792,7 +786,11 @@ Future<void> register(BuildContext context) async {
   await AuthRouter().registerUser(
       _emailController.text, _passwordController.text, _usernameController.text,
       () {
-    print("Error occurred");
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Invalid credentials'),
+      ),
+    );
   });
   DatabaseRouter().createUser(_usernameController.text);
   Navigator.push(
