@@ -255,7 +255,7 @@ class _VerificationSmallState extends State<VerificationSmall> {
                 height: 0.001 * height,
               ),
 
-              ///Verifier
+              ///Verify Button
               Container(
                 height: 0.07 * height,
                 // width: 0.02 * width,
