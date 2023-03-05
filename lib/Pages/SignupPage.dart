@@ -5,7 +5,6 @@ import 'package:mood_swing/Utilities/AuthRouter.dart';
 import 'package:mood_swing/Utilities/DatabaseRouter.dart';
 import '../Widgets/widgets.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
 import 'dart:async';
 
 class Body extends StatelessWidget {
@@ -22,10 +21,6 @@ TextEditingController _emailController = new TextEditingController();
 TextEditingController _usernameController = new TextEditingController();
 TextEditingController _passwordController = new TextEditingController();
 TextEditingController _passwordController2 = new TextEditingController();
-MultiValidator emailValidator = MultiValidator([
-  // RequiredValidator(errorText: "*Required"),
-  //EmailValidator(errorText: "Enter valid email ID"),
-]);
 
 class LargeScreen extends StatefulWidget {
   _LargeScreenState createState() => _LargeScreenState();
@@ -419,8 +414,6 @@ class _SmallScreenState extends State<SmallScreen> {
 
   final _formKey = GlobalKey<FormState>();
 
-  String errorTextvalue = '';
-
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -494,6 +487,7 @@ class _SmallScreenState extends State<SmallScreen> {
                               ),
                               decoration: InputDecoration(
                                 hintStyle: TextStyle(color: Colors.white60),
+                                hintText: "Username",
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide:
                                       BorderSide(color: Colors.white, width: 3),
