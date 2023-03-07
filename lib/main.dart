@@ -6,6 +6,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'Pages/HomePage.dart';
 import 'Pages/LandingPage.dart';
+import 'package:mood_swing/Pages/TestingPage.dart';
 import 'Widgets/MockNavigator.dart';
 import 'firebase_options.dart';
 
@@ -55,12 +56,13 @@ class App extends StatelessWidget {
         fontFamily: 'Maven Pro',
         iconTheme: const IconThemeData(color: Colors.white),
       ),
-      home: StreamBuilder<User?>(
-        initialData: FirebaseAuth.instance.currentUser,
-        builder: (context,snapshot) {
-          return snapshot.data != null?HomePage():LandingPage();
-        }
-      ),
+      //home: StreamBuilder<User?>(
+      //  initialData: FirebaseAuth.instance.currentUser,
+      //  builder: (context,snapshot) {
+      //    return snapshot.data != null?HomePage():LandingPage();
+      //  }
+      //),
+      home: TestingPage(),
     );
   }
 }

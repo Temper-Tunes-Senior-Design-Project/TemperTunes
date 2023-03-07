@@ -5,6 +5,7 @@ import 'package:mood_swing/Utilities/DatabaseRouter.dart';
 import 'package:mood_swing/Widgets/widgets.dart';
 import 'package:flutter/foundation.dart';
 import 'package:video_player/video_player.dart';
+import 'package:mood_swing/Widgets/CloudFunctions.dart';
 
 class Body extends StatelessWidget {
   final List<CameraDescription>? cameras;
@@ -28,58 +29,62 @@ class LargeScreen extends StatefulWidget {
 }
 
 class _LargeScreenState extends State<LargeScreen> {
-  late CameraController cameraController;
+  CameraController? cameraController;
   VideoPlayerController? videoController;
   bool initializedCamCtrl = false;
   XFile? pictureFile;
   XFile? videoFile;
   bool recording = false;
   int currentCameraIndex = 0;
+  double aspectRatio = 0;
   late int maxNumCameras;
 
   @override
   void initState() {
     super.initState();
-    ////COME BACK TO THIS
     if (widget.cameras == null || widget.cameras!.length == 0) {
+      //camera not found
       return;
     }
     maxNumCameras = (widget.cameras!.length >= 2) ? 2 : widget.cameras!.length;
-    cameraController = CameraController(
-        widget.cameras![currentCameraIndex], ResolutionPreset.max,
-        enableAudio: false, imageFormatGroup: ImageFormatGroup.yuv420);
-    cameraController.initialize().then((_) {
-      if (!mounted) {
-        return;
-      }
-      initializedCamCtrl = true;
-      setState(() {});
-    }).catchError((error) {
-      if (error is CameraException) {
-        ///////Tell the user to allow the app to access their camera/audio
-        return;
-      }
-    });
+    onNewCameraSelected(toggle: true);
   }
 
-  void onNewCameraSelected(CameraDescription cameraDescription) async {
+  void onNewCameraSelected({required bool toggle}) async {
+    if (toggle) {
+      currentCameraIndex = (currentCameraIndex + 1) % maxNumCameras;
+    }
+
     final previousCameraController = cameraController;
     // Instantiating the camera controller
     final CameraController newCameraController = CameraController(
-        cameraDescription, ResolutionPreset.max,
+        widget.cameras![currentCameraIndex], ResolutionPreset.max,
         enableAudio: false, imageFormatGroup: ImageFormatGroup.yuv420);
 
-    // Dispose the previous controller
+    // Dispose the previous controller if it exists
     initializedCamCtrl = false;
     setState(() {});
-    await previousCameraController.dispose();
+    await previousCameraController?.dispose();
 
-    cameraController = newCameraController;
-    cameraController.initialize().then((_) {
+    // Replace with the new controller
+    if (mounted) {
+      setState(() {
+        cameraController = newCameraController;
+      });
+    }
+
+    // Update UI if controller updated
+    newCameraController.addListener(() {
+      if (mounted) setState(() {});
+    });
+
+    // Initialize Controller
+    newCameraController.initialize().then((_) {
       if (!mounted) {
         return;
       }
       initializedCamCtrl = true;
+      aspectRatio = newCameraController.value.aspectRatio;
       setState(() {});
     }).catchError((error) {
       if (error is CameraException) {
@@ -91,7 +96,7 @@ class _LargeScreenState extends State<LargeScreen> {
 
   @override
   void dispose() {
-    cameraController.dispose();
+    cameraController?.dispose();
     videoController?.dispose();
     super.dispose();
   }
@@ -113,10 +118,15 @@ class _LargeScreenState extends State<LargeScreen> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+    // Ratio of device screen
+    double screenRatio = MediaQuery.of(context).size.aspectRatio;
+    // Ratio of camera or device screen if the camera isn't initialized
+    var tempRatio = (aspectRatio != 0) ? aspectRatio : (screenRatio);
     return SingleChildScrollView(
       child: Container(
         width: width,
         height: height,
+        //background
         decoration: BoxDecoration(
           image: DecorationImage(
               image: (defaultTargetPlatform == TargetPlatform.iOS ||
@@ -127,12 +137,15 @@ class _LargeScreenState extends State<LargeScreen> {
         ),
         child: Column(
           children: [
+            //Camera Box
             Padding(
               padding: EdgeInsets.all(height * 0.02),
               child: Center(
                 child: SizedBox(
-                  height: height * 0.7,
-                  width: width * 0.7,
+                  height: (height *
+                      0.7 *
+                      ((tempRatio < 1) ? ((1 / tempRatio / screenRatio)) : 1)),
+                  width: (width * 0.7 * (tempRatio / screenRatio)),
                   child: Container(
                       decoration: BoxDecoration(
                           color: Colors.black,
@@ -157,7 +170,7 @@ class _LargeScreenState extends State<LargeScreen> {
                                           color: Colors.white))
                               //show camera preview if initialized
                               : (initializedCamCtrl)
-                                  ? CameraPreview(cameraController)
+                                  ? CameraPreview(cameraController!)
                                   //otherwise show black container
                                   : Material(
                                       color: Colors.black,
@@ -165,6 +178,8 @@ class _LargeScreenState extends State<LargeScreen> {
                 ),
               ),
             ),
+            
+            //Buttons
             Padding(
               padding: EdgeInsets.all(height * 0.02),
               child: Row(
@@ -178,8 +193,7 @@ class _LargeScreenState extends State<LargeScreen> {
                       onPressed: () async {
                         pictureFile = null;
                         videoFile = null;
-                        onNewCameraSelected(
-                            widget.cameras![currentCameraIndex]);
+                        onNewCameraSelected(toggle: false);
                         setState(() {});
                       },
                     ),
@@ -191,6 +205,8 @@ class _LargeScreenState extends State<LargeScreen> {
                         FileType type = pictureFile != null?FileType.JPEG:FileType.MP4;
                         await DatabaseRouter().uploadFile(pictureFile??videoFile,type);
                         Navigator.pop(context);
+                        //var res = await CloudFunctions().get_mood();
+                        //print(res);
                         //NEXT PAGE TBD
                       },
                     )
@@ -200,7 +216,10 @@ class _LargeScreenState extends State<LargeScreen> {
                       heroTag: "Stop Recording",
                       icon: Icons.stop_circle_rounded,
                       onPressed: () async {
-                        videoFile = await cameraController.stopVideoRecording();
+                        videoFile =
+                            await cameraController?.stopVideoRecording();
+                        cameraController?.dispose();
+                        initializedCamCtrl = false;
                         recording = false;
                         setState(() {});
                         await _startVideoPlayer();
@@ -212,7 +231,7 @@ class _LargeScreenState extends State<LargeScreen> {
                       heroTag: "Record Video",
                       icon: Icons.fiber_manual_record_rounded,
                       onPressed: () async {
-                        await cameraController.startVideoRecording();
+                        await cameraController?.startVideoRecording();
                         recording = true;
                         setState(() {});
                       },
@@ -222,7 +241,10 @@ class _LargeScreenState extends State<LargeScreen> {
                       heroTag: "Snap Picture",
                       icon: Icons.camera_rounded,
                       onPressed: () async {
-                        pictureFile = await cameraController.takePicture();
+                        pictureFile = await cameraController?.takePicture();
+                        cameraController?.dispose();
+                        initializedCamCtrl = false;
+                        // runModel();
                         setState(() {});
                       },
                     ),
@@ -231,10 +253,7 @@ class _LargeScreenState extends State<LargeScreen> {
                       heroTag: "Toggle Camera",
                       icon: Icons.flip_camera_ios_rounded,
                       onPressed: () async {
-                        currentCameraIndex =
-                            (currentCameraIndex + 1) % maxNumCameras;
-                        onNewCameraSelected(
-                            widget.cameras![currentCameraIndex]);
+                        onNewCameraSelected(toggle: true);
                         setState(() {});
                       },
                     ),
@@ -250,7 +269,6 @@ class _LargeScreenState extends State<LargeScreen> {
 }
 
 class CameraPage extends StatelessWidget {
-
   CameraPage();
 
   static const Key PageKey = Key("Camera Page");
@@ -281,6 +299,7 @@ class CameraPage extends StatelessWidget {
   }
 }
 
+//CameraButton Widget
 class CameraButton extends StatelessWidget {
   final IconData icon;
   final void Function()? onPressed;
