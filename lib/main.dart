@@ -1,8 +1,11 @@
 import 'dart:ui';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'Pages/HomePage.dart';
 import 'Pages/LandingPage.dart';
@@ -14,6 +17,16 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  if(kDebugMode)
+  {
+    print("----------------------------------");
+    print("RUNNING APP IN DEBUG MODE");
+    print("----------------------------------");
+    FirebaseAuth.instance.useAuthEmulator("localhost", 9099);
+    FirebaseFirestore.instance.useFirestoreEmulator("localhost", 8080);
+    FirebaseStorage.instance.useStorageEmulator("localhost", 9002);
+  }
 
   //Catch Flutter framework errors
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
