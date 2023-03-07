@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'package:mood_swing/Objects/FileTypes.dart';
+import 'package:mood_swing/Utilities/DatabaseRouter.dart';
 import 'package:mood_swing/Widgets/widgets.dart';
 import 'package:flutter/foundation.dart';
 import 'package:video_player/video_player.dart';
@@ -185,7 +187,10 @@ class _LargeScreenState extends State<LargeScreen> {
                       context: context,
                       heroTag: "Confirm Button",
                       icon: Icons.check_circle_rounded,
-                      onPressed: () {
+                      onPressed: () async {
+                        FileType type = pictureFile != null?FileType.JPEG:FileType.MP4;
+                        await DatabaseRouter().uploadFile(pictureFile??videoFile,type);
+                        Navigator.pop(context);
                         //NEXT PAGE TBD
                       },
                     )
@@ -245,9 +250,8 @@ class _LargeScreenState extends State<LargeScreen> {
 }
 
 class CameraPage extends StatelessWidget {
-  final List<CameraDescription>? cameras;
 
-  CameraPage({required this.cameras});
+  CameraPage();
 
   static const Key PageKey = Key("Camera Page");
   @override
@@ -261,7 +265,18 @@ class CameraPage extends StatelessWidget {
         backgroundColor: MyPalette.darkTurqoise,
       ),
       resizeToAvoidBottomInset: false,
-      body: Body(cameras: cameras),
+      body: FutureBuilder<List<CameraDescription>>(
+        future: availableCameras(),
+        builder: (context,snapshot) {
+          if(snapshot.hasData) {
+            return Body(cameras: snapshot.data ?? []);
+          }
+          else
+            {
+              return CircularProgressIndicator();
+            }
+        }
+      ),
     );
   }
 }

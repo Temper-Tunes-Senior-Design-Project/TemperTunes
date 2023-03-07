@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mood_swing/Pages/CameraPage.dart';
 import 'package:mood_swing/Pages/PreferencesPage.dart';
 import 'package:mood_swing/Pages/UserPage.dart';
 import 'package:collapsible_sidebar/collapsible_sidebar.dart';
@@ -48,7 +49,10 @@ class _SidebarLargeState extends State<SidebarLarge> {
       CollapsibleItem(
         text: 'Create New Playlist',
         icon: Icons.create_rounded,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => CameraPage()));
+        },
       ),
 
       ///Existing Playlists
