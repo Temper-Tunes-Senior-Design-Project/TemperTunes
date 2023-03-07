@@ -323,7 +323,7 @@ class _LargeScreenState extends State<LargeScreen> {
                           ),
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
-                              register(context);
+                              changePassword(context);
                             }
                           },
                           style: ElevatedButton.styleFrom(
@@ -669,7 +669,7 @@ class _SmallScreenState extends State<SmallScreen> {
                           ),
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
-                              register(context);
+                              changePassword(context);
                             }
                           },
                           style: ElevatedButton.styleFrom(
@@ -723,16 +723,10 @@ class _SmallScreenState extends State<SmallScreen> {
   }
 }
 
-Future<void> register(BuildContext context) async {
-  // await AuthRouter().registerUser(
-  //     _emailController.text, _passwordController.text, _usernameController.text,
-  //     () {
-  //   ScaffoldMessenger.of(context).showSnackBar(
-  //     const SnackBar(
-  //       content: Text('Invalid credentials'),
-  //     ),
-  //   );
-  // });
+Future<void> changePassword(BuildContext context) async {
+  AuthRouter().changePassword(
+    _newPasswordController.text,
+  );
   Navigator.push(
     context,
     MaterialPageRoute(
