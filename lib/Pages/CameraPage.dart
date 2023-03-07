@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'package:mood_swing/Objects/FileTypes.dart';
+import 'package:mood_swing/Utilities/DatabaseRouter.dart';
 import 'package:mood_swing/Widgets/widgets.dart';
 import 'package:flutter/foundation.dart';
 import 'package:video_player/video_player.dart';
@@ -176,7 +178,7 @@ class _LargeScreenState extends State<LargeScreen> {
                 ),
               ),
             ),
-
+            
             //Buttons
             Padding(
               padding: EdgeInsets.all(height * 0.02),
@@ -200,8 +202,11 @@ class _LargeScreenState extends State<LargeScreen> {
                       heroTag: "Confirm Button",
                       icon: Icons.check_circle_rounded,
                       onPressed: () async {
-                        var res = await CloudFunctions().get_mood();
-                        print(res);
+                        FileType type = pictureFile != null?FileType.JPEG:FileType.MP4;
+                        await DatabaseRouter().uploadFile(pictureFile??videoFile,type);
+                        Navigator.pop(context);
+                        //var res = await CloudFunctions().get_mood();
+                        //print(res);
                         //NEXT PAGE TBD
                       },
                     )
@@ -264,9 +269,7 @@ class _LargeScreenState extends State<LargeScreen> {
 }
 
 class CameraPage extends StatelessWidget {
-  final List<CameraDescription>? cameras;
-
-  CameraPage({required this.cameras});
+  CameraPage();
 
   static const Key PageKey = Key("Camera Page");
   @override
@@ -280,7 +283,18 @@ class CameraPage extends StatelessWidget {
         backgroundColor: MyPalette.darkTurqoise,
       ),
       resizeToAvoidBottomInset: false,
-      body: Body(cameras: cameras),
+      body: FutureBuilder<List<CameraDescription>>(
+        future: availableCameras(),
+        builder: (context,snapshot) {
+          if(snapshot.hasData) {
+            return Body(cameras: snapshot.data ?? []);
+          }
+          else
+            {
+              return CircularProgressIndicator();
+            }
+        }
+      ),
     );
   }
 }
