@@ -53,7 +53,6 @@ class SidebarDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
     return SidebarX(
       controller: _controller,
       theme: SidebarXTheme(
@@ -152,7 +151,7 @@ class SidebarDrawer extends StatelessWidget {
               (smallScreenCameras) => Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => CameraPage(cameras: smallScreenCameras),
+                  builder: (_) => CameraPage(),
                 ),
               ),
             );

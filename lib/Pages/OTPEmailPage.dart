@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mood_swing/Pages/VerificationPage.dart';
 import '../Widgets/widgets.dart';
-import 'HomePage.dart';
 
 class Body extends StatelessWidget {
   @override

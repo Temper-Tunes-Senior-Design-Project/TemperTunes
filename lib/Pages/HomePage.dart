@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mood_swing/Widgets/RippleLarge.dart';
 import '../Widgets/widgets.dart';
-import 'package:mood_swing/Pages/CameraPage.dart';
 import 'package:camera/camera.dart';
 
 Key UserButtonKey = Key("User Button");
