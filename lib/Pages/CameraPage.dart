@@ -47,30 +47,28 @@ class _LargeScreenState extends State<LargeScreen> {
       return;
     }
     maxNumCameras = (widget.cameras!.length >= 2) ? 2 : widget.cameras!.length;
-<<<<<<< Updated upstream
     onNewCameraSelected(toggle: true);
-=======
     cameraController = CameraController(
         //get camera
         widget.cameras![currentCameraIndex],
         ResolutionPreset.max,
         enableAudio: false,
         imageFormatGroup: ImageFormatGroup.yuv420);
-    cameraController.initialize().then((_) {
+    cameraController?.initialize().then((_) {
       if (!mounted) {
         return;
       }
-      //define the resolution to use
-      ResolutionPreset.low;
+
       initializedCamCtrl = true;
       setState(() {});
-    }).catchError((error) {
-      if (error is CameraException) {
-        ///////Tell the user to allow the app to access their camera/audio
-        return;
-      }
-    });
->>>>>>> Stashed changes
+    }).catchError(
+      (error) {
+        if (error is CameraException) {
+          ///////Tell the user to allow the app to access their camera/audio
+          return;
+        }
+      },
+    );
   }
 
   void onNewCameraSelected({required bool toggle}) async {
@@ -171,36 +169,6 @@ class _LargeScreenState extends State<LargeScreen> {
                       ((tempRatio < 1) ? ((1 / tempRatio / screenRatio)) : 1)),
                   width: (width * 0.7 * (tempRatio / screenRatio)),
                   child: Container(
-<<<<<<< Updated upstream
-                      decoration: BoxDecoration(
-                          color: Colors.black,
-                          border: Border.all(
-                              color: MyPalette.darkBlue, width: height * 0.01)),
-                      child: (pictureFile != null)
-                          ?
-                          //Display image to user
-                          Image.network(
-                              pictureFile!.path,
-                            )
-                          : (videoFile != null)
-                              ?
-                              //allow user to play video (video_player plugin)
-                              (videoController != null &&
-                                      videoController!.value.isInitialized)
-                                  //display the video
-                                  ? VideoPlayer(videoController!)
-                                  //controller not ready means that video is loading
-                                  : Center(
-                                      child: CircularProgressIndicator(
-                                          color: Colors.white))
-                              //show camera preview if initialized
-                              : (initializedCamCtrl)
-                                  ? CameraPreview(cameraController!)
-                                  //otherwise show black container
-                                  : Material(
-                                      color: Colors.black,
-                                    )),
-=======
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: Colors.purple,
@@ -226,17 +194,16 @@ class _LargeScreenState extends State<LargeScreen> {
                                   )
                             //show camera preview if initialized
                             : (initializedCamCtrl)
-                                ? CameraPreview(cameraController)
+                                ? CameraPreview(cameraController!)
                                 //otherwise show black container
                                 : Material(
                                     color: Colors.black,
                                   ),
                   ),
->>>>>>> Stashed changes
                 ),
               ),
             ),
-            
+
             //Buttons
             Padding(
               padding: EdgeInsets.all(height * 0.02),
@@ -260,8 +227,10 @@ class _LargeScreenState extends State<LargeScreen> {
                       heroTag: "Confirm Button",
                       icon: Icons.check_circle_rounded,
                       onPressed: () async {
-                        FileType type = pictureFile != null?FileType.JPEG:FileType.MP4;
-                        await DatabaseRouter().uploadFile(pictureFile??videoFile,type);
+                        FileType type =
+                            pictureFile != null ? FileType.JPEG : FileType.MP4;
+                        await DatabaseRouter()
+                            .uploadFile(pictureFile ?? videoFile, type);
                         Navigator.pop(context);
                         //var res = await CloudFunctions().get_mood();
                         //print(res);
@@ -342,17 +311,14 @@ class CameraPage extends StatelessWidget {
       ),
       resizeToAvoidBottomInset: false,
       body: FutureBuilder<List<CameraDescription>>(
-        future: availableCameras(),
-        builder: (context,snapshot) {
-          if(snapshot.hasData) {
-            return Body(cameras: snapshot.data ?? []);
-          }
-          else
-            {
+          future: availableCameras(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return Body(cameras: snapshot.data ?? []);
+            } else {
               return CircularProgressIndicator();
             }
-        }
-      ),
+          }),
     );
   }
 }

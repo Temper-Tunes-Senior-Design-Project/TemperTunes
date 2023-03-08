@@ -17,18 +17,17 @@ class LargeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+
     return SingleChildScrollView(
-      child: Padding(
+      child: Container(
         padding: EdgeInsets.only(top: 30),
-<<<<<<< Updated upstream
-=======
         height: height,
         width: width,
         decoration: BoxDecoration(
           image: DecorationImage(
               image: AssetImage("assets/landingPageBG.png"), fit: BoxFit.cover),
         ),
->>>>>>> Stashed changes
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
@@ -161,7 +160,7 @@ class SmallScreen extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                //Title
+                                //TITLE
                                 Container(
                                   alignment: Alignment.center,
                                   padding: const EdgeInsets.only(bottom: 5),
@@ -173,43 +172,17 @@ class SmallScreen extends StatelessWidget {
                                       ),
                                       textAlign: TextAlign.center),
                                 ),
+
+                                ///SUBTITLE
                                 const Text(
                                   'Select to begin',
                                   style: TextStyle(
-<<<<<<< Updated upstream
                                       fontFamily: 'Maven Pro',
-=======
-                                    fontFamily: 'Share Tech',
-                                    color: MyPalette.lightPurple,
-                                    fontSize: 55,
-                                  ),
-                                  textAlign: TextAlign.center),
-                            ),
-                            const Text(
-                              'Select to begin',
-                              style: TextStyle(
-                                  fontFamily: 'Maven Pro',
-                                  color: MyPalette.white,
-                                  fontSize: 18),
-                              textAlign: TextAlign.center,
-                            ),
-                            Container(
-                              padding: EdgeInsets.only(
-                                  top: height * 0.03, bottom: 5),
-                              child: Column(
-                                children: [
-                                  ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      shape: CircleBorder(),
-                                    ),
-                                    child: Icon(
-                                      IconData(0xe095,
-                                          fontFamily: 'MaterialIcons'),
->>>>>>> Stashed changes
                                       color: MyPalette.white,
                                       fontSize: 18),
                                   textAlign: TextAlign.center,
                                 ),
+                                ////ICON
                                 Container(
                                   padding: EdgeInsets.only(top: height * 0.07),
                                   child: Column(
@@ -226,10 +199,11 @@ class SmallScreen extends StatelessWidget {
                                         ),
                                         onPressed: () {
                                           Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      LoginPage()));
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => LoginPage(),
+                                            ),
+                                          );
                                         },
                                       ),
                                     ],

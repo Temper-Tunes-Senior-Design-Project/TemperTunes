@@ -34,10 +34,8 @@ class LargeScreen extends StatelessWidget {
         child: ElevatedButton(
             //Goto: Camera Page
             onPressed: () async {
-              await availableCameras().then((value) => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => CameraPage(cameras: value))));
+              await availableCameras().then((value) => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => CameraPage())));
             },
             child: Text("TEST WIDGET")),
       ),
