@@ -4,9 +4,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
+<<<<<<< Updated upstream
 import 'Pages/HomePage.dart';
 import 'Pages/LandingPage.dart';
 import 'package:mood_swing/Pages/TestingPage.dart';
+=======
+import 'package:mood_swing/Pages/HomePage.dart';
+import 'package:mood_swing/Pages/LandingPage.dart';
+import 'package:mood_swing/Pages/CameraPage.dart';
+import 'package:mood_swing/Pages/LogOutPage.dart';
+
+>>>>>>> Stashed changes
 import 'Widgets/MockNavigator.dart';
 import 'firebase_options.dart';
 
@@ -56,6 +64,7 @@ class App extends StatelessWidget {
         fontFamily: 'Maven Pro',
         iconTheme: const IconThemeData(color: Colors.white),
       ),
+<<<<<<< Updated upstream
       //home: StreamBuilder<User?>(
       //  initialData: FirebaseAuth.instance.currentUser,
       //  builder: (context,snapshot) {
@@ -63,6 +72,12 @@ class App extends StatelessWidget {
       //  }
       //),
       home: TestingPage(),
+=======
+      //   home: LoginContainer(),
+      home: LogOutPage(cameras: cameras),
+
+      ///   home: SignupPage(),
+>>>>>>> Stashed changes
     );
   }
 }

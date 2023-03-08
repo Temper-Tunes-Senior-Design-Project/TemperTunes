@@ -30,6 +30,11 @@ dependencies:
   firebase_crashlytics: ^3.0.14
   firebase_storage: ^11.0.14
   cloud_firestore: ^4.4.2
+<<<<<<< Updated upstream
+=======
+  form_field_validator: ^1.1.0
+  simple_animations: ^4.0.0
+>>>>>>> Stashed changes
 
 dev_dependencies:
   flutter_test:

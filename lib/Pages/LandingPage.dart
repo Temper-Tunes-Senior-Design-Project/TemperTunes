@@ -20,6 +20,15 @@ class LargeScreen extends StatelessWidget {
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.only(top: 30),
+<<<<<<< Updated upstream
+=======
+        height: height,
+        width: width,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("assets/landingPageBG.png"), fit: BoxFit.cover),
+        ),
+>>>>>>> Stashed changes
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
@@ -167,7 +176,36 @@ class SmallScreen extends StatelessWidget {
                                 const Text(
                                   'Select to begin',
                                   style: TextStyle(
+<<<<<<< Updated upstream
                                       fontFamily: 'Maven Pro',
+=======
+                                    fontFamily: 'Share Tech',
+                                    color: MyPalette.lightPurple,
+                                    fontSize: 55,
+                                  ),
+                                  textAlign: TextAlign.center),
+                            ),
+                            const Text(
+                              'Select to begin',
+                              style: TextStyle(
+                                  fontFamily: 'Maven Pro',
+                                  color: MyPalette.white,
+                                  fontSize: 18),
+                              textAlign: TextAlign.center,
+                            ),
+                            Container(
+                              padding: EdgeInsets.only(
+                                  top: height * 0.03, bottom: 5),
+                              child: Column(
+                                children: [
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      shape: CircleBorder(),
+                                    ),
+                                    child: Icon(
+                                      IconData(0xe095,
+                                          fontFamily: 'MaterialIcons'),
+>>>>>>> Stashed changes
                                       color: MyPalette.white,
                                       fontSize: 18),
                                   textAlign: TextAlign.center,
@@ -239,6 +277,10 @@ class SmallScreen extends StatelessWidget {
                 ],
               ),
             ),
+
+            //   SizedBox(height: 0.05 * height),
+
+            //      WaveAnimation(),
           ],
         ),
       ),
