@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mood_swing/Pages/PreferencesPage.dart';
 import 'package:mood_swing/Pages/UserPage.dart';
+import 'package:camera/camera.dart';
+import 'package:mood_swing/Pages/CameraPage.dart';
+import 'package:mood_swing/Pages/CameraExPage.dart';
 
 import '../Widgets/widgets.dart';
 import 'package:sidebarx/sidebarx.dart';
@@ -16,21 +19,6 @@ class SidebarSmall extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //  return MaterialApp(
-    // title: 'SidebarX Example',
-    //   debugShowCheckedModeBanner: false,
-    // theme: ThemeData(
-    //   primaryColor: primaryColor,
-    //   canvasColor: canvasColor,
-    //   scaffoldBackgroundColor: Colors.orange,
-    //   textTheme: const TextTheme(
-    //     headlineSmall: TextStyle(
-    //       color: Colors.white,
-    //       fontSize: 46,
-    //       fontWeight: FontWeight.w800,
-    //     ),
-    //   ),
-    // ),
     return Scaffold(
       key: _key,
       floatingActionButton: IconButton(
@@ -162,9 +150,32 @@ class SidebarDrawer extends StatelessWidget {
         ),
 
         ///Make New Playlist
+        // SidebarXItem(
+        //   icon: Icons.create_rounded,
+        //   label: 'Create New Playlist',
+        //   onTap: () async {
+        //     await availableCameras().then(
+        //       (largeScreenCameras) => Navigator.push(
+        //         context,
+        //         MaterialPageRoute(
+        //           builder: (_) => CameraExPage(cameras: largeScreenCameras),
+        //         ),
+        //       ),
+        //     );
+        //   },
+        // ),
+
         SidebarXItem(
           icon: Icons.create_rounded,
           label: 'Create New Playlist',
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => CameraExPage(),
+              ),
+            );
+          },
         ),
 
         ///Existing Playlists

@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'Pages/LandingPage.dart';
 import 'package:mood_swing/Pages/HomePage.dart';
 
-import 'Pages/LogOutPage.dart';
+import 'Pages/CameraExPage.dart';
 import 'Widgets/MockNavigator.dart';
 import 'firebase_options.dart';
 

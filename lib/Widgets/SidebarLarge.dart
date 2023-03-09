@@ -1,9 +1,11 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:mood_swing/Pages/CameraPage.dart';
 import 'package:mood_swing/Pages/PreferencesPage.dart';
 import 'package:mood_swing/Pages/UserPage.dart';
 import 'package:collapsible_sidebar/collapsible_sidebar.dart';
 import 'dart:math' as math show pi;
+import '../Pages/CameraExPage.dart';
 import '../Widgets/widgets.dart';
 
 ///Large Sidebar
@@ -45,13 +47,33 @@ class _SidebarLargeState extends State<SidebarLarge> {
         },
       ),
 
+      // ///Make New Playlist
+      // CollapsibleItem(
+      //   text: 'Create New Playlist',
+      //   icon: Icons.create_rounded,
+      //   onPressed: () async {
+      //     await availableCameras().then(
+      //       (largeScreenCameras) => Navigator.push(
+      //         context,
+      //         MaterialPageRoute(
+      //           builder: (_) => CameraExPage(cameras: largeScreenCameras),
+      //         ),
+      //       ),
+      //     );
+      //   },
+      // ),
+
       ///Make New Playlist
       CollapsibleItem(
         text: 'Create New Playlist',
         icon: Icons.create_rounded,
         onPressed: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => LogOutPage()));
+            context,
+            MaterialPageRoute(
+              builder: (_) => CameraExPage(),
+            ),
+          );
         },
       ),
 
