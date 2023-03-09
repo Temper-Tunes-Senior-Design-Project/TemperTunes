@@ -25,7 +25,7 @@ void main() async {
     print("----------------------------------");
     FirebaseAuth.instance.useAuthEmulator("localhost", 9099);
     FirebaseFirestore.instance.useFirestoreEmulator("localhost", 8080);
-    FirebaseStorage.instance.useStorageEmulator("localhost", 9002);
+    FirebaseStorage.instance.useStorageEmulator("localhost", 9199);
   }
 
   //Catch Flutter framework errors
