@@ -1,8 +1,11 @@
 import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:mood_swing/Pages/ChangeEmailPage.dart';
 import 'package:mood_swing/Pages/LandingPage.dart';
+import 'package:mood_swing/Pages/HomePage.dart';
+import 'dart:ui';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'Widgets/MockNavigator.dart';
 import 'firebase_options.dart';
 
@@ -13,7 +16,16 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  cameras = await availableCameras();
+
+  //Catch Flutter framework errors
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+
+  //Catch async errors
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    return true;
+  };
+
   runApp(App());
 }
 
@@ -45,10 +57,11 @@ class App extends StatelessWidget {
         fontFamily: 'Maven Pro',
         iconTheme: const IconThemeData(color: Colors.white),
       ),
-      //   home: LoginContainer(),
-      home: ChangeEmailPage(),
-
-      ///   home: SignupPage(),
+      home: StreamBuilder<User?>(
+          initialData: FirebaseAuth.instance.currentUser,
+          builder: (context, snapshot) {
+            return snapshot.data != null ? HomePage() : LandingPage();
+          }),
     );
   }
 }

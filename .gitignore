@@ -52,3 +52,4 @@ app.*.map.json
 /macos/Flutter/GeneratedPluginRegistrant.swift
 /coverage/
 /.firebaserc
+/.env

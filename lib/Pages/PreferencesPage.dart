@@ -244,7 +244,36 @@ class LargeScreen extends StatelessWidget {
                       ],
                     ),
                   ),
+                  ///Logout
+                  Container(
+                    padding: EdgeInsets.only(top: 0.035 * height),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                            alignment: Alignment.topLeft,
+                            child: Icon(
+                              IconData(0xe9ba, fontFamily: 'MaterialIcons'),
+                              color: MyPalette.white,
+                              size: 24,
+                            )),
 
+                        ///Name
+                        Container(
+                          padding: EdgeInsets.only(left: 0.01 * width),
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            'Logout',
+                            style: TextStyle(
+                              fontFamily: 'Maven Pro',
+                              color: Colors.white,
+                              fontSize: 24,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   ///Delete
                   Container(
                     padding: EdgeInsets.only(top: 0.035 * height),
@@ -254,7 +283,7 @@ class LargeScreen extends StatelessWidget {
                         Container(
                             alignment: Alignment.topLeft,
                             child: Icon(
-                              IconData(0xe1b9, fontFamily: 'MaterialIcons'),
+                              IconData(0xe3b3, fontFamily: 'MaterialIcons'),
                               color: MyPalette.white,
                               size: 24,
                             )),
@@ -532,7 +561,37 @@ class SmallScreen extends StatelessWidget {
                                   ],
                                 ),
                               ),
-
+                              Container(
+                                padding: EdgeInsets.only(top: 0.04 * height),
+                                child: Row(
+                                  children: [
+                                    ///icon
+                                    Container(
+                                        padding:
+                                        EdgeInsets.only(left: 0.12 * width),
+                                        alignment: Alignment.topLeft,
+                                        child: Icon(
+                                          IconData(0xe3b3,
+                                              fontFamily: 'MaterialIcons'),
+                                          color: MyPalette.white,
+                                          size: 40,
+                                        )),
+                                    Container(
+                                      padding:
+                                      EdgeInsets.only(left: 0.04 * width),
+                                      alignment: Alignment.topLeft,
+                                      child: Text(
+                                        'Logout',
+                                        style: TextStyle(
+                                          fontFamily: 'Maven Pro',
+                                          color: Colors.white,
+                                          fontSize: 28,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                               ///Delete
                               Container(
                                 padding: EdgeInsets.only(top: 0.04 * height),
@@ -564,7 +623,7 @@ class SmallScreen extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         ),
