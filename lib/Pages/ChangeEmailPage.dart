@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../Widgets/widgets.dart';
 import 'package:mood_swing/Pages/HomePage.dart';
 import 'package:mood_swing/Utilities/AuthRouter.dart';
-import 'package:mood_swing/Utilities/DatabaseRouter.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'dart:async';
 

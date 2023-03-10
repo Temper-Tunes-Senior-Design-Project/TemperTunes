@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:mood_swing/Pages/LoginPage.dart';
 import '../Widgets/widgets.dart';
 import 'SignupPage.dart';
-import 'package:simple_animations/simple_animations.dart';
 
 class Body extends StatelessWidget {
   @override
