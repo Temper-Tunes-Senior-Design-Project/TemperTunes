@@ -50,8 +50,8 @@ class _SidebarLargeState extends State<SidebarLarge> {
         text: 'Create New Playlist',
         icon: Icons.create_rounded,
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => CameraPage()));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => CameraPage()));
         },
       ),
 

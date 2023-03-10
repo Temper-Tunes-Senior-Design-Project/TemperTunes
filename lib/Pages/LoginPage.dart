@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../Utilities/AuthRouter.dart';
 import '../Widgets/widgets.dart';
 import 'HomePage.dart';
+import 'OTPEmailPage.dart';
 import 'SignupPage.dart';
 
 class Body extends StatelessWidget {
@@ -49,7 +50,8 @@ class LargeScreen extends StatelessWidget {
                               shape: CircleBorder(),
                             ),
                             child: Icon(
-                              const IconData(0xf05bc, fontFamily: 'MaterialIcons'),
+                              const IconData(0xf05bc,
+                                  fontFamily: 'MaterialIcons'),
                               color: Colors.white,
                               size: 35,
                             ),
@@ -94,9 +96,9 @@ class LargeScreen extends StatelessWidget {
                               fontFamily: 'Maven Pro',
                               fontWeight: FontWeight.w100,
                               color: Colors.white,
-                              fontSize: 16,
+                              fontSize: 20,
                             ),
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
                               prefixIcon: Icon(
                                 IconData(0xe491, fontFamily: 'MaterialIcons'),
                                 color: MyPalette.white,
@@ -142,6 +144,8 @@ class LargeScreen extends StatelessWidget {
                           child: TextField(
                             controller: _passwordController,
                             textAlign: TextAlign.left,
+                            obscureText: true,
+                            obscuringCharacter: "*",
                             cursorColor: Colors.white,
                             style: TextStyle(
                               fontFamily: 'Maven Pro',
@@ -149,9 +153,9 @@ class LargeScreen extends StatelessWidget {
                               color: Colors.white,
                               fontSize: 20,
                             ),
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
                               prefixIcon: Icon(
-                                IconData(0xf052b, fontFamily: 'MaterialIcons'),
+                                IconData(0xe3ae, fontFamily: 'MaterialIcons'),
                                 color: MyPalette.white,
                                 size: 34,
                               ),
@@ -275,16 +279,25 @@ class LargeScreen extends StatelessWidget {
                     ///Forgot Password
                     Container(
                       padding: EdgeInsets.only(top: 0.08 * height),
-                      child: Text(
-                        'Forgot your password?',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontFamily: 'Maven Pro',
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
-                          color: MyPalette.turqoise,
-                        ),
-                      ),
+                      child: TextButton(
+                          child: Text(
+                            'Forgot your password?',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontFamily: 'Maven Pro',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                              color: MyPalette.turqoise,
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => OTPEmailPage(),
+                              ),
+                            );
+                          }),
                     ),
                   ],
                 ),
@@ -330,7 +343,8 @@ class SmallScreen extends StatelessWidget {
                               shape: CircleBorder(),
                             ),
                             child: Icon(
-                              const IconData(0xf05bc, fontFamily: 'MaterialIcons'),
+                              const IconData(0xf05bc,
+                                  fontFamily: 'MaterialIcons'),
                               color: Colors.white,
                               size: 40,
                             ),
@@ -419,6 +433,8 @@ class SmallScreen extends StatelessWidget {
                               EdgeInsets.only(left: 0.12 * width, bottom: 0),
                           child: TextField(
                             controller: _passwordController,
+                            obscureText: true,
+                            obscuringCharacter: "*",
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               fontFamily: 'Maven Pro',
@@ -430,7 +446,7 @@ class SmallScreen extends StatelessWidget {
                                 prefixIcon: Align(
                                   widthFactor: 1.0,
                                   child: Icon(
-                                    IconData(0xf052b,
+                                    IconData(0xe3ae,
                                         fontFamily: 'MaterialIcons'),
                                     color: MyPalette.white,
                                     size: 32,
@@ -452,7 +468,7 @@ class SmallScreen extends StatelessWidget {
                           padding: EdgeInsets.only(
                               left: 0.1 * width,
                               right: 0.1 * width,
-                              top: 3,
+                              top: 0,
                               bottom: height * 0.045),
                           child: const Divider(
                             height: 5,
@@ -551,18 +567,27 @@ class SmallScreen extends StatelessWidget {
                     ///Forgot Password
                     Container(
                       padding: EdgeInsets.only(top: 0.01 * height),
-                      child: Container(
-                        child: Text(
-                          'Forgot your password?',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontFamily: 'Maven Pro',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            color: MyPalette.turqoise,
+                      child: TextButton(
+                          child: Container(
+                            child: Text(
+                              'Forgot your password?',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontFamily: 'Maven Pro',
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: MyPalette.turqoise,
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => OTPEmailPage(),
+                              ),
+                            );
+                          }),
                     ),
                   ],
                 ),

@@ -472,6 +472,8 @@ class SmallScreen extends StatelessWidget {
                           alignment: Alignment.topLeft,
                           child: TextField(
                             controller: _passwordController,
+                            obscureText: true,
+                            obscuringCharacter: "*",
                             style: TextStyle(
                               fontFamily: 'Maven Pro',
                               fontWeight: FontWeight.w100,
@@ -512,6 +514,8 @@ class SmallScreen extends StatelessWidget {
                           alignment: Alignment.topLeft,
                           child: TextField(
                             controller: _passwordController2,
+                            obscureText: true,
+                            obscuringCharacter: "*",
                             style: TextStyle(
                               fontFamily: 'Maven Pro',
                               fontWeight: FontWeight.w100,
@@ -547,7 +551,7 @@ class SmallScreen extends StatelessWidget {
                     Container(
                       child: TextButton(
                         child: Container(
-                          padding: EdgeInsets.only(top: height * 0.015),
+                          padding: EdgeInsets.only(top: height * 0.02),
                           child: Container(
                             width: 0.8 * width,
                             height: 0.05 * height,
