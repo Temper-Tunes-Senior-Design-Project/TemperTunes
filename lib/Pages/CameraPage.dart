@@ -291,12 +291,14 @@ class _LargeScreenState extends State<LargeScreen> {
                                   padding: EdgeInsets.only(left: 0.05 * width),
 
                                   ///return to app
-                                  child: IconButton(
-                                    icon: Icon(Icons.exit_to_app_rounded),
-                                    tooltip: 'Return to homepage',
-                                    color: Colors.grey,
-                                    iconSize: 0.05 * height,
-                                    hoverColor: Color.fromARGB(255, 75, 79, 95),
+                                  child: CameraButton(
+                                    context: context,
+                                    heroTag: "nothing",
+                                    toolTipText: "Return to Home page",
+                                    //icon: Icon(Icons.exit_to_app_rounded),
+                                    icon: Icons.exit_to_app_rounded,
+
+                                    //color: Colors.grey,
                                     onPressed: () => Navigator.pop(context),
                                   ),
                                 ),
