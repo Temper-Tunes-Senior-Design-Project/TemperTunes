@@ -1,0 +1,1 @@
+start "" firebase emulators:start
