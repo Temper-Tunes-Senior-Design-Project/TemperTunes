@@ -5,7 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
-
 import 'Pages/LandingPage.dart';
 import 'package:mood_swing/Pages/HomePage.dart';
 
@@ -57,7 +56,6 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: MaterialColor(0xd789ff, color),
         fontFamily: 'Maven Pro',
-        iconTheme: const IconThemeData(color: Colors.white),
       ),
 
       //home: StreamBuilder<User?>(
@@ -75,7 +73,7 @@ class App extends StatelessWidget {
       //       return LogOutPage(cameras: snapshot.data ?? []);
       //     }),
 
-      home: HomePage(),
+      home: CameraExPage(),
     );
   }
 }
