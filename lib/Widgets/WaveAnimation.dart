@@ -1,6 +1,4 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
-import '../Widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:simple_animations/simple_animations.dart';
 
@@ -19,7 +17,7 @@ class WaveAnimationState extends State<WaveAnimation> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
+    // double width = MediaQuery.of(context).size.width;
     return CustomAnimation<double>(
       tween: Tween(begin: -100, end: timeBetweenSuccessiveStart + 0.0),
       duration: Duration(milliseconds: duration),
