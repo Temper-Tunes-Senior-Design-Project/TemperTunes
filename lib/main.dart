@@ -4,7 +4,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'Pages/LandingPage.dart';
-import 'Pages/HomePage.dart';
 
 import 'Widgets/MockNavigator.dart';
 import 'firebase_options.dart';
@@ -62,7 +61,7 @@ class App extends StatelessWidget {
       //  }
       //),
 
-      home: HomePage(),
+      home: LandingPage(),
 
       // home: FutureBuilder<List<CameraDescription>>(
       //     future: availableCameras(),
