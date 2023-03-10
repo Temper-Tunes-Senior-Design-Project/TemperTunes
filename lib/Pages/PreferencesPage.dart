@@ -84,7 +84,7 @@ class LargeScreen extends StatelessWidget {
                     child: Text(
                       'Preferences',
                       style: TextStyle(
-                        fontSize: 53,
+                        fontSize: 45,
                         fontFamily: 'Share Tech',
                         color: MyPalette.lightPurple,
                       ),
@@ -186,8 +186,7 @@ class LargeScreen extends StatelessWidget {
                             Container(
                                 alignment: Alignment.topLeft,
                                 child: Icon(
-                                  IconData(0xf052b,
-                                      fontFamily: 'MaterialIcons'),
+                                  IconData(0xe3ae, fontFamily: 'MaterialIcons'),
                                   color: MyPalette.white,
                                   size: 24,
                                 )),
@@ -496,7 +495,7 @@ class SmallScreen extends StatelessWidget {
                                               left: 0.12 * width),
                                           alignment: Alignment.topLeft,
                                           child: Icon(
-                                            IconData(0xf052b,
+                                            IconData(0xe3ae,
                                                 fontFamily: 'MaterialIcons'),
                                             color: MyPalette.white,
                                             size: 40,

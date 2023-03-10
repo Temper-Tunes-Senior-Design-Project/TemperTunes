@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mood_swing/Widgets/RippleLarge.dart';
 import '../Widgets/widgets.dart';
+import 'package:camera/camera.dart';
 
 Key UserButtonKey = Key("User Button");
+
+List<CameraDescription> cameras = [];
 
 class Body extends StatelessWidget {
   @override

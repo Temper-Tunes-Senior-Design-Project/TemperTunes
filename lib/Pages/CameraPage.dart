@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'package:mood_swing/Objects/FileTypes.dart';
+import 'package:mood_swing/Utilities/DatabaseRouter.dart';
 import 'package:mood_swing/Widgets/widgets.dart';
 import 'package:flutter/foundation.dart';
 import 'package:video_player/video_player.dart';
@@ -119,47 +121,68 @@ class _LargeScreenState extends State<LargeScreen> {
           image: DecorationImage(
               image: (defaultTargetPlatform == TargetPlatform.iOS ||
                       defaultTargetPlatform == TargetPlatform.android)
-                  ? AssetImage("assets/userPageSmall.png")
-                  : AssetImage("assets/userPageLarge.png"),
+                  ? AssetImage("assets/appBarBG.png")
+                  : AssetImage("assets/appBarBG.png"),
               fit: BoxFit.cover),
         ),
         child: Column(
           children: [
+            Container(
+              padding: EdgeInsets.only(left: 0.01 * width, top: 0.06 * height),
+              child: Row(
+                children: [
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: CircleBorder(),
+                    ),
+                    child: Icon(
+                      const IconData(0xf05bc, fontFamily: 'MaterialIcons'),
+                      color: Colors.white,
+                      size: 40,
+                    ),
+                    onPressed: () => Navigator.pop(context),
+                  )
+                ],
+              ),
+            ),
             Padding(
-              padding: EdgeInsets.all(height * 0.02),
+              padding: EdgeInsets.only(top: height * 0.02),
               child: Center(
                 child: SizedBox(
-                  height: height * 0.7,
+                  height: height * 0.6,
                   width: width * 0.7,
                   child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.black,
-                          border: Border.all(
-                              color: MyPalette.darkBlue, width: height * 0.01)),
-                      child: (pictureFile != null)
-                          ?
-                          //Display image to user
-                          Image.network(
-                              pictureFile!.path,
-                            )
-                          : (videoFile != null)
-                              ?
-                              //allow user to play video (video_player plugin)
-                              (videoController != null &&
-                                      videoController!.value.isInitialized)
-                                  //display the video
-                                  ? VideoPlayer(videoController!)
-                                  //controller not ready means that video is loading
-                                  : Center(
-                                      child: CircularProgressIndicator(
-                                          color: Colors.white))
-                              //show camera preview if initialized
-                              : (initializedCamCtrl)
-                                  ? CameraPreview(cameraController)
-                                  //otherwise show black container
-                                  : Material(
-                                      color: Colors.black,
-                                    )),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.black,
+                        border: Border.all(
+                            color: MyPalette.darkBlue, width: height * 0.01)),
+                    child: (pictureFile != null)
+                        ?
+                        //Display image to user
+                        Image.network(
+                            pictureFile!.path,
+                          )
+                        : (videoFile != null)
+                            ?
+                            //allow user to play video (video_player plugin)
+                            (videoController != null &&
+                                    videoController!.value.isInitialized)
+                                //display the video
+                                ? VideoPlayer(videoController!)
+                                //controller not ready means that video is loading
+                                : Center(
+                                    child: CircularProgressIndicator(
+                                        color: Colors.white),
+                                  )
+                            //show camera preview if initialized
+                            : (initializedCamCtrl)
+                                ? CameraPreview(cameraController)
+                                //otherwise show black container
+                                : Material(
+                                    color: Colors.black,
+                                  ),
+                  ),
                 ),
               ),
             ),
@@ -185,7 +208,10 @@ class _LargeScreenState extends State<LargeScreen> {
                       context: context,
                       heroTag: "Confirm Button",
                       icon: Icons.check_circle_rounded,
-                      onPressed: () {
+                      onPressed: () async {
+                        FileType type = pictureFile != null?FileType.JPEG:FileType.MP4;
+                        await DatabaseRouter().uploadFile(pictureFile??videoFile,type);
+                        Navigator.pop(context);
                         //NEXT PAGE TBD
                       },
                     )
@@ -245,23 +271,27 @@ class _LargeScreenState extends State<LargeScreen> {
 }
 
 class CameraPage extends StatelessWidget {
-  final List<CameraDescription>? cameras;
 
-  CameraPage({required this.cameras});
+  CameraPage();
 
   static const Key PageKey = Key("Camera Page");
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: PageKey,
-      appBar: AppBar(
-        title: Text("Emotion Identification",
-            style: TextStyle(
-                fontFamily: 'Share Tech', fontWeight: FontWeight.bold)),
-        backgroundColor: MyPalette.darkTurqoise,
-      ),
       resizeToAvoidBottomInset: false,
-      body: Body(cameras: cameras),
+      body: FutureBuilder<List<CameraDescription>>(
+        future: availableCameras(),
+        builder: (context,snapshot) {
+          if(snapshot.hasData) {
+            return Body(cameras: snapshot.data ?? []);
+          }
+          else
+            {
+              return CircularProgressIndicator();
+            }
+        }
+      ),
     );
   }
 }

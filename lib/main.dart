@@ -1,16 +1,18 @@
-import 'dart:ui';
-
+import 'package:camera/camera.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:mood_swing/Pages/LandingPage.dart';
+import 'package:mood_swing/Pages/HomePage.dart';
+import 'dart:ui';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'Pages/HomePage.dart';
-import 'Pages/LandingPage.dart';
 import 'Widgets/MockNavigator.dart';
 import 'firebase_options.dart';
+
+List<CameraDescription> cameras = [];
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,8 +20,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  if(kDebugMode)
-  {
+  if (kDebugMode) {
     print("----------------------------------");
     print("RUNNING APP IN DEBUG MODE");
     print("----------------------------------");
@@ -69,11 +70,10 @@ class App extends StatelessWidget {
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       home: StreamBuilder<User?>(
-        initialData: FirebaseAuth.instance.currentUser,
-        builder: (context,snapshot) {
-          return snapshot.data != null?HomePage():LandingPage();
-        }
-      ),
+          initialData: FirebaseAuth.instance.currentUser,
+          builder: (context, snapshot) {
+            return snapshot.data != null ? HomePage() : LandingPage();
+          }),
     );
   }
 }

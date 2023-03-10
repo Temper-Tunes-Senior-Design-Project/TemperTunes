@@ -6,7 +6,6 @@ version: 1.0.0+1
 
 environment:
   sdk: ">=2.17.6 <3.7.1"
-
 dependencies:
   flutter:
     sdk: flutter
@@ -19,7 +18,6 @@ dependencies:
   camera: ^0.10.3
   video_player: ^2.5.1
   pin_code_fields: ^7.4.0
-  flutter_pin_code_fields: ^1.2.0
   animations: ^2.0.7
   collapsible_sidebar: ^2.0.3+2
   sidebarx: ^0.14.0
@@ -29,6 +27,8 @@ dependencies:
   firebase_crashlytics: ^3.0.14
   cloud_firestore: ^4.4.2
   firebase_storage: ^11.0.15
+  form_field_validator: ^1.1.0
+  simple_animations: ^5.0.0+3
 
 dev_dependencies:
   flutter_test:
