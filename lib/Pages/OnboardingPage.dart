@@ -36,12 +36,13 @@ class _OnboardingPageState extends State<OnboardingPage> {
   }
 
   int _currentPage = 0;
-  List colors = const [
-    Color(0xffDAD3C8),
-    Color(0xffFFE5DE),
-    Color(0xffDCF6E6),
-  ];
+  // List colors = const [
+  //   Color(0xffDAD3C8),
+  //   Color(0xffFFE5DE),
+  //   Color(0xffDCF6E6),
+  // ];
 
+  ///Dot Image Status
   AnimatedContainer _buildDots({
     int? index,
   }) {
@@ -51,7 +52,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
         borderRadius: BorderRadius.all(
           Radius.circular(50),
         ),
-        color: Color(0xFF000000),
+        color: MyPalette.turqoise,
       ),
       margin: const EdgeInsets.only(right: 5),
       height: 10,
@@ -67,7 +68,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
     double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: colors[_currentPage],
       body: SafeArea(
         child: Column(
           children: [
@@ -83,27 +83,35 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     padding: const EdgeInsets.all(40.0),
                     child: Column(
                       children: [
+                        ///Image
                         Image.asset(
                           contents[i].image,
-                          height: SizeConfig.blockV! * 35,
+                          // height: SizeConfig.blockV! * 35,
+                          height: height * 0.4,
                         ),
                         SizedBox(
                           height: (height >= 840) ? 60 : 30,
                         ),
+
+                        ///Title
                         Text(
                           contents[i].title,
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontFamily: "Mulish",
+                            fontFamily: "Share Tech",
                             fontWeight: FontWeight.w600,
                             fontSize: (width <= 550) ? 30 : 35,
                           ),
                         ),
+
+                        ///spacer
                         const SizedBox(height: 15),
+
+                        ///Description
                         Text(
                           contents[i].desc,
                           style: TextStyle(
-                            fontFamily: "Mulish",
+                            fontFamily: "Maven Pro",
                             fontWeight: FontWeight.w300,
                             fontSize: (width <= 550) ? 17 : 25,
                           ),
@@ -115,6 +123,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 },
               ),
             ),
+
+            ///Dots
             Expanded(
               flex: 1,
               child: Column(
@@ -130,13 +140,22 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     ),
                   ),
                   _currentPage + 1 == contents.length
+
+                      ///Continue button on last page
                       ? Padding(
                           padding: const EdgeInsets.all(30),
                           child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => HomePage(),
+                                ),
+                              );
+                            },
                             child: const Text("Continue"),
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.green,
+                              backgroundColor: Colors.teal,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50),
                               ),
@@ -150,6 +169,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             ),
                           ),
                         )
+
+                      ///Skip and next buttons on other pages
                       : Padding(
                           padding: const EdgeInsets.all(30),
                           child: Row(
@@ -227,7 +248,7 @@ List<OnboardingContents> contents = [
   ),
   OnboardingContents(
     title: "Set Your Preferences",
-    image: "assets/linkIcon.png",
+    image: "assets/preferencesIcon.png",
     desc:
         "But understanding the contributions our colleagues make to our teams and companies.",
   ),

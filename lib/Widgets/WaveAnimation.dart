@@ -36,7 +36,7 @@ class WaveAnimationState extends State<WaveAnimation> {
                 image: AssetImage("assets/wave.png"),
                 fit: BoxFit.fill,
                 width: width,
-                height: height,
+                height: 0.5 * height,
                 //   height: double.maxFinite,
                 filterQuality: FilterQuality.high,
               ),

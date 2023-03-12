@@ -144,211 +144,214 @@ class _LargeScreenState extends State<LargeScreen> {
     // Ratio of camera or device screen if the camera isn't initialized
     //var tempRatio = (aspectRatio != 0) ? aspectRatio : (screenRatio);
     return Scaffold(
-      body: Container(
-        width: width,
-        height: height,
-        //background
-        decoration: BoxDecoration(
-          color: Colors.black,
-          // image: DecorationImage(
-          //     image: (defaultTargetPlatform == TargetPlatform.iOS ||
-          //             defaultTargetPlatform == TargetPlatform.android)
-          //         ? AssetImage("assets/userPageSmall.png")
-          //         : AssetImage("assets/userPageLarge.png"),
-          //     fit: BoxFit.cover),
-        ),
-        child: Column(
-          children: [
-            // Container(
-            //   padding: EdgeInsets.only(left: 0.01 * width, top: 0.06 * height),
-            // ),
+      body: SafeArea(
+        child: Container(
+          width: width,
+          height: height,
+          //background
+          decoration: BoxDecoration(
+            color: Colors.black,
+            // image: DecorationImage(
+            //     image: (defaultTargetPlatform == TargetPlatform.iOS ||
+            //             defaultTargetPlatform == TargetPlatform.android)
+            //         ? AssetImage("assets/userPageSmall.png")
+            //         : AssetImage("assets/userPageLarge.png"),
+            //     fit: BoxFit.cover),
+          ),
+          child: Column(
+            children: [
+              // Container(
+              //   padding: EdgeInsets.only(left: 0.01 * width, top: 0.06 * height),
+              // ),
 
-            Stack(
-              alignment: Alignment.center,
-              children: [
-                //Camera Box
-                Padding(
-                  padding: EdgeInsets.only(
-                      top: 0.06 * height,
-                      left: 0.02 * width,
-                      right: 0.02 * width),
-                  child: Center(
-                    child: SizedBox(
-                      //          height: (height * 0.7 * ((tempRatio < 1) ? ((1 / tempRatio / screenRatio)) : 1)),
-                      //          width: (width * 0.7 * (tempRatio / screenRatio)),
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  //Camera Box
+                  Padding(
+                    padding: EdgeInsets.only(
+                        top: 0.06 * height,
+                        left: 0.02 * width,
+                        right: 0.02 * width),
+                    child: Center(
+                      child: SizedBox(
+                        //          height: (height * 0.7 * ((tempRatio < 1) ? ((1 / tempRatio / screenRatio)) : 1)),
+                        //          width: (width * 0.7 * (tempRatio / screenRatio)),
 
-                      //      height: height * 0.75,
-                      height: height * 0.93,
-                      width: width,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.black, //borders on photos
-                          // border: Border.all(
-                          //     color: MyPalette.darkBlue, width: height * 0.01)
+                        //      height: height * 0.75,
+                        height: height * 0.93,
+                        width: width,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.black, //borders on photos
+                            // border: Border.all(
+                            //     color: MyPalette.darkBlue, width: height * 0.01)
+                          ),
+                          child: (pictureFile != null)
+                              ?
+                              //Display image to user
+                              Image.network(
+                                  pictureFile!.path,
+                                )
+                              : (videoFile != null)
+                                  ?
+                                  //allow user to play video (video_player plugin)
+                                  (videoController != null &&
+                                          videoController!.value.isInitialized)
+                                      //display the video
+                                      ? VideoPlayer(videoController!)
+                                      //controller not ready means that video is loading
+                                      : Center(
+                                          child: CircularProgressIndicator(
+                                              color: Colors.white),
+                                        )
+                                  //show camera preview if initialized
+                                  : (initializedCamCtrl)
+                                      ? CameraPreview(cameraController!)
+                                      //otherwise show black container
+                                      : Material(
+                                          color: Colors.black,
+                                        ),
                         ),
-                        child: (pictureFile != null)
-                            ?
-                            //Display image to user
-                            Image.network(
-                                pictureFile!.path,
-                              )
-                            : (videoFile != null)
-                                ?
-                                //allow user to play video (video_player plugin)
-                                (videoController != null &&
-                                        videoController!.value.isInitialized)
-                                    //display the video
-                                    ? VideoPlayer(videoController!)
-                                    //controller not ready means that video is loading
-                                    : Center(
-                                        child: CircularProgressIndicator(
-                                            color: Colors.white),
-                                      )
-                                //show camera preview if initialized
-                                : (initializedCamCtrl)
-                                    ? CameraPreview(cameraController!)
-                                    //otherwise show black container
-                                    : Material(
-                                        color: Colors.black,
-                                      ),
                       ),
                     ),
                   ),
-                ),
 
-                //Buttons
-                Positioned(
-                  bottom: 0,
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                      top: height * 0.05,
-                      // left: 0.02 * height,
-                      // right: 0.02 * height,
-                      //  bottom: 0,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        ///CAMERA BUTTONS
-                        if (videoFile != null || pictureFile != null) ...{
-                          ///back button
-                          CameraButtonConfirmOrBack(
-                            context: context,
-                            heroTag: "Back Button",
-                            text: "Retake",
-                            onPressed: () async {
-                              pictureFile = null;
-                              videoFile = null;
-                              onNewCameraSelected(toggle: false);
-                              setState(() {});
-                            },
-                          ),
-
-                          ///confirm button
-                          CameraButtonConfirmOrBack(
-                            context: context,
-                            heroTag: "Confirm Button",
-                            text: "Confirm",
-                            onPressed: () async {
-                              FileType type = pictureFile != null
-                                  ? FileType.JPEG
-                                  : FileType.MP4;
-                              await DatabaseRouter()
-                                  .uploadFile(pictureFile ?? videoFile, type);
-                              Navigator.pop(context);
-                              //var res = await CloudFunctions().get_mood();
-                              //print(res);
-                              //NEXT PAGE TBD
-                            },
-                          )
-                        } else if (recording) ...{
-                          CameraButton(
-                            context: context,
-                            toolTipText: 'Stop Recording',
-                            heroTag: "Stop Recording",
-                            icon: Icons.stop_circle_rounded,
-                            onPressed: () async {
-                              videoFile =
-                                  await cameraController?.stopVideoRecording();
-                              cameraController?.dispose();
-                              initializedCamCtrl = false;
-                              recording = false;
-                              setState(() {});
-                              await _startVideoPlayer();
-                            },
-                          ),
-                        } else ...{
-                          ///Camera Navbar
-                          Container(
-                            height: 0.1 * height,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.white,
+                  //Buttons
+                  Positioned(
+                    bottom: 0,
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                        top: height * 0.05,
+                        // left: 0.02 * height,
+                        // right: 0.02 * height,
+                        //  bottom: 0,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          ///CAMERA BUTTONS
+                          if (videoFile != null || pictureFile != null) ...{
+                            ///back button
+                            CameraButtonConfirmOrBack(
+                              context: context,
+                              heroTag: "Back Button",
+                              text: "Retake",
+                              onPressed: () async {
+                                pictureFile = null;
+                                videoFile = null;
+                                onNewCameraSelected(toggle: false);
+                                setState(() {});
+                              },
                             ),
-                            child: Row(
-                              children: [
-                                Container(
-                                  padding: EdgeInsets.only(left: 0.05 * width),
 
-                                  ///return to app
-                                  child: CameraButton(
-                                    context: context,
-                                    heroTag: "nothing",
-                                    toolTipText: "Return to Home page",
-                                    //icon: Icon(Icons.exit_to_app_rounded),
-                                    icon: Icons.exit_to_app_rounded,
+                            ///confirm button
+                            CameraButtonConfirmOrBack(
+                              context: context,
+                              heroTag: "Confirm Button",
+                              text: "Confirm",
+                              onPressed: () async {
+                                FileType type = pictureFile != null
+                                    ? FileType.JPEG
+                                    : FileType.MP4;
+                                await DatabaseRouter()
+                                    .uploadFile(pictureFile ?? videoFile, type);
+                                Navigator.pop(context);
+                                //var res = await CloudFunctions().get_mood();
+                                //print(res);
+                                //NEXT PAGE TBD
+                              },
+                            )
+                          } else if (recording) ...{
+                            CameraButton(
+                              context: context,
+                              toolTipText: 'Stop Recording',
+                              heroTag: "Stop Recording",
+                              icon: Icons.stop_circle_rounded,
+                              onPressed: () async {
+                                videoFile = await cameraController
+                                    ?.stopVideoRecording();
+                                cameraController?.dispose();
+                                initializedCamCtrl = false;
+                                recording = false;
+                                setState(() {});
+                                await _startVideoPlayer();
+                              },
+                            ),
+                          } else ...{
+                            ///Camera Navbar
+                            Container(
+                              height: 0.1 * height,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.white,
+                              ),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    padding:
+                                        EdgeInsets.only(left: 0.05 * width),
 
-                                    //color: Colors.grey,
-                                    onPressed: () => Navigator.pop(context),
+                                    ///return to app
+                                    child: CameraButton(
+                                      context: context,
+                                      heroTag: "nothing",
+                                      toolTipText: "Return to Home page",
+                                      //icon: Icon(Icons.exit_to_app_rounded),
+                                      icon: Icons.exit_to_app_rounded,
+
+                                      //color: Colors.grey,
+                                      onPressed: () => Navigator.pop(context),
+                                    ),
                                   ),
-                                ),
-                                CameraButton(
-                                  context: context,
-                                  toolTipText: 'Record Video',
-                                  heroTag: "Record Video",
-                                  icon: Icons.videocam_rounded,
-                                  onPressed: () async {
-                                    await cameraController
-                                        ?.startVideoRecording();
-                                    recording = true;
-                                    setState(() {});
-                                  },
-                                ),
-                                CameraButton(
-                                  context: context,
-                                  toolTipText: 'Take Picture',
-                                  heroTag: "Snap Picture",
-                                  icon: Icons.camera_rounded,
-                                  onPressed: () async {
-                                    pictureFile =
-                                        await cameraController?.takePicture();
-                                    cameraController?.dispose();
-                                    initializedCamCtrl = false;
-                                    // runModel();
-                                    setState(() {});
-                                  },
-                                ),
-                                CameraButton(
-                                  context: context,
-                                  toolTipText: 'Change Camera',
-                                  heroTag: "Toggle Camera",
-                                  icon: Icons.flip_camera_ios_rounded,
-                                  onPressed: () async {
-                                    onNewCameraSelected(toggle: true);
-                                    setState(() {});
-                                  },
-                                ),
-                              ],
+                                  CameraButton(
+                                    context: context,
+                                    toolTipText: 'Record Video',
+                                    heroTag: "Record Video",
+                                    icon: Icons.videocam_rounded,
+                                    onPressed: () async {
+                                      await cameraController
+                                          ?.startVideoRecording();
+                                      recording = true;
+                                      setState(() {});
+                                    },
+                                  ),
+                                  CameraButton(
+                                    context: context,
+                                    toolTipText: 'Take Picture',
+                                    heroTag: "Snap Picture",
+                                    icon: Icons.camera_rounded,
+                                    onPressed: () async {
+                                      pictureFile =
+                                          await cameraController?.takePicture();
+                                      cameraController?.dispose();
+                                      initializedCamCtrl = false;
+                                      // runModel();
+                                      setState(() {});
+                                    },
+                                  ),
+                                  CameraButton(
+                                    context: context,
+                                    toolTipText: 'Change Camera',
+                                    heroTag: "Toggle Camera",
+                                    icon: Icons.flip_camera_ios_rounded,
+                                    onPressed: () async {
+                                      onNewCameraSelected(toggle: true);
+                                      setState(() {});
+                                    },
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        }
-                      ],
+                          }
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

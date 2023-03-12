@@ -1,6 +1,10 @@
+//CHANGE EMAIL
+
 import 'package:flutter/material.dart';
 import '../Widgets/widgets.dart';
 import 'package:mood_swing/Pages/HomePage.dart';
+
+import 'OTPEmailPage.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -18,17 +22,17 @@ class LargeScreen extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
-      child: Container(
-        width: width,
-        height: height,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage("assets/loginPageLarge.png"),
-              fit: BoxFit.cover),
-        ),
-        child: Padding(
+      child: SafeArea(
+        child: Container(
+          width: width,
+          height: height,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("assets/loginPageLarge.png"),
+                fit: BoxFit.cover),
+          ),
+
           ///back arrow
-          padding: EdgeInsets.only(top: 0.03 * height),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
@@ -193,6 +197,8 @@ class LargeScreen extends StatelessWidget {
                               left: 0.03 * width, top: height * 0.01),
                           alignment: Alignment.topLeft,
                           child: TextField(
+                            obscureText: true,
+                            obscuringCharacter: "*",
                             style: TextStyle(
                               fontFamily: 'Maven Pro',
                               fontWeight: FontWeight.w100,
@@ -222,43 +228,56 @@ class LargeScreen extends StatelessWidget {
                       ],
                     ),
 
-                    ///Register button
+                    ///Submit button
                     Container(
                       child: TextButton(
                         child: Container(
                           padding: EdgeInsets.only(top: height * 0.02),
                           child: Container(
-                            width: 0.5 * width,
+                            width: 0.2 * width,
                             height: 0.056 * height,
                             decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  begin: Alignment.topRight,
-                                  end: Alignment.bottomLeft,
-                                  colors: [
-                                    MyPalette.slateBlue,
-                                    MyPalette.brightMagenta,
-                                    MyPalette.turqoise,
-                                  ],
+                              gradient: LinearGradient(
+                                begin: Alignment.topRight,
+                                end: Alignment.bottomLeft,
+                                colors: [
+                                  MyPalette.slateBlue,
+                                  MyPalette.brightMagenta,
+                                  MyPalette.turqoise,
+                                ],
+                              ),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(15),
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  offset: Offset(0, 1),
+                                  color: MyPalette.brightMagenta,
+                                  blurRadius: 16,
                                 ),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15))),
+                              ],
+                            ),
                             child: Align(
                               alignment: Alignment.center,
-                              child: Text("Register",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 25,
-                                    fontFamily: 'Share Tech',
-                                    color: Colors.white,
-                                  )),
+                              child: Text(
+                                "Submit",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 25,
+                                  fontFamily: 'Share Tech',
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
                           ),
                         ),
                         onPressed: () {
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => HomePage()));
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HomePage(),
+                            ),
+                          );
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.transparent,
@@ -270,43 +289,29 @@ class LargeScreen extends StatelessWidget {
                     ///Forgot Password
                     Container(
                       padding: EdgeInsets.only(top: 0.02 * height),
-                      child: Column(
-                        children: [
-                          Text(
-                            'Already have an account?',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: 'Maven Pro',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Container(
-                            alignment: Alignment.center,
-                            child: Column(
-                              children: [
-                                TextButton(
-                                  child: Text(
-                                    'Go to login',
-                                    style: TextStyle(
-                                      fontFamily: 'Maven Pro',
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
-                                      color: MyPalette.turqoise,
-                                    ),
-                                  ),
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => HomePage()));
-                                  },
+                      child: Container(
+                        alignment: Alignment.center,
+                        child: Column(
+                          children: [
+                            TextButton(
+                              child: Text(
+                                'Forgot your password?',
+                                style: TextStyle(
+                                  fontFamily: 'Maven Pro',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                  color: MyPalette.turqoise,
                                 ),
-                              ],
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => OTPEmailPage()));
+                              },
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -337,17 +342,16 @@ class SmallScreen extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
-      child: Container(
-        height: height,
-        width: width,
-        decoration: BoxDecoration(
-          //set img to bg of body
-          image: DecorationImage(
-              image: AssetImage("assets/loginPageSmall.png"),
-              fit: BoxFit.cover),
-        ),
-        child: Padding(
-          padding: EdgeInsets.only(left: 0.01 * width, top: 0.06 * height),
+      child: SafeArea(
+        child: Container(
+          height: height,
+          width: width,
+          decoration: BoxDecoration(
+            //set img to bg of body
+            image: DecorationImage(
+                image: AssetImage("assets/loginPageSmall.png"),
+                fit: BoxFit.cover),
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
@@ -379,7 +383,7 @@ class SmallScreen extends StatelessWidget {
                       padding: EdgeInsets.only(
                           top: height * 0.02, bottom: height * 0.005),
                       child: Image.asset("assets/music_swing_logo_small.png",
-                          scale: 2.5),
+                          scale: 2.2),
                     ),
 
                     ///current email
@@ -513,6 +517,8 @@ class SmallScreen extends StatelessWidget {
                               left: 0.12 * width, top: height * 0.005),
                           alignment: Alignment.topLeft,
                           child: TextField(
+                            obscureText: true,
+                            obscuringCharacter: "*",
                             style: TextStyle(
                               fontFamily: 'Maven Pro',
                               fontWeight: FontWeight.w100,
@@ -520,15 +526,16 @@ class SmallScreen extends StatelessWidget {
                               fontSize: 20,
                             ),
                             decoration: const InputDecoration(
-                                hintStyle: TextStyle(color: Colors.white60),
-                                hintText: 'Password',
-                                border: UnderlineInputBorder(
-                                  borderSide:
-                                      BorderSide(width: 3, color: Colors.white),
-                                ),
-                                labelText: 'Please enter your password',
-                                labelStyle: TextStyle(
-                                    fontSize: 15, color: Colors.white54)),
+                              hintStyle: TextStyle(color: Colors.white60),
+                              hintText: 'Password',
+                              border: UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(width: 3, color: Colors.white),
+                              ),
+                              labelText: 'Please enter your password',
+                              labelStyle: TextStyle(
+                                  fontSize: 15, color: Colors.white54),
+                            ),
                           ),
                         ),
 
@@ -544,35 +551,48 @@ class SmallScreen extends StatelessWidget {
                       ],
                     ),
 
-                    ///Register Button
+                    SizedBox(height: height * 0.02),
+
+                    ///Submit Button
                     Container(
                       child: TextButton(
                         child: Container(
                           padding: EdgeInsets.only(top: height * 0.015),
                           child: Container(
-                            width: 0.8 * width,
+                            width: 0.4 * width,
                             height: 0.05 * height,
                             decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  begin: Alignment.topRight,
-                                  end: Alignment.bottomLeft,
-                                  colors: [
-                                    MyPalette.slateBlue,
-                                    MyPalette.brightMagenta,
-                                    MyPalette.turqoise,
-                                  ],
+                              gradient: LinearGradient(
+                                begin: Alignment.topRight,
+                                end: Alignment.bottomLeft,
+                                colors: [
+                                  MyPalette.slateBlue,
+                                  MyPalette.brightMagenta,
+                                  MyPalette.turqoise,
+                                ],
+                              ),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(15),
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  offset: Offset(0, 1),
+                                  color: MyPalette.brightMagenta,
+                                  blurRadius: 16,
                                 ),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15))),
+                              ],
+                            ),
                             child: Align(
                               alignment: Alignment.center,
-                              child: Text("Submit",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 25,
-                                    fontFamily: 'Share Tech',
-                                    color: Colors.white,
-                                  )),
+                              child: Text(
+                                "Submit",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 25,
+                                  fontFamily: 'Share Tech',
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
                           ),
                         ),
@@ -592,18 +612,25 @@ class SmallScreen extends StatelessWidget {
                     ///Already Have an account
                     Container(
                       padding: EdgeInsets.only(top: 0.01 * height),
-                      child: Container(
-                        child: Text(
-                          'Forgot your password?',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontFamily: 'Maven Pro',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            color: MyPalette.turqoise,
+                      child: TextButton(
+                          child: Text(
+                            'Forgot your password?',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontFamily: 'Maven Pro',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              color: MyPalette.turqoise,
+                            ),
                           ),
-                        ),
-                      ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => OTPEmailPage(),
+                              ),
+                            );
+                          }),
                     ),
                   ],
                 ),

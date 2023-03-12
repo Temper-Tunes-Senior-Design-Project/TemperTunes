@@ -42,14 +42,16 @@ class VerificationPage extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          Container(
-            height: height,
-            width: width,
-            child: Body(),
-          ),
-        ],
+      child: SafeArea(
+        child: Column(
+          children: [
+            Container(
+              height: height,
+              width: width,
+              child: Body(),
+            ),
+          ],
+        ),
       ),
     );
   }
