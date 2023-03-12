@@ -130,7 +130,7 @@ class SidebarDrawer extends StatelessWidget {
 
         ///User Profile
         SidebarXItem(
-          icon: IconData(0xe491, fontFamily: 'MaterialIcons'),
+          icon: const IconData(0xe491, fontFamily: 'MaterialIcons'),
           label: 'User Profile',
           onTap: () {
             Navigator.push(
@@ -160,13 +160,13 @@ class SidebarDrawer extends StatelessWidget {
 
         ///Existing Playlists
         SidebarXItem(
-          icon: IconData(0xe4d3, fontFamily: 'MaterialIcons'),
+          icon: const IconData(0xe4d3, fontFamily: 'MaterialIcons'),
           label: 'Existing Playlists',
         ),
 
         ///Settings/Preferences
         SidebarXItem(
-          icon: IconData(0xec76, fontFamily: 'MaterialIcons'),
+          icon: const IconData(0xec76, fontFamily: 'MaterialIcons'),
           label: 'User Preferences',
           onTap: () {
             Navigator.push(

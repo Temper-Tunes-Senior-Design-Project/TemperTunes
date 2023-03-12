@@ -122,7 +122,7 @@ class _LargeScreenState extends State<LargeScreen> {
                               decoration: InputDecoration(
                                 //icon
                                 prefixIcon: Icon(
-                                  IconData(0xe491, fontFamily: 'MaterialIcons'),
+                                  const IconData(0xe491, fontFamily: 'MaterialIcons'),
                                   color: MyPalette.white,
                                   size: 34,
                                 ),
@@ -196,7 +196,7 @@ class _LargeScreenState extends State<LargeScreen> {
 
                                 ///PrefixIcon
                                 prefixIcon: Icon(
-                                  IconData(0xe3ae, fontFamily: 'MaterialIcons'),
+                                  const IconData(0xe3ae, fontFamily: 'MaterialIcons'),
                                   color: MyPalette.white,
                                   size: 34,
                                 ),
@@ -463,7 +463,7 @@ class _SmallScreenState extends State<SmallScreen> {
                                   widthFactor: 0,
                                   heightFactor: 1.0,
                                   child: Icon(
-                                    IconData(0xe491,
+                                    const IconData(0xe491,
                                         fontFamily: 'MaterialIcons'),
                                     color: MyPalette.white,
                                     size: 30,
@@ -535,7 +535,7 @@ class _SmallScreenState extends State<SmallScreen> {
                                 prefixIcon: Align(
                                   widthFactor: 1.0,
                                   child: Icon(
-                                    IconData(0xe3ae,
+                                    const IconData(0xe3ae,
                                         fontFamily: 'MaterialIcons'),
                                     color: MyPalette.white,
                                     size: 32,

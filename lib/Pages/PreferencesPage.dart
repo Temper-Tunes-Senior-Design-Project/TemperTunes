@@ -43,7 +43,7 @@ class LargeScreen extends StatelessWidget {
                       children: [
                         ElevatedButton(
                           child: Icon(
-                            IconData(0xf05bc, fontFamily: 'MaterialIcons'),
+                            const IconData(0xf05bc, fontFamily: 'MaterialIcons'),
                             color: Colors.white,
                             size: 40,
                           ),
@@ -101,7 +101,7 @@ class LargeScreen extends StatelessWidget {
                             Container(
                               alignment: Alignment.topLeft,
                               child: Icon(
-                                IconData(0xe491, fontFamily: 'MaterialIcons'),
+                                const IconData(0xe491, fontFamily: 'MaterialIcons'),
                                 color: MyPalette.white,
                                 size: 24,
                               ),
@@ -146,7 +146,7 @@ class LargeScreen extends StatelessWidget {
                             Container(
                                 alignment: Alignment.topLeft,
                                 child: Icon(
-                                  IconData(0xe22a, fontFamily: 'MaterialIcons'),
+                                  const IconData(0xe22a, fontFamily: 'MaterialIcons'),
                                   color: MyPalette.white,
                                   size: 24,
                                 )),
@@ -186,7 +186,7 @@ class LargeScreen extends StatelessWidget {
                             Container(
                                 alignment: Alignment.topLeft,
                                 child: Icon(
-                                  IconData(0xe3ae, fontFamily: 'MaterialIcons'),
+                                  const IconData(0xe3ae, fontFamily: 'MaterialIcons'),
                                   color: MyPalette.white,
                                   size: 24,
                                 )),
@@ -223,7 +223,7 @@ class LargeScreen extends StatelessWidget {
                         Container(
                             alignment: Alignment.topLeft,
                             child: Icon(
-                              IconData(0xe91c, fontFamily: 'MaterialIcons'),
+                              const IconData(0xe91c, fontFamily: 'MaterialIcons'),
                               color: MyPalette.white,
                               size: 24,
                             )),
@@ -253,7 +253,7 @@ class LargeScreen extends StatelessWidget {
                         Container(
                             alignment: Alignment.topLeft,
                             child: Icon(
-                              IconData(0xe9ba, fontFamily: 'MaterialIcons'),
+                              const IconData(0xe9ba, fontFamily: 'MaterialIcons'),
                               color: MyPalette.white,
                               size: 24,
                             )),
@@ -283,7 +283,7 @@ class LargeScreen extends StatelessWidget {
                         Container(
                             alignment: Alignment.topLeft,
                             child: Icon(
-                              IconData(0xe3b3, fontFamily: 'MaterialIcons'),
+                              const IconData(0xe3b3, fontFamily: 'MaterialIcons'),
                               color: MyPalette.white,
                               size: 24,
                             )),
@@ -348,7 +348,7 @@ class SmallScreen extends StatelessWidget {
                               foregroundColor: Colors.transparent,
                             ),
                             child: Icon(
-                              IconData(0xf05bc, fontFamily: 'MaterialIcons'),
+                              const IconData(0xf05bc, fontFamily: 'MaterialIcons'),
                               color: Colors.white,
                               size: 40,
                             ),
@@ -402,7 +402,7 @@ class SmallScreen extends StatelessWidget {
                                               left: 0.12 * width),
                                           alignment: Alignment.topLeft,
                                           child: Icon(
-                                            IconData(0xe491,
+                                            const IconData(0xe491,
                                                 fontFamily: 'MaterialIcons'),
                                             color: MyPalette.white,
                                             size: 40,
@@ -449,7 +449,7 @@ class SmallScreen extends StatelessWidget {
                                               left: 0.12 * width),
                                           alignment: Alignment.topLeft,
                                           child: Icon(
-                                            IconData(0xe22a,
+                                            const IconData(0xe22a,
                                                 fontFamily: 'MaterialIcons'),
                                             color: MyPalette.white,
                                             size: 40,
@@ -495,7 +495,7 @@ class SmallScreen extends StatelessWidget {
                                               left: 0.12 * width),
                                           alignment: Alignment.topLeft,
                                           child: Icon(
-                                            IconData(0xe3ae,
+                                            const IconData(0xe3ae,
                                                 fontFamily: 'MaterialIcons'),
                                             color: MyPalette.white,
                                             size: 40,
@@ -540,7 +540,7 @@ class SmallScreen extends StatelessWidget {
                                             EdgeInsets.only(left: 0.12 * width),
                                         alignment: Alignment.topLeft,
                                         child: Icon(
-                                          IconData(0xe91c,
+                                          const IconData(0xe91c,
                                               fontFamily: 'MaterialIcons'),
                                           color: MyPalette.white,
                                           size: 40,
@@ -571,7 +571,7 @@ class SmallScreen extends StatelessWidget {
                                         EdgeInsets.only(left: 0.12 * width),
                                         alignment: Alignment.topLeft,
                                         child: Icon(
-                                          IconData(0xe3b3,
+                                          const IconData(0xe3b3,
                                               fontFamily: 'MaterialIcons'),
                                           color: MyPalette.white,
                                           size: 40,
@@ -603,7 +603,7 @@ class SmallScreen extends StatelessWidget {
                                             EdgeInsets.only(left: 0.12 * width),
                                         alignment: Alignment.topLeft,
                                         child: Icon(
-                                          IconData(0xe1b9,
+                                          const IconData(0xe1b9,
                                               fontFamily: 'MaterialIcons'),
                                           color: MyPalette.white,
                                           size: 40,

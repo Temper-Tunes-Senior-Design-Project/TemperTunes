@@ -81,7 +81,7 @@ class _VerificationSmallState extends State<VerificationSmall> {
                           shape: CircleBorder(),
                         ),
                         child: Icon(
-                          IconData(0xf05bc, fontFamily: 'MaterialIcons'),
+                          const IconData(0xf05bc, fontFamily: 'MaterialIcons'),
                           color: Colors.white,
                           size: 40,
                         ),
