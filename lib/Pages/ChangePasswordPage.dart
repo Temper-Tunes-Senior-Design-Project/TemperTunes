@@ -513,7 +513,7 @@ class SmallScreen extends StatelessWidget {
                       ),
                     ),
 
-                    ///Already Have an account
+                    ///Forgot Password
                     Container(
                       padding: EdgeInsets.only(top: 0.01 * height),
                       child: Container(
@@ -542,7 +542,6 @@ class SmallScreen extends StatelessWidget {
 
 class ChangePasswordPage extends StatefulWidget {
   _ChangePasswordPageState createState() => _ChangePasswordPageState();
-
 
   Widget build(Object context) {
     return Scaffold(

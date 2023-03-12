@@ -3,7 +3,11 @@ import 'dart:ui';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
+import 'package:mood_swing/Pages/OTPEmailPage.dart';
 import 'Pages/LandingPage.dart';
+import 'Pages/HomePage.dart';
+
+//import 'Pages/OnboardingPage.dart';
 
 import 'Widgets/MockNavigator.dart';
 import 'firebase_options.dart';
@@ -61,7 +65,7 @@ class App extends StatelessWidget {
       //  }
       //),
 
-      home: LandingPage(),
+      home: OTPEmailPage(),
 
       // home: FutureBuilder<List<CameraDescription>>(
       //     future: availableCameras(),
