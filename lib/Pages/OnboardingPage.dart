@@ -52,7 +52,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
         borderRadius: BorderRadius.all(
           Radius.circular(50),
         ),
-        color: MyPalette.turqoise,
+        color: MyPalette.brightMagenta,
       ),
       margin: const EdgeInsets.only(right: 5),
       height: 10,
@@ -69,159 +69,171 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              flex: 3,
-              child: PageView.builder(
-                physics: const BouncingScrollPhysics(),
-                controller: _controller,
-                onPageChanged: (value) => setState(() => _currentPage = value),
-                itemCount: contents.length,
-                itemBuilder: (context, i) {
-                  return Padding(
-                    padding: const EdgeInsets.all(40.0),
-                    child: Column(
-                      children: [
-                        ///Image
-                        Image.asset(
-                          contents[i].image,
-                          // height: SizeConfig.blockV! * 35,
-                          height: height * 0.4,
-                        ),
-                        SizedBox(
-                          height: (height >= 840) ? 60 : 30,
-                        ),
-
-                        ///Title
-                        Text(
-                          contents[i].title,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontFamily: "Share Tech",
-                            fontWeight: FontWeight.w600,
-                            fontSize: (width <= 550) ? 30 : 35,
+        child: Container(
+          alignment: Alignment.topCenter,
+          width: width,
+          height: height,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("assets/appBarBG.png"), fit: BoxFit.cover),
+          ),
+          child: Column(
+            children: [
+              Expanded(
+                flex: 3,
+                child: PageView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  controller: _controller,
+                  onPageChanged: (value) =>
+                      setState(() => _currentPage = value),
+                  itemCount: contents.length,
+                  itemBuilder: (context, i) {
+                    return Padding(
+                      padding: const EdgeInsets.all(40.0),
+                      child: Column(
+                        children: [
+                          ///Image
+                          Image.asset(
+                            contents[i].image,
+                            height: height * 0.38,
                           ),
-                        ),
-
-                        ///spacer
-                        const SizedBox(height: 15),
-
-                        ///Description
-                        Text(
-                          contents[i].desc,
-                          style: TextStyle(
-                            fontFamily: "Maven Pro",
-                            fontWeight: FontWeight.w300,
-                            fontSize: (width <= 550) ? 17 : 25,
+                          SizedBox(
+                            height: (height >= 840) ? 60 : 30,
                           ),
-                          textAlign: TextAlign.center,
-                        )
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ),
 
-            ///Dots
-            Expanded(
-              flex: 1,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: List.generate(
-                      contents.length,
-                      (int index) => _buildDots(
-                        index: index,
-                      ),
-                    ),
-                  ),
-                  _currentPage + 1 == contents.length
-
-                      ///Continue button on last page
-                      ? Padding(
-                          padding: const EdgeInsets.all(30),
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => HomePage(),
-                                ),
-                              );
-                            },
-                            child: const Text("Continue"),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.teal,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50),
-                              ),
-                              padding: (width <= 550)
-                                  ? const EdgeInsets.symmetric(
-                                      horizontal: 100, vertical: 20)
-                                  : EdgeInsets.symmetric(
-                                      horizontal: width * 0.2, vertical: 25),
-                              textStyle:
-                                  TextStyle(fontSize: (width <= 550) ? 13 : 17),
+                          ///Title
+                          Text(
+                            contents[i].title,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontFamily: "Share Tech",
+                              fontWeight: FontWeight.w600,
+                              color: MyPalette.lightPurple,
+                              fontSize: (width <= 550) ? 30 : 35,
                             ),
                           ),
-                        )
 
-                      ///Skip and next buttons on other pages
-                      : Padding(
-                          padding: const EdgeInsets.all(30),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              TextButton(
-                                onPressed: () {
-                                  _controller.jumpToPage(2);
-                                },
-                                child: const Text(
-                                  "SKIP",
-                                  style: TextStyle(color: Colors.black),
-                                ),
-                                style: TextButton.styleFrom(
-                                  elevation: 0,
-                                  textStyle: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: (width <= 550) ? 13 : 17,
-                                  ),
-                                ),
-                              ),
-                              ElevatedButton(
-                                onPressed: () {
-                                  _controller.nextPage(
-                                    duration: const Duration(milliseconds: 200),
-                                    curve: Curves.easeIn,
-                                  );
-                                },
-                                child: const Text("NEXT"),
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.purple,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50),
-                                  ),
-                                  elevation: 0,
-                                  padding: (width <= 550)
-                                      ? const EdgeInsets.symmetric(
-                                          horizontal: 30, vertical: 20)
-                                      : const EdgeInsets.symmetric(
-                                          horizontal: 30, vertical: 25),
-                                  textStyle: TextStyle(
-                                      fontSize: (width <= 550) ? 13 : 17),
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                ],
+                          ///spacer
+                          const SizedBox(height: 15),
+
+                          ///Description
+                          Text(
+                            contents[i].desc,
+                            style: TextStyle(
+                              fontFamily: "Maven Pro",
+                              color: Colors.white70,
+                              fontWeight: FontWeight.w300,
+                              fontSize: (width <= 550) ? 17 : 25,
+                            ),
+                            textAlign: TextAlign.center,
+                          )
+                        ],
+                      ),
+                    );
+                  },
+                ),
               ),
-            ),
-          ],
+
+              ///Dots
+              Expanded(
+                flex: 1,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: List.generate(
+                        contents.length,
+                        (int index) => _buildDots(
+                          index: index,
+                        ),
+                      ),
+                    ),
+                    _currentPage + 1 == contents.length
+
+                        ///Continue button on last page
+                        ? Padding(
+                            padding: const EdgeInsets.all(30),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => HomePage(),
+                                  ),
+                                );
+                              },
+                              child: const Text("GET STARTED"),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: MyPalette.slateBlue,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(50),
+                                ),
+                                padding: (width <= 550)
+                                    ? const EdgeInsets.symmetric(
+                                        horizontal: 100, vertical: 20)
+                                    : EdgeInsets.symmetric(
+                                        horizontal: width * 0.2, vertical: 25),
+                                textStyle: TextStyle(
+                                    fontSize: (width <= 550) ? 13 : 17),
+                              ),
+                            ),
+                          )
+
+                        ///Skip and next buttons on other pages
+                        : Padding(
+                            padding: const EdgeInsets.all(30),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                TextButton(
+                                  onPressed: () {
+                                    _controller.jumpToPage(2);
+                                  },
+                                  child: const Text(
+                                    "SKIP",
+                                    style: TextStyle(color: MyPalette.turqoise),
+                                  ),
+                                  style: TextButton.styleFrom(
+                                    elevation: 0,
+                                    textStyle: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: (width <= 550) ? 13 : 17,
+                                    ),
+                                  ),
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    _controller.nextPage(
+                                      duration:
+                                          const Duration(milliseconds: 200),
+                                      curve: Curves.easeIn,
+                                    );
+                                  },
+                                  child: const Text("NEXT"),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: MyPalette.darkMagenta,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(50),
+                                    ),
+                                    elevation: 0,
+                                    padding: (width <= 550)
+                                        ? const EdgeInsets.symmetric(
+                                            horizontal: 30, vertical: 20)
+                                        : const EdgeInsets.symmetric(
+                                            horizontal: 30, vertical: 25),
+                                    textStyle: TextStyle(
+                                        fontSize: (width <= 550) ? 13 : 17),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -244,18 +256,16 @@ List<OnboardingContents> contents = [
   OnboardingContents(
     title: "Link to Spotify",
     image: "assets/linkIcon.png",
-    desc: "Remember to keep track of your professional accomplishments.",
+    desc: "Go to User Preferences to link to your Spotify account.",
   ),
   OnboardingContents(
     title: "Set Your Preferences",
     image: "assets/preferencesIcon.png",
-    desc:
-        "But understanding the contributions our colleagues make to our teams and companies.",
+    desc: "Go to User Preferences to personalize your playlist settings.",
   ),
   OnboardingContents(
-    title: "Generate Playlist",
+    title: "Generate Your Playlist",
     image: "assets/playlistIcon.png",
-    desc:
-        "Take control of notifications, collaborate live or on your own time.",
+    desc: "Create your own playlist based on your mood and personal settings.",
   ),
 ];
