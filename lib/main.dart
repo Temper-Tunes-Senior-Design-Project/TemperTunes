@@ -63,7 +63,7 @@ class App extends StatelessWidget {
       //  }
       //),
 
-      home: OnboardingPage(),
+      home: LandingPage(),
 
       // home: FutureBuilder<List<CameraDescription>>(
       //     future: availableCameras(),
