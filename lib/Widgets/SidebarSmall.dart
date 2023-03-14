@@ -1,12 +1,14 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:mood_swing/Pages/CameraPage.dart';
 import 'package:mood_swing/Pages/PreferencesPage.dart';
 import 'package:mood_swing/Pages/UserPage.dart';
-import 'package:mood_swing/Pages/CameraPage.dart';
 
 import '../Widgets/widgets.dart';
 import 'package:sidebarx/sidebarx.dart';
 
 ///Small Sidebar
+
 class SidebarSmall extends StatelessWidget {
   SidebarSmall(this.child, {Key? key}) : super(key: key);
 
@@ -54,11 +56,9 @@ class SidebarDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
     return SidebarX(
       controller: _controller,
       theme: SidebarXTheme(
-        margin: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: MyPalette.dark,
           borderRadius: BorderRadius.circular(20),
@@ -114,8 +114,7 @@ class SidebarDrawer extends StatelessWidget {
         return Container(
           height: height * 0.28,
           child: Padding(
-            padding: EdgeInsets.only(
-                top: 0.1 * height, right: 0.05 * width, bottom: 0.01 * height),
+            padding: EdgeInsets.only(top: 0.1 * height, bottom: 0.01 * height),
             child: Align(
               alignment: Alignment.topCenter,
               child: Image.asset('assets/music_swing_logo_small.png'),
@@ -178,12 +177,6 @@ class SidebarDrawer extends StatelessWidget {
               ),
             );
           },
-        ),
-
-        ///IconWidget
-        const SidebarXItem(
-          iconWidget: FlutterLogo(size: 20),
-          label: 'Flutter',
         ),
       ],
     );

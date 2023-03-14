@@ -227,7 +227,7 @@ class _LargeScreenState extends State<LargeScreen> {
                       //  bottom: 0,
                     ),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         ///CAMERA BUTTONS
                         if (videoFile != null || pictureFile != null) ...{
@@ -479,7 +479,7 @@ class CameraButtonConfirmOrBack extends StatelessWidget {
                 style: TextStyle(
                   color: MyPalette.white,
                   fontFamily: 'Share Tech',
-                  fontSize: 40,
+                  fontSize: 30,
                 ),
               ),
             ),

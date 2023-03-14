@@ -51,11 +51,7 @@ class _SidebarLargeState extends State<SidebarLarge> {
         icon: Icons.create_rounded,
         onPressed: () {
           Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (_) => CameraPage(),
-            ),
-          );
+              context, MaterialPageRoute(builder: (context) => CameraPage()));
         },
       ),
 
