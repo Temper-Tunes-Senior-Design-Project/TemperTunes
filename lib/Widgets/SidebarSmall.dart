@@ -1,4 +1,3 @@
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:mood_swing/Pages/CameraPage.dart';
 import 'package:mood_swing/Pages/PreferencesPage.dart';
