@@ -337,7 +337,7 @@ class LargeScreen extends StatelessWidget {
                                                                   top: 0.02 *
                                                                       height),
                                                           child: Icon(
-                                                            IconData(0xf4b2,
+                                                            const IconData(0xf4b2,
                                                                 fontFamily:
                                                                     'MaterialIcons'),
                                                             color:
@@ -617,7 +617,7 @@ class SmallScreen extends StatelessWidget {
                                         shape: CircleBorder(),
                                       ),
                                       child: Icon(
-                                        IconData(0xf05bc,
+                                        const IconData(0xf05bc,
                                             fontFamily: 'MaterialIcons'),
                                         color: Colors.white,
                                         size: 40,

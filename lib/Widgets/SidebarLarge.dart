@@ -34,7 +34,7 @@ class _SidebarLargeState extends State<SidebarLarge> {
       ///User profile
       CollapsibleItem(
         text: 'User Profile',
-        icon: IconData(0xe491, fontFamily: 'MaterialIcons'),
+        icon: const IconData(0xe491, fontFamily: 'MaterialIcons'),
         onPressed: () {
           Navigator.push(
             context,
@@ -58,14 +58,14 @@ class _SidebarLargeState extends State<SidebarLarge> {
       ///Existing Playlists
       CollapsibleItem(
         text: 'Existing Playlists',
-        icon: IconData(0xe4d3, fontFamily: 'MaterialIcons'),
+        icon: const IconData(0xe4d3, fontFamily: 'MaterialIcons'),
         onPressed: () {},
       ),
 
       ///User Preferences
       CollapsibleItem(
         text: 'User Preferences',
-        icon: IconData(0xec76, fontFamily: 'MaterialIcons'),
+        icon: const IconData(0xec76, fontFamily: 'MaterialIcons'),
         onPressed: () {
           Navigator.push(
             context,
