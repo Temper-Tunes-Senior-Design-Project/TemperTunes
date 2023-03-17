@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
+import 'package:mood_swing/Pages/LoginPage.dart';
 import 'Pages/LandingPage.dart';
 
 import 'Pages/OnboardingPage.dart';
@@ -63,7 +64,7 @@ class App extends StatelessWidget {
       //  }
       //),
 
-      home: LandingPage(),
+      home: LoginPage(),
 
       // home: FutureBuilder<List<CameraDescription>>(
       //     future: availableCameras(),

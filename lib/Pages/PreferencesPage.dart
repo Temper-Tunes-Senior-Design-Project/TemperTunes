@@ -261,12 +261,10 @@ class LargeScreen extends StatelessWidget {
                             Container(
                                 alignment: Alignment.topLeft,
                                 child: Icon(
-                                  IconData(0xe9ba, fontFamily: 'MaterialIcons'),
+                                  IconData(0xe3b3, fontFamily: 'MaterialIcons'),
                                   color: MyPalette.white,
                                   size: 24,
                                 )),
-
-                            ///Name
                             Container(
                               padding: EdgeInsets.only(left: 0.01 * width),
                               alignment: Alignment.topLeft,
@@ -290,12 +288,13 @@ class LargeScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
-                                alignment: Alignment.topLeft,
-                                child: Icon(
-                                  IconData(0xe3b3, fontFamily: 'MaterialIcons'),
-                                  color: MyPalette.white,
-                                  size: 24,
-                                )),
+                              alignment: Alignment.topLeft,
+                              child: Icon(
+                                IconData(0xe1b9, fontFamily: 'MaterialIcons'),
+                                color: MyPalette.white,
+                                size: 24,
+                              ),
+                            ),
 
                             ///Name
                             Container(

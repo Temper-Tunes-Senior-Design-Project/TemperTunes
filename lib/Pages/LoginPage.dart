@@ -5,6 +5,7 @@ import 'HomePage.dart';
 import 'OTPEmailPage.dart';
 import 'SignupPage.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:bouncing_widget/bouncing_widget.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -31,6 +32,7 @@ class _LargeScreenState extends State<LargeScreen> {
   //lets user see their password if they choose to
   bool _isVisible = false;
   final _formKey = GlobalKey<FormState>();
+  double _scaleFactor = 1.5;
 
   @override
   Widget build(BuildContext context) {
@@ -225,118 +227,7 @@ class _LargeScreenState extends State<LargeScreen> {
                         ),
 
                         ///spacer
-                        SizedBox(height: 0.03 * height),
-
-                        ///Buttons
-                        //Login button
-                        Container(
-                          padding: EdgeInsets.only(top: 0.016 * height),
-                          child: TextButton(
-                            child: Container(
-                              width: 0.27 * width,
-                              height: 0.075 * height,
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  begin: Alignment.topRight,
-                                  end: Alignment.bottomLeft,
-                                  colors: [
-                                    MyPalette.slateBlue,
-                                    MyPalette.brightMagenta,
-                                    MyPalette.turqoise,
-                                  ],
-                                ),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(15),
-                                ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    offset: Offset(0, 1),
-                                    color: MyPalette.brightMagenta,
-                                    blurRadius: 16,
-                                  ),
-                                ],
-                              ),
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: Text(
-                                  "Login",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 25,
-                                    fontFamily: 'Share Tech',
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            onPressed: () {
-                              if (_formKey.currentState!.validate()) {
-                                login(context);
-                              }
-                            },
-                          ),
-                        ),
-
-                        //Register Button
-                        Container(
-                          child: TextButton(
-                            child: Container(
-                              padding: EdgeInsets.only(top: 0.03 * height),
-                              child: Container(
-                                width: 0.27 * width,
-                                height: 0.075 * height,
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    begin: Alignment.topRight,
-                                    end: Alignment.bottomLeft,
-                                    colors: [
-                                      MyPalette.slateBlue,
-                                      MyPalette.brightMagenta,
-                                      MyPalette.turqoise,
-                                    ],
-                                  ),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(15),
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      offset: Offset(0, 1),
-                                      color: MyPalette.brightMagenta,
-                                      blurRadius: 16,
-                                    ),
-                                  ],
-                                ),
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    "Register",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 25,
-                                      fontFamily: 'Share Tech',
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => SignupPage(),
-                                ),
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.transparent,
-                              foregroundColor: Colors.transparent,
-                            ),
-                          ),
-                        ),
-
-                        ///Spacer
-                        SizedBox(height: 0.05 * height),
+                        SizedBox(height: 0.02 * height),
 
                         ///Forgot Password
                         Container(
@@ -359,6 +250,154 @@ class _LargeScreenState extends State<LargeScreen> {
                                   ),
                                 );
                               }),
+                        ),
+
+                        ///spacer
+                        SizedBox(height: 0.025 * height),
+
+                        ///Buttons
+                        //Login button
+                        BouncingWidget(
+                          scaleFactor: _scaleFactor,
+                          onPressed: () {},
+                          child: Container(
+                            child: TextButton(
+                              child: Container(
+                                width: 0.27 * width,
+                                height: 0.075 * height,
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    begin: Alignment.topRight,
+                                    end: Alignment.bottomLeft,
+                                    colors: [
+                                      MyPalette.slateBlue,
+                                      MyPalette.brightMagenta,
+                                      MyPalette.turqoise,
+                                    ],
+                                  ),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(20),
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      offset: Offset(0, 1),
+                                      color: MyPalette.brightMagenta,
+                                      blurRadius: 16,
+                                    ),
+                                  ],
+                                ),
+                                child: Align(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    "Login",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      fontFamily: 'Share Tech',
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()) {
+                                  login(context);
+                                }
+                              },
+                            ),
+                          ),
+                        ),
+
+                        // //Register Button
+                        // Container(
+                        //   child: TextButton(
+                        //     child: Container(
+                        //       padding: EdgeInsets.only(top: 0.03 * height),
+                        //       child: Container(
+                        //         width: 0.27 * width,
+                        //         height: 0.075 * height,
+                        //         decoration: BoxDecoration(
+                        //           gradient: LinearGradient(
+                        //             begin: Alignment.topRight,
+                        //             end: Alignment.bottomLeft,
+                        //             colors: [
+                        //               MyPalette.slateBlue,
+                        //               MyPalette.brightMagenta,
+                        //               MyPalette.turqoise,
+                        //             ],
+                        //           ),
+                        //           borderRadius: BorderRadius.all(
+                        //             Radius.circular(15),
+                        //           ),
+                        //           boxShadow: [
+                        //             BoxShadow(
+                        //               offset: Offset(0, 1),
+                        //               color: MyPalette.brightMagenta,
+                        //               blurRadius: 16,
+                        //             ),
+                        //           ],
+                        //         ),
+                        //         child: Align(
+                        //           alignment: Alignment.center,
+                        //           child: Text(
+                        //             "Register",
+                        //             textAlign: TextAlign.center,
+                        //             style: TextStyle(
+                        //               fontSize: 25,
+                        //               fontFamily: 'Share Tech',
+                        //               color: Colors.white,
+                        //             ),
+                        //           ),
+                        //         ),
+                        //       ),
+                        //     ),
+                        //     onPressed: () {
+                        //       Navigator.push(
+                        //         context,
+                        //         MaterialPageRoute(
+                        //           builder: (context) => SignupPage(),
+                        //         ),
+                        //       );
+                        //     },
+                        //     style: ElevatedButton.styleFrom(
+                        //       backgroundColor: Colors.transparent,
+                        //       foregroundColor: Colors.transparent,
+                        //     ),
+                        //   ),
+                        // ),
+                        ///Spacer
+                        SizedBox(height: 0.04 * height),
+
+                        ///Log in with
+                        Container(
+                          child: FittedBox(
+                            child: Text(
+                              'Or log in using',
+                              style: TextStyle(
+                                color: white,
+                                fontSize: 15,
+                                fontFamily: 'Maven Pro',
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                        ),
+
+                        ///Other account options
+                        Container(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                          height: height * 0.15,
+                          alignment: Alignment.center,
+                          child: Flexible(
+                            flex: 3,
+                            fit: FlexFit.loose,
+                            child: Row(
+                              children: <Widget>[
+                                Container(),
+                              ],
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -407,6 +446,7 @@ class _SmallScreenState extends State<SmallScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
+                      padding: EdgeInsets.only(top: 15),
                       child: Row(
                         children: [
                           ElevatedButton(

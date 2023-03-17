@@ -136,7 +136,6 @@ class SmallScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
       child: SafeArea(
         bottom: false,
@@ -257,7 +256,6 @@ class SmallScreen extends StatelessWidget {
 
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
-
   @override
   Widget build(Object context) {
     return Scaffold(
