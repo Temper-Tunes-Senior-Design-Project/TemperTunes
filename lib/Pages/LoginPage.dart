@@ -723,7 +723,8 @@ void login(BuildContext context) async {
     );
   });
   if (AuthRouter().isLoggedIn()) {
-    Navigator.push(context, MaterialPageRoute(builder: (ctxt) => HomePage()));
+    Navigator.pushAndRemoveUntil(context,
+        MaterialPageRoute(builder: (ctxt) => HomePage()), (route) => false);
   }
 }
 
