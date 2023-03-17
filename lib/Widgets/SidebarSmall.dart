@@ -1,10 +1,12 @@
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:mood_swing/Pages/CameraPage.dart';
 import 'package:mood_swing/Pages/PreferencesPage.dart';
 import 'package:mood_swing/Pages/UserPage.dart';
+
 import '../Widgets/widgets.dart';
 import 'package:sidebarx/sidebarx.dart';
+
+///Small Sidebar
 
 class SidebarSmall extends StatelessWidget {
   SidebarSmall(this.child, {Key? key}) : super(key: key);
@@ -142,17 +144,15 @@ class SidebarDrawer extends StatelessWidget {
           },
         ),
 
-        ///Make New Playlist
+        ///Create New Playlist
         SidebarXItem(
           icon: Icons.create_rounded,
           label: 'Create New Playlist',
-          onTap: () async {
-            await availableCameras().then(
-              (smallScreenCameras) => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => CameraPage(),
-                ),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => CameraPage(),
               ),
             );
           },

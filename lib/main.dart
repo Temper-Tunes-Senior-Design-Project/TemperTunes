@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:mood_swing/Pages/LandingPage.dart';
 import 'package:mood_swing/Pages/HomePage.dart';
 import 'dart:ui';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'Widgets/MockNavigator.dart';
 import 'firebase_options.dart';
 
@@ -55,7 +56,6 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: MaterialColor(0xd789ff, color),
         fontFamily: 'Maven Pro',
-        iconTheme: const IconThemeData(color: Colors.white),
       ),
       home: StreamBuilder<User?>(
           initialData: FirebaseAuth.instance.currentUser,
