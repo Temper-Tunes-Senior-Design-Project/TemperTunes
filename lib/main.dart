@@ -64,19 +64,10 @@ class App extends StatelessWidget {
           builder: (context, snapshot) {
             if(snapshot.data != null)
               {
-                snapshot.data!.metadata.creationTime == snapshot.data!.metadata.lastSignInTime;
+                // bool isNewAccount = snapshot.data!.metadata.creationTime == snapshot.data!.metadata.lastSignInTime;
+                return HomePage();
               }
             return LandingPage();
-            //
-            // return Scaffold(
-            //   body: Text("Test"),
-            //   floatingActionButton: FloatingActionButton(onPressed: () {
-            //     AuthRouter().signInWithProvider("Google");
-            //   },
-            //
-            //   ),
-            // );
-            //return snapshot.data != null ? HomePage() : LandingPage();
           }),
     );
   }

@@ -722,9 +722,6 @@ void login(BuildContext context) async {
       ),
     );
   });
-  if (AuthRouter().isLoggedIn()) {
-    Navigator.push(context, MaterialPageRoute(builder: (ctxt) => HomePage()));
-  }
 }
 
 class LoginPage extends StatelessWidget {
