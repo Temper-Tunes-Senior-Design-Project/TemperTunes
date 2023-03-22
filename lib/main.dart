@@ -7,6 +7,8 @@ import 'dart:ui';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mood_swing/Utilities/AuthRouter.dart';
+import 'package:mood_swing/Utilities/DatabaseRouter.dart';
 import 'Widgets/MockNavigator.dart';
 import 'firebase_options.dart';
 
@@ -60,7 +62,21 @@ class App extends StatelessWidget {
       home: StreamBuilder<User?>(
           initialData: FirebaseAuth.instance.currentUser,
           builder: (context, snapshot) {
-            return snapshot.data != null ? HomePage() : LandingPage();
+            if(snapshot.data != null)
+              {
+                snapshot.data!.metadata.creationTime == snapshot.data!.metadata.lastSignInTime;
+              }
+            return LandingPage();
+            //
+            // return Scaffold(
+            //   body: Text("Test"),
+            //   floatingActionButton: FloatingActionButton(onPressed: () {
+            //     AuthRouter().signInWithProvider("Google");
+            //   },
+            //
+            //   ),
+            // );
+            //return snapshot.data != null ? HomePage() : LandingPage();
           }),
     );
   }

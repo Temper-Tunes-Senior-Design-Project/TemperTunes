@@ -1,5 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mood_swing/Pages/HomePage.dart';
 import 'package:mood_swing/Pages/LoginPage.dart';
 import 'package:mood_swing/Utilities/AuthRouter.dart';
 import 'package:mood_swing/Utilities/DatabaseRouter.dart';
@@ -21,6 +21,7 @@ TextEditingController _emailController = new TextEditingController();
 TextEditingController _usernameController = new TextEditingController();
 TextEditingController _passwordController = new TextEditingController();
 TextEditingController _passwordController2 = new TextEditingController();
+UserCredential? credential;
 
 class LargeScreen extends StatefulWidget {
   _LargeScreenState createState() => _LargeScreenState();
@@ -777,7 +778,7 @@ class _SmallScreenState extends State<SmallScreen> {
 }
 
 Future<void> register(BuildContext context) async {
-  await AuthRouter().registerUser(
+      credential ??= await AuthRouter().registerUser(
       _emailController.text, _passwordController.text, _usernameController.text,
       () {
     ScaffoldMessenger.of(context).showSnackBar(
@@ -786,17 +787,14 @@ Future<void> register(BuildContext context) async {
       ),
     );
   });
-  DatabaseRouter().createUser(_usernameController.text);
-  Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (context) => HomePage(),
-    ),
-  );
+  AuthRouter().credentialSignIn(credential!);
 }
 
 class SignupPage extends StatelessWidget {
-  const SignupPage({super.key});
+  SignupPage({super.key, UserCredential? authCred})
+  {
+    credential = authCred;
+  }
 
   @override
   Widget build(Object context) {

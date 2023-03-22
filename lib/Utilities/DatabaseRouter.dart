@@ -7,6 +7,11 @@ import 'package:mood_swing/Objects/FileTypes.dart';
 class DatabaseRouter {
   String uid = FirebaseAuth.instance.currentUser?.uid ?? "-1";
 
+  Future<bool> userExists() async
+  {
+    //await FirebaseFirestore.instance.collection("users").doc(uid).
+    return false;
+  }
   void createUser(String username) async {
     await FirebaseFirestore.instance.collection("users").doc(uid).set(
       {
@@ -17,6 +22,7 @@ class DatabaseRouter {
         'statistics' : {},
       },
     );
+
   }
 
   Future<void> uploadFile(XFile? file, FileType encodingFormat) async
