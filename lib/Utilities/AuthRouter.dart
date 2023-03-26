@@ -1,16 +1,19 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:mood_swing/Objects/LoginCredentials.dart';
 import 'package:mood_swing/Utilities/DatabaseRouter.dart';
 
-enum AuthProviders
-{
+import '../Pages/HomePage.dart';
+
+enum AuthProviders {
   Google,
   Facebook,
   Apple,
   Email,
 }
-class AuthRouter {
 
+class AuthRouter {
   Stream<User?> authMonitor() {
     return FirebaseAuth.instance.authStateChanges();
   }
@@ -23,27 +26,31 @@ class AuthRouter {
     return FirebaseAuth.instance.currentUser?.uid ?? "";
   }
 
-  void login(String email, String password, Function callback) async {
+  void login(String email, String password, Function callback, context) async {
     try {
-      await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
+     UserCredential cred =  await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
+      credentialSignIn(LoginCredentials(cred, EmailAuthProvider.credential(email: email, password: password)),context);
     } on FirebaseAuthException catch (e) {
       print(e);
       callback.call();
     }
   }
 
-  void credentialSignIn(UserCredential credential) async
-  {
-    if((credential.additionalUserInfo?.isNewUser??false) && credential.credential != null)
+  void credentialSignIn(LoginCredentials credentials, BuildContext context) async {
+    if (credentials.uc.additionalUserInfo?.isNewUser ?? false)
     {
-      DatabaseRouter().createUser(credential.user?.displayName??"");
+      DatabaseRouter().createUser(credentials.uc.user?.displayName ?? "");
     }
-    await FirebaseAuth.instance.signInWithCredential(credential.credential!);
+
+    await FirebaseAuth.instance.signInWithCredential(credentials.ac);
+    if(FirebaseAuth.instance.currentUser != null)
+      {
+        Navigator.pushAndRemoveUntil(context,
+            MaterialPageRoute(builder: (ctxt) => HomePage()), (route) => false);
+      }
   }
 
-  Future<AuthCredential?> signInWithProvider(String provider) async
-  {
+  Future<AuthCredential?> signInWithProvider(String provider) async {
     try {
       GoogleSignInAccount? account = await GoogleSignIn().signIn();
       GoogleSignInAuthentication? auth = await account?.authentication;
@@ -55,26 +62,22 @@ class AuthRouter {
       await FirebaseAuth.instance.signInWithCredential(credential);
 
       print(FirebaseAuth.instance.currentUser?.displayName);
-    }
-    on Exception catch(e)
-    {
+    } on Exception catch (e) {
       print(e);
       return null;
     }
   }
-    //FirebaseAuth.instance.currentUser?.updateDisplayName(username);
-    //       /
+  //FirebaseAuth.instance.currentUser?.updateDisplayName(username);
+  //       /
 
-
-  Future<UserCredential?> registerUser(
-      String email, String password, String username, Function callback
-      ) async {
+  Future<LoginCredentials?> registerUser(
+      String email, String password, String username, Function callback) async {
     try {
       UserCredential credentials = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
       FirebaseAuth.instance.currentUser?.sendEmailVerification();
-      return credentials;
 
+      return LoginCredentials(credentials, EmailAuthProvider.credential(email: email, password: password));
     } on FirebaseAuthException catch (e) {
       print(e);
       callback.call();

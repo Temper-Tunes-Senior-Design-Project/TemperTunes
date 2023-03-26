@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mood_swing/Pages/LoginPage.dart';
 import 'package:mood_swing/Utilities/AuthRouter.dart';
 import 'package:mood_swing/Utilities/DatabaseRouter.dart';
+import '../Objects/LoginCredentials.dart';
 import '../Widgets/widgets.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'dart:async';
@@ -21,7 +22,7 @@ TextEditingController _emailController = new TextEditingController();
 TextEditingController _usernameController = new TextEditingController();
 TextEditingController _passwordController = new TextEditingController();
 TextEditingController _passwordController2 = new TextEditingController();
-UserCredential? credential;
+LoginCredentials? credential;
 
 class LargeScreen extends StatefulWidget {
   _LargeScreenState createState() => _LargeScreenState();
@@ -778,7 +779,7 @@ class _SmallScreenState extends State<SmallScreen> {
 }
 
 Future<void> register(BuildContext context) async {
-      credential ??= await AuthRouter().registerUser(
+  credential ??= await AuthRouter().registerUser(
       _emailController.text, _passwordController.text, _usernameController.text,
       () {
     ScaffoldMessenger.of(context).showSnackBar(
@@ -787,12 +788,13 @@ Future<void> register(BuildContext context) async {
       ),
     );
   });
-  AuthRouter().credentialSignIn(credential!);
+  if (credential != null) {
+    AuthRouter().credentialSignIn(credential!, context);
+  }
 }
 
 class SignupPage extends StatelessWidget {
-  SignupPage({super.key, UserCredential? authCred})
-  {
+  SignupPage({super.key, LoginCredentials? authCred}) {
     credential = authCred;
   }
 

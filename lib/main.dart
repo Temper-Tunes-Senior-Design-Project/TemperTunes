@@ -8,7 +8,6 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mood_swing/Utilities/AuthRouter.dart';
-import 'package:mood_swing/Utilities/DatabaseRouter.dart';
 import 'Widgets/MockNavigator.dart';
 import 'firebase_options.dart';
 
@@ -61,11 +60,11 @@ class App extends StatelessWidget {
       ),
       home: StreamBuilder<User?>(
           initialData: FirebaseAuth.instance.currentUser,
+          stream: AuthRouter().authMonitor(),
           builder: (context, snapshot) {
             if(snapshot.data != null)
               {
-                // bool isNewAccount = snapshot.data!.metadata.creationTime == snapshot.data!.metadata.lastSignInTime;
-                return HomePage();
+               return HomePage();
               }
             return LandingPage();
           }),
