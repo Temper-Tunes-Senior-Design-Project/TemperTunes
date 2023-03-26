@@ -19,14 +19,15 @@ class DatabaseRouter {
     );
   }
 
-  Future<void> uploadFile(XFile? file, FileType encodingFormat) async
+  Future<String?> uploadFile(XFile? file, FileType encodingFormat) async
   {
     if(file != null) {
       String path = "Processing Data/file." + encodingFormat.getPostfix();
       TaskSnapshot snap = await FirebaseStorage.instance.ref(path).putData(await file.readAsBytes(),SettableMetadata(
         contentType: encodingFormat.getEncoding(),
       ));
-      print(await snap.ref.getDownloadURL());
+      return snap.ref.fullPath;
     }
+    return null;
   }
 }

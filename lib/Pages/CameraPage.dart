@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:mood_swing/Objects/FileTypes.dart';
 import 'package:mood_swing/Utilities/DatabaseRouter.dart';
+import 'package:mood_swing/Widgets/MoodPopup.dart';
 import 'package:mood_swing/Widgets/widgets.dart';
 import 'package:video_player/video_player.dart';
 
@@ -253,9 +254,16 @@ class _LargeScreenState extends State<LargeScreen> {
                               FileType type = pictureFile != null
                                   ? FileType.JPEG
                                   : FileType.MP4;
-                              await DatabaseRouter()
-                                  .uploadFile(pictureFile ?? videoFile, type);
-                              Navigator.pop(context);
+                              String filePath = await DatabaseRouter()
+                                      .uploadFile(
+                                          pictureFile ?? videoFile, type) ??
+                                  "Processing Data/file.jpg";
+                              showDialog(context: context, builder: (ctxt)
+                              {
+                               return MoodPopup(filePath);
+                              }
+                              );
+                              //Navigator.pop(context);
                               //var res = await CloudFunctions().get_mood();
                               //print(res);
                               //NEXT PAGE TBD
