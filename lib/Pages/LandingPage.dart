@@ -35,6 +35,7 @@ class LargeScreen extends StatelessWidget {
             children: <Widget>[
               SizedBox(height: height * 0.01),
               Container(
+                padding: EdgeInsets.only(top: 0.02 * height),
                 alignment: Alignment.center,
                 child: new Image.asset(
                   "assets/music_swing_logo_med.png",

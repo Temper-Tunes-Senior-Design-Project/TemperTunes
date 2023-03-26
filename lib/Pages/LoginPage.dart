@@ -372,13 +372,14 @@ class _LargeScreenState extends State<LargeScreen> {
                         Container(
                           child: FittedBox(
                             child: Text(
-                              'Or log in using',
+                              'Or',
                               style: TextStyle(
                                 color: white,
                                 fontSize: 15,
                                 fontFamily: 'Maven Pro',
                                 fontWeight: FontWeight.w400,
                               ),
+                              textAlign: TextAlign.center,
                             ),
                           ),
                         ),

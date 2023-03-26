@@ -64,8 +64,9 @@ class App extends StatelessWidget {
       //  }
       //),
 
-      home: LandingPage(),
+      //home: LandingPage(),
 
+      home: LoginPage(),
       // home: FutureBuilder<List<CameraDescription>>(
       //     future: availableCameras(),
       //     builder: (context, snapshot) {
@@ -74,4 +75,3 @@ class App extends StatelessWidget {
     );
   }
 }
-s
