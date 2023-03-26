@@ -89,7 +89,7 @@ class SmallScreen extends StatelessWidget {
 }
 
 class HomePage extends StatelessWidget {
-  //const HomePage({super.key})
+  HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {

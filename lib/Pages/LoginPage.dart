@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../Utilities/AuthRouter.dart';
 import '../Widgets/widgets.dart';
-import 'HomePage.dart';
 import 'OTPEmailPage.dart';
 import 'SignupPage.dart';
 import 'package:form_field_validator/form_field_validator.dart';
@@ -721,10 +720,7 @@ void login(BuildContext context) async {
         content: Text('Invalid credentials'),
       ),
     );
-  });
-  if (AuthRouter().isLoggedIn()) {
-    Navigator.push(context, MaterialPageRoute(builder: (ctxt) => HomePage()));
-  }
+  }, context);
 }
 
 class LoginPage extends StatelessWidget {
