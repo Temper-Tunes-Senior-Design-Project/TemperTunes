@@ -1,8 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mood_swing/Pages/LoginPage.dart';
 import 'package:mood_swing/Utilities/AuthRouter.dart';
-import 'package:mood_swing/Utilities/DatabaseRouter.dart';
 import '../Objects/LoginCredentials.dart';
 import '../Widgets/widgets.dart';
 import 'package:form_field_validator/form_field_validator.dart';

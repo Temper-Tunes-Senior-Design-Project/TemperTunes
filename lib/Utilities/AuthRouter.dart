@@ -59,16 +59,11 @@ class AuthRouter {
         idToken: auth?.idToken,
       );
       return credential;
-      await FirebaseAuth.instance.signInWithCredential(credential);
-
-      print(FirebaseAuth.instance.currentUser?.displayName);
     } on Exception catch (e) {
       print(e);
       return null;
     }
   }
-  //FirebaseAuth.instance.currentUser?.updateDisplayName(username);
-  //       /
 
   Future<LoginCredentials?> registerUser(
       String email, String password, String username, Function callback) async {
