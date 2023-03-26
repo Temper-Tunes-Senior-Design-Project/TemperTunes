@@ -385,16 +385,50 @@ class _LargeScreenState extends State<LargeScreen> {
 
                         ///Other account options
                         Container(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 10),
                           height: height * 0.15,
-                          alignment: Alignment.center,
                           child: Flexible(
                             flex: 3,
                             fit: FlexFit.loose,
                             child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: <Widget>[
-                                Container(),
+                                Container(
+                                  //child: Image.asset("assets/googleIcon.png"),
+                                  height: 45,
+                                  width: 45,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image:
+                                          AssetImage("assets/googleIcon.png"),
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  //child: Image.asset("assets/googleIcon.png"),
+                                  height: 45,
+                                  width: 45,
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image:
+                                          AssetImage("assets/facebookIcon.png"),
+                                      fit: BoxFit.fill,
+                                    ),
+                                  ),
+                                ),
+                                FloatingActionButton(
+                                  child: Image.asset("assets/appleIcon.png"),
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => HomePage(),
+                                      ),
+                                    );
+                                  },
+                                ),
                               ],
                             ),
                           ),
