@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../Utilities/AuthRouter.dart';
 import '../Widgets/widgets.dart';
-import 'HomePage.dart';
 import 'OTPEmailPage.dart';
+import 'HomePage.dart';
 import 'SignupPage.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
@@ -126,7 +126,7 @@ class _LargeScreenState extends State<LargeScreen> {
                                 decoration: InputDecoration(
                                   //icon
                                   prefixIcon: Icon(
-                                    IconData(0xe491,
+                                    const IconData(0xe491,
                                         fontFamily: 'MaterialIcons'),
                                     color: MyPalette.white,
                                     size: 34,
@@ -202,7 +202,7 @@ class _LargeScreenState extends State<LargeScreen> {
 
                                   ///PrefixIcon
                                   prefixIcon: Icon(
-                                    IconData(0xe3ae,
+                                    const IconData(0xe3ae,
                                         fontFamily: 'MaterialIcons'),
                                     color: MyPalette.white,
                                     size: 34,
@@ -545,7 +545,7 @@ class _SmallScreenState extends State<SmallScreen> {
                                   widthFactor: 0,
                                   heightFactor: 1.0,
                                   child: Icon(
-                                    IconData(0xe491,
+                                    const IconData(0xe491,
                                         fontFamily: 'MaterialIcons'),
                                     color: MyPalette.white,
                                     size: 30,
@@ -617,7 +617,7 @@ class _SmallScreenState extends State<SmallScreen> {
                                 prefixIcon: Align(
                                   widthFactor: 1.0,
                                   child: Icon(
-                                    IconData(0xe3ae,
+                                    const IconData(0xe3ae,
                                         fontFamily: 'MaterialIcons'),
                                     color: MyPalette.white,
                                     size: 32,
@@ -796,10 +796,7 @@ void login(BuildContext context) async {
         content: Text('Invalid credentials'),
       ),
     );
-  });
-  if (AuthRouter().isLoggedIn()) {
-    Navigator.push(context, MaterialPageRoute(builder: (ctxt) => HomePage()));
-  }
+  }, context);
 }
 
 class LoginPage extends StatelessWidget {

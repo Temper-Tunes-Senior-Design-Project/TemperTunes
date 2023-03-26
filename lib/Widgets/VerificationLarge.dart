@@ -81,7 +81,7 @@ class _VerificationLargeState extends State<VerificationLarge> {
                         shape: CircleBorder(),
                       ),
                       child: Icon(
-                        IconData(0xf05bc, fontFamily: 'MaterialIcons'),
+                        const IconData(0xf05bc, fontFamily: 'MaterialIcons'),
                         color: Colors.white,
                         size: 40,
                       ),
@@ -98,7 +98,7 @@ class _VerificationLargeState extends State<VerificationLarge> {
                 children: <Widget>[
                   Container(
                     height: height * 0.8,
-                    width: width * 0.4,
+                    width: width * 0.3,
                     decoration: BoxDecoration(
                       color: Colors.grey.withOpacity(0.3),
                       borderRadius: BorderRadius.all(
@@ -121,15 +121,18 @@ class _VerificationLargeState extends State<VerificationLarge> {
                         ///Heading
                         Padding(
                           padding: EdgeInsets.symmetric(vertical: 0.01),
-                          child: Text(
-                            'Verification',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 40,
-                              fontFamily: 'Share Tech',
-                              color: MyPalette.lightPurple,
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              'Verification',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 40,
+                                fontFamily: 'Share Tech',
+                                color: MyPalette.lightPurple,
+                              ),
+                              textAlign: TextAlign.center,
                             ),
-                            textAlign: TextAlign.center,
                           ),
                         ),
 
@@ -175,11 +178,10 @@ class _VerificationLargeState extends State<VerificationLarge> {
                                 child: Padding(
                                   padding: EdgeInsets.symmetric(
                                     vertical: height * 0.004,
-                                    horizontal: width * 0.05,
+                                    horizontal: width * 0.018,
                                   ),
                                   child: PinCodeTextField(
                                     appContext: context,
-
                                     pastedTextStyle: TextStyle(
                                       color: MyPalette.turqoise,
                                       fontWeight: FontWeight.bold,
@@ -197,7 +199,7 @@ class _VerificationLargeState extends State<VerificationLarge> {
                                       shape: PinCodeFieldShape.box,
                                       borderRadius: BorderRadius.circular(5),
                                       fieldHeight: 70,
-                                      fieldWidth: 45,
+                                      fieldWidth: 40,
                                       inactiveColor: MyPalette.magenta,
                                       inactiveFillColor: MyPalette.slateBlue,
                                       activeFillColor: MyPalette.darkTurqoise,
@@ -260,19 +262,25 @@ class _VerificationLargeState extends State<VerificationLarge> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Text(
-                                    "Didn't receive the code? ",
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 15),
-                                  ),
-                                  TextButton(
-                                    onPressed: () => snackBar("OTP resend!!"),
-                                    child: const Text(
-                                      "RESEND",
+                                  FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                    child: Text(
+                                      "Didn't receive the code? ",
                                       style: TextStyle(
-                                        color: MyPalette.turqoise,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16,
+                                          color: Colors.white, fontSize: 14),
+                                    ),
+                                  ),
+                                  FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                    child: TextButton(
+                                      onPressed: () => snackBar("OTP resend!!"),
+                                      child: Text(
+                                        "RESEND",
+                                        style: TextStyle(
+                                          color: MyPalette.turqoise,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -281,7 +289,7 @@ class _VerificationLargeState extends State<VerificationLarge> {
 
                               ////spacer
                               SizedBox(
-                                height: 0.001 * height,
+                                height: 0.01 * height,
                               ),
 
                               ///Verifier

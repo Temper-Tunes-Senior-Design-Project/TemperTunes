@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:mood_swing/Pages/OTPEmailPage.dart';
 import '../Widgets/widgets.dart';
 import 'package:mood_swing/Pages/HomePage.dart';
+import 'package:mood_swing/Utilities/AuthRouter.dart';
+import 'package:form_field_validator/form_field_validator.dart';
+import 'dart:async';
 
 class Body extends StatelessWidget {
   @override
@@ -15,7 +18,29 @@ class Body extends StatelessWidget {
   }
 }
 
-class LargeScreen extends StatelessWidget {
+TextEditingController _currentPasswordController = new TextEditingController();
+TextEditingController _newPasswordController = new TextEditingController();
+TextEditingController _newPasswordController2 = new TextEditingController();
+
+class LargeScreen extends StatefulWidget {
+  _LargeScreenState createState() => _LargeScreenState();
+}
+
+class _LargeScreenState extends State<LargeScreen> {
+  final _formKey = GlobalKey<FormState>();
+  //show password
+  bool _isVisible = false;
+
+  // snackBar Widget
+  snackBar(String? message) {
+    return ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message!),
+        duration: const Duration(seconds: 2),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -267,7 +292,16 @@ class LargeScreen extends StatelessWidget {
                               );
                             },
                           ),
-                        ],
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              changePassword(context);
+                            }
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.transparent,
+                            foregroundColor: Colors.transparent,
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -281,18 +315,16 @@ class LargeScreen extends StatelessWidget {
   }
 }
 
-class _ChangePasswordPageState extends State<ChangePasswordPage> {
-  //GlobalKey<FormState> _key = new GlobalKey();
-  //bool _validate = false;
-  //bool _obscureText = true;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(body: Body());
-  }
+class SmallScreen extends StatefulWidget {
+  _SmallScreenState createState() => _SmallScreenState();
 }
 
-class SmallScreen extends StatelessWidget {
+class _SmallScreenState extends State<SmallScreen> {
+  //lets user see their password if they choose to
+  bool _isVisible = false;
+
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -304,8 +336,7 @@ class SmallScreen extends StatelessWidget {
         decoration: BoxDecoration(
           //set img to bg of body
           image: DecorationImage(
-              image: AssetImage("assets/loginPageSmall.png"),
-              fit: BoxFit.cover),
+              image: AssetImage("assets/userPageLarge.png"), fit: BoxFit.cover),
         ),
         child: Padding(
           padding: EdgeInsets.only(left: 0.01 * width, top: 0.06 * height),
@@ -318,160 +349,219 @@ class SmallScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          shape: CircleBorder(),
-                        ),
-                        child: Icon(
-                          IconData(0xf05bc, fontFamily: 'MaterialIcons'),
-                          color: Colors.white,
-                          size: 40,
-                        ),
-                        onPressed: () => Navigator.pop(context)),
+                      style: ElevatedButton.styleFrom(
+                        shape: CircleBorder(),
+                      ),
+                      child: Icon(
+                        const IconData(0xf05bc, fontFamily: 'MaterialIcons'),
+                        color: Colors.white,
+                        size: 40,
+                      ),
+                      onPressed: () => Navigator.pop(context),
+                    ),
                   ],
                 ),
               ),
 
-              Container(
-                child: Column(
-                  children: [
-                    ///Logo
-                    Container(
-                      alignment: Alignment.topCenter,
-                      padding: EdgeInsets.only(
-                          top: height * 0.02, bottom: height * 0.005),
-                      child: Image.asset("assets/music_swing_logo_small.png",
-                          scale: 2.5),
-                    ),
+              Form(
+                key: _formKey,
+                child: Container(
+                  padding:
+                      EdgeInsets.only(left: 0.12 * width, right: 0.12 * width),
+                  child: Column(
+                    children: [
+                      ///Logo
+                      Container(
+                        alignment: Alignment.topCenter,
+                        padding: EdgeInsets.only(
+                            top: height * 0.01, bottom: height * 0.005),
+                        child: Image.asset("assets/music_swing_logo_small.png",
+                            scale: 2.3),
+                      ),
 
-                    ///current password
-                    Column(
-                      children: [
-                        Container(
-                          padding:
-                              EdgeInsets.only(left: 0.12 * width, bottom: 0),
-                          alignment: Alignment.topLeft,
-                          child: TextField(
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              fontFamily: 'Maven Pro',
-                              fontWeight: FontWeight.w100,
-                              color: Colors.white,
-                              fontSize: 20,
-                            ),
-                            decoration: const InputDecoration(
+                      ///Current Password
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Container(
+                            alignment: Alignment.topLeft,
+                            child: TextFormField(
+                              controller: _currentPasswordController,
+                              validator: RequiredValidator(
+                                  errorText: AutofillHints.password),
+                              obscureText: !_isVisible,
+                              obscuringCharacter: "*",
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                fontFamily: 'Maven Pro',
+                                fontWeight: FontWeight.w100,
+                                color: Colors.white,
+                                fontSize: 15,
+                              ),
+                              decoration: InputDecoration(
+                                //eye icon (see password)
+                                suffixIcon: Align(
+                                  widthFactor: 0,
+                                  child: IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        _isVisible = !_isVisible;
+                                      });
+                                    },
+                                    icon: _isVisible
+                                        ? Icon(
+                                            Icons.visibility,
+                                            color: MyPalette.darkTurqoise,
+                                          )
+                                        : Icon(
+                                            Icons.visibility_off,
+                                            color: Colors.grey,
+                                          ),
+                                  ),
+                                ),
                                 hintStyle: TextStyle(color: Colors.white60),
-                                hintText: 'Current Password',
-                                border: UnderlineInputBorder(
+                                hintText: "Current Password",
+                                enabledBorder: UnderlineInputBorder(
                                   borderSide:
-                                      BorderSide(width: 3, color: Colors.white),
+                                      BorderSide(color: Colors.white, width: 3),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: new BorderSide(
+                                      color: MyPalette.darkTurqoise, width: 3),
                                 ),
                                 labelText: 'Please enter your current password',
                                 labelStyle: TextStyle(
-                                    fontSize: 15, color: Colors.white54)),
-                          ),
-                        ),
-
-                        ///Horizontal line
-                        Container(
-                          padding: EdgeInsets.only(
-                            left: 0.1 * width,
-                            right: 0.1 * width,
-                            top: 0,
-                          ),
-                          child: const Divider(
-                            height: 5,
-                            thickness: 2,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    ///New password
-                    Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.only(
-                              left: 0.12 * width, top: height * 0.005),
-                          alignment: Alignment.topLeft,
-                          child: TextField(
-                            style: TextStyle(
-                              fontFamily: 'Maven Pro',
-                              fontWeight: FontWeight.w100,
-                              color: Colors.white,
-                              fontSize: 20,
+                                    fontSize: 15, color: Colors.white54),
+                              ),
                             ),
-                            decoration: const InputDecoration(
+                          ),
+                        ],
+                      ),
+
+                      ///spacer
+                      SizedBox(height: height * 0.02),
+
+                      ///New Password
+                      Column(
+                        children: [
+                          Container(
+                            alignment: Alignment.topLeft,
+                            child: TextFormField(
+                              controller: _newPasswordController,
+                              validator:
+                                  RequiredValidator(errorText: "new password"),
+                              obscureText: !_isVisible,
+                              obscuringCharacter: "*",
+                              style: TextStyle(
+                                fontFamily: 'Maven Pro',
+                                fontWeight: FontWeight.w100,
+                                color: Colors.white,
+                                fontSize: 15,
+                              ),
+                              decoration: InputDecoration(
+                                //eye icon (see password)
+                                suffixIcon: Align(
+                                  widthFactor: 0,
+                                  child: IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        _isVisible = !_isVisible;
+                                      });
+                                    },
+                                    icon: _isVisible
+                                        ? Icon(
+                                            Icons.visibility,
+                                            color: MyPalette.darkTurqoise,
+                                          )
+                                        : Icon(
+                                            Icons.visibility_off,
+                                            color: Colors.grey,
+                                          ),
+                                  ),
+                                ),
                                 hintStyle: TextStyle(color: Colors.white60),
                                 hintText: 'New Password',
-                                border: UnderlineInputBorder(
+                                enabledBorder: UnderlineInputBorder(
                                   borderSide:
-                                      BorderSide(width: 3, color: Colors.white),
+                                      BorderSide(color: Colors.white, width: 3),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: new BorderSide(
+                                      color: MyPalette.darkTurqoise, width: 3),
                                 ),
                                 labelText: 'Please enter your new password',
                                 labelStyle: TextStyle(
-                                    fontSize: 15, color: Colors.white54)),
-                          ),
-                        ),
-
-                        ///Horizontal line
-                        Container(
-                          padding: EdgeInsets.only(
-                              left: 0.1 * width, right: 0.1 * width),
-                          child: const Divider(
-                            height: 8,
-                            thickness: 2,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    ///Confirm new password
-                    Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.only(
-                              left: 0.12 * width, top: height * 0.005),
-                          alignment: Alignment.topLeft,
-                          child: TextField(
-                            style: TextStyle(
-                              fontFamily: 'Maven Pro',
-                              fontWeight: FontWeight.w100,
-                              color: Colors.white,
-                              fontSize: 20,
+                                    fontSize: 15, color: Colors.white54),
+                              ),
                             ),
-                            decoration: const InputDecoration(
-                                hintStyle: TextStyle(color: Colors.white60),
-                                hintText: 'Confirm Password',
-                                border: UnderlineInputBorder(
-                                  borderSide:
-                                      BorderSide(width: 3, color: Colors.white),
+                          ),
+                        ],
+                      ),
+
+                      ///spacer
+                      SizedBox(height: height * 0.02),
+
+                      ///Confirm New Password
+                      Column(
+                        children: [
+                          Container(
+                            alignment: Alignment.topLeft,
+                            child: TextFormField(
+                              controller: _newPasswordController2,
+                              validator: RequiredValidator(
+                                  errorText: "confirm new password"),
+                              style: TextStyle(
+                                fontFamily: 'Maven Pro',
+                                fontWeight: FontWeight.w100,
+                                color: Colors.white,
+                                fontSize: 15,
+                              ),
+                              decoration: InputDecoration(
+                                //eye icon (see password)
+                                suffixIcon: Align(
+                                  widthFactor: 0,
+                                  child: IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        _isVisible = !_isVisible;
+                                      });
+                                    },
+                                    icon: _isVisible
+                                        ? Icon(
+                                            Icons.visibility,
+                                            color: MyPalette.darkTurqoise,
+                                          )
+                                        : Icon(
+                                            Icons.visibility_off,
+                                            color: Colors.grey,
+                                          ),
+                                  ),
                                 ),
-                                labelText: 'Please confirm your new password',
+                                hintStyle: TextStyle(color: Colors.white60),
+                                hintText: 'Confirm New Password',
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.white, width: 3),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: new BorderSide(
+                                      color: MyPalette.darkTurqoise, width: 3),
+                                ),
+                                labelText: 'Please confirm your new Password',
                                 labelStyle: TextStyle(
-                                    fontSize: 15, color: Colors.white54)),
-                          ),
-                        ),
+                                    fontSize: 15, color: Colors.white54),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
 
-                        ///Horizontal line
-                        Container(
-                          padding: EdgeInsets.only(
-                              left: 0.1 * width, right: 0.1 * width, top: 0),
-                          child: const Divider(
-                            height: 8,
-                            thickness: 2,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
+                      ///spacer
+                      SizedBox(height: height * 0.04),
 
-                    ///Register Button
-                    Container(
-                      child: TextButton(
-                        child: Container(
-                          padding: EdgeInsets.only(top: height * 0.015),
+                      ///Submit Button
+                      Container(
+                        child: TextButton(
                           child: Container(
                             width: 0.4 * width,
                             height: 0.05 * height,
@@ -543,10 +633,43 @@ class SmallScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                    ),
-                  ],
+
+                      ///Forgot Password
+                      Container(
+                        padding: EdgeInsets.only(top: 0.01 * height, bottom: 0),
+                        child: Column(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.only(top: 0.01 * height),
+                              child: TextButton(
+                                  child: Container(
+                                    child: Text(
+                                      'Forgot your password?',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontFamily: 'Maven Pro',
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: MyPalette.turqoise,
+                                      ),
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => OTPEmailPage(),
+                                      ),
+                                    );
+                                  }),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
+              )
             ],
           ),
         ),

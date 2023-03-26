@@ -1,15 +1,17 @@
-import 'dart:ui';
-
+import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
-import 'package:mood_swing/Pages/LoginPage.dart';
-import 'Pages/LandingPage.dart';
+import 'package:mood_swing/Pages/LandingPage.dart';
+import 'package:mood_swing/Pages/HomePage.dart';
+import 'dart:ui';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
-import 'Pages/OnboardingPage.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mood_swing/Utilities/AuthRouter.dart';
 import 'Widgets/MockNavigator.dart';
 import 'firebase_options.dart';
+
+List<CameraDescription> cameras = [];
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -56,22 +58,16 @@ class App extends StatelessWidget {
         primarySwatch: MaterialColor(0xd789ff, color),
         fontFamily: 'Maven Pro',
       ),
-
-      //home: StreamBuilder<User?>(
-      //  initialData: FirebaseAuth.instance.currentUser,
-      //  builder: (context,snapshot) {
-      //    return snapshot.data != null?HomePage():LandingPage();
-      //  }
-      //),
-
-      //home: LandingPage(),
-
-      home: LoginPage(),
-      // home: FutureBuilder<List<CameraDescription>>(
-      //     future: availableCameras(),
-      //     builder: (context, snapshot) {
-      //       return LogOutPage(cameras: snapshot.data ?? []);
-      //     }),
+      home: StreamBuilder<User?>(
+          initialData: FirebaseAuth.instance.currentUser,
+          stream: AuthRouter().authMonitor(),
+          builder: (context, snapshot) {
+            if(snapshot.data != null)
+              {
+               return HomePage();
+              }
+            return LandingPage();
+          }),
     );
   }
 }

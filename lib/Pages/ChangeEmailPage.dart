@@ -3,6 +3,11 @@
 import 'package:flutter/material.dart';
 import '../Widgets/widgets.dart';
 import 'package:mood_swing/Pages/HomePage.dart';
+import 'package:mood_swing/Utilities/AuthRouter.dart';
+import 'package:form_field_validator/form_field_validator.dart';
+import 'dart:async';
+
+import 'OTPEmailPage.dart';
 
 import 'OTPEmailPage.dart';
 
@@ -16,7 +21,30 @@ class Body extends StatelessWidget {
   }
 }
 
-class LargeScreen extends StatelessWidget {
+TextEditingController _currentEmailController = new TextEditingController();
+TextEditingController _newEmailController = new TextEditingController();
+TextEditingController _newEmailController2 = new TextEditingController();
+TextEditingController _passwordController = new TextEditingController();
+
+class LargeScreen extends StatefulWidget {
+  _LargeScreenState createState() => _LargeScreenState();
+}
+
+class _LargeScreenState extends State<LargeScreen> {
+  final _formKey = GlobalKey<FormState>();
+  //show password
+  bool _isVisible = false;
+
+  // snackBar Widget
+  snackBar(String? message) {
+    return ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message!),
+        duration: const Duration(seconds: 2),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -44,7 +72,7 @@ class LargeScreen extends StatelessWidget {
                         shape: CircleBorder(),
                       ),
                       child: Icon(
-                        IconData(0xf05bc, fontFamily: 'MaterialIcons'),
+                        const IconData(0xf05bc, fontFamily: 'MaterialIcons'),
                         color: Colors.white,
                         size: 40,
                       ),
@@ -55,120 +83,130 @@ class LargeScreen extends StatelessWidget {
               ),
 
               ///Main Container
-              Container(
-                height: height * 0.8,
-                width: width * 0.3,
-                decoration: BoxDecoration(
+              Form(
+                key: _formKey,
+                child: Container(
+                  height: height * 0.8,
+                  width: width * 0.3,
+                  padding:
+                      EdgeInsets.only(left: 0.03 * width, right: 0.03 * height),
+                  decoration: BoxDecoration(
                     color: Colors.grey.withOpacity(0.3),
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
-                child: Column(
-                  children: [
-                    ///App logo
-                    Container(
-                      alignment: Alignment.topCenter,
-                      padding: EdgeInsets.only(top: height * 0.02),
-                      child: Image.asset("assets/music_swing_logo_small.png",
-                          scale: 2.3),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(20),
                     ),
+                  ),
+                  child: Column(
+                    children: [
+                      ///App logo
+                      Container(
+                        alignment: Alignment.topCenter,
+                        padding: EdgeInsets.only(top: height * 0.02),
+                        child: Image.asset("assets/music_swing_logo_small.png",
+                            scale: 2.5),
+                      ),
 
-                    ///Current Email
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Container(
-                          padding:
-                              EdgeInsets.only(left: 0.03 * width, bottom: 0),
-                          alignment: Alignment.topLeft,
-                          child: TextField(
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              fontFamily: 'Maven Pro',
-                              fontWeight: FontWeight.w100,
-                              color: Colors.white,
-                              fontSize: 20,
-                            ),
-                            decoration: const InputDecoration(
-                                hintText: 'Current Email',
+                      ///Current Email
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Container(
+                            alignment: Alignment.topLeft,
+                            child: TextFormField(
+                              controller: _currentEmailController,
+                              validator: RequiredValidator(
+                                  errorText: AutofillHints.email),
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                fontFamily: 'Maven Pro',
+                                fontWeight: FontWeight.w100,
+                                color: Colors.white,
+                                fontSize: 15,
+                              ),
+                              decoration: InputDecoration(
                                 hintStyle: TextStyle(color: Colors.white60),
-                                enabledBorder: InputBorder.none,
+                                hintText: 'Current Email',
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.white, width: 3),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: new BorderSide(
+                                      color: MyPalette.darkTurqoise, width: 3),
+                                ),
                                 labelText: 'Please enter your current email',
                                 labelStyle: TextStyle(
-                                    fontSize: 15, color: Colors.white54)),
-                          ),
-                        ),
-
-                        ///Horizontal line
-                        Container(
-                          padding: EdgeInsets.only(
-                            left: 0.03 * width,
-                            right: 0.03 * width,
-                            top: 0,
-                          ),
-                          child: const Divider(
-                            height: 5,
-                            thickness: 2,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    ///New Email
-                    Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.only(
-                              left: 0.03 * width, top: height * 0.01),
-                          alignment: Alignment.topLeft,
-                          child: TextField(
-                            style: TextStyle(
-                              fontFamily: 'Maven Pro',
-                              fontWeight: FontWeight.w100,
-                              color: Colors.white,
-                              fontSize: 20,
+                                    fontSize: 15, color: Colors.white54),
+                              ),
                             ),
-                            decoration: const InputDecoration(
+                          ),
+                        ],
+                      ),
+
+                      ///Enter new email
+                      Column(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.only(top: height * 0.005),
+                            alignment: Alignment.topLeft,
+                            child: TextFormField(
+                              controller: _newEmailController,
+                              validator:
+                                  RequiredValidator(errorText: "new email"),
+                              style: TextStyle(
+                                fontFamily: 'Maven Pro',
+                                fontWeight: FontWeight.w100,
+                                color: Colors.white,
+                                fontSize: 15,
+                              ),
+                              decoration: InputDecoration(
                                 hintStyle: TextStyle(color: Colors.white60),
                                 hintText: 'New Email',
-                                enabledBorder: InputBorder.none,
-                                labelText: 'Please your new email',
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.white, width: 3),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: new BorderSide(
+                                      color: MyPalette.darkTurqoise, width: 3),
+                                ),
+                                labelText: 'Please enter your new email',
                                 labelStyle: TextStyle(
-                                    fontSize: 15, color: Colors.white54)),
-                          ),
-                        ),
-
-                        ///Horizontal line
-                        Container(
-                          padding: EdgeInsets.only(
-                              left: 0.03 * width, right: 0.03 * width),
-                          child: const Divider(
-                            height: 8,
-                            thickness: 2,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    ///Confirm new email
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Container(
-                          padding: EdgeInsets.only(
-                              left: 0.03 * width, top: height * 0.01),
-                          alignment: Alignment.topLeft,
-                          child: TextField(
-                            style: TextStyle(
-                              fontFamily: 'Maven Pro',
-                              fontWeight: FontWeight.w100,
-                              color: Colors.white,
-                              fontSize: 20,
+                                    fontSize: 15, color: Colors.white54),
+                              ),
                             ),
-                            decoration: const InputDecoration(
+                          ),
+                        ],
+                      ),
+
+                      ///Confirm new email
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Container(
+                            padding: EdgeInsets.only(top: height * 0.005),
+                            alignment: Alignment.topLeft,
+                            child: TextFormField(
+                              controller: _newEmailController2,
+                              validator:
+                                  RequiredValidator(errorText: "new email"),
+                              style: TextStyle(
+                                fontFamily: 'Maven Pro',
+                                fontWeight: FontWeight.w100,
+                                color: Colors.white,
+                                fontSize: 15,
+                              ),
+                              decoration: InputDecoration(
                                 hintStyle: TextStyle(color: Colors.white60),
-                                hintText: 'Confirm Email',
-                                enabledBorder: InputBorder.none,
+                                hintText: 'Confirm New Email',
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.white, width: 3),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: new BorderSide(
+                                      color: MyPalette.darkTurqoise, width: 3),
+                                ),
                                 labelText: 'Please confirm your new email',
                                 labelStyle: TextStyle(
                                     fontSize: 15, color: Colors.white54)),
@@ -205,28 +243,70 @@ class LargeScreen extends StatelessWidget {
                               color: Colors.white,
                               fontSize: 20,
                             ),
-                            decoration: const InputDecoration(
+                          ),
+                        ],
+                      ),
+
+                      ///Password
+                      Column(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.only(top: height * 0.005),
+                            alignment: Alignment.topLeft,
+                            child: TextFormField(
+                              controller: _passwordController,
+                              validator: RequiredValidator(
+                                  errorText: AutofillHints.password),
+                              obscureText: !_isVisible,
+                              obscuringCharacter: "*",
+                              style: TextStyle(
+                                fontFamily: 'Maven Pro',
+                                fontWeight: FontWeight.w100,
+                                color: Colors.white,
+                                fontSize: 15,
+                              ),
+                              decoration: InputDecoration(
+                                //eye icon (see password)
+                                suffixIcon: Align(
+                                  widthFactor: 0,
+                                  child: IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        _isVisible = !_isVisible;
+                                      });
+                                    },
+                                    icon: _isVisible
+                                        ? Icon(
+                                            Icons.visibility,
+                                            color: MyPalette.darkTurqoise,
+                                          )
+                                        : Icon(
+                                            Icons.visibility_off,
+                                            color: Colors.grey,
+                                          ),
+                                  ),
+                                ),
+
                                 hintStyle: TextStyle(color: Colors.white60),
                                 hintText: 'Password',
-                                enabledBorder: InputBorder.none,
-                                labelText: 'Please enter your password',
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.white, width: 3),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: new BorderSide(
+                                      color: MyPalette.darkTurqoise, width: 3),
+                                ),
+                                labelText: 'Please enter password',
                                 labelStyle: TextStyle(
-                                    fontSize: 15, color: Colors.white54)),
+                                    fontSize: 15, color: Colors.white54),
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
+                      ),
 
-                        ///Horizontal line
-                        Container(
-                          padding: EdgeInsets.only(
-                              left: 0.02 * width, right: 0.02 * width, top: 0),
-                          child: const Divider(
-                            height: 8,
-                            thickness: 2,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
+                      SizedBox(height: height * 0.023),
 
                     ///Submit button
                     Container(
@@ -314,7 +394,46 @@ class LargeScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                  ],
+
+                      ///Forgot Password
+                      Container(
+                        padding: EdgeInsets.only(top: 0.02 * height),
+                        child: Column(
+                          children: [
+                            Container(
+                              alignment: Alignment.center,
+                              child: Column(
+                                children: [
+                                  Container(
+                                    child: TextButton(
+                                        child: Text(
+                                          'Forgot your password?',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontFamily: 'Maven Pro',
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 15,
+                                            color: MyPalette.turqoise,
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  OTPEmailPage(),
+                                            ),
+                                          );
+                                        }),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
@@ -325,18 +444,16 @@ class LargeScreen extends StatelessWidget {
   }
 }
 
-class _ChangeEmailPageState extends State<ChangeEmailPage> {
-  //GlobalKey<FormState> _key = new GlobalKey();
-  //bool _validate = false;
-  //bool _obscureText = true;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(body: Body());
-  }
+class SmallScreen extends StatefulWidget {
+  _SmallScreenState createState() => _SmallScreenState();
 }
 
-class SmallScreen extends StatelessWidget {
+class _SmallScreenState extends State<SmallScreen> {
+  //lets user see their password if they choose to
+  bool _isVisible = false;
+
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -361,195 +478,211 @@ class SmallScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          shape: CircleBorder(),
-                        ),
-                        child: Icon(
-                          IconData(0xf05bc, fontFamily: 'MaterialIcons'),
-                          color: Colors.white,
-                          size: 40,
-                        ),
-                        onPressed: () => Navigator.pop(context)),
+                      style: ElevatedButton.styleFrom(
+                        shape: CircleBorder(),
+                      ),
+                      child: Icon(
+                        const IconData(0xf05bc, fontFamily: 'MaterialIcons'),
+                        color: Colors.white,
+                        size: 40,
+                      ),
+                      onPressed: () => Navigator.pop(context),
+                    ),
                   ],
                 ),
               ),
 
-              Container(
-                child: Column(
-                  children: [
-                    ///Logo
-                    Container(
-                      alignment: Alignment.topCenter,
-                      padding: EdgeInsets.only(
-                          top: height * 0.02, bottom: height * 0.005),
-                      child: Image.asset("assets/music_swing_logo_small.png",
-                          scale: 2.2),
-                    ),
+              Form(
+                key: _formKey,
+                child: Container(
+                  padding:
+                      EdgeInsets.only(left: 0.12 * width, right: 0.12 * width),
+                  child: Column(
+                    children: [
+                      ///Logo
+                      Container(
+                        alignment: Alignment.topCenter,
+                        padding: EdgeInsets.only(
+                            top: height * 0.01, bottom: height * 0.005),
+                        child: Image.asset("assets/music_swing_logo_small.png",
+                            scale: 2.5),
+                      ),
 
-                    ///current email
-                    Column(
-                      children: [
-                        Container(
-                          padding:
-                              EdgeInsets.only(left: 0.12 * width, bottom: 0),
-                          alignment: Alignment.topLeft,
-                          child: TextField(
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              fontFamily: 'Maven Pro',
-                              fontWeight: FontWeight.w100,
-                              color: Colors.white,
-                              fontSize: 20,
-                            ),
-                            decoration: const InputDecoration(
+                      ///Current Email
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Container(
+                            alignment: Alignment.topLeft,
+                            child: TextFormField(
+                              controller: _currentEmailController,
+                              validator: RequiredValidator(
+                                  errorText: AutofillHints.email),
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                fontFamily: 'Maven Pro',
+                                fontWeight: FontWeight.w100,
+                                color: Colors.white,
+                                fontSize: 15,
+                              ),
+                              decoration: InputDecoration(
                                 hintStyle: TextStyle(color: Colors.white60),
-                                hintText: 'Current Email',
-                                border: UnderlineInputBorder(
+                                hintText: "Current Email",
+                                enabledBorder: UnderlineInputBorder(
                                   borderSide:
-                                      BorderSide(width: 3, color: Colors.white),
+                                      BorderSide(color: Colors.white, width: 3),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: new BorderSide(
+                                      color: MyPalette.darkTurqoise, width: 3),
                                 ),
                                 labelText: 'Please enter your current email',
                                 labelStyle: TextStyle(
-                                    fontSize: 15, color: Colors.white54)),
-                          ),
-                        ),
-
-                        ///Horizontal line
-                        Container(
-                          padding: EdgeInsets.only(
-                            left: 0.1 * width,
-                            right: 0.1 * width,
-                            top: 0,
-                          ),
-                          child: const Divider(
-                            height: 5,
-                            thickness: 2,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    ///New Email
-                    Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.only(
-                              left: 0.12 * width, top: height * 0.005),
-                          alignment: Alignment.topLeft,
-                          child: TextField(
-                            style: TextStyle(
-                              fontFamily: 'Maven Pro',
-                              fontWeight: FontWeight.w100,
-                              color: Colors.white,
-                              fontSize: 20,
+                                    fontSize: 15, color: Colors.white54),
+                              ),
                             ),
-                            decoration: const InputDecoration(
+                          ),
+                        ],
+                      ),
+
+                      ///spacer
+                      SizedBox(height: height * 0.015),
+
+                      ///New Email
+                      Column(
+                        children: [
+                          Container(
+                            alignment: Alignment.topLeft,
+                            child: TextFormField(
+                              controller: _newEmailController,
+                              validator:
+                                  RequiredValidator(errorText: "new email"),
+                              style: TextStyle(
+                                fontFamily: 'Maven Pro',
+                                fontWeight: FontWeight.w100,
+                                color: Colors.white,
+                                fontSize: 15,
+                              ),
+                              decoration: InputDecoration(
                                 hintStyle: TextStyle(color: Colors.white60),
                                 hintText: 'New Email',
-                                border: UnderlineInputBorder(
+                                enabledBorder: UnderlineInputBorder(
                                   borderSide:
-                                      BorderSide(width: 3, color: Colors.white),
+                                      BorderSide(color: Colors.white, width: 3),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: new BorderSide(
+                                      color: MyPalette.darkTurqoise, width: 3),
                                 ),
                                 labelText: 'Please enter your new email',
                                 labelStyle: TextStyle(
-                                    fontSize: 15, color: Colors.white54)),
-                          ),
-                        ),
-
-                        ///Horizontal line
-                        Container(
-                          padding: EdgeInsets.only(
-                              left: 0.1 * width, right: 0.1 * width),
-                          child: const Divider(
-                            height: 8,
-                            thickness: 2,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    ///Confirm Email
-                    Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.only(
-                              left: 0.12 * width, top: height * 0.005),
-                          alignment: Alignment.topLeft,
-                          child: TextField(
-                            style: TextStyle(
-                              fontFamily: 'Maven Pro',
-                              fontWeight: FontWeight.w100,
-                              color: Colors.white,
-                              fontSize: 20,
+                                    fontSize: 15, color: Colors.white54),
+                              ),
                             ),
-                            decoration: const InputDecoration(
+                          ),
+                        ],
+                      ),
+
+                      ///spacer
+                      SizedBox(height: height * 0.015),
+
+                      ///Confirm New Email
+                      Column(
+                        children: [
+                          Container(
+                            alignment: Alignment.topLeft,
+                            child: TextFormField(
+                              controller: _newEmailController2,
+                              validator: RequiredValidator(
+                                  errorText: "confirm new email"),
+                              style: TextStyle(
+                                fontFamily: 'Maven Pro',
+                                fontWeight: FontWeight.w100,
+                                color: Colors.white,
+                                fontSize: 15,
+                              ),
+                              decoration: InputDecoration(
                                 hintStyle: TextStyle(color: Colors.white60),
-                                hintText: 'Confirm Email',
-                                border: UnderlineInputBorder(
+                                hintText: 'Confirm New Email',
+                                enabledBorder: UnderlineInputBorder(
                                   borderSide:
-                                      BorderSide(width: 3, color: Colors.white),
+                                      BorderSide(color: Colors.white, width: 3),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: new BorderSide(
+                                      color: MyPalette.darkTurqoise, width: 3),
                                 ),
                                 labelText: 'Please confirm your new email',
                                 labelStyle: TextStyle(
-                                    fontSize: 15, color: Colors.white54)),
-                          ),
-                        ),
-
-                        ///Horizontal line
-                        Container(
-                            padding: EdgeInsets.only(
-                                left: 0.1 * width, right: 0.1 * width, top: 0),
-                            child: const Divider(
-                              height: 8,
-                              thickness: 2,
-                              color: Colors.white,
-                            )),
-                      ],
-                    ),
-
-                    ///enter password
-                    Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.only(
-                              left: 0.12 * width, top: height * 0.005),
-                          alignment: Alignment.topLeft,
-                          child: TextField(
-                            obscureText: true,
-                            obscuringCharacter: "*",
-                            style: TextStyle(
-                              fontFamily: 'Maven Pro',
-                              fontWeight: FontWeight.w100,
-                              color: Colors.white,
-                              fontSize: 20,
-                            ),
-                            decoration: const InputDecoration(
-                              hintStyle: TextStyle(color: Colors.white60),
-                              hintText: 'Password',
-                              border: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(width: 3, color: Colors.white),
+                                    fontSize: 15, color: Colors.white54),
                               ),
-                              labelText: 'Please enter your password',
-                              labelStyle: TextStyle(
-                                  fontSize: 15, color: Colors.white54),
+                            ),
+                          )
+                        ],
+                      ),
+
+                      ///spacer
+                      SizedBox(height: height * 0.015),
+
+                      ///Confirm Password
+                      Column(
+                        children: [
+                          Container(
+                            alignment: Alignment.topLeft,
+                            child: TextFormField(
+                              controller: _passwordController,
+                              validator: RequiredValidator(
+                                  errorText: AutofillHints.password),
+                              obscureText: !_isVisible,
+                              obscuringCharacter: "*",
+                              style: TextStyle(
+                                fontFamily: 'Maven Pro',
+                                fontWeight: FontWeight.w100,
+                                color: Colors.white,
+                                fontSize: 15,
+                              ),
+                              decoration: InputDecoration(
+                                //eye icon (see password)
+                                suffixIcon: Align(
+                                  widthFactor: 0,
+                                  child: IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        _isVisible = !_isVisible;
+                                      });
+                                    },
+                                    icon: _isVisible
+                                        ? Icon(
+                                            Icons.visibility,
+                                            color: MyPalette.darkTurqoise,
+                                          )
+                                        : Icon(
+                                            Icons.visibility_off,
+                                            color: Colors.grey,
+                                          ),
+                                  ),
+                                ),
+                                hintStyle: TextStyle(color: Colors.white60),
+                                hintText: 'Confirm Password',
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.white, width: 3),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: new BorderSide(
+                                      color: MyPalette.darkTurqoise, width: 3),
+                                ),
+                                labelText: 'Please confirm your password',
+                                labelStyle: TextStyle(
+                                    fontSize: 15, color: Colors.white54),
+                              ),
                             ),
                           ),
-                        ),
+                        ],
+                      ),
 
-                        ///Horizontal line
-                        Container(
-                            padding: EdgeInsets.only(
-                                left: 0.1 * width, right: 0.1 * width, top: 0),
-                            child: const Divider(
-                              height: 8,
-                              thickness: 2,
-                              color: Colors.white,
-                            )),
-                      ],
-                    ),
+                      ///spacer
+                      SizedBox(height: height * 0.02),
 
                     SizedBox(height: height * 0.02),
 
@@ -634,7 +767,7 @@ class SmallScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-              ),
+              )
             ],
           ),
         ),
@@ -643,9 +776,19 @@ class SmallScreen extends StatelessWidget {
   }
 }
 
-class ChangeEmailPage extends StatefulWidget {
-  _ChangeEmailPageState createState() => _ChangeEmailPageState();
+Future<void> changeEmail(BuildContext context) async {
+  AuthRouter().changeEmail(
+    _newEmailController.text,
+  );
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => HomePage(),
+    ),
+  );
+}
 
+class ChangeEmailPage extends StatelessWidget {
   Widget build(Object context) {
     return Scaffold(
         resizeToAvoidBottomInset: false, body: Column(children: [Body()]));
