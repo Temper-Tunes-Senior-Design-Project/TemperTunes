@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mood_swing/Pages/OTPEmailPage.dart';
 import '../Widgets/widgets.dart';
 import 'package:mood_swing/Pages/HomePage.dart';
-import 'package:mood_swing/Utilities/AuthRouter.dart';
 import 'package:form_field_validator/form_field_validator.dart';
-import 'dart:async';
 
 class Body extends StatelessWidget {
   @override
@@ -291,17 +289,12 @@ class _LargeScreenState extends State<LargeScreen> {
                                 ),
                               );
                             },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.transparent,
+                              foregroundColor: Colors.transparent,
+                            ),
                           ),
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              changePassword(context);
-                            }
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.transparent,
-                            foregroundColor: Colors.transparent,
-                          ),
-                        ),
+                        ],
                       ),
                     ),
                   ),
@@ -599,40 +592,31 @@ class _SmallScreenState extends State<SmallScreen> {
                               ),
                             ),
                           ),
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => HomePage(),
-                            ),
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.transparent,
-                          foregroundColor: Colors.transparent,
-                        ),
-                      ),
-                    ),
 
-                    ///spacer
-                    SizedBox(height: 0.02 * height),
-
-                    ///Already Have an account
-                    Container(
-                      padding: EdgeInsets.only(top: 0.01 * height),
-                      child: Container(
-                        child: Text(
-                          'Forgot your password?',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontFamily: 'Maven Pro',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                            color: MyPalette.turqoise,
+                          /*
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              changePassword(context);
+                            }
+                          },
+                          */
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => HomePage(),
+                              ),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.transparent,
+                            foregroundColor: Colors.transparent,
                           ),
                         ),
                       ),
+
+                      ///spacer
+                      SizedBox(height: 0.02 * height),
 
                       ///Forgot Password
                       Container(
@@ -678,9 +662,7 @@ class _SmallScreenState extends State<SmallScreen> {
   }
 }
 
-class ChangePasswordPage extends StatefulWidget {
-  _ChangePasswordPageState createState() => _ChangePasswordPageState();
-
+class ChangePasswordPage extends StatelessWidget {
   Widget build(Object context) {
     return Scaffold(
         resizeToAvoidBottomInset: false, body: Column(children: [Body()]));

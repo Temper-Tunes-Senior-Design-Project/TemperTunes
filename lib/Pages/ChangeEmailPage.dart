@@ -197,51 +197,53 @@ class _LargeScreenState extends State<LargeScreen> {
                                 fontSize: 15,
                               ),
                               decoration: InputDecoration(
-                                hintStyle: TextStyle(color: Colors.white60),
-                                hintText: 'Confirm New Email',
-                                enabledBorder: UnderlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.white, width: 3),
-                                ),
-                                focusedBorder: UnderlineInputBorder(
-                                  borderSide: new BorderSide(
-                                      color: MyPalette.darkTurqoise, width: 3),
-                                ),
-                                labelText: 'Please confirm your new email',
-                                labelStyle: TextStyle(
-                                    fontSize: 15, color: Colors.white54)),
+                                  hintStyle: TextStyle(color: Colors.white60),
+                                  hintText: 'Confirm New Email',
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.white, width: 3),
+                                  ),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: new BorderSide(
+                                        color: MyPalette.darkTurqoise,
+                                        width: 3),
+                                  ),
+                                  labelText: 'Please confirm your new email',
+                                  labelStyle: TextStyle(
+                                      fontSize: 15, color: Colors.white54)),
+                            ),
                           ),
-                        ),
 
-                        ///Horizontal line
-                        Container(
+                          ///Horizontal line
+                          Container(
+                              padding: EdgeInsets.only(
+                                  left: 0.02 * width,
+                                  right: 0.02 * width,
+                                  top: 0),
+                              child: const Divider(
+                                height: 8,
+                                thickness: 2,
+                                color: Colors.white,
+                              )),
+                        ],
+                      ),
+
+                      ///Password
+                      Column(
+                        children: [
+                          Container(
                             padding: EdgeInsets.only(
-                                left: 0.02 * width,
-                                right: 0.02 * width,
-                                top: 0),
-                            child: const Divider(
-                              height: 8,
-                              thickness: 2,
-                              color: Colors.white,
-                            )),
-                      ],
-                    ),
-
-                    ///Password
-                    Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.only(
-                              left: 0.03 * width, top: height * 0.01),
-                          alignment: Alignment.topLeft,
-                          child: TextField(
-                            obscureText: true,
-                            obscuringCharacter: "*",
-                            style: TextStyle(
-                              fontFamily: 'Maven Pro',
-                              fontWeight: FontWeight.w100,
-                              color: Colors.white,
-                              fontSize: 20,
+                                left: 0.03 * width, top: height * 0.01),
+                            alignment: Alignment.topLeft,
+                            child: TextField(
+                              obscureText: true,
+                              obscuringCharacter: "*",
+                              style: TextStyle(
+                                fontFamily: 'Maven Pro',
+                                fontWeight: FontWeight.w100,
+                                color: Colors.white,
+                                fontSize: 20,
+                              ),
                             ),
                           ),
                         ],
@@ -308,92 +310,93 @@ class _LargeScreenState extends State<LargeScreen> {
 
                       SizedBox(height: height * 0.023),
 
-                    ///Submit button
-                    Container(
-                      child: TextButton(
-                        child: Container(
-                          padding: EdgeInsets.only(top: height * 0.02),
+                      ///Submit button
+                      Container(
+                        child: TextButton(
                           child: Container(
-                            width: 0.2 * width,
-                            height: 0.056 * height,
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                begin: Alignment.topRight,
-                                end: Alignment.bottomLeft,
-                                colors: [
-                                  MyPalette.slateBlue,
-                                  MyPalette.brightMagenta,
-                                  MyPalette.turqoise,
+                            padding: EdgeInsets.only(top: height * 0.02),
+                            child: Container(
+                              width: 0.2 * width,
+                              height: 0.056 * height,
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topRight,
+                                  end: Alignment.bottomLeft,
+                                  colors: [
+                                    MyPalette.slateBlue,
+                                    MyPalette.brightMagenta,
+                                    MyPalette.turqoise,
+                                  ],
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(15),
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    offset: Offset(0, 1),
+                                    color: MyPalette.brightMagenta,
+                                    blurRadius: 16,
+                                  ),
                                 ],
                               ),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(15),
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  offset: Offset(0, 1),
-                                  color: MyPalette.brightMagenta,
-                                  blurRadius: 16,
-                                ),
-                              ],
-                            ),
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: Text(
-                                "Submit",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 25,
-                                  fontFamily: 'Share Tech',
-                                  color: Colors.white,
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  "Submit",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                    fontFamily: 'Share Tech',
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => HomePage(),
-                            ),
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.transparent,
-                          foregroundColor: Colors.transparent,
-                        ),
-                      ),
-                    ),
-
-                    ///Forgot Password
-                    Container(
-                      padding: EdgeInsets.only(top: 0.02 * height),
-                      child: Container(
-                        alignment: Alignment.center,
-                        child: Column(
-                          children: [
-                            TextButton(
-                              child: Text(
-                                'Forgot your password?',
-                                style: TextStyle(
-                                  fontFamily: 'Maven Pro',
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                  color: MyPalette.turqoise,
-                                ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => HomePage(),
                               ),
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => OTPEmailPage()));
-                              },
-                            ),
-                          ],
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.transparent,
+                            foregroundColor: Colors.transparent,
+                          ),
                         ),
                       ),
-                    ),
+
+                      ///Forgot Password
+                      Container(
+                        padding: EdgeInsets.only(top: 0.02 * height),
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: Column(
+                            children: [
+                              TextButton(
+                                child: Text(
+                                  'Forgot your password?',
+                                  style: TextStyle(
+                                    fontFamily: 'Maven Pro',
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                    color: MyPalette.turqoise,
+                                  ),
+                                ),
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              OTPEmailPage()));
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
 
                       ///Forgot Password
                       Container(
@@ -684,90 +687,91 @@ class _SmallScreenState extends State<SmallScreen> {
                       ///spacer
                       SizedBox(height: height * 0.02),
 
-                    SizedBox(height: height * 0.02),
+                      SizedBox(height: height * 0.02),
 
-                    ///Submit Button
-                    Container(
-                      child: TextButton(
-                        child: Container(
-                          padding: EdgeInsets.only(top: height * 0.015),
+                      ///Submit Button
+                      Container(
+                        child: TextButton(
                           child: Container(
-                            width: 0.4 * width,
-                            height: 0.05 * height,
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                begin: Alignment.topRight,
-                                end: Alignment.bottomLeft,
-                                colors: [
-                                  MyPalette.slateBlue,
-                                  MyPalette.brightMagenta,
-                                  MyPalette.turqoise,
+                            padding: EdgeInsets.only(top: height * 0.015),
+                            child: Container(
+                              width: 0.4 * width,
+                              height: 0.05 * height,
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topRight,
+                                  end: Alignment.bottomLeft,
+                                  colors: [
+                                    MyPalette.slateBlue,
+                                    MyPalette.brightMagenta,
+                                    MyPalette.turqoise,
+                                  ],
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(15),
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    offset: Offset(0, 1),
+                                    color: MyPalette.brightMagenta,
+                                    blurRadius: 16,
+                                  ),
                                 ],
                               ),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(15),
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  offset: Offset(0, 1),
-                                  color: MyPalette.brightMagenta,
-                                  blurRadius: 16,
-                                ),
-                              ],
-                            ),
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: Text(
-                                "Submit",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 25,
-                                  fontFamily: 'Share Tech',
-                                  color: Colors.white,
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  "Submit",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                    fontFamily: 'Share Tech',
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
-                            ),
-                          ),
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => HomePage()));
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.transparent,
-                          foregroundColor: Colors.transparent,
-                        ),
-                      ),
-                    ),
-
-                    ///Already Have an account
-                    Container(
-                      padding: EdgeInsets.only(top: 0.01 * height),
-                      child: TextButton(
-                          child: Text(
-                            'Forgot your password?',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: 'Maven Pro',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                              color: MyPalette.turqoise,
                             ),
                           ),
                           onPressed: () {
                             Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => OTPEmailPage(),
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => HomePage()));
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.transparent,
+                            foregroundColor: Colors.transparent,
+                          ),
+                        ),
+                      ),
+
+                      ///Already Have an account
+                      Container(
+                        padding: EdgeInsets.only(top: 0.01 * height),
+                        child: TextButton(
+                            child: Text(
+                              'Forgot your password?',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontFamily: 'Maven Pro',
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: MyPalette.turqoise,
                               ),
-                            );
-                          }),
-                    ),
-                  ],
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => OTPEmailPage(),
+                                ),
+                              );
+                            }),
+                      ),
+                    ],
+                  ),
                 ),
-              )
+              ),
             ],
           ),
         ),
