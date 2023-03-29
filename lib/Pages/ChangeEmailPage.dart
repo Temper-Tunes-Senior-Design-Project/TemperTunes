@@ -9,8 +9,6 @@ import 'dart:async';
 
 import 'OTPEmailPage.dart';
 
-import 'OTPEmailPage.dart';
-
 class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

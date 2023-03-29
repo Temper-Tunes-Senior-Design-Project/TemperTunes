@@ -108,12 +108,13 @@ class _LargeScreenState extends State<LargeScreen> {
                             fontSize: 20,
                           ),
                           decoration: const InputDecoration(
-                              hintStyle: TextStyle(color: Colors.white60),
-                              enabledBorder: InputBorder.none,
-                              hintText: 'Current Password',
-                              labelText: 'Please enter your current username',
-                              labelStyle: TextStyle(
-                                  fontSize: 15, color: Colors.white54)),
+                            hintStyle: TextStyle(color: Colors.white60),
+                            enabledBorder: InputBorder.none,
+                            hintText: 'Current Password',
+                            labelText: 'Please enter your current username',
+                            labelStyle:
+                                TextStyle(fontSize: 15, color: Colors.white54),
+                          ),
                         ),
                       ),
 

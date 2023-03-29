@@ -20,8 +20,8 @@ class Body extends StatelessWidget {
 TextEditingController _emailController = new TextEditingController();
 TextEditingController _passwordController = new TextEditingController();
 MultiValidator emailValidator = MultiValidator([
-  /// RequiredValidator(errorText: "* Required"),
-  //EmailValidator(errorText: "Enter valid email ID"),
+  //   RequiredValidator(errorText: "* Required"),
+  //   EmailValidator(errorText: "Enter valid email ID"),
 ]);
 
 class LargeScreen extends StatefulWidget {
@@ -80,368 +80,350 @@ class _LargeScreenState extends State<LargeScreen> {
               ),
 
               ///Main Container
-              FittedBox(
-                child: Form(
-                  key: _formKey,
-                  child: Container(
-                    height: height * 0.8,
-                    width: width * 0.3,
-                    decoration: BoxDecoration(
-                      color: Colors.grey.withOpacity(0.3),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(20),
-                      ),
+              Form(
+                key: _formKey,
+                child: Container(
+                  constraints: BoxConstraints(
+                    maxHeight: height * 0.87,
+                    minHeight: height * 0.8,
+                    minWidth: width * 0.3,
+                    maxWidth: width * 0.3,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.grey.withOpacity(0.3),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(20),
                     ),
-                    child: Column(
-                      children: [
-                        Container(
-                          alignment: Alignment.topCenter,
-                          padding: EdgeInsets.only(top: height * 0.02),
-                          child: Image.asset(
-                              "assets/music_swing_logo_small.png",
-                              scale: 2.5),
-                        ),
+                  ),
+                  child: Column(
+                    children: [
+                      Container(
+                        alignment: Alignment.topCenter,
+                        padding: EdgeInsets.only(top: height * 0.02),
+                        child: Image.asset("assets/music_swing_logo_small.png",
+                            scale: 2.5),
+                      ),
 
-                        ///User input area
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Container(
-                              padding: EdgeInsets.only(
-                                  left: 0.02 * width, right: 0.02 * width),
+                      ///User input area
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Container(
+                            padding: EdgeInsets.only(
+                                left: 0.02 * width, right: 0.02 * width),
 
-                              ///TextFormField
-                              child: TextFormField(
-                                controller: _emailController,
-                                validator: RequiredValidator(
-                                    errorText: AutofillHints.email),
-                                textAlign: TextAlign.left,
-                                cursorColor: Colors.white,
-                                style: TextStyle(
-                                  fontFamily: 'Maven Pro',
-                                  fontWeight: FontWeight.w100,
-                                  color: Colors.white,
-                                  fontSize: 20,
+                            ///TextFormField
+                            child: TextFormField(
+                              controller: _emailController,
+                              validator: RequiredValidator(
+                                  errorText: AutofillHints.email),
+                              textAlign: TextAlign.left,
+                              cursorColor: Colors.white,
+                              style: TextStyle(
+                                fontFamily: 'Maven Pro',
+                                fontWeight: FontWeight.w100,
+                                color: Colors.white,
+                                fontSize: 20,
+                              ),
+                              decoration: InputDecoration(
+                                //icon
+                                prefixIcon: Icon(
+                                  const IconData(0xe491,
+                                      fontFamily: 'MaterialIcons'),
+                                  color: MyPalette.white,
+                                  size: 34,
                                 ),
-                                decoration: InputDecoration(
-                                  //icon
-                                  prefixIcon: Icon(
-                                    const IconData(0xe491,
-                                        fontFamily: 'MaterialIcons'),
-                                    color: MyPalette.white,
-                                    size: 34,
-                                  ),
-                                  hintStyle: TextStyle(color: Colors.white60),
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.white, width: 3),
-                                  ),
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: new BorderSide(
-                                        color: MyPalette.darkTurqoise,
-                                        width: 3),
-                                  ),
-                                  labelText: 'Please enter your email',
-                                  labelStyle: TextStyle(
-                                      fontSize: 15, color: Colors.white54),
+                                hintStyle: TextStyle(color: Colors.white60),
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.white, width: 3),
                                 ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: new BorderSide(
+                                      color: MyPalette.darkTurqoise, width: 3),
+                                ),
+                                labelText: 'Please enter your email',
+                                labelStyle: TextStyle(
+                                    fontSize: 15, color: Colors.white54),
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
+                      ),
 
-                        ///spacer
-                        SizedBox(height: 0.025 * height),
+                      ///spacer
+                      SizedBox(height: 0.025 * height),
 
-                        ///password icon
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            ///TextField
-                            Container(
-                              padding: EdgeInsets.only(
-                                left: 0.02 * width,
-                                right: 0.02 * width,
+                      ///password icon
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          ///TextField
+                          Container(
+                            padding: EdgeInsets.only(
+                              left: 0.02 * width,
+                              right: 0.02 * width,
+                            ),
+                            //textformfield
+                            child: TextFormField(
+                              controller: _passwordController,
+                              validator: RequiredValidator(
+                                  errorText: AutofillHints.password),
+                              textAlign: TextAlign.left,
+                              obscureText: !_isVisible,
+                              obscuringCharacter: "*",
+                              cursorColor: Colors.white,
+                              style: TextStyle(
+                                fontFamily: 'Maven Pro',
+                                fontWeight: FontWeight.w100,
+                                color: Colors.white,
+                                fontSize: 20,
                               ),
-                              //textformfield
-                              child: TextFormField(
-                                controller: _passwordController,
-                                validator: RequiredValidator(
-                                    errorText: AutofillHints.password),
-                                textAlign: TextAlign.left,
-                                obscureText: !_isVisible,
-                                obscuringCharacter: "*",
-                                cursorColor: Colors.white,
-                                style: TextStyle(
-                                  fontFamily: 'Maven Pro',
-                                  fontWeight: FontWeight.w100,
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                ),
-                                decoration: InputDecoration(
-                                  ///Eye icon (see password)
-                                  suffixIcon: Align(
-                                    widthFactor: 0,
-                                    child: IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          _isVisible = !_isVisible;
-                                        });
-                                      },
-                                      icon: _isVisible
-                                          ? Icon(
-                                              Icons.visibility,
-                                              color: MyPalette.darkTurqoise,
-                                            )
-                                          : Icon(
-                                              Icons.visibility_off,
-                                              color: Colors.grey,
-                                            ),
-                                    ),
+                              decoration: InputDecoration(
+                                ///Eye icon (see password)
+                                suffixIcon: Align(
+                                  widthFactor: 0,
+                                  child: IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        _isVisible = !_isVisible;
+                                      });
+                                    },
+                                    icon: _isVisible
+                                        ? Icon(
+                                            Icons.visibility,
+                                            color: MyPalette.darkTurqoise,
+                                          )
+                                        : Icon(
+                                            Icons.visibility_off,
+                                            color: Colors.grey,
+                                          ),
                                   ),
+                                ),
 
-                                  ///PrefixIcon
-                                  prefixIcon: Icon(
-                                    const IconData(0xe3ae,
-                                        fontFamily: 'MaterialIcons'),
-                                    color: MyPalette.white,
-                                    size: 34,
-                                  ),
-                                  hintStyle: TextStyle(color: Colors.white60),
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.white, width: 3),
-                                  ),
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: new BorderSide(
-                                        color: MyPalette.darkTurqoise,
-                                        width: 3),
-                                  ),
-                                  labelText: 'Please enter your password',
-                                  labelStyle: TextStyle(
-                                      fontSize: 15, color: Colors.white54),
+                                ///PrefixIcon
+                                prefixIcon: Icon(
+                                  const IconData(0xe3ae,
+                                      fontFamily: 'MaterialIcons'),
+                                  color: MyPalette.white,
+                                  size: 34,
                                 ),
+                                hintStyle: TextStyle(color: Colors.white60),
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.white, width: 3),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: new BorderSide(
+                                      color: MyPalette.darkTurqoise, width: 3),
+                                ),
+                                labelText: 'Please enter your password',
+                                labelStyle: TextStyle(
+                                    fontSize: 15, color: Colors.white54),
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
+                      ),
 
-                        ///spacer
-                        SizedBox(height: 0.02 * height),
+                      ///spacer
+                      SizedBox(height: 0.02 * height),
 
-                        ///Forgot Password
-                        Container(
+                      ///Forgot Password
+                      Container(
+                        child: TextButton(
+                            child: Text(
+                              'Forgot your password?',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontFamily: 'Maven Pro',
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                                color: MyPalette.turqoise,
+                              ),
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => OTPEmailPage(),
+                                ),
+                              );
+                            }),
+                      ),
+
+                      ///spacer
+                      SizedBox(height: 0.04 * height),
+
+                      ///Buttons
+                      //Login button
+                      BouncingWidget(
+                        scaleFactor: _scaleFactor,
+                        onPressed: () {},
+                        child: Container(
                           child: TextButton(
-                              child: Text(
-                                'Forgot your password?',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontFamily: 'Maven Pro',
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15,
-                                  color: MyPalette.turqoise,
-                                ),
-                              ),
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => OTPEmailPage(),
-                                  ),
-                                );
-                              }),
-                        ),
-
-                        ///spacer
-                        SizedBox(height: 0.025 * height),
-
-                        ///Buttons
-                        //Login button
-                        BouncingWidget(
-                          scaleFactor: _scaleFactor,
-                          onPressed: () {},
-                          child: Container(
-                            child: TextButton(
-                              child: Container(
-                                width: 0.27 * width,
-                                height: 0.075 * height,
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    begin: Alignment.topRight,
-                                    end: Alignment.bottomLeft,
-                                    colors: [
-                                      MyPalette.slateBlue,
-                                      MyPalette.brightMagenta,
-                                      MyPalette.turqoise,
-                                    ],
-                                  ),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(20),
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      offset: Offset(0, 1),
-                                      color: MyPalette.brightMagenta,
-                                      blurRadius: 16,
-                                    ),
+                            child: Container(
+                              width: 0.27 * width,
+                              height: 0.075 * height,
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topRight,
+                                  end: Alignment.bottomLeft,
+                                  colors: [
+                                    MyPalette.slateBlue,
+                                    MyPalette.brightMagenta,
+                                    MyPalette.turqoise,
                                   ],
                                 ),
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    "Login",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 25,
-                                      fontFamily: 'Share Tech',
-                                      color: Colors.white,
-                                    ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(20),
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    offset: Offset(0, 1),
+                                    color: MyPalette.brightMagenta,
+                                    blurRadius: 16,
+                                  ),
+                                ],
+                              ),
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  "Login",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                    fontFamily: 'Share Tech',
+                                    color: Colors.white,
                                   ),
                                 ),
                               ),
-                              onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                  login(context);
-                                }
-                              },
                             ),
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                login(context);
+                              }
+                            },
                           ),
                         ),
+                      ),
 
-                        // //Register Button
-                        // Container(
-                        //   child: TextButton(
-                        //     child: Container(
-                        //       padding: EdgeInsets.only(top: 0.03 * height),
-                        //       child: Container(
-                        //         width: 0.27 * width,
-                        //         height: 0.075 * height,
-                        //         decoration: BoxDecoration(
-                        //           gradient: LinearGradient(
-                        //             begin: Alignment.topRight,
-                        //             end: Alignment.bottomLeft,
-                        //             colors: [
-                        //               MyPalette.slateBlue,
-                        //               MyPalette.brightMagenta,
-                        //               MyPalette.turqoise,
-                        //             ],
-                        //           ),
-                        //           borderRadius: BorderRadius.all(
-                        //             Radius.circular(15),
-                        //           ),
-                        //           boxShadow: [
-                        //             BoxShadow(
-                        //               offset: Offset(0, 1),
-                        //               color: MyPalette.brightMagenta,
-                        //               blurRadius: 16,
-                        //             ),
-                        //           ],
-                        //         ),
-                        //         child: Align(
-                        //           alignment: Alignment.center,
-                        //           child: Text(
-                        //             "Register",
-                        //             textAlign: TextAlign.center,
-                        //             style: TextStyle(
-                        //               fontSize: 25,
-                        //               fontFamily: 'Share Tech',
-                        //               color: Colors.white,
-                        //             ),
-                        //           ),
-                        //         ),
-                        //       ),
-                        //     ),
-                        //     onPressed: () {
-                        //       Navigator.push(
-                        //         context,
-                        //         MaterialPageRoute(
-                        //           builder: (context) => SignupPage(),
-                        //         ),
-                        //       );
-                        //     },
-                        //     style: ElevatedButton.styleFrom(
-                        //       backgroundColor: Colors.transparent,
-                        //       foregroundColor: Colors.transparent,
-                        //     ),
-                        //   ),
-                        // ),
-                        ///Spacer
-                        SizedBox(height: 0.04 * height),
+                      ///Spacer
+                      SizedBox(height: 0.04 * height),
 
-                        ///Log in with
-                        Container(
-                          child: FittedBox(
-                            child: Text(
-                              'Or',
-                              style: TextStyle(
-                                color: white,
-                                fontSize: 15,
-                                fontFamily: 'Maven Pro',
-                                fontWeight: FontWeight.w400,
+                      ///Log in with
+                      Container(
+                        child: FittedBox(
+                          child: Text(
+                            'Or',
+                            style: TextStyle(
+                              color: white,
+                              fontSize: 13,
+                              fontFamily: 'Maven Pro',
+                              fontWeight: FontWeight.w400,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+
+                      ///Other account options
+                      Container(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                        height: height * 0.15,
+                        child: Flexible(
+                          flex: 3,
+                          fit: FlexFit.loose,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              Container(
+                                //child: Image.asset("assets/googleIcon.png"),
+                                height: 45,
+                                width: 45,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage("assets/googleIcon.png"),
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
                               ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ),
-
-                        ///Other account options
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 10),
-                          height: height * 0.15,
-                          child: Flexible(
-                            flex: 3,
-                            fit: FlexFit.loose,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: <Widget>[
-                                Container(
-                                  //child: Image.asset("assets/googleIcon.png"),
-                                  height: 45,
-                                  width: 45,
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image:
-                                          AssetImage("assets/googleIcon.png"),
-                                      fit: BoxFit.fill,
-                                    ),
+                              Container(
+                                //child: Image.asset("assets/googleIcon.png"),
+                                height: 45,
+                                width: 45,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image:
+                                        AssetImage("assets/facebookIcon.png"),
+                                    fit: BoxFit.fill,
                                   ),
                                 ),
-                                Container(
-                                  //child: Image.asset("assets/googleIcon.png"),
-                                  height: 45,
-                                  width: 45,
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image:
-                                          AssetImage("assets/facebookIcon.png"),
-                                      fit: BoxFit.fill,
+                              ),
+                              ExternalAuthBtn(
+                                context: context,
+                                img: Image.asset("assets/appleIcon.png"),
+                                toolTipText: "AppleID",
+                                heroTag: "Apple Login",
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => HomePage(),
                                     ),
-                                  ),
-                                ),
-                                FloatingActionButton(
-                                  child: Image.asset("assets/appleIcon.png"),
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => HomePage(),
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ],
-                            ),
+                                  );
+                                },
+                              ),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class ExternalAuthBtn extends StatelessWidget {
+  final Image img;
+  final String toolTipText;
+  final void Function()? onPressed;
+  final BuildContext context;
+  final String heroTag;
+  const ExternalAuthBtn(
+      {required this.context,
+      required this.heroTag,
+      required this.img,
+      required this.onPressed,
+      required this.toolTipText,
+      super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    return Container(
+      decoration: BoxDecoration(
+          // shape: BoxShape.circle,
+          //  border: Border.all(width: width * 0.002, color: Colors.black),
+          ),
+      child: FloatingActionButton(
+        hoverColor: Color.fromARGB(255, 75, 79, 95),
+        hoverElevation: height * 0.035,
+        elevation: 0,
+        heroTag: heroTag,
+        tooltip: toolTipText,
+        //           shape: CircleBorder(),
+        backgroundColor: MyPalette.white,
+        onPressed: onPressed,
+        child: img,
       ),
     );
   }

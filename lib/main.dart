@@ -8,6 +8,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mood_swing/Utilities/AuthRouter.dart';
+import 'Pages/LoginPage.dart';
 import 'Widgets/MockNavigator.dart';
 import 'firebase_options.dart';
 
@@ -62,11 +63,11 @@ class App extends StatelessWidget {
           initialData: FirebaseAuth.instance.currentUser,
           stream: AuthRouter().authMonitor(),
           builder: (context, snapshot) {
-            if(snapshot.data != null)
-              {
-               return HomePage();
-              }
-            return LandingPage();
+            if (snapshot.data != null) {
+              return HomePage();
+            }
+            //return LandingPage();
+            return LoginPage();
           }),
     );
   }
