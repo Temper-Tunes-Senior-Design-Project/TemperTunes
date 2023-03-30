@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mood_swing/Pages/LoginPage.dart';
 import '../Widgets/widgets.dart';
 import 'SignupPage.dart';
 
@@ -224,7 +223,7 @@ class SmallScreen extends StatelessWidget {
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    LoginPage(),
+                                                    SignupPage(),
                                               ),
                                             );
                                           },

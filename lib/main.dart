@@ -8,9 +8,14 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mood_swing/Utilities/AuthRouter.dart';
-import 'Pages/LoginPage.dart';
 import 'Widgets/MockNavigator.dart';
 import 'firebase_options.dart';
+
+import 'Pages/ChangePasswordPage.dart';
+import 'Pages/LoginPage.dart';
+import 'Pages/SignupPage.dart';
+import 'package:mood_swing/Pages/PreferencesPage.dart';
+import 'Pages/ChangeEmailPage.dart';
 
 List<CameraDescription> cameras = [];
 
@@ -67,7 +72,7 @@ class App extends StatelessWidget {
               return HomePage();
             }
             //return LandingPage();
-            return LoginPage();
+            return PreferencesPage();
           }),
     );
   }

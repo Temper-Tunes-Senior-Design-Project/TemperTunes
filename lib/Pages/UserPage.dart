@@ -25,11 +25,14 @@ class profileBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               //picture
-              Container(
-                padding: EdgeInsets.only(bottom: height * 0.02),
-                child: CircleAvatar(
-                  backgroundImage: AssetImage("assets/profilepic.png"),
-                  radius: 90,
+              FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Container(
+                  padding: EdgeInsets.only(bottom: height * 0.02),
+                  child: CircleAvatar(
+                    backgroundImage: AssetImage("assets/profilepic.png"),
+                    radius: 90,
+                  ),
                 ),
               ),
               //Name
@@ -292,12 +295,14 @@ class LargeScreen extends StatelessWidget {
                                       color: MyPalette.magenta,
                                       child: Column(
                                         children: [
-                                          Text(
-                                            "Linked Devices",
-                                            style: TextStyle(
-                                              fontFamily: 'Share Tech',
-                                              color: Colors.white,
-                                              fontSize: 30,
+                                          FittedBox(
+                                            child: Text(
+                                              "Linked Devices",
+                                              style: TextStyle(
+                                                fontFamily: 'Share Tech',
+                                                color: Colors.white,
+                                                fontSize: 30,
+                                              ),
                                             ),
                                           ),
                                           Divider(
@@ -649,11 +654,13 @@ class SmallScreen extends StatelessWidget {
                             child: Column(
                               children: [
                                 //Name
-                                Text("John Doe",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: 'Share Tech',
-                                        fontSize: 40)),
+                                Text(
+                                  "John Doe",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Share Tech',
+                                      fontSize: 40),
+                                ),
                                 //Membership
                                 Container(
                                   padding: EdgeInsets.only(top: 3),
@@ -698,69 +705,77 @@ class SmallScreen extends StatelessWidget {
                         children: [
                           ///Generated Playlists
                           Container(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Container(
-                                  alignment: Alignment.topCenter,
-                                  padding: EdgeInsets.only(
-                                      left: 0.08 * width, top: 3),
-                                  child: Text(
-                                    "Playlists Generated",
-                                    style: TextStyle(
-                                      fontFamily: 'Maven Pro',
-                                      fontSize: 18,
-                                      color: Colors.white,
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    alignment: Alignment.topCenter,
+                                    padding: EdgeInsets.only(
+                                        left: 0.08 * width, top: 3),
+                                    child: FittedBox(
+                                      child: Text(
+                                        "Playlists Generated",
+                                        style: TextStyle(
+                                          fontFamily: 'Maven Pro',
+                                          fontSize: 18,
+                                          color: Colors.white,
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Container(
-                                  alignment: Alignment.topCenter,
-                                  child: Text(
-                                    "14",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 26,
+                                  Container(
+                                    alignment: Alignment.topCenter,
+                                    child: Text(
+                                      "14",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 26,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
 
                           ///Songs
                           Container(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Container(
-                                  alignment: Alignment.topCenter,
-                                  padding: EdgeInsets.only(
-                                      left: 0.08 * width, top: 3),
-                                  child: Text(
-                                    "Unique Songs",
-                                    style: TextStyle(
-                                      fontFamily: 'Maven Pro',
-                                      fontSize: 18,
-                                      color: Colors.white,
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    alignment: Alignment.topCenter,
+                                    padding: EdgeInsets.only(
+                                        left: 0.08 * width, top: 3),
+                                    child: Text(
+                                      "Unique Songs",
+                                      style: TextStyle(
+                                        fontFamily: 'Maven Pro',
+                                        fontSize: 18,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Container(
-                                  alignment: Alignment.topCenter,
-                                  child: Text(
-                                    "14",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 26,
+                                  Container(
+                                    alignment: Alignment.topCenter,
+                                    child: Text(
+                                      "14",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 26,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ],
@@ -792,69 +807,76 @@ class SmallScreen extends StatelessWidget {
                         children: [
                           ///Mood categories
                           Container(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Container(
-                                  alignment: Alignment.topCenter,
-                                  padding: EdgeInsets.only(top: 3),
-                                  child: Text(
-                                    "Mood Categories",
-                                    style: TextStyle(
-                                      fontFamily: 'Maven Pro',
-                                      fontSize: 18,
-                                      color: Colors.white,
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    alignment: Alignment.topCenter,
+                                    padding: EdgeInsets.only(top: 3),
+                                    child: Text(
+                                      "Mood Categories",
+                                      style: TextStyle(
+                                        fontFamily: 'Maven Pro',
+                                        fontSize: 18,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Container(
-                                  padding: EdgeInsets.only(right: 0.1 * width),
-                                  alignment: Alignment.topCenter,
-                                  child: Text(
-                                    "14",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 26,
+                                  Container(
+                                    padding:
+                                        EdgeInsets.only(right: 0.1 * width),
+                                    alignment: Alignment.topCenter,
+                                    child: Text(
+                                      "14",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 26,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
 
                           ///Exported Playlists
                           Container(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Container(
-                                  alignment: Alignment.topCenter,
-                                  padding: EdgeInsets.only(
-                                      left: 0.08 * width, top: 3),
-                                  child: Text(
-                                    "Exported Playlists",
-                                    style: TextStyle(
-                                      fontFamily: 'Maven Pro',
-                                      fontSize: 18,
-                                      color: Colors.white,
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    alignment: Alignment.topCenter,
+                                    padding: EdgeInsets.only(
+                                        left: 0.08 * width, top: 3),
+                                    child: Text(
+                                      "Exported Playlists",
+                                      style: TextStyle(
+                                        fontFamily: 'Maven Pro',
+                                        fontSize: 18,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Container(
-                                  alignment: Alignment.topCenter,
-                                  child: Text(
-                                    "14",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 26,
+                                  Container(
+                                    alignment: Alignment.topCenter,
+                                    child: Text(
+                                      "14",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 26,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ],
@@ -869,42 +891,48 @@ class SmallScreen extends StatelessWidget {
                 ///User's linked devices
                 Container(
                   alignment: Alignment.topRight,
-                  child: Container(
-                    alignment: Alignment.topRight,
-                    height: height * 0.1,
-                    width: width * 0.9,
-                    decoration: BoxDecoration(
-                      color: MyPalette.magenta,
-                      borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(80),
-                          topLeft: Radius.circular(80)),
-                    ),
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
                     child: Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          ///linked devices
-                          Container(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Container(
-                                  alignment: Alignment.topLeft,
-                                  padding: EdgeInsets.only(top: 3),
-                                  child: Text(
-                                    "Linked Devices:",
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      fontFamily: 'Maven Pro',
-                                      fontSize: 16,
-                                      color: Colors.white,
+                      alignment: Alignment.topRight,
+                      height: height * 0.1,
+                      width: width * 0.9,
+                      decoration: BoxDecoration(
+                        color: MyPalette.magenta,
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(80),
+                            topLeft: Radius.circular(80)),
+                      ),
+                      child: Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            ///linked devices
+                            Container(
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.topLeft,
+                                      padding: EdgeInsets.only(top: 3),
+                                      child: Text(
+                                        "Linked Devices:",
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          fontFamily: 'Maven Pro',
+                                          fontSize: 16,
+                                          color: Colors.white,
+                                        ),
+                                      ),
                                     ),
-                                  ),
+                                  ],
                                 ),
-                              ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -916,43 +944,48 @@ class SmallScreen extends StatelessWidget {
                 ///User's linked accounts
                 Container(
                   alignment: Alignment.topLeft,
-                  child: Container(
-                    alignment: Alignment.topLeft,
-                    height: height * 0.1,
-                    width: width * 0.9,
-                    decoration: BoxDecoration(
-                      color: MyPalette.darkTurqoise,
-                      borderRadius: BorderRadius.only(
-                        bottomRight: Radius.circular(80),
-                        topRight: Radius.circular(80),
-                      ),
-                    ),
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
                     child: Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          ///Mood categories
-                          Container(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  alignment: Alignment.topLeft,
-                                  padding: EdgeInsets.only(top: 3),
-                                  child: Text(
-                                    "Linked Accounts:",
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      fontFamily: 'Maven Pro',
-                                      fontSize: 16,
-                                      color: Colors.white,
+                      alignment: Alignment.topLeft,
+                      height: height * 0.1,
+                      width: width * 0.9,
+                      decoration: BoxDecoration(
+                        color: MyPalette.darkTurqoise,
+                        borderRadius: BorderRadius.only(
+                          bottomRight: Radius.circular(80),
+                          topRight: Radius.circular(80),
+                        ),
+                      ),
+                      child: Container(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.topLeft,
+                                      padding: EdgeInsets.only(top: 3),
+                                      child: Text(
+                                        "Linked Accounts:",
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          fontFamily: 'Maven Pro',
+                                          fontSize: 16,
+                                          color: Colors.white,
+                                        ),
+                                      ),
                                     ),
-                                  ),
+                                  ],
                                 ),
-                              ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),

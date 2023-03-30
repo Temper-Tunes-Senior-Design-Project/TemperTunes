@@ -63,6 +63,7 @@ class _LargeScreenState extends State<LargeScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Container(
+                padding: EdgeInsets.only(top: 0.02 * height),
                 child: Row(
                   children: [
                     ElevatedButton(
@@ -211,39 +212,6 @@ class _LargeScreenState extends State<LargeScreen> {
                                       fontSize: 15, color: Colors.white54)),
                             ),
                           ),
-
-                          ///Horizontal line
-                          Container(
-                              padding: EdgeInsets.only(
-                                  left: 0.02 * width,
-                                  right: 0.02 * width,
-                                  top: 0),
-                              child: const Divider(
-                                height: 8,
-                                thickness: 2,
-                                color: Colors.white,
-                              )),
-                        ],
-                      ),
-
-                      ///Password
-                      Column(
-                        children: [
-                          Container(
-                            padding: EdgeInsets.only(
-                                left: 0.03 * width, top: height * 0.01),
-                            alignment: Alignment.topLeft,
-                            child: TextField(
-                              obscureText: true,
-                              obscuringCharacter: "*",
-                              style: TextStyle(
-                                fontFamily: 'Maven Pro',
-                                fontWeight: FontWeight.w100,
-                                color: Colors.white,
-                                fontSize: 20,
-                              ),
-                            ),
-                          ),
                         ],
                       ),
 
@@ -352,12 +320,9 @@ class _LargeScreenState extends State<LargeScreen> {
                             ),
                           ),
                           onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => HomePage(),
-                              ),
-                            );
+                            if (_formKey.currentState!.validate()) {
+                              changeEmail(context);
+                            }
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.transparent,
@@ -385,52 +350,15 @@ class _LargeScreenState extends State<LargeScreen> {
                                 ),
                                 onPressed: () {
                                   Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              OTPEmailPage()));
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => OTPEmailPage(),
+                                    ),
+                                  );
                                 },
                               ),
                             ],
                           ),
-                        ),
-                      ),
-
-                      ///Forgot Password
-                      Container(
-                        padding: EdgeInsets.only(top: 0.02 * height),
-                        child: Column(
-                          children: [
-                            Container(
-                              alignment: Alignment.center,
-                              child: Column(
-                                children: [
-                                  Container(
-                                    child: TextButton(
-                                        child: Text(
-                                          'Forgot your password?',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            fontFamily: 'Maven Pro',
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 15,
-                                            color: MyPalette.turqoise,
-                                          ),
-                                        ),
-                                        onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  OTPEmailPage(),
-                                            ),
-                                          );
-                                        }),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
                         ),
                       ),
                     ],
@@ -731,10 +659,9 @@ class _SmallScreenState extends State<SmallScreen> {
                             ),
                           ),
                           onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => HomePage()));
+                            if (_formKey.currentState!.validate()) {
+                              changeEmail(context);
+                            }
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.transparent,
@@ -743,7 +670,7 @@ class _SmallScreenState extends State<SmallScreen> {
                         ),
                       ),
 
-                      ///Already Have an account
+                      ///Forgot password
                       Container(
                         padding: EdgeInsets.only(top: 0.01 * height),
                         child: TextButton(

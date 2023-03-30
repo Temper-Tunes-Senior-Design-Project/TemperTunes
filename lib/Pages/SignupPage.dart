@@ -57,7 +57,7 @@ class _LargeScreenState extends State<LargeScreen> {
           ),
           child: Padding(
             ///back arrow
-            padding: EdgeInsets.only(top: 0.03 * height),
+            padding: EdgeInsets.only(top: 0.02 * height),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
