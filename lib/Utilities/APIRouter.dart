@@ -3,6 +3,8 @@ import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:mood_swing/Objects/Mood.dart';
 
+import 'SpotifyRouter.dart';
+
 class APIRouter {
 
   Future<Mood> getUserMood(String firebasePath) async {
@@ -24,5 +26,12 @@ class APIRouter {
       return m;
     }
     return Mood.Neutral;
+  }
+
+  Future<List<dynamic>> getSongs() async
+  {
+    String token = await SpotifyRouter().getToken();
+
+    return [];
   }
 }

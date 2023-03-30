@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mood_swing/Pages/ChangeEmailPage.dart';
 import 'package:mood_swing/Pages/UserPage.dart';
+import 'package:mood_swing/Utilities/SpotifyRouter.dart';
 import 'ChangePasswordPage.dart';
 import '../Widgets/widgets.dart';
 
@@ -222,36 +223,35 @@ class LargeScreen extends StatelessWidget {
                       ),
 
                       ///Adjust Presets
-                      Container(
-                        padding: EdgeInsets.only(top: 0.035 * height),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                                alignment: Alignment.topLeft,
-                                child: Icon(
-                                  const IconData(0xe91c, fontFamily: 'MaterialIcons'),
-                                  color: MyPalette.white,
-                                  size: 24,
-                                )),
-
-                            ///Name
-                            Container(
-                              padding: EdgeInsets.only(left: 0.01 * width),
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                'Adjust Presets',
-                                style: TextStyle(
-                                  fontFamily: 'Maven Pro',
-                                  color: Colors.white,
-                                  fontSize: 24,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-
+                      // Container(
+                      //   padding: EdgeInsets.only(top: 0.035 * height),
+                      //   child: Row(
+                      //     mainAxisAlignment: MainAxisAlignment.center,
+                      //     children: [
+                      //       Container(
+                      //           alignment: Alignment.topLeft,
+                      //           child: Icon(
+                      //             const IconData(0xe91c, fontFamily: 'MaterialIcons'),
+                      //             color: MyPalette.white,
+                      //             size: 24,
+                      //           )),
+                      //
+                      //       ///Name
+                      //       Container(
+                      //         padding: EdgeInsets.only(left: 0.01 * width),
+                      //         alignment: Alignment.topLeft,
+                      //         child: Text(
+                      //           'Adjust Presets',
+                      //           style: TextStyle(
+                      //             fontFamily: 'Maven Pro',
+                      //             color: Colors.white,
+                      //             fontSize: 24,
+                      //           ),
+                      //         ),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
                       ///Logout
                       Container(
                         padding: EdgeInsets.only(top: 0.035 * height),
@@ -312,15 +312,57 @@ class LargeScreen extends StatelessWidget {
                                 ),
                               ),
                             ),
-                          ],
+                            ],
                         ),
                       ),
+                            ///Link Spotify
+                            Container(
+                              padding:
+                              EdgeInsets.only(top: 0.04 * height),
+                              child: TextButton(
+                                child: Row(
+                                  children: [
+                                    ///icon
+                                    Container(
+                                        alignment: Alignment.topLeft,
+                                        child: Icon(
+                                          const IconData(0xe157,
+                                              fontFamily:
+                                              'MaterialIcons'),
+                                          color: MyPalette.white,
+                                          size: 40,
+                                        )),
+                                    Container(
+                                      padding: EdgeInsets.only(
+                                          left: 0.04 * width),
+                                      alignment: Alignment.topLeft,
+                                      child: Text(
+                                        'Link Spotify',
+                                        style: TextStyle(
+                                          fontFamily: 'Maven Pro',
+                                          color: Colors.white,
+                                          fontSize: 28,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                onPressed: () async
+                                {
+                                  SpotifyRouter().getToken();
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.transparent,
+                                  foregroundColor: Colors.transparent,
+                                ),
+                              ),
+                            ),
                     ],
                   ),
                 ),
               ),
-            ],
-          ),
+        ],
+      ),
         ),
       ),
     );
@@ -640,6 +682,48 @@ class SmallScreen extends StatelessWidget {
                                           ),
                                         ),
                                       ],
+                                    ),
+                                  ),
+                                  ///Link Spotify
+                                  Container(
+                                    padding:
+                                    EdgeInsets.only(top: 0.04 * height),
+                                    child: TextButton(
+                                      child: Row(
+                                        children: [
+                                          ///icon
+                                          Container(
+                                              alignment: Alignment.topLeft,
+                                              child: Icon(
+                                                const IconData(0xe157,
+                                                    fontFamily:
+                                                    'MaterialIcons'),
+                                                color: MyPalette.white,
+                                                size: 40,
+                                              )),
+                                          Container(
+                                            padding: EdgeInsets.only(
+                                                left: 0.04 * width),
+                                            alignment: Alignment.topLeft,
+                                            child: Text(
+                                              'Link Spotify',
+                                              style: TextStyle(
+                                                fontFamily: 'Maven Pro',
+                                                color: Colors.white,
+                                                fontSize: 28,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      onPressed: () async
+                                      {
+                                        SpotifyRouter().getToken();
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.transparent,
+                                        foregroundColor: Colors.transparent,
+                                      ),
                                     ),
                                   ),
                                 ],
