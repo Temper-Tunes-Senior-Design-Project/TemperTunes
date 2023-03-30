@@ -26,19 +26,9 @@ class LargeScreen extends StatefulWidget {
 }
 
 class _LargeScreenState extends State<LargeScreen> {
-  final _formKey = GlobalKey<FormState>();
-  //show password
   bool _isVisible = false;
 
-  // snackBar Widget
-  snackBar(String? message) {
-    return ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message!),
-        duration: const Duration(seconds: 2),
-      ),
-    );
-  }
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -58,33 +48,20 @@ class _LargeScreenState extends State<LargeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Container(
-              padding: EdgeInsets.only(top: 0.02 * height),
-              child: Row(
-                children: [
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: CircleBorder(),
-                    ),
-                    child: Icon(
-                      IconData(0xf05bc, fontFamily: 'MaterialIcons'),
-                      color: Colors.white,
-                      size: 40,
-                    ),
-                    onPressed: () => Navigator.pop(context),
-                  )
-                ],
-              ),
-            ),
+            BackButton(height: height),
 
             ///Main Container
             Form(
+              key: _formKey,
               child: Container(
                 height: height * 0.8,
                 width: width * 0.3,
                 decoration: BoxDecoration(
-                    color: Colors.grey.withOpacity(0.3),
-                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                  color: Colors.grey.withOpacity(0.3),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(20),
+                  ),
+                ),
                 child: Column(
                   children: [
                     ///App logo
@@ -103,23 +80,81 @@ class _LargeScreenState extends State<LargeScreen> {
                           padding: EdgeInsets.only(
                               left: 0.03 * width, right: 0.03 * width),
                           alignment: Alignment.topLeft,
-                          child: FittedBox(
-                            fit: BoxFit.scaleDown,
-                            child: TextFormField(
-                              controller: _currentPasswordController,
-                              validator: RequiredValidator(
-                                  errorText: AutofillHints.password),
-                              obscureText: !_isVisible,
-                              obscuringCharacter: "*",
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                fontFamily: 'Maven Pro',
-                                fontWeight: FontWeight.w100,
-                                color: Colors.white,
-                                fontSize: 20,
+                          child: TextFormField(
+                            controller: _currentPasswordController,
+                            validator: RequiredValidator(
+                                errorText: AutofillHints.password),
+                            obscureText: !_isVisible,
+                            obscuringCharacter: "*",
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              fontFamily: 'Maven Pro',
+                              fontWeight: FontWeight.w100,
+                              color: Colors.white,
+                              fontSize: 20,
+                            ),
+                            decoration: InputDecoration(
+                              //eye icon
+                              suffixIcon: Align(
+                                widthFactor: 0,
+                                child: IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      _isVisible = !_isVisible;
+                                    });
+                                  },
+                                  icon: _isVisible
+                                      ? Icon(
+                                          Icons.visibility,
+                                          color: MyPalette.darkTurqoise,
+                                        )
+                                      : Icon(
+                                          Icons.visibility_off,
+                                          color: Colors.grey,
+                                        ),
+                                ),
                               ),
-                              decoration: InputDecoration(
-                                //eye icon
+                              hintStyle: TextStyle(color: Colors.white60),
+                              hintText: 'Current Password',
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.white, width: 4),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide: new BorderSide(
+                                    color: MyPalette.darkTurqoise, width: 4),
+                              ),
+                              labelText: 'Please enter your current username',
+                              labelStyle: TextStyle(
+                                  fontSize: 15, color: Colors.white54),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    ///New Password
+                    Column(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.only(
+                              left: 0.03 * width,
+                              right: 0.03 * width,
+                              top: height * 0.01),
+                          alignment: Alignment.topLeft,
+                          child: TextFormField(
+                            controller: _newPasswordController,
+                            validator: RequiredValidator(
+                                errorText: AutofillHints.newPassword),
+                            obscureText: !_isVisible,
+                            obscuringCharacter: "*",
+                            style: TextStyle(
+                              fontFamily: 'Maven Pro',
+                              fontWeight: FontWeight.w100,
+                              color: Colors.white,
+                              fontSize: 20,
+                            ),
+                            decoration: InputDecoration(
                                 suffixIcon: Align(
                                   widthFactor: 0,
                                   child: IconButton(
@@ -140,83 +175,18 @@ class _LargeScreenState extends State<LargeScreen> {
                                   ),
                                 ),
                                 hintStyle: TextStyle(color: Colors.white60),
+                                hintText: 'New Password',
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide:
                                       BorderSide(color: Colors.white, width: 4),
                                 ),
                                 focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
+                                  borderSide: new BorderSide(
                                       color: MyPalette.darkTurqoise, width: 4),
                                 ),
-                                hintText: 'Current Password',
-                                labelText: 'Please enter your current username',
+                                labelText: 'Please your new password',
                                 labelStyle: TextStyle(
-                                    fontSize: 15, color: Colors.white54),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-
-                    ///New Password
-                    Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.only(
-                              left: 0.03 * width,
-                              right: 0.03 * width,
-                              top: height * 0.01),
-                          alignment: Alignment.topLeft,
-                          child: FittedBox(
-                            fit: BoxFit.scaleDown,
-                            child: TextFormField(
-                              controller: _newPasswordController,
-                              validator: RequiredValidator(
-                                  errorText: AutofillHints.newPassword),
-                              obscureText: !_isVisible,
-                              obscuringCharacter: "*",
-                              style: TextStyle(
-                                fontFamily: 'Maven Pro',
-                                fontWeight: FontWeight.w100,
-                                color: Colors.white,
-                                fontSize: 20,
-                              ),
-                              decoration: InputDecoration(
-                                  suffixIcon: Align(
-                                    widthFactor: 0,
-                                    child: IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          _isVisible = !_isVisible;
-                                        });
-                                      },
-                                      icon: _isVisible
-                                          ? Icon(
-                                              Icons.visibility,
-                                              color: MyPalette.darkTurqoise,
-                                            )
-                                          : Icon(
-                                              Icons.visibility_off,
-                                              color: Colors.grey,
-                                            ),
-                                    ),
-                                  ),
-                                  hintStyle: TextStyle(color: Colors.white60),
-                                  hintText: 'New Password',
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.white, width: 4),
-                                  ),
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: MyPalette.darkTurqoise,
-                                        width: 4),
-                                  ),
-                                  labelText: 'Please your new password',
-                                  labelStyle: TextStyle(
-                                      fontSize: 15, color: Colors.white54)),
-                            ),
+                                    fontSize: 15, color: Colors.white54)),
                           ),
                         ),
                       ],
@@ -233,55 +203,51 @@ class _LargeScreenState extends State<LargeScreen> {
                             top: height * 0.01,
                           ),
                           alignment: Alignment.topLeft,
-                          child: FittedBox(
-                            fit: BoxFit.scaleDown,
-                            child: TextFormField(
-                              controller: _newPasswordController2,
-                              validator: RequiredValidator(
-                                  errorText: AutofillHints.newPassword),
-                              obscureText: !_isVisible,
-                              obscuringCharacter: "*",
-                              style: TextStyle(
-                                fontFamily: 'Maven Pro',
-                                fontWeight: FontWeight.w100,
-                                color: Colors.white,
-                                fontSize: 20,
-                              ),
-                              decoration: InputDecoration(
-                                  suffixIcon: Align(
-                                    widthFactor: 0,
-                                    child: IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          _isVisible = !_isVisible;
-                                        });
-                                      },
-                                      icon: _isVisible
-                                          ? Icon(
-                                              Icons.visibility,
-                                              color: MyPalette.darkTurqoise,
-                                            )
-                                          : Icon(
-                                              Icons.visibility_off,
-                                              color: Colors.grey,
-                                            ),
-                                    ),
-                                  ),
-                                  hintStyle: TextStyle(color: Colors.white60),
-                                  hintText: 'Confirm New Password',
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.white, width: 4),
-                                  ),
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: MyPalette.darkTurqoise,
-                                        width: 4),
-                                  ),
-                                  labelText: 'Please confirm your new password',
-                                  labelStyle: TextStyle(
-                                      fontSize: 15, color: Colors.white54)),
+                          child: TextFormField(
+                            controller: _newPasswordController2,
+                            validator: RequiredValidator(
+                                errorText: "confirm new password"),
+                            obscureText: !_isVisible,
+                            obscuringCharacter: "*",
+                            style: TextStyle(
+                              fontFamily: 'Maven Pro',
+                              fontWeight: FontWeight.w100,
+                              color: Colors.white,
+                              fontSize: 20,
                             ),
+                            decoration: InputDecoration(
+                                suffixIcon: Align(
+                                  widthFactor: 0,
+                                  child: IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        _isVisible = !_isVisible;
+                                      });
+                                    },
+                                    icon: _isVisible
+                                        ? Icon(
+                                            Icons.visibility,
+                                            color: MyPalette.darkTurqoise,
+                                          )
+                                        : Icon(
+                                            Icons.visibility_off,
+                                            color: Colors.grey,
+                                          ),
+                                  ),
+                                ),
+                                hintStyle: TextStyle(color: Colors.white60),
+                                hintText: 'Confirm New Password',
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.white, width: 4),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: MyPalette.darkTurqoise, width: 4),
+                                ),
+                                labelText: 'Please confirm your new password',
+                                labelStyle: TextStyle(
+                                    fontSize: 15, color: Colors.white54)),
                           ),
                         ),
                       ],
@@ -331,12 +297,9 @@ class _LargeScreenState extends State<LargeScreen> {
                           ),
                         ),
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => HomePage(),
-                            ),
-                          );
+                          if (_formKey.currentState!.validate()) {
+                            changePassword(context);
+                          }
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.transparent,
@@ -363,9 +326,12 @@ class _LargeScreenState extends State<LargeScreen> {
                                 ),
                               ),
                               onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                  changePassword(context);
-                                }
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => OTPEmailPage(),
+                                  ),
+                                );
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.transparent,
@@ -382,6 +348,37 @@ class _LargeScreenState extends State<LargeScreen> {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class BackButton extends StatelessWidget {
+  const BackButton({
+    super.key,
+    required this.height,
+  });
+
+  final double height;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(top: 0.02 * height),
+      child: Row(
+        children: [
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              shape: CircleBorder(),
+            ),
+            child: Icon(
+              IconData(0xf05bc, fontFamily: 'MaterialIcons'),
+              color: Colors.white,
+              size: 40,
+            ),
+            onPressed: () => Navigator.pop(context),
+          )
+        ],
       ),
     );
   }
@@ -460,58 +457,55 @@ class _SmallScreenState extends State<SmallScreen> {
                           children: [
                             Container(
                               alignment: Alignment.topLeft,
-                              child: FittedBox(
-                                fit: BoxFit.scaleDown,
-                                child: TextFormField(
-                                  controller: _currentPasswordController,
-                                  validator: RequiredValidator(
-                                      errorText: AutofillHints.password),
-                                  obscureText: !_isVisible,
-                                  obscuringCharacter: "*",
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                    fontFamily: 'Maven Pro',
-                                    fontWeight: FontWeight.w100,
-                                    color: Colors.white,
-                                    fontSize: 15,
+                              child: TextFormField(
+                                controller: _currentPasswordController,
+                                validator: RequiredValidator(
+                                    errorText: AutofillHints.password),
+                                obscureText: !_isVisible,
+                                obscuringCharacter: "*",
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                  fontFamily: 'Maven Pro',
+                                  fontWeight: FontWeight.w100,
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                ),
+                                decoration: InputDecoration(
+                                  //eye icon (see password)
+                                  suffixIcon: Align(
+                                    widthFactor: 0,
+                                    child: IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          _isVisible = !_isVisible;
+                                        });
+                                      },
+                                      icon: _isVisible
+                                          ? Icon(
+                                              Icons.visibility,
+                                              color: MyPalette.darkTurqoise,
+                                            )
+                                          : Icon(
+                                              Icons.visibility_off,
+                                              color: Colors.grey,
+                                            ),
+                                    ),
                                   ),
-                                  decoration: InputDecoration(
-                                    //eye icon (see password)
-                                    suffixIcon: Align(
-                                      widthFactor: 0,
-                                      child: IconButton(
-                                        onPressed: () {
-                                          setState(() {
-                                            _isVisible = !_isVisible;
-                                          });
-                                        },
-                                        icon: _isVisible
-                                            ? Icon(
-                                                Icons.visibility,
-                                                color: MyPalette.darkTurqoise,
-                                              )
-                                            : Icon(
-                                                Icons.visibility_off,
-                                                color: Colors.grey,
-                                              ),
-                                      ),
-                                    ),
-                                    hintStyle: TextStyle(color: Colors.white60),
-                                    hintText: "Current Password",
-                                    enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.white, width: 3),
-                                    ),
-                                    focusedBorder: UnderlineInputBorder(
-                                      borderSide: new BorderSide(
-                                          color: MyPalette.darkTurqoise,
-                                          width: 3),
-                                    ),
-                                    labelText:
-                                        'Please enter your current password',
-                                    labelStyle: TextStyle(
-                                        fontSize: 15, color: Colors.white54),
+                                  hintStyle: TextStyle(color: Colors.white60),
+                                  hintText: "Current Password",
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.white, width: 3),
                                   ),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: new BorderSide(
+                                        color: MyPalette.darkTurqoise,
+                                        width: 3),
+                                  ),
+                                  labelText:
+                                      'Please enter your current password',
+                                  labelStyle: TextStyle(
+                                      fontSize: 15, color: Colors.white54),
                                 ),
                               ),
                             ),
@@ -526,56 +520,53 @@ class _SmallScreenState extends State<SmallScreen> {
                           children: [
                             Container(
                               alignment: Alignment.topLeft,
-                              child: FittedBox(
-                                fit: BoxFit.scaleDown,
-                                child: TextFormField(
-                                  controller: _newPasswordController,
-                                  validator: RequiredValidator(
-                                      errorText: "new password"),
-                                  obscureText: !_isVisible,
-                                  obscuringCharacter: "*",
-                                  style: TextStyle(
-                                    fontFamily: 'Maven Pro',
-                                    fontWeight: FontWeight.w100,
-                                    color: Colors.white,
-                                    fontSize: 15,
+                              child: TextFormField(
+                                controller: _newPasswordController,
+                                validator: RequiredValidator(
+                                    errorText: "new password"),
+                                obscureText: !_isVisible,
+                                obscuringCharacter: "*",
+                                style: TextStyle(
+                                  fontFamily: 'Maven Pro',
+                                  fontWeight: FontWeight.w100,
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                ),
+                                decoration: InputDecoration(
+                                  //eye icon (see password)
+                                  suffixIcon: Align(
+                                    widthFactor: 0,
+                                    child: IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          _isVisible = !_isVisible;
+                                        });
+                                      },
+                                      icon: _isVisible
+                                          ? Icon(
+                                              Icons.visibility,
+                                              color: MyPalette.darkTurqoise,
+                                            )
+                                          : Icon(
+                                              Icons.visibility_off,
+                                              color: Colors.grey,
+                                            ),
+                                    ),
                                   ),
-                                  decoration: InputDecoration(
-                                    //eye icon (see password)
-                                    suffixIcon: Align(
-                                      widthFactor: 0,
-                                      child: IconButton(
-                                        onPressed: () {
-                                          setState(() {
-                                            _isVisible = !_isVisible;
-                                          });
-                                        },
-                                        icon: _isVisible
-                                            ? Icon(
-                                                Icons.visibility,
-                                                color: MyPalette.darkTurqoise,
-                                              )
-                                            : Icon(
-                                                Icons.visibility_off,
-                                                color: Colors.grey,
-                                              ),
-                                      ),
-                                    ),
-                                    hintStyle: TextStyle(color: Colors.white60),
-                                    hintText: 'New Password',
-                                    enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.white, width: 3),
-                                    ),
-                                    focusedBorder: UnderlineInputBorder(
-                                      borderSide: new BorderSide(
-                                          color: MyPalette.darkTurqoise,
-                                          width: 3),
-                                    ),
-                                    labelText: 'Please enter your new password',
-                                    labelStyle: TextStyle(
-                                        fontSize: 15, color: Colors.white54),
+                                  hintStyle: TextStyle(color: Colors.white60),
+                                  hintText: 'New Password',
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.white, width: 3),
                                   ),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: new BorderSide(
+                                        color: MyPalette.darkTurqoise,
+                                        width: 3),
+                                  ),
+                                  labelText: 'Please enter your new password',
+                                  labelStyle: TextStyle(
+                                      fontSize: 15, color: Colors.white54),
                                 ),
                               ),
                             ),
@@ -590,55 +581,53 @@ class _SmallScreenState extends State<SmallScreen> {
                           children: [
                             Container(
                               alignment: Alignment.topLeft,
-                              child: FittedBox(
-                                fit: BoxFit.scaleDown,
-                                child: TextFormField(
-                                  controller: _newPasswordController2,
-                                  validator: RequiredValidator(
-                                      errorText: "confirm new password"),
-                                  style: TextStyle(
-                                    fontFamily: 'Maven Pro',
-                                    fontWeight: FontWeight.w100,
-                                    color: Colors.white,
-                                    fontSize: 15,
+                              child: TextFormField(
+                                controller: _newPasswordController2,
+                                validator: RequiredValidator(
+                                    errorText: "confirm new password"),
+                                obscureText: !_isVisible,
+                                obscuringCharacter: "*",
+                                style: TextStyle(
+                                  fontFamily: 'Maven Pro',
+                                  fontWeight: FontWeight.w100,
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                ),
+                                decoration: InputDecoration(
+                                  //eye icon (see password)
+                                  suffixIcon: Align(
+                                    widthFactor: 0,
+                                    child: IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          _isVisible = !_isVisible;
+                                        });
+                                      },
+                                      icon: _isVisible
+                                          ? Icon(
+                                              Icons.visibility,
+                                              color: MyPalette.darkTurqoise,
+                                            )
+                                          : Icon(
+                                              Icons.visibility_off,
+                                              color: Colors.grey,
+                                            ),
+                                    ),
                                   ),
-                                  decoration: InputDecoration(
-                                    //eye icon (see password)
-                                    suffixIcon: Align(
-                                      widthFactor: 0,
-                                      child: IconButton(
-                                        onPressed: () {
-                                          setState(() {
-                                            _isVisible = !_isVisible;
-                                          });
-                                        },
-                                        icon: _isVisible
-                                            ? Icon(
-                                                Icons.visibility,
-                                                color: MyPalette.darkTurqoise,
-                                              )
-                                            : Icon(
-                                                Icons.visibility_off,
-                                                color: Colors.grey,
-                                              ),
-                                      ),
-                                    ),
-                                    hintStyle: TextStyle(color: Colors.white60),
-                                    hintText: 'Confirm New Password',
-                                    enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color: Colors.white, width: 3),
-                                    ),
-                                    focusedBorder: UnderlineInputBorder(
-                                      borderSide: new BorderSide(
-                                          color: MyPalette.darkTurqoise,
-                                          width: 3),
-                                    ),
-                                    labelText:
-                                        'Please confirm your new Password',
-                                    labelStyle: TextStyle(
-                                        fontSize: 15, color: Colors.white54),
+                                  hintStyle: TextStyle(color: Colors.white60),
+                                  hintText: 'Confirm New Password',
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.white, width: 3),
                                   ),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: new BorderSide(
+                                        color: MyPalette.darkTurqoise,
+                                        width: 3),
+                                  ),
+                                  labelText: 'Please confirm your new Password',
+                                  labelStyle: TextStyle(
+                                      fontSize: 15, color: Colors.white54),
                                 ),
                               ),
                             )

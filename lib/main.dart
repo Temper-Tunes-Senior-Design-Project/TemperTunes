@@ -14,8 +14,9 @@ import 'firebase_options.dart';
 import 'Pages/ChangePasswordPage.dart';
 import 'Pages/LoginPage.dart';
 import 'Pages/SignupPage.dart';
-import 'package:mood_swing/Pages/PreferencesPage.dart';
+import 'package:mood_swing/Pages/CameraPage.dart';
 import 'Pages/ChangeEmailPage.dart';
+import 'Pages/PreferencesPage.dart';
 
 List<CameraDescription> cameras = [];
 

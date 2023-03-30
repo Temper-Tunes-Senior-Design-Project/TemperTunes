@@ -258,11 +258,11 @@ class _LargeScreenState extends State<LargeScreen> {
                                       .uploadFile(
                                           pictureFile ?? videoFile, type) ??
                                   "Processing Data/file.jpg";
-                              showDialog(context: context, builder: (ctxt)
-                              {
-                               return MoodPopup(filePath);
-                              }
-                              );
+                              showDialog(
+                                  context: context,
+                                  builder: (ctxt) {
+                                    return MoodPopup(filePath);
+                                  });
                               //Navigator.pop(context);
                               //var res = await CloudFunctions().get_mood();
                               //print(res);
@@ -379,12 +379,6 @@ class _CameraPageState extends State<CameraPage> {
     return Scaffold(
       key: PageKey,
       resizeToAvoidBottomInset: false,
-      //     appBar: AppBar(
-      //     title: Text("Emotion Identification",
-      //     style: TextStyle(
-      //     fontFamily: 'Share Tech', fontWeight: FontWeight.bold)),
-      // backgroundColor: MyPalette.darkTurqoise,
-      //     ),
 
       ///camera preview
       body: FutureBuilder<List<CameraDescription>>(
@@ -434,7 +428,6 @@ class CameraButton extends StatelessWidget {
           elevation: 0,
           heroTag: heroTag,
           tooltip: toolTipText,
-          //           shape: CircleBorder(),
           backgroundColor: MyPalette.white,
           onPressed: onPressed,
           child: Icon(icon, size: height * 0.05, color: Colors.grey),

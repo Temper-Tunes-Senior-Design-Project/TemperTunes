@@ -3,6 +3,7 @@ import 'package:mood_swing/Pages/ChangeEmailPage.dart';
 import 'package:mood_swing/Pages/UserPage.dart';
 import 'ChangePasswordPage.dart';
 import '../Widgets/widgets.dart';
+import 'package:bouncing_widget/bouncing_widget.dart';
 
 class Body extends StatelessWidget {
   @override
