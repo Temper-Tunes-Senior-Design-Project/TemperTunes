@@ -28,6 +28,18 @@ class APIRouter {
     return Mood.Neutral;
   }
 
+  void classifySpotifyLibrary() async
+  {
+    Response response = await http
+        .get(Uri.parse(
+        ""))
+        .timeout(Duration(minutes: 1));
+    if(response.statusCode == 200)
+      {
+        print("Successfully classified user songs");
+      }
+  }
+
   Future<List<dynamic>> getSongs() async
   {
     String token = await SpotifyRouter().getToken();
