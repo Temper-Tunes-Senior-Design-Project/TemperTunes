@@ -46,10 +46,4 @@ class APIRouter {
       }
   }
 
-  Future<List<dynamic>> getSongs() async
-  {
-    String token = await SpotifyRouter().getToken();
-
-    return [];
-  }
 }
