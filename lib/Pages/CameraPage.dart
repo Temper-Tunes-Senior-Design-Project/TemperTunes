@@ -267,7 +267,7 @@ class _LargeScreenState extends State<LargeScreen> {
                                     return MoodPopup(filePath);
                                   });
 
-                              //     ClassPopup().getDialogue(context).show();
+                              // ClassPopup().getDialogue(context);
 
                               //Navigator.pop(context);
                               //var res = await CloudFunctions().get_mood();

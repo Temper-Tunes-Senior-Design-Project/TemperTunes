@@ -23,7 +23,7 @@ class _WaveLoaderState extends State<WaveLoader>
         child: AutomatedAnimator(
           animateToggle: true,
           doRepeatAnimation: true,
-          duration: Duration(seconds: 2),
+          duration: Duration(seconds: 5),
           buildWidget: (double animationPosition) {
             return WaveLoadingBubble(
               foregroundWaveColor: Color(0xFF6AA0E1),

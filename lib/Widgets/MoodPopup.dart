@@ -25,6 +25,7 @@ class MoodPopup extends StatelessWidget {
         height: height * 0.3,
         width: width * 0.3,
         decoration: BoxDecoration(
+          color: Colors.white,
           // gradient: LinearGradient(
           //   begin: Alignment.topRight,
           //   end: Alignment.bottomLeft,
@@ -56,40 +57,47 @@ class MoodPopup extends StatelessWidget {
               ///For adding emotion icons
               switch (snapshot.data) {
                 case Mood.Angry:
-                  w = Image.asset("assets/emotions/angry.png");
+                  w = Image.asset("assets/angry.png", height: 0.12 * height);
                   break;
                 case Mood.Disgust:
-                  w = Image.asset("assets/emotions/disgust.png");
+                  w = Image.asset("assets/disgust.png", height: 0.12 * height);
                   break;
                 case Mood.Fear:
-                  w = Image.asset("assets/emotions/fear.png");
+                  w = Image.asset("assets/fear.png", height: 0.12 * height);
                   break;
                 case Mood.Happy:
-                  w = Image.asset("assets/emotions/happy.png");
+                  w = Image.asset("assets/happy.png", height: 0.12 * height);
                   break;
                 case Mood.Sad:
-                  w = Image.asset("assets/emotions/sad.png");
+                  w = Image.asset("assets/sad.png", height: 0.12 * height);
                   break;
                 case Mood.Surprise:
-                  w = Image.asset("assets/emotions/surprise.png");
+                  w = Image.asset("assets/surprise.png", height: 0.12 * height);
                   break;
                 case Mood.Neutral:
-                  w = Image.asset("assets/emotions/neutral.png");
+                  // w = Image.asset("assets/emotions/neutral.png");
+                  w = Image.asset("assets/neutral.png", height: 0.12 * height);
                   break;
               }
-              return Column(
+              return Stack(
                 children: [
-                  w,
-                  Container(
-                    child: Text(
-                      snapshot.data?.name ?? "No data",
-                      style: TextStyle(
-                        fontFamily: 'Share Tech',
-                        color: MyPalette.darkBlue,
-                        fontSize: 30,
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        child: Text(
+                          snapshot.data?.name ?? "No data",
+                          style: TextStyle(
+                            fontFamily: 'Share Tech',
+                            color: MyPalette.darkBlue,
+                            fontSize: 30,
+                          ),
+                        ),
                       ),
-                    ),
-                  )
+                      Container(padding: EdgeInsets.only(top: 20), child: w),
+                    ],
+                  ),
                 ],
               );
 
@@ -105,12 +113,13 @@ class MoodPopup extends StatelessWidget {
               );
             }
             return Container(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
+              child: Stack(
+                alignment: Alignment.center,
+                // crossAxisAlignment: CrossAxisAlignment.center,
+                // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    alignment: Alignment.bottomCenter,
+                    alignment: Alignment.center,
                     height: 0.05 * height,
                     width: 0.05 * width,
                     child: WaveLoader(title: 'Wave'),
