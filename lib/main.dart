@@ -16,7 +16,7 @@ import 'Pages/LoginPage.dart';
 import 'Pages/SignupPage.dart';
 import 'package:mood_swing/Pages/CameraPage.dart';
 import 'Pages/ChangeEmailPage.dart';
-import 'Pages/PreferencesPage.dart';
+import 'Pages/CameraPage.dart';
 
 List<CameraDescription> cameras = [];
 
@@ -73,7 +73,7 @@ class App extends StatelessWidget {
               return HomePage();
             }
             //return LandingPage();
-            return PreferencesPage();
+            return CameraPage();
           }),
     );
   }
