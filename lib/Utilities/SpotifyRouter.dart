@@ -12,11 +12,7 @@ class SpotifyRouter {
         clientId: dotenv.env['SPOTIFY_CLIENT_ID'] ?? "",
         redirectUrl: redirect,
         scope:
-            "app-remote-control,user-modify-playback-state,playlist-read-private");
-    print("-------------------------------");
-    print("Spotify Verification Successful");
-    print("-------------------------------");
-    print(accessToken);
+            "app-remote-control,user-modify-playback-state,playlist-read-private,user-library-read");
     return accessToken;
   }
 }

@@ -11,13 +11,12 @@ import 'package:mood_swing/Utilities/AuthRouter.dart';
 import 'Widgets/MockNavigator.dart';
 import 'firebase_options.dart';
 
-List<CameraDescription> cameras = [];
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   //Load the dotenv plugin
   await dotenv.load(fileName: ".env");
 
@@ -72,9 +71,3 @@ class App extends StatelessWidget {
     );
   }
 }
-
-/**
- * await dotenv.load(fileName: ".env");
-    print(dotenv.env['SPOTIFY_CLIENT_ID']);
-    SpotifyRouter().getToken();
- */
