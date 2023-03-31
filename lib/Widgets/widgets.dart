@@ -8,3 +8,4 @@ export 'VerificationLarge.dart';
 export 'VerificationSmall.dart';
 export 'RippleSmall.dart';
 export 'WaveAnimation.dart';
+export 'WaveLoader.dart';

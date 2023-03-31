@@ -56,16 +56,17 @@ class LargeScreen extends StatelessWidget {
                               children: [
                                 FittedBox(
                                   child: Container(
-                                      padding: const EdgeInsets.only(bottom: 8),
-                                      //TITLE
-                                      child: const Text(
-                                        'Mood Swing',
-                                        style: TextStyle(
-                                            fontFamily: 'Share Tech',
-                                            color: MyPalette.lightPurple,
-                                            fontSize: 65),
-                                        textAlign: TextAlign.center,
-                                      )),
+                                    padding: const EdgeInsets.only(bottom: 8),
+                                    //TITLE
+                                    child: const Text(
+                                      'Mood Swing',
+                                      style: TextStyle(
+                                          fontFamily: 'Share Tech',
+                                          color: MyPalette.lightPurple,
+                                          fontSize: 65),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
                                 ),
                                 //SUBTITLE
 

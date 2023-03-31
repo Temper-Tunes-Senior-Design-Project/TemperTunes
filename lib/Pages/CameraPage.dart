@@ -5,6 +5,9 @@ import 'package:mood_swing/Utilities/DatabaseRouter.dart';
 import 'package:mood_swing/Widgets/MoodPopup.dart';
 import 'package:mood_swing/Widgets/widgets.dart';
 import 'package:video_player/video_player.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
+
+import '../Widgets/ClassPopup.dart';
 
 class Body extends StatelessWidget {
   final List<CameraDescription>? cameras;
@@ -263,6 +266,9 @@ class _LargeScreenState extends State<LargeScreen> {
                                   builder: (ctxt) {
                                     return MoodPopup(filePath);
                                   });
+
+                              //     ClassPopup().getDialogue(context).show();
+
                               //Navigator.pop(context);
                               //var res = await CloudFunctions().get_mood();
                               //print(res);
@@ -458,10 +464,10 @@ class CameraButtonConfirmOrBack extends StatelessWidget {
           left: width * 0.05, right: width * 00.05, bottom: 0.05 * height),
       child: Container(
         decoration: BoxDecoration(
-            shape: BoxShape.rectangle, borderRadius: BorderRadius.circular(20)
+          shape: BoxShape.rectangle, borderRadius: BorderRadius.circular(20),
 
-            //   border: Border.all(width: width * 0.002, color: Colors.black),
-            ),
+          //   border: Border.all(width: width * 0.002, color: Colors.black),
+        ),
         child: SizedBox(
           height: 0.07 * height,
           width: 0.3 * width,
@@ -470,7 +476,8 @@ class CameraButtonConfirmOrBack extends StatelessWidget {
             hoverElevation: height * 0.035,
             heroTag: heroTag,
             shape: ContinuousRectangleBorder(
-                borderRadius: BorderRadius.circular(20)),
+              borderRadius: BorderRadius.circular(20),
+            ),
             //RectangleBorder(borderRadius: BorderRadius.circular(20)),
             backgroundColor: Colors.grey.withOpacity(0.7),
             onPressed: onPressed,
