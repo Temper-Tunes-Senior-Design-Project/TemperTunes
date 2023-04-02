@@ -5,9 +5,6 @@ import 'package:mood_swing/Utilities/DatabaseRouter.dart';
 import 'package:mood_swing/Widgets/MoodPopup.dart';
 import 'package:mood_swing/Widgets/widgets.dart';
 import 'package:video_player/video_player.dart';
-import 'package:awesome_dialog/awesome_dialog.dart';
-
-import '../Widgets/ClassPopup.dart';
 
 class Body extends StatelessWidget {
   final List<CameraDescription>? cameras;

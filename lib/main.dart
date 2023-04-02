@@ -11,13 +11,6 @@ import 'package:mood_swing/Utilities/AuthRouter.dart';
 import 'Widgets/MockNavigator.dart';
 import 'firebase_options.dart';
 
-import 'Pages/ChangePasswordPage.dart';
-import 'Pages/LoginPage.dart';
-import 'Pages/SignupPage.dart';
-import 'package:mood_swing/Pages/CameraPage.dart';
-import 'Pages/ChangeEmailPage.dart';
-import 'Pages/CameraPage.dart';
-
 List<CameraDescription> cameras = [];
 
 void main() async {
@@ -73,7 +66,7 @@ class App extends StatelessWidget {
               return HomePage();
             }
             //return LandingPage();
-            return CameraPage();
+            return LandingPage();
           }),
     );
   }

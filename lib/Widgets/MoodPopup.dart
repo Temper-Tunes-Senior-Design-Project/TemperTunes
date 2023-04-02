@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import '../Widgets/widgets.dart';
-import 'package:awesome_dialog/awesome_dialog.dart';
 
 import '../Objects/Mood.dart';
 import '../Utilities/APIRouter.dart';
@@ -99,17 +97,6 @@ class MoodPopup extends StatelessWidget {
                     ],
                   ),
                 ],
-              );
-
-              return Container(
-                child: Text(
-                  snapshot.data?.name ?? "No data",
-                  style: TextStyle(
-                    fontFamily: 'Share Tech',
-                    color: MyPalette.darkBlue,
-                    fontSize: 30,
-                  ),
-                ),
               );
             }
             return Container(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../Widgets/widgets.dart';
-import '../Widgets/widgets.dart';
 import 'package:mood_swing/Pages/HomePage.dart';
 
 class Body extends StatelessWidget {
