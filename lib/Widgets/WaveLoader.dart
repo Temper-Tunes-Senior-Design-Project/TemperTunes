@@ -312,7 +312,7 @@ class WavePathHorizontal {
     this.phaseShift = 0.0,
     this.doClosePath = false,
     this.crossAxisEndPoint = 0,
-  }) : assert(crossAxisEndPoint != null || doClosePath == false,
+  }) : assert(doClosePath == false,
             "if doClosePath is true you must provide an end point (crossAxisEndPoint)");
 
   final double width;
