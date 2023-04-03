@@ -1,23 +1,23 @@
-import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mood_swing/Pages/LandingPage.dart';
 import 'package:mood_swing/Pages/HomePage.dart';
 import 'dart:ui';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mood_swing/Utilities/AuthRouter.dart';
 import 'Widgets/MockNavigator.dart';
 import 'firebase_options.dart';
-
-List<CameraDescription> cameras = [];
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  //Load the dotenv plugin
+  await dotenv.load(fileName: ".env");
 
   //Catch Flutter framework errors
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
@@ -62,10 +62,9 @@ class App extends StatelessWidget {
           initialData: FirebaseAuth.instance.currentUser,
           stream: AuthRouter().authMonitor(),
           builder: (context, snapshot) {
-            if(snapshot.data != null)
-              {
-               return HomePage();
-              }
+            if (snapshot.data != null) {
+              return HomePage();
+            }
             return LandingPage();
           }),
     );

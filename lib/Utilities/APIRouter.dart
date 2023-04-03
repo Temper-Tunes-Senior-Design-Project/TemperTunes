@@ -2,6 +2,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:mood_swing/Objects/Mood.dart';
+import 'package:mood_swing/Utilities/AuthRouter.dart';
+
+import 'SpotifyRouter.dart';
 
 class APIRouter {
 
@@ -25,4 +28,22 @@ class APIRouter {
     }
     return Mood.Neutral;
   }
+
+  /**
+   * Classifies the users song library when they have authenticated with the application
+   */
+  void classifySpotifyLibrary() async
+  {
+    String token = await SpotifyRouter().getToken();
+    String uid = AuthRouter().getUserUID();
+    Response response = await http
+        .get(Uri.parse(
+        "https://user-song-classification-ilvif34q5a-ue.a.run.app/get_classified_mood?spotify_token="+ token+ "uid=" + uid ))
+        .timeout(Duration(minutes: 1));
+    if(response.statusCode == 200)
+      {
+        print("Successfully classified user songs");
+      }
+  }
+
 }
