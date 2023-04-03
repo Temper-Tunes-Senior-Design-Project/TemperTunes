@@ -24,7 +24,12 @@
     "public": "build/web",
     "ignore": [
       "firebase.json",
-      "**/.*",
+      "**/.f*",
+      "**/.g*",
+      "**/.i*",
+      "**/.v*",
+      "**/.m*",
+
       "**/node_modules/**"
     ],
     "rewrites": [
