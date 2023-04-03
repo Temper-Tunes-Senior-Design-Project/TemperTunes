@@ -27,6 +27,7 @@ jobs:
     - run: echo "${{ secrets.SPOTIFY_CLIENT_SECRET }}" > .env
     - run: echo "${{ secrets.SPOTIFY_REDIRECT_URI }}" > .env
     - run: echo "${{ secrets.SPOTIFY_WEB_REDIRECT_URI }}" > .env
+    - run: echo "Test"
     
     # Get flutter dependencies.
     - run: flutter pub get
