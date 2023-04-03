@@ -22,14 +22,14 @@ jobs:
         # flutter-version: '1.12.x' # you can also specify exact version of flutter
     
   #Create an environment file
-  - run: |
-      touch .env
-      echo SPOTIFY_CLIENT_ID="${{ secrets.SPOTIFY_CLIENT_ID }}" >> .env
-      echo SPOTIFY_CLIENT_SECRET="${{ secrets.SPOTIFY_CLIENT_SECRET }}" >> .env
-      echo SPOTIFY_REDIRECT_URI="${{ secrets.SPOTIFY_REDIRECT_URI }}" >> .env
-      echo SPOTIFY_WEB_REDIRECT_URI="${{ secrets.SPOTIFY_WEB_REDIRECT_URI }}" >> .env
-      echo "cat .env"
-      cat .env
+    - run: |
+        touch .env
+        echo SPOTIFY_CLIENT_ID="${{ secrets.SPOTIFY_CLIENT_ID }}" >> .env
+        echo SPOTIFY_CLIENT_SECRET="${{ secrets.SPOTIFY_CLIENT_SECRET }}" >> .env
+        echo SPOTIFY_REDIRECT_URI="${{ secrets.SPOTIFY_REDIRECT_URI }}" >> .env
+        echo SPOTIFY_WEB_REDIRECT_URI="${{ secrets.SPOTIFY_WEB_REDIRECT_URI }}" >> .env
+        echo "cat .env"
+        cat .env
     
     # Get flutter dependencies.
     - run: flutter pub get
