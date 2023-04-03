@@ -23,7 +23,12 @@ jobs:
     
     # Get flutter dependencies.
     - run: flutter pub get
+    #Creating an environment file
     - run: echo "${{ secrets.SPOTIFY_CLIENT_ID }}" > .env
+    - run: echo "${{ secrets.SPOTIFY_CLIENT_SECRET }}" > .env
+    - run: echo "${{ secrets.SPOTIFY_REDIRECT_URI }}" > .env
+    - run: echo "${{ secrets.SPOTIFY_WEB_REDIRECT_URI }}" > .env
+    
     # Check for any formatting issues in the code. This rule doesn't work yet[WIP]
     #- run: flutter format --set-exit-if-changed .
     
