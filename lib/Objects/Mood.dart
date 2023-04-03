@@ -1,5 +1,4 @@
-enum Mood
-{
+enum Mood {
   Angry,
   Disgust,
   Fear,

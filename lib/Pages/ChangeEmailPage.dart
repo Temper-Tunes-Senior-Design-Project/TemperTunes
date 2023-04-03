@@ -1,3 +1,5 @@
+//CHANGE EMAIL
+
 import 'package:flutter/material.dart';
 import '../Widgets/widgets.dart';
 import 'package:mood_swing/Pages/HomePage.dart';
@@ -46,21 +48,22 @@ class _LargeScreenState extends State<LargeScreen> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
-      child: Container(
-        width: width,
-        height: height,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage("assets/loginPageLarge.png"),
-              fit: BoxFit.cover),
-        ),
-        child: Padding(
+      child: SafeArea(
+        child: Container(
+          width: width,
+          height: height,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("assets/loginPageLarge.png"),
+                fit: BoxFit.cover),
+          ),
+
           ///back arrow
-          padding: EdgeInsets.only(top: 0.03 * height),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Container(
+                padding: EdgeInsets.only(top: 0.02 * height),
                 child: Row(
                   children: [
                     ElevatedButton(
@@ -193,20 +196,20 @@ class _LargeScreenState extends State<LargeScreen> {
                                 fontSize: 15,
                               ),
                               decoration: InputDecoration(
-                                hintStyle: TextStyle(color: Colors.white60),
-                                hintText: 'Confirm New Email',
-                                enabledBorder: UnderlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.white, width: 3),
-                                ),
-                                focusedBorder: UnderlineInputBorder(
-                                  borderSide: new BorderSide(
-                                      color: MyPalette.darkTurqoise, width: 3),
-                                ),
-                                labelText: 'Please confirm your new email',
-                                labelStyle: TextStyle(
-                                    fontSize: 15, color: Colors.white54),
-                              ),
+                                  hintStyle: TextStyle(color: Colors.white60),
+                                  hintText: 'Confirm New Email',
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.white, width: 3),
+                                  ),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: new BorderSide(
+                                        color: MyPalette.darkTurqoise,
+                                        width: 3),
+                                  ),
+                                  labelText: 'Please confirm your new email',
+                                  labelStyle: TextStyle(
+                                      fontSize: 15, color: Colors.white54)),
                             ),
                           ),
                         ],
@@ -277,8 +280,9 @@ class _LargeScreenState extends State<LargeScreen> {
                       Container(
                         child: TextButton(
                           child: Container(
+                            padding: EdgeInsets.only(top: height * 0.02),
                             child: Container(
-                              width: 0.5 * width,
+                              width: 0.2 * width,
                               height: 0.056 * height,
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
@@ -303,13 +307,15 @@ class _LargeScreenState extends State<LargeScreen> {
                               ),
                               child: Align(
                                 alignment: Alignment.center,
-                                child: Text("Submit",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 25,
-                                      fontFamily: 'Share Tech',
-                                      color: Colors.white,
-                                    )),
+                                child: Text(
+                                  "Submit",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                    fontFamily: 'Share Tech',
+                                    color: Colors.white,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
@@ -328,38 +334,31 @@ class _LargeScreenState extends State<LargeScreen> {
                       ///Forgot Password
                       Container(
                         padding: EdgeInsets.only(top: 0.02 * height),
-                        child: Column(
-                          children: [
-                            Container(
-                              alignment: Alignment.center,
-                              child: Column(
-                                children: [
-                                  Container(
-                                    child: TextButton(
-                                        child: Text(
-                                          'Forgot your password?',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            fontFamily: 'Maven Pro',
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 15,
-                                            color: MyPalette.turqoise,
-                                          ),
-                                        ),
-                                        onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  OTPEmailPage(),
-                                            ),
-                                          );
-                                        }),
+                        child: Container(
+                          alignment: Alignment.center,
+                          child: Column(
+                            children: [
+                              TextButton(
+                                child: Text(
+                                  'Forgot your password?',
+                                  style: TextStyle(
+                                    fontFamily: 'Maven Pro',
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                    color: MyPalette.turqoise,
                                   ),
-                                ],
+                                ),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => OTPEmailPage(),
+                                    ),
+                                  );
+                                },
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ],
@@ -389,16 +388,16 @@ class _SmallScreenState extends State<SmallScreen> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
-      child: Container(
-        height: height,
-        width: width,
-        decoration: BoxDecoration(
-          //set img to bg of body
-          image: DecorationImage(
-              image: AssetImage("assets/userPageLarge.png"), fit: BoxFit.cover),
-        ),
-        child: Padding(
-          padding: EdgeInsets.only(left: 0.01 * width, top: 0.06 * height),
+      child: SafeArea(
+        child: Container(
+          height: height,
+          width: width,
+          decoration: BoxDecoration(
+            //set img to bg of body
+            image: DecorationImage(
+                image: AssetImage("assets/loginPageSmall.png"),
+                fit: BoxFit.cover),
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
@@ -614,13 +613,15 @@ class _SmallScreenState extends State<SmallScreen> {
                       ///spacer
                       SizedBox(height: height * 0.02),
 
+                      SizedBox(height: height * 0.02),
+
                       ///Submit Button
                       Container(
                         child: TextButton(
                           child: Container(
-                            padding: EdgeInsets.only(top: height * 0.02),
+                            padding: EdgeInsets.only(top: height * 0.015),
                             child: Container(
-                              width: 0.8 * width,
+                              width: 0.4 * width,
                               height: 0.05 * height,
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
@@ -645,13 +646,15 @@ class _SmallScreenState extends State<SmallScreen> {
                               ),
                               child: Align(
                                 alignment: Alignment.center,
-                                child: Text("Submit",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 25,
-                                      fontFamily: 'Share Tech',
-                                      color: Colors.white,
-                                    )),
+                                child: Text(
+                                  "Submit",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                    fontFamily: 'Share Tech',
+                                    color: Colors.white,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
@@ -667,42 +670,33 @@ class _SmallScreenState extends State<SmallScreen> {
                         ),
                       ),
 
-                      ///Forgot Password
+                      ///Forgot password
                       Container(
-                        padding: EdgeInsets.only(top: 0.01 * height, bottom: 0),
-                        child: Column(
-                          children: [
-                            Container(
-                              padding: EdgeInsets.only(top: 0.01 * height),
-                              child: TextButton(
-                                  child: Container(
-                                    child: Text(
-                                      'Forgot your password?',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        fontFamily: 'Maven Pro',
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16,
-                                        color: MyPalette.turqoise,
-                                      ),
-                                    ),
-                                  ),
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => OTPEmailPage(),
-                                      ),
-                                    );
-                                  }),
+                        padding: EdgeInsets.only(top: 0.01 * height),
+                        child: TextButton(
+                            child: Text(
+                              'Forgot your password?',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontFamily: 'Maven Pro',
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: MyPalette.turqoise,
+                              ),
                             ),
-                          ],
-                        ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => OTPEmailPage(),
+                                ),
+                              );
+                            }),
                       ),
                     ],
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),

@@ -60,27 +60,29 @@ class SmallScreen extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
-      child: Container(
-        height: height,
-        width: width,
-        child: SidebarSmall(
-          Stack(
-            children: [
-              Container(
-                height: height,
-                width: width,
-                padding: EdgeInsets.only(top: 0),
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage("assets/ribbon_lowered.png"),
-                      fit: BoxFit.cover),
+      child: SafeArea(
+        child: Container(
+          height: height,
+          width: width,
+          child: SidebarSmall(
+            Stack(
+              children: [
+                Container(
+                  height: height,
+                  width: width,
+                  padding: EdgeInsets.only(top: 0),
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage("assets/ribbon_lowered.png"),
+                        fit: BoxFit.cover),
+                  ),
+                  child: Container(
+                    padding: EdgeInsets.only(top: 0.3 * height),
+                    child: RippleSmall(),
+                  ),
                 ),
-                child: Container(
-                  padding: EdgeInsets.only(top: 0.3 * height),
-                  child: RippleSmall(),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

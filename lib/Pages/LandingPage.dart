@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mood_swing/Pages/LoginPage.dart';
 import '../Widgets/widgets.dart';
 import 'SignupPage.dart';
 
@@ -35,6 +34,7 @@ class LargeScreen extends StatelessWidget {
             children: <Widget>[
               SizedBox(height: height * 0.01),
               Container(
+                padding: EdgeInsets.only(top: 0.02 * height),
                 alignment: Alignment.center,
                 child: new Image.asset(
                   "assets/music_swing_logo_med.png",
@@ -56,16 +56,17 @@ class LargeScreen extends StatelessWidget {
                               children: [
                                 FittedBox(
                                   child: Container(
-                                      padding: const EdgeInsets.only(bottom: 8),
-                                      //TITLE
-                                      child: const Text(
-                                        'Mood Swing',
-                                        style: TextStyle(
-                                            fontFamily: 'Share Tech',
-                                            color: MyPalette.lightPurple,
-                                            fontSize: 65),
-                                        textAlign: TextAlign.center,
-                                      )),
+                                    padding: const EdgeInsets.only(bottom: 8),
+                                    //TITLE
+                                    child: const Text(
+                                      'Mood Swing',
+                                      style: TextStyle(
+                                          fontFamily: 'Share Tech',
+                                          color: MyPalette.lightPurple,
+                                          fontSize: 65),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
                                 ),
                                 //SUBTITLE
 
@@ -223,7 +224,7 @@ class SmallScreen extends StatelessWidget {
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    LoginPage(),
+                                                    SignupPage(),
                                               ),
                                             );
                                           },
@@ -256,7 +257,6 @@ class SmallScreen extends StatelessWidget {
 
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
-
   @override
   Widget build(Object context) {
     return Scaffold(

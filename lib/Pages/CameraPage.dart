@@ -258,11 +258,14 @@ class _LargeScreenState extends State<LargeScreen> {
                                       .uploadFile(
                                           pictureFile ?? videoFile, type) ??
                                   "Processing Data/file.jpg";
-                              showDialog(context: context, builder: (ctxt)
-                              {
-                               return MoodPopup(filePath);
-                              }
-                              );
+                              showDialog(
+                                  context: context,
+                                  builder: (ctxt) {
+                                    return MoodPopup(filePath);
+                                  });
+
+                              // ClassPopup().getDialogue(context);
+
                               //Navigator.pop(context);
                               //var res = await CloudFunctions().get_mood();
                               //print(res);
@@ -379,12 +382,6 @@ class _CameraPageState extends State<CameraPage> {
     return Scaffold(
       key: PageKey,
       resizeToAvoidBottomInset: false,
-      //     appBar: AppBar(
-      //     title: Text("Emotion Identification",
-      //     style: TextStyle(
-      //     fontFamily: 'Share Tech', fontWeight: FontWeight.bold)),
-      // backgroundColor: MyPalette.darkTurqoise,
-      //     ),
 
       ///camera preview
       body: FutureBuilder<List<CameraDescription>>(
@@ -434,7 +431,6 @@ class CameraButton extends StatelessWidget {
           elevation: 0,
           heroTag: heroTag,
           tooltip: toolTipText,
-          //           shape: CircleBorder(),
           backgroundColor: MyPalette.white,
           onPressed: onPressed,
           child: Icon(icon, size: height * 0.05, color: Colors.grey),
@@ -465,10 +461,10 @@ class CameraButtonConfirmOrBack extends StatelessWidget {
           left: width * 0.05, right: width * 00.05, bottom: 0.05 * height),
       child: Container(
         decoration: BoxDecoration(
-            shape: BoxShape.rectangle, borderRadius: BorderRadius.circular(20)
+          shape: BoxShape.rectangle, borderRadius: BorderRadius.circular(20),
 
-            //   border: Border.all(width: width * 0.002, color: Colors.black),
-            ),
+          //   border: Border.all(width: width * 0.002, color: Colors.black),
+        ),
         child: SizedBox(
           height: 0.07 * height,
           width: 0.3 * width,
@@ -477,7 +473,8 @@ class CameraButtonConfirmOrBack extends StatelessWidget {
             hoverElevation: height * 0.035,
             heroTag: heroTag,
             shape: ContinuousRectangleBorder(
-                borderRadius: BorderRadius.circular(20)),
+              borderRadius: BorderRadius.circular(20),
+            ),
             //RectangleBorder(borderRadius: BorderRadius.circular(20)),
             backgroundColor: Colors.grey.withOpacity(0.7),
             onPressed: onPressed,

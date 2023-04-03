@@ -38,7 +38,7 @@ class LargeScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Container(
-                padding: EdgeInsets.only(top: 0.03 * height, left: 0),
+                padding: EdgeInsets.only(top: 0.02 * height, left: 0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

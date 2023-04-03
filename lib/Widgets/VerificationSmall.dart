@@ -63,7 +63,7 @@ class _VerificationSmallState extends State<VerificationSmall> {
           width: width,
           decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("assets/userPageLarge.png"),
+                image: AssetImage("assets/loginPageSmall.png"),
                 fit: BoxFit.cover),
           ),
           child: ListView(
@@ -71,8 +71,6 @@ class _VerificationSmallState extends State<VerificationSmall> {
             children: <Widget>[
               ///Back button
               Container(
-                padding:
-                    EdgeInsets.only(left: 0.01 * width, top: 0.06 * height),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
