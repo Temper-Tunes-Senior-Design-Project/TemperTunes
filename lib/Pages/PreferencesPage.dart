@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mood_swing/Pages/ChangeEmailPage.dart';
+import 'package:mood_swing/Pages/ChangePasswordPage.dart';
+
 import 'package:mood_swing/Pages/UserPage.dart';
 import 'ChangePasswordPage.dart';
 import '../Widgets/widgets.dart';
@@ -34,144 +36,97 @@ class LargeScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Container(
-                padding: EdgeInsets.only(top: 0.02 * height, left: 0),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      child: Row(
-                        children: [
-                          ElevatedButton(
-                            child: Icon(
-                              IconData(0xf05bc, fontFamily: 'MaterialIcons'),
-                              color: Colors.white,
-                              size: 40,
+              Flexible(
+                flex: 1,
+                child: Container(
+                  padding: EdgeInsets.only(top: 0.02 * height, left: 0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        child: Row(
+                          children: [
+                            ElevatedButton(
+                              child: Icon(
+                                IconData(0xf05bc, fontFamily: 'MaterialIcons'),
+                                color: Colors.white,
+                                size: 40,
+                              ),
+                              onPressed: () => Navigator.pop(context),
                             ),
-                            onPressed: () => Navigator.pop(context),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
 
               ///Main Container
-              FittedBox(
-                child: Container(
-                  height: height * 0.8,
-                  width: width * 0.3,
-                  decoration: BoxDecoration(
-                    color: Colors.grey.withOpacity(0.3),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(20),
-                    ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      ///logo
-                      Container(
-                        padding: EdgeInsets.only(top: 0.02 * height),
-                        child: Image.asset("assets/music_swing_logo_small.png",
-                            scale: 2.5),
+              Flexible(
+                flex: 6,
+                child: FittedBox(
+                  child: Container(
+                    height: height * 0.8,
+                    width: width * 0.3,
+                    decoration: BoxDecoration(
+                      color: Colors.grey.withOpacity(0.3),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(20),
                       ),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        ///logo
+                        Container(
+                          padding: EdgeInsets.only(top: 0.02 * height),
+                          child: Image.asset(
+                              "assets/music_swing_logo_small.png",
+                              scale: 2.5),
+                        ),
 
-                      ///Preferences Title
-                      FittedBox(
-                        child: Container(
-                          alignment: Alignment.center,
-                          padding: EdgeInsets.only(
-                              top: 0.03 * height, bottom: 0.03 * height),
-                          child: Text(
-                            'Preferences',
-                            style: TextStyle(
-                              fontSize: 53,
-                              fontFamily: 'Share Tech',
-                              color: MyPalette.lightPurple,
+                        ///Preferences Title
+                        FittedBox(
+                          child: Container(
+                            alignment: Alignment.center,
+                            padding: EdgeInsets.only(
+                                top: 0.03 * height, bottom: 0.03 * height),
+                            child: Text(
+                              'Preferences',
+                              style: TextStyle(
+                                fontSize: 53,
+                                fontFamily: 'Share Tech',
+                                color: MyPalette.lightPurple,
+                              ),
                             ),
                           ),
                         ),
-                      ),
 
-                      ///Account
-                      Container(
-                        child: TextButton(
-                          child: Container(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  alignment: Alignment.topLeft,
-                                  child: Icon(
-                                    IconData(0xe491,
-                                        fontFamily: 'MaterialIcons'),
-                                    color: MyPalette.white,
-                                    size: 24,
-                                  ),
-                                ),
-
-                                ///label
-                                Container(
-                                  padding: EdgeInsets.only(left: 0.01 * width),
-                                  alignment: Alignment.topLeft,
-                                  child: Text(
-                                    'Account',
-                                    style: TextStyle(
-                                      fontFamily: 'Maven Pro',
-                                      color: Colors.white,
-                                      fontSize: 24,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          onPressed: () {
-                            Navigator.push(
+                        ///Account
+                        Container(
+                          child: LgLabelBtn(
+                            context: context,
+                            label: "Account",
+                            icon: Icons.person,
+                            onPressed: () {
+                              Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => UserPage()));
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.transparent,
-                            foregroundColor: Colors.transparent,
+                                  builder: (context) => UserPage(),
+                                ),
+                              );
+                            },
                           ),
                         ),
-                      ),
 
-                      ///Change Email
-                      Container(
-                        padding: EdgeInsets.only(top: 0.035 * height),
-                        child: TextButton(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                    alignment: Alignment.topLeft,
-                                    child: Icon(
-                                      IconData(0xe22a,
-                                          fontFamily: 'MaterialIcons'),
-                                      color: MyPalette.white,
-                                      size: 24,
-                                    )),
-
-                                ///Name
-                                Container(
-                                  padding: EdgeInsets.only(left: 0.01 * width),
-                                  alignment: Alignment.topLeft,
-                                  child: Text(
-                                    'Change Email',
-                                    style: TextStyle(
-                                      fontFamily: 'Maven Pro',
-                                      color: Colors.white,
-                                      fontSize: 24,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
+                        ///Change Email
+                        Container(
+                          padding: EdgeInsets.only(top: 0.035 * height),
+                          child: LgLabelBtn(
+                            context: context,
+                            icon: Icons.email,
+                            label: 'Change Email',
                             onPressed: () {
                               Navigator.push(
                                 context,
@@ -179,38 +134,17 @@ class LargeScreen extends StatelessWidget {
                                   builder: (context) => ChangeEmailPage(),
                                 ),
                               );
-                            }),
-                      ),
+                            },
+                          ),
+                        ),
 
-                      ///Change Password
-                      Container(
-                        padding: EdgeInsets.only(top: 0.035 * height),
-                        child: TextButton(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                    alignment: Alignment.topLeft,
-                                    child: Icon(
-                                      IconData(0xf052b,
-                                          fontFamily: 'MaterialIcons'),
-                                      color: MyPalette.white,
-                                      size: 24,
-                                    )),
-                                Container(
-                                  padding: EdgeInsets.only(left: 0.01 * width),
-                                  alignment: Alignment.topLeft,
-                                  child: Text(
-                                    'Change Password',
-                                    style: TextStyle(
-                                      fontFamily: 'Maven Pro',
-                                      color: Colors.white,
-                                      fontSize: 24,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
+                        ///Change Password
+                        Container(
+                          padding: EdgeInsets.only(top: 0.035 * height),
+                          child: LgLabelBtn(
+                            context: context,
+                            icon: Icons.key,
+                            label: 'Change Password',
                             onPressed: () {
                               Navigator.push(
                                 context,
@@ -218,101 +152,44 @@ class LargeScreen extends StatelessWidget {
                                   builder: (context) => ChangePasswordPage(),
                                 ),
                               );
-                            }),
-                      ),
-
-                      ///Adjust Presets
-                      Container(
-                        padding: EdgeInsets.only(top: 0.035 * height),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                                alignment: Alignment.topLeft,
-                                child: Icon(
-                                  IconData(0xe91c, fontFamily: 'MaterialIcons'),
-                                  color: MyPalette.white,
-                                  size: 24,
-                                )),
-
-                            ///Name
-                            Container(
-                              padding: EdgeInsets.only(left: 0.01 * width),
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                'Adjust Presets',
-                                style: TextStyle(
-                                  fontFamily: 'Maven Pro',
-                                  color: Colors.white,
-                                  fontSize: 24,
-                                ),
-                              ),
-                            ),
-                          ],
+                            },
+                          ),
                         ),
-                      ),
 
-                      ///Logout
-                      Container(
-                        padding: EdgeInsets.only(top: 0.035 * height),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                                alignment: Alignment.topLeft,
-                                child: Icon(
-                                  IconData(0xe3b3, fontFamily: 'MaterialIcons'),
-                                  color: MyPalette.white,
-                                  size: 24,
-                                )),
-                            Container(
-                              padding: EdgeInsets.only(left: 0.01 * width),
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                'Logout',
-                                style: TextStyle(
-                                  fontFamily: 'Maven Pro',
-                                  color: Colors.white,
-                                  fontSize: 24,
-                                ),
-                              ),
-                            ),
-                          ],
+                        ///Adjust Presets
+                        Container(
+                          padding: EdgeInsets.only(top: 0.035 * height),
+                          child: LgLabelBtn(
+                            context: context,
+                            icon: Icons.edit_sharp,
+                            label: "Adjust Presets",
+                            onPressed: () {},
+                          ),
                         ),
-                      ),
 
-                      ///Delete
-                      Container(
-                        padding: EdgeInsets.only(top: 0.035 * height),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              alignment: Alignment.topLeft,
-                              child: Icon(
-                                IconData(0xe1b9, fontFamily: 'MaterialIcons'),
-                                color: MyPalette.white,
-                                size: 24,
-                              ),
-                            ),
-
-                            ///Name
-                            Container(
-                              padding: EdgeInsets.only(left: 0.01 * width),
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                'Delete Account',
-                                style: TextStyle(
-                                  fontFamily: 'Maven Pro',
-                                  color: Colors.white,
-                                  fontSize: 24,
-                                ),
-                              ),
-                            ),
-                          ],
+                        ///Link Accounts
+                        Container(
+                          padding: EdgeInsets.only(top: 0.035 * height),
+                          child: LgLabelBtn(
+                            context: context,
+                            icon: Icons.link,
+                            label: "Link To Spotify",
+                            onPressed: () {},
+                          ),
                         ),
-                      ),
-                    ],
+
+                        ///Logout
+                        Container(
+                          padding: EdgeInsets.only(top: 0.035 * height),
+                          child: LgLabelBtn(
+                            context: context,
+                            icon: Icons.logout,
+                            label: "Logout",
+                            onPressed: () {},
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -345,6 +222,7 @@ class SmallScreen extends StatelessWidget {
             children: <Widget>[
               Container(
                 ///Back arrow
+                padding: EdgeInsets.only(top: 5),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -403,53 +281,21 @@ class SmallScreen extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
+                                children: <Widget>[
                                   ///Account
                                   Container(
-                                    alignment: Alignment.center,
-                                    child: TextButton(
-                                      child: Container(
-                                        padding: EdgeInsets.only(
-                                            right: 0.03 * height),
-                                        child: Row(
-                                          children: [
-                                            Container(
-                                              child: Icon(
-                                                const IconData(0xe491,
-                                                    fontFamily:
-                                                        'MaterialIcons'),
-                                                color: MyPalette.white,
-                                                size: 40,
-                                              ),
-                                            ),
-                                            Container(
-                                              padding: EdgeInsets.only(
-                                                  left: 0.04 * width,
-                                                  bottom: 0),
-                                              alignment: Alignment.topLeft,
-                                              child: Text(
-                                                'Account',
-                                                style: TextStyle(
-                                                  fontFamily: 'Maven Pro',
-                                                  color: Colors.white,
-                                                  fontSize: 28,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
+                                    child: SmallLabelBtn(
+                                      context: context,
+                                      icon: Icons.person,
+                                      label: 'Account',
                                       onPressed: () {
                                         Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    UserPage()));
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => UserPage(),
+                                          ),
+                                        );
                                       },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.transparent,
-                                        foregroundColor: Colors.transparent,
-                                      ),
                                     ),
                                   ),
 
@@ -457,45 +303,19 @@ class SmallScreen extends StatelessWidget {
                                   Container(
                                     padding:
                                         EdgeInsets.only(top: 0.04 * height),
-                                    child: TextButton(
-                                      child: Row(
-                                        children: [
-                                          ///icon
-                                          Container(
-                                            alignment: Alignment.topLeft,
-                                            child: Icon(
-                                              const IconData(0xe22a,
-                                                  fontFamily: 'MaterialIcons'),
-                                              color: MyPalette.white,
-                                              size: 40,
-                                            ),
-                                          ),
-                                          Container(
-                                            padding: EdgeInsets.only(
-                                                left: 0.04 * width),
-                                            alignment: Alignment.topLeft,
-                                            child: Text(
-                                              'Change Email',
-                                              style: TextStyle(
-                                                fontFamily: 'Maven Pro',
-                                                color: Colors.white,
-                                                fontSize: 28,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                                    child: SmallLabelBtn(
+                                      context: context,
+                                      icon: Icons.email,
+                                      label: 'Change Email',
                                       onPressed: () {
                                         Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ChangeEmailPage()));
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                ChangeEmailPage(),
+                                          ),
+                                        );
                                       },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.transparent,
-                                        foregroundColor: Colors.transparent,
-                                      ),
                                     ),
                                   ),
 
@@ -503,45 +323,19 @@ class SmallScreen extends StatelessWidget {
                                   Container(
                                     padding:
                                         EdgeInsets.only(top: 0.04 * height),
-                                    child: TextButton(
-                                      child: Row(
-                                        children: [
-                                          ///icon
-                                          Container(
-                                              alignment: Alignment.topLeft,
-                                              child: Icon(
-                                                const IconData(0xf052b,
-                                                    fontFamily:
-                                                        'MaterialIcons'),
-                                                color: MyPalette.white,
-                                                size: 40,
-                                              )),
-                                          Container(
-                                            padding: EdgeInsets.only(
-                                                left: 0.04 * width),
-                                            alignment: Alignment.topLeft,
-                                            child: Text(
-                                              'Change Password',
-                                              style: TextStyle(
-                                                fontFamily: 'Maven Pro',
-                                                color: Colors.white,
-                                                fontSize: 28,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                                    child: SmallLabelBtn(
+                                      context: context,
+                                      icon: Icons.key,
+                                      label: 'Change Password',
                                       onPressed: () {
                                         Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ChangePasswordPage()));
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                ChangePasswordPage(),
+                                          ),
+                                        );
                                       },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.transparent,
-                                        foregroundColor: Colors.transparent,
-                                      ),
                                     ),
                                   ),
 
@@ -549,94 +343,35 @@ class SmallScreen extends StatelessWidget {
                                   Container(
                                     padding:
                                         EdgeInsets.only(top: 0.04 * height),
-                                    child: Row(
-                                      children: [
-                                        ///icon
-                                        Container(
-                                            alignment: Alignment.topLeft,
-                                            child: Icon(
-                                              const IconData(0xe91c,
-                                                  fontFamily: 'MaterialIcons'),
-                                              color: MyPalette.white,
-                                              size: 40,
-                                            )),
-                                        Container(
-                                          padding: EdgeInsets.only(
-                                              left: 0.04 * width),
-                                          alignment: Alignment.topLeft,
-                                          child: Text(
-                                            'Adjust Presets',
-                                            style: TextStyle(
-                                              fontFamily: 'Maven Pro',
-                                              color: Colors.white,
-                                              fontSize: 28,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    padding:
-                                        EdgeInsets.only(top: 0.04 * height),
-                                    child: Row(
-                                      children: [
-                                        ///icon
-                                        Container(
-                                          alignment: Alignment.topLeft,
-                                          child: Icon(
-                                            const IconData(0xe22a,
-                                                fontFamily: 'MaterialIcons'),
-                                            color: MyPalette.white,
-                                            size: 40,
-                                          ),
-                                        ),
-                                        Container(
-                                          padding: EdgeInsets.only(
-                                              left: 0.04 * width),
-                                          alignment: Alignment.topLeft,
-                                          child: Text(
-                                            'Logout',
-                                            style: TextStyle(
-                                              fontFamily: 'Maven Pro',
-                                              color: Colors.white,
-                                              fontSize: 28,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
+                                    child: SmallLabelBtn(
+                                      context: context,
+                                      icon: Icons.edit_sharp,
+                                      label: 'Adjust Presets',
+                                      onPressed: () {},
                                     ),
                                   ),
 
-                                  ///Delete
+                                  ///Link Accounts
                                   Container(
                                     padding:
                                         EdgeInsets.only(top: 0.04 * height),
-                                    child: Row(
-                                      children: [
-                                        ///icon
-                                        Container(
-                                            alignment: Alignment.topLeft,
-                                            child: Icon(
-                                              const IconData(0xe1b9,
-                                                  fontFamily: 'MaterialIcons'),
-                                              color: MyPalette.white,
-                                              size: 40,
-                                            )),
-                                        Container(
-                                          padding: EdgeInsets.only(
-                                              left: 0.04 * width),
-                                          alignment: Alignment.topLeft,
-                                          child: Text(
-                                            'Delete Account',
-                                            style: TextStyle(
-                                              fontFamily: 'Maven Pro',
-                                              color: Colors.white,
-                                              fontSize: 28,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
+                                    child: SmallLabelBtn(
+                                      context: context,
+                                      icon: Icons.link,
+                                      label: "Link To Spotify",
+                                      onPressed: () {},
+                                    ),
+                                  ),
+
+                                  ///Logout
+                                  Container(
+                                    padding:
+                                        EdgeInsets.only(top: 0.04 * height),
+                                    child: SmallLabelBtn(
+                                      context: context,
+                                      icon: Icons.logout,
+                                      label: "Logout",
+                                      onPressed: () {},
                                     ),
                                   ),
                                 ],
@@ -663,5 +398,111 @@ class PreferencesPage extends StatelessWidget {
   @override
   Widget build(Object context) {
     return Scaffold(resizeToAvoidBottomInset: false, body: Body());
+  }
+}
+
+class SmallLabelBtn extends StatelessWidget {
+  final String label;
+  final IconData icon;
+  final void Function()? onPressed;
+  final BuildContext context;
+  const SmallLabelBtn(
+      {required this.context,
+      required this.label,
+      required this.icon,
+      required this.onPressed,
+      super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    return TextButton(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            alignment: Alignment.topLeft,
+            child: Icon(
+              icon,
+              color: MyPalette.white,
+              size: 40,
+            ),
+          ),
+
+          ///label
+          Container(
+            padding: EdgeInsets.only(left: 0.01 * width),
+            alignment: Alignment.topLeft,
+            child: Text(
+              label,
+              style: TextStyle(
+                fontFamily: 'Maven Pro',
+                color: Colors.white,
+                fontSize: 28,
+              ),
+            ),
+          ),
+        ],
+      ),
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.transparent,
+        foregroundColor: Colors.pinkAccent,
+      ),
+    );
+  }
+}
+
+class LgLabelBtn extends StatelessWidget {
+  final String label;
+  final IconData icon;
+  final void Function()? onPressed;
+  final BuildContext context;
+  const LgLabelBtn(
+      {required this.context,
+      required this.label,
+      required this.icon,
+      required this.onPressed,
+      super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    return TextButton(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            alignment: Alignment.topLeft,
+            child: Icon(
+              icon,
+              color: MyPalette.white,
+              size: 24,
+            ),
+          ),
+
+          ///label
+          Container(
+            padding: EdgeInsets.only(left: 0.01 * width),
+            alignment: Alignment.topLeft,
+            child: Text(
+              label,
+              style: TextStyle(
+                fontFamily: 'Maven Pro',
+                color: Colors.white,
+                fontSize: 24,
+              ),
+            ),
+          ),
+        ],
+      ),
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.transparent,
+        foregroundColor: Colors.pinkAccent,
+      ),
+    );
   }
 }

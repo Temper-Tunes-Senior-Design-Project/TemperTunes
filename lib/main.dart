@@ -11,6 +11,8 @@ import 'package:mood_swing/Utilities/AuthRouter.dart';
 import 'Widgets/MockNavigator.dart';
 import 'firebase_options.dart';
 
+import 'package:mood_swing/Pages/OTPEmailPage.dart.';
+
 List<CameraDescription> cameras = [];
 
 void main() async {
@@ -66,7 +68,7 @@ class App extends StatelessWidget {
               return HomePage();
             }
             //return LandingPage();
-            return LandingPage();
+            return OTPEmailPage();
           }),
     );
   }
