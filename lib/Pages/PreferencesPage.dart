@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mood_swing/Pages/ChangeEmailPage.dart';
 import 'package:mood_swing/Pages/UserPage.dart';
 import 'package:mood_swing/Utilities/APIRouter.dart';
+import 'package:mood_swing/Utilities/AuthRouter.dart';
 import 'package:mood_swing/Utilities/SpotifyRouter.dart';
 import 'package:mood_swing/Widgets/PreferenceOption.dart';
 import 'ChangePasswordPage.dart';
@@ -186,354 +187,63 @@ class SmallScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Container(
-                ///Back arrow
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      child: Row(
-                        children: [
-                          TextButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.transparent,
-                              foregroundColor: Colors.transparent,
-                            ),
-                            child: Icon(
-                              const IconData(0xf05bc,
-                                  fontFamily: 'MaterialIcons'),
-                              color: Colors.white,
-                              size: 40,
-                            ),
-                            onPressed: () => Navigator.pop(context),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              FittedBox(
-                child: Container(
-                  alignment: Alignment.center,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          ///Preferences Title
-                          Container(
-                            alignment: Alignment.center,
-                            padding: EdgeInsets.only(
-                                top: height * 0.01, bottom: height * 0.05),
-                            child: Text(
-                              'Preferences',
-                              style: TextStyle(
-                                fontSize: 58,
-                                fontFamily: 'Share Tech',
-                                color: MyPalette.lightPurple,
-                              ),
-                            ),
-                          ),
-
-                          Center(
-                            child: Container(
-                              alignment: Alignment.center,
-                              padding: EdgeInsets.only(
-                                  right: 0.03 * width, left: 0.03 * width),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  ///Account
-                                  Container(
-                                    alignment: Alignment.center,
-                                    child: TextButton(
-                                      child: Container(
-                                        padding: EdgeInsets.only(
-                                            right: 0.03 * height),
-                                        child: Row(
-                                          children: [
-                                            Container(
-                                              child: Icon(
-                                                const IconData(0xe491,
-                                                    fontFamily:
-                                                        'MaterialIcons'),
-                                                color: MyPalette.white,
-                                                size: 40,
-                                              ),
-                                            ),
-                                            Container(
-                                              padding: EdgeInsets.only(
-                                                  left: 0.04 * width,
-                                                  bottom: 0),
-                                              alignment: Alignment.topLeft,
-                                              child: Text(
-                                                'Account',
-                                                style: TextStyle(
-                                                  fontFamily: 'Maven Pro',
-                                                  color: Colors.white,
-                                                  fontSize: 28,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      onPressed: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    UserPage()));
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.transparent,
-                                        foregroundColor: Colors.transparent,
-                                      ),
-                                    ),
-                                  ),
-
-                                  ///Change Email
-                                  Container(
-                                    padding:
-                                        EdgeInsets.only(top: 0.04 * height),
-                                    child: TextButton(
-                                      child: Row(
-                                        children: [
-                                          ///icon
-                                          Container(
-                                            alignment: Alignment.topLeft,
-                                            child: Icon(
-                                              const IconData(0xe22a,
-                                                  fontFamily: 'MaterialIcons'),
-                                              color: MyPalette.white,
-                                              size: 40,
-                                            ),
-                                          ),
-                                          Container(
-                                            padding: EdgeInsets.only(
-                                                left: 0.04 * width),
-                                            alignment: Alignment.topLeft,
-                                            child: Text(
-                                              'Change Email',
-                                              style: TextStyle(
-                                                fontFamily: 'Maven Pro',
-                                                color: Colors.white,
-                                                fontSize: 28,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      onPressed: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ChangeEmailPage()));
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.transparent,
-                                        foregroundColor: Colors.transparent,
-                                      ),
-                                    ),
-                                  ),
-
-                                  ///Change Password
-                                  Container(
-                                    padding:
-                                        EdgeInsets.only(top: 0.04 * height),
-                                    child: TextButton(
-                                      child: Row(
-                                        children: [
-                                          ///icon
-                                          Container(
-                                              alignment: Alignment.topLeft,
-                                              child: Icon(
-                                                const IconData(0xf052b,
-                                                    fontFamily:
-                                                        'MaterialIcons'),
-                                                color: MyPalette.white,
-                                                size: 40,
-                                              )),
-                                          Container(
-                                            padding: EdgeInsets.only(
-                                                left: 0.04 * width),
-                                            alignment: Alignment.topLeft,
-                                            child: Text(
-                                              'Change Password',
-                                              style: TextStyle(
-                                                fontFamily: 'Maven Pro',
-                                                color: Colors.white,
-                                                fontSize: 28,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      onPressed: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ChangePasswordPage()));
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.transparent,
-                                        foregroundColor: Colors.transparent,
-                                      ),
-                                    ),
-                                  ),
-
-                                  ///Adjust Presets
-                                  Container(
-                                    padding:
-                                        EdgeInsets.only(top: 0.04 * height),
-                                    child: Row(
-                                      children: [
-                                        ///icon
-                                        Container(
-                                            alignment: Alignment.topLeft,
-                                            child: Icon(
-                                              const IconData(0xe91c,
-                                                  fontFamily: 'MaterialIcons'),
-                                              color: MyPalette.white,
-                                              size: 40,
-                                            )),
-                                        Container(
-                                          padding: EdgeInsets.only(
-                                              left: 0.04 * width),
-                                          alignment: Alignment.topLeft,
-                                          child: Text(
-                                            'Adjust Presets',
-                                            style: TextStyle(
-                                              fontFamily: 'Maven Pro',
-                                              color: Colors.white,
-                                              fontSize: 28,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    padding:
-                                        EdgeInsets.only(top: 0.04 * height),
-                                    child: Row(
-                                      children: [
-                                        ///icon
-                                        Container(
-                                          alignment: Alignment.topLeft,
-                                          child: Icon(
-                                            const IconData(0xe22a,
-                                                fontFamily: 'MaterialIcons'),
-                                            color: MyPalette.white,
-                                            size: 40,
-                                          ),
-                                        ),
-                                        Container(
-                                          padding: EdgeInsets.only(
-                                              left: 0.04 * width),
-                                          alignment: Alignment.topLeft,
-                                          child: Text(
-                                            'Logout',
-                                            style: TextStyle(
-                                              fontFamily: 'Maven Pro',
-                                              color: Colors.white,
-                                              fontSize: 28,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-
-                                  ///Delete
-                                  Container(
-                                    padding:
-                                        EdgeInsets.only(top: 0.04 * height),
-                                    child: Row(
-                                      children: [
-                                        ///icon
-                                        Container(
-                                            alignment: Alignment.topLeft,
-                                            child: Icon(
-                                              const IconData(0xe1b9,
-                                                  fontFamily: 'MaterialIcons'),
-                                              color: MyPalette.white,
-                                              size: 40,
-                                            )),
-                                        Container(
-                                          padding: EdgeInsets.only(
-                                              left: 0.04 * width),
-                                          alignment: Alignment.topLeft,
-                                          child: Text(
-                                            'Delete Account',
-                                            style: TextStyle(
-                                              fontFamily: 'Maven Pro',
-                                              color: Colors.white,
-                                              fontSize: 28,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-
-                                  ///Link Spotify
-                                  Container(
-                                    padding:
-                                        EdgeInsets.only(top: 0.04 * height),
-                                    child: TextButton(
-                                      child: Row(
-                                        children: [
-                                          ///icon
-                                          Container(
-                                              alignment: Alignment.topLeft,
-                                              child: Icon(
-                                                const IconData(0xe157,
-                                                    fontFamily:
-                                                        'MaterialIcons'),
-                                                color: MyPalette.white,
-                                                size: 40,
-                                              )),
-                                          Container(
-                                            padding: EdgeInsets.only(
-                                                left: 0.04 * width),
-                                            alignment: Alignment.topLeft,
-                                            child: Text(
-                                              'Link Spotify',
-                                              style: TextStyle(
-                                                fontFamily: 'Maven Pro',
-                                                color: Colors.white,
-                                                fontSize: 28,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      onPressed: () async {
-                                        SpotifyRouter().getToken();
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.transparent,
-                                        foregroundColor: Colors.transparent,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+              PreferenceOption("Account", height, width,
+              const IconData(0xe491, fontFamily: 'MaterialIcons'),
+                  () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => UserPage(),
                   ),
-                ),
-              ),
+                );
+              }),
+          PreferenceOption("Change Email", height, width,
+              const IconData(0xe22a, fontFamily: 'MaterialIcons'),
+                  () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ChangeEmailPage(),
+                  ),
+                );
+              }),
+          PreferenceOption("Change Password", height, width,
+              const IconData(0xf052b, fontFamily: 'MaterialIcons'),
+                  () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ChangePasswordPage(),
+                  ),
+                );
+              }),
+          // PreferenceOption(
+          //     "Adjust Presets",
+          //     height,
+          //     width,
+          //     const IconData(0xe91c, fontFamily: 'MaterialIcons'),
+          //         () {}),
+          PreferenceOption(
+              "Logout",
+              height,
+              width,
+              const IconData(0xe22a, fontFamily: 'MaterialIcons'),
+                  () {AuthRouter().logout(context);}),
+          PreferenceOption(
+              "Delete Account",
+              height,
+              width,
+              const IconData(0xe3ae, fontFamily: 'MaterialIcons'),
+                  () {}),
+          PreferenceOption(
+            "Link Spotify",
+            height,
+            width,
+            const IconData(0xe157, fontFamily: 'MaterialIcons'),
+                () async {
+              APIRouter().classifySpotifyLibrary();
+            },
+          ),
             ],
           ),
         ),

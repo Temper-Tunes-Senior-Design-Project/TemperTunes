@@ -139,7 +139,7 @@ class SmallScreen extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     return SingleChildScrollView(
       child: SafeArea(
-        bottom: false,
+        bottom: true,
         top: true,
         left: false,
         right: false,
@@ -260,6 +260,8 @@ class LandingPage extends StatelessWidget {
   @override
   Widget build(Object context) {
     return Scaffold(
-        resizeToAvoidBottomInset: false, body: Column(children: [Body()]));
+        resizeToAvoidBottomInset: false, body: Column(children: [Flexible(
+      flex: 1,
+        child: Body())]));
   }
 }

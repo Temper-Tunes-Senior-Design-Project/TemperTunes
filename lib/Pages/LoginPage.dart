@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../Utilities/AuthRouter.dart';
 import '../Widgets/widgets.dart';
@@ -340,13 +341,8 @@ class _LargeScreenState extends State<LargeScreen> {
                                 toolTipText: "Google",
                                 img: Image.asset("assets/googleIcon.png",
                                     height: 15),
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => HomePage(),
-                                    ),
-                                  );
+                                onPressed: () async {
+                                  await AuthRouter().signInWithProvider("Google",context);
                                 },
                               ),
                               ExternalAuthBtn(

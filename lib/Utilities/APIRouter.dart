@@ -38,15 +38,16 @@ class APIRouter {
   void classifySpotifyLibrary() async
   {
     String token = await SpotifyRouter().getToken();
-    String uid = AuthRouter().getUserUID();
-    Response response = await http
-        .get(Uri.parse(
-        "https://user-song-classification-ilvif34q5a-ue.a.run.app/get_classified_mood?spotify_token="+ token+ "uid=" + uid ))
-        .timeout(Duration(minutes: 1));
-    if(response.statusCode == 200)
-      {
-        print("Successfully classified user songs");
-      }
+    print(token);
+    // String uid = AuthRouter().getUserUID();
+    // Response response = await http
+    //     .get(Uri.parse(
+    //     "https://user-song-classification-ilvif34q5a-ue.a.run.app/get_classified_mood?spotify_token="+ token+ "uid=" + uid ))
+    //     .timeout(Duration(minutes: 1));
+    // if(response.statusCode == 200)
+    //   {
+    //     print("Successfully classified user songs");
+    //   }
   }
 
 }

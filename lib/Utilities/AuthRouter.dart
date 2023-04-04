@@ -2,9 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mood_swing/Objects/LoginCredentials.dart';
+import 'package:mood_swing/Pages/LandingPage.dart';
+import 'package:mood_swing/Pages/OnboardingPage.dart';
 import 'package:mood_swing/Utilities/DatabaseRouter.dart';
 
-import '../Pages/HomePage.dart';
+//import '../Pages/HomePage.dart';
 
 enum AuthProviders {
   Google,
@@ -20,6 +22,12 @@ class AuthRouter {
 
   bool isLoggedIn() {
     return FirebaseAuth.instance.currentUser != null;
+  }
+
+  void logout(context) async{
+    await FirebaseAuth.instance.signOut();
+    Navigator.pushAndRemoveUntil(context,
+        MaterialPageRoute(builder: (ctxt) => LandingPage()), (route) => false);
   }
 
   String getUserUID() {
@@ -46,22 +54,31 @@ class AuthRouter {
     if(FirebaseAuth.instance.currentUser != null)
       {
         Navigator.pushAndRemoveUntil(context,
-            MaterialPageRoute(builder: (ctxt) => HomePage()), (route) => false);
+            MaterialPageRoute(builder: (ctxt) => OnboardingPage()), (route) => false);
       }
   }
 
-  Future<AuthCredential?> signInWithProvider(String provider) async {
+  Future<void> signInWithProvider(String provider, BuildContext context) async {
     try {
       GoogleSignInAccount? account = await GoogleSignIn().signIn();
       GoogleSignInAuthentication? auth = await account?.authentication;
+
       OAuthCredential credential = GoogleAuthProvider.credential(
         accessToken: auth?.accessToken,
         idToken: auth?.idToken,
       );
-      return credential;
+      UserCredential cred = await FirebaseAuth.instance.signInWithCredential(credential);
+      if(cred.additionalUserInfo?.isNewUser??false)
+        {
+          DatabaseRouter().createUser(cred.user?.displayName ?? "");
+        }
+      if(FirebaseAuth.instance.currentUser != null)
+      {
+        Navigator.pushAndRemoveUntil(context,
+            MaterialPageRoute(builder: (ctxt) => OnboardingPage()), (route) => false);
+      }
     } on Exception catch (e) {
       print(e);
-      return null;
     }
   }
 
