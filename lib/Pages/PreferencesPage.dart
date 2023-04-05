@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:mood_swing/Pages/ChangeEmailPage.dart';
 import 'package:mood_swing/Pages/ChangePasswordPage.dart';
 import 'package:mood_swing/Utilities/APIRouter.dart';
-import 'package:mood_swing/Utilities/AuthRouter.dart';
 import 'package:mood_swing/Pages/UserPage.dart';
+import 'package:mood_swing/Utilities/SpotifyRouter.dart';
+import 'package:mood_swing/Widgets/PreferenceOption.dart';
 import 'ChangePasswordPage.dart';
 import '../Widgets/widgets.dart';
 
@@ -37,29 +38,27 @@ class LargeScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Flexible(
-                flex: 1,
-                child: Container(
-                  padding: EdgeInsets.only(top: 0.02 * height, left: 0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        child: Row(
-                          children: [
-                            ElevatedButton(
-                              child: Icon(
-                                IconData(0xf05bc, fontFamily: 'MaterialIcons'),
-                                color: Colors.white,
-                                size: 40,
-                              ),
-                              onPressed: () => Navigator.pop(context),
+              Container(
+                padding: EdgeInsets.only(top: 0.02 * height, left: 0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      child: Row(
+                        children: [
+                          ElevatedButton(
+                            child: Icon(
+                              const IconData(0xf05bc,
+                                  fontFamily: 'MaterialIcons'),
+                              color: Colors.white,
+                              size: 40,
                             ),
-                          ],
-                        ),
+                            onPressed: () => Navigator.pop(context),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
 
@@ -104,94 +103,65 @@ class LargeScreen extends StatelessWidget {
                           ),
                         ),
 
-                        ///Account
-                        Container(
-                          child: LgLabelBtn(
-                            context: context,
-                            label: "Account",
-                            icon: Icons.person,
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => UserPage(),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-
-                        ///Change Email
-                        Container(
-                          padding: EdgeInsets.only(top: 0.035 * height),
-                          child: LgLabelBtn(
-                            context: context,
-                            icon: Icons.email,
-                            label: 'Change Email',
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ChangeEmailPage(),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-
-                        ///Change Password
-                        Container(
-                          padding: EdgeInsets.only(top: 0.035 * height),
-                          child: LgLabelBtn(
-                            context: context,
-                            icon: Icons.key,
-                            label: 'Change Password',
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ChangePasswordPage(),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-
-                        ///Adjust Presets
-                        Container(
-                          padding: EdgeInsets.only(top: 0.035 * height),
-                          child: LgLabelBtn(
-                            context: context,
-                            icon: Icons.edit_sharp,
-                            label: "Adjust Presets",
-                            onPressed: () {},
-                          ),
-                        ),
-
-                        ///Link Accounts
-                        Container(
-                          padding: EdgeInsets.only(top: 0.035 * height),
-                          child: LgLabelBtn(
-                            context: context,
-                            icon: Icons.link,
-                            label: "Link To Spotify",
-                            onPressed: () async {
-                              //    APIRouter().classifySpotifyLibrary();
-                            },
-                          ),
-                        ),
-
-                        ///Logout
-                        Container(
-                          padding: EdgeInsets.only(top: 0.035 * height),
-                          child: LgLabelBtn(
-                            context: context,
-                            icon: Icons.logout,
-                            label: "Logout",
-                            onPressed: () {
-                              //   AuthRouter().logout(context);
-                            },
-                          ),
+                        PreferenceOption("Account", height, width,
+                            const IconData(0xe491, fontFamily: 'MaterialIcons'),
+                            () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => UserPage(),
+                            ),
+                          );
+                        }),
+                        PreferenceOption("Change Email", height, width,
+                            const IconData(0xe22a, fontFamily: 'MaterialIcons'),
+                            () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ChangeEmailPage(),
+                            ),
+                          );
+                        }),
+                        PreferenceOption(
+                            "Change Password",
+                            height,
+                            width,
+                            const IconData(0xf052b,
+                                fontFamily: 'MaterialIcons'), () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ChangePasswordPage(),
+                            ),
+                          );
+                        }),
+                        PreferenceOption(
+                            "Adjust Presets",
+                            height,
+                            width,
+                            const IconData(0xe91c, fontFamily: 'MaterialIcons'),
+                            () {}),
+                        PreferenceOption(
+                            "Logout",
+                            height,
+                            width,
+                            const IconData(0xe22a, fontFamily: 'MaterialIcons'),
+                            () {}),
+                        PreferenceOption(
+                            "Delete Account",
+                            height,
+                            width,
+                            const IconData(0xe3ae, fontFamily: 'MaterialIcons'),
+                            () {}),
+                        PreferenceOption(
+                          "Link Spotify",
+                          height,
+                          width,
+                          const IconData(0xe157, fontFamily: 'MaterialIcons'),
+                          () async {
+                            APIRouter().classifySpotifyLibrary();
+                          },
                         ),
                       ],
                     ),
@@ -381,6 +351,48 @@ class SmallScreen extends StatelessWidget {
                                       onPressed: () {
                                         // AuthRouter().logout(context);
                                       },
+                                    ),
+                                  ),
+
+                                  ///Link Spotify
+                                  Container(
+                                    padding:
+                                        EdgeInsets.only(top: 0.04 * height),
+                                    child: TextButton(
+                                      child: Row(
+                                        children: [
+                                          ///icon
+                                          Container(
+                                              alignment: Alignment.topLeft,
+                                              child: Icon(
+                                                const IconData(0xe157,
+                                                    fontFamily:
+                                                        'MaterialIcons'),
+                                                color: MyPalette.white,
+                                                size: 40,
+                                              )),
+                                          Container(
+                                            padding: EdgeInsets.only(
+                                                left: 0.04 * width),
+                                            alignment: Alignment.topLeft,
+                                            child: Text(
+                                              'Link Spotify',
+                                              style: TextStyle(
+                                                fontFamily: 'Maven Pro',
+                                                color: Colors.white,
+                                                fontSize: 28,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      onPressed: () async {
+                                        SpotifyRouter().getToken();
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.transparent,
+                                        foregroundColor: Colors.transparent,
+                                      ),
                                     ),
                                   ),
                                 ],

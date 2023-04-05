@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:mood_swing/Objects/FileTypes.dart';
+import 'package:mood_swing/Objects/Mood.dart';
 
 class DatabaseRouter {
   String uid = FirebaseAuth.instance.currentUser?.uid ?? "-1";
@@ -23,6 +24,20 @@ class DatabaseRouter {
       },
     );
 
+  }
+
+  Future<List<String>> generatePlaylist(List<String> userLikedSongs, Mood mood) async
+  {
+    List<String> playlist = [];
+    for(String s in userLikedSongs)
+      {
+        DocumentSnapshot dref = await FirebaseFirestore.instance.collection("songs").doc(s).get();
+        if(dref.get("mood") == mood.index)
+          {
+            playlist.add(s);
+          }
+      }
+    return playlist;
   }
 
   Future<String?> uploadFile(XFile? file, FileType encodingFormat) async

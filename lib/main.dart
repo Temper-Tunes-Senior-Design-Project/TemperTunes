@@ -1,27 +1,32 @@
-import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mood_swing/Pages/LandingPage.dart';
 import 'package:mood_swing/Pages/HomePage.dart';
 import 'dart:ui';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mood_swing/Utilities/AuthRouter.dart';
 import 'Widgets/MockNavigator.dart';
 import 'firebase_options.dart';
 
+<<<<<<< HEAD
 import 'package:mood_swing/Pages/PreferencesPage.dart.';
 
 import 'package:mood_swing/Pages/OTPEmailPage.dart.';
 
 List<CameraDescription> cameras = [];
 
+=======
+>>>>>>> 037d7c13d38ddd55c8f4502e25036f4b0162c052
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  //Load the dotenv plugin
+  await dotenv.load(fileName: ".env");
 
   //Catch Flutter framework errors
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
@@ -69,8 +74,12 @@ class App extends StatelessWidget {
             if (snapshot.data != null) {
               return HomePage();
             }
+<<<<<<< HEAD
             //return LandingPage();
             return OTPEmailPage();
+=======
+            return LandingPage();
+>>>>>>> 037d7c13d38ddd55c8f4502e25036f4b0162c052
           }),
     );
   }

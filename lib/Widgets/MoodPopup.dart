@@ -7,7 +7,7 @@ import '../Utilities/APIRouter.dart';
 class MoodPopup extends StatelessWidget {
   final String filePath;
   MoodPopup(this.filePath);
-  late Future<Mood> emotion;
+  late final Future<Mood> emotion;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ class MoodPopup extends StatelessWidget {
               Widget w = Container();
 
               ///For adding emotion icons
-              switch (snapshot.data) {
+              switch (snapshot.data!) {
                 case Mood.Angry:
                   w = Image.asset("assets/angry.png", height: 0.12 * height);
                   break;
@@ -73,6 +73,7 @@ class MoodPopup extends StatelessWidget {
                   w = Image.asset("assets/surprise.png", height: 0.12 * height);
                   break;
                 case Mood.Neutral:
+                  // w = Image.asset("assets/emotions/neutral.png");
                   w = Image.asset("assets/neutral.png", height: 0.12 * height);
                   break;
               }

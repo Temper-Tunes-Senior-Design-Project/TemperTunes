@@ -74,3 +74,4 @@ flutter:
         - asset: fonts/MavenPro-VariableFont_wght.ttf
   assets:
     - assets/
+    - .env

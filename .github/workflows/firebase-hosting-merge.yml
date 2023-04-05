@@ -19,6 +19,15 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           channel: 'stable'
+      #Create an environment file
+      - run: |
+          touch .env
+          echo SPOTIFY_CLIENT_ID="${{ secrets.SPOTIFY_CLIENT_ID }}" >> .env
+          echo SPOTIFY_CLIENT_SECRET="${{ secrets.SPOTIFY_CLIENT_SECRET }}" >> .env
+          echo SPOTIFY_REDIRECT_URI="${{ secrets.SPOTIFY_REDIRECT_URI }}" >> .env
+          echo SPOTIFY_WEB_REDIRECT_URI="${{ secrets.SPOTIFY_WEB_REDIRECT_URI }}" >> .env
+          echo "cat .env"
+          cat .env
       - run: flutter pub get && flutter build web
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:

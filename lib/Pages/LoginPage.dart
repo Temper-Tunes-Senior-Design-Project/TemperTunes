@@ -331,10 +331,7 @@ class _LargeScreenState extends State<LargeScreen> {
                         padding:
                             EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                         height: height * 0.15,
-                        child: Flexible(
-                          flex: 3,
-                          fit: FlexFit.loose,
-                          child: Row(
+                        child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
                               ExternalAuthBtn(
@@ -382,7 +379,7 @@ class _LargeScreenState extends State<LargeScreen> {
                               ),
                             ],
                           ),
-                        ),
+
                       ),
                     ],
                   ),
