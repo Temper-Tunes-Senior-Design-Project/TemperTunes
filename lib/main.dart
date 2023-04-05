@@ -10,15 +10,8 @@ import 'package:mood_swing/Utilities/AuthRouter.dart';
 import 'Widgets/MockNavigator.dart';
 import 'firebase_options.dart';
 
-<<<<<<< HEAD
-import 'package:mood_swing/Pages/PreferencesPage.dart.';
+import 'package:mood_swing/Pages/PreferencesPage.dart';
 
-import 'package:mood_swing/Pages/OTPEmailPage.dart.';
-
-List<CameraDescription> cameras = [];
-
-=======
->>>>>>> 037d7c13d38ddd55c8f4502e25036f4b0162c052
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -74,12 +67,9 @@ class App extends StatelessWidget {
             if (snapshot.data != null) {
               return HomePage();
             }
-<<<<<<< HEAD
+
             //return LandingPage();
-            return OTPEmailPage();
-=======
-            return LandingPage();
->>>>>>> 037d7c13d38ddd55c8f4502e25036f4b0162c052
+            return PreferencesPage();
           }),
     );
   }
