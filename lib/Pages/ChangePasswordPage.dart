@@ -410,7 +410,7 @@ class _SmallScreenState extends State<SmallScreen> {
                 fit: BoxFit.cover),
           ),
           child: Padding(
-            padding: EdgeInsets.only(left: 0.01 * width, top: 0.06 * height),
+            padding: EdgeInsets.only(top: 0.01 * height),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[

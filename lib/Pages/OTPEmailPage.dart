@@ -1,8 +1,8 @@
 //OTP EMAIL
-
 import 'package:flutter/material.dart';
 import 'package:mood_swing/Pages/VerificationPage.dart';
 import '../Widgets/widgets.dart';
+import 'package:bouncing_widget/bouncing_widget.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -30,7 +30,7 @@ class LargeScreen extends StatelessWidget {
                 fit: BoxFit.cover),
           ),
           child: Padding(
-            padding: EdgeInsets.only(top: 0.03 * height),
+            padding: EdgeInsets.only(top: 0.01 * height),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
@@ -168,7 +168,7 @@ class LargeScreen extends StatelessWidget {
                       //Login button
                       Container(
                         padding: EdgeInsets.only(top: 0.016 * height),
-                        child: TextButton(
+                        child: BouncingWidget(
                             child: Container(
                               width: 0.2 * width,
                               height: 0.075 * height,
@@ -378,7 +378,7 @@ class SmallScreen extends StatelessWidget {
                     //Send Button
                     Container(
                       //padding: EdgeInsets.only(top: height*0.03),
-                      child: TextButton(
+                      child: BouncingWidget(
                           child: Container(
                             width: 0.5 * width,
                             height: 0.07 * height,

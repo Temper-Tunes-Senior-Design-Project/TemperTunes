@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mood_swing/Pages/ChangeEmailPage.dart';
 import 'package:mood_swing/Pages/ChangePasswordPage.dart';
-
+import 'package:mood_swing/Utilities/APIRouter.dart';
+import 'package:mood_swing/Utilities/AuthRouter.dart';
 import 'package:mood_swing/Pages/UserPage.dart';
 import 'ChangePasswordPage.dart';
 import '../Widgets/widgets.dart';
@@ -174,7 +175,9 @@ class LargeScreen extends StatelessWidget {
                             context: context,
                             icon: Icons.link,
                             label: "Link To Spotify",
-                            onPressed: () {},
+                            onPressed: () async {
+                              //    APIRouter().classifySpotifyLibrary();
+                            },
                           ),
                         ),
 
@@ -185,7 +188,9 @@ class LargeScreen extends StatelessWidget {
                             context: context,
                             icon: Icons.logout,
                             label: "Logout",
-                            onPressed: () {},
+                            onPressed: () {
+                              //   AuthRouter().logout(context);
+                            },
                           ),
                         ),
                       ],
@@ -359,7 +364,9 @@ class SmallScreen extends StatelessWidget {
                                       context: context,
                                       icon: Icons.link,
                                       label: "Link To Spotify",
-                                      onPressed: () {},
+                                      onPressed: () async {
+                                        //    APIRouter().classifySpotifyLibrary();
+                                      },
                                     ),
                                   ),
 
@@ -371,7 +378,9 @@ class SmallScreen extends StatelessWidget {
                                       context: context,
                                       icon: Icons.logout,
                                       label: "Logout",
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        // AuthRouter().logout(context);
+                                      },
                                     ),
                                   ),
                                 ],
