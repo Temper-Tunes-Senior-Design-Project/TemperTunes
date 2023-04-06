@@ -16,7 +16,7 @@ class PreferenceOption extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 0.03 * height),
+      padding: EdgeInsets.only(top: 0.02 * height),
       alignment: Alignment.topCenter,
       child: Flexible(
         flex: 1,
