@@ -20,22 +20,32 @@ class PreferenceOption extends StatelessWidget {
       child: TextButton(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              alignment: Alignment.topLeft,
-              child: icon,
+            Flexible(
+              flex: 1,
+              fit: FlexFit.tight,
+              child: Container(
+                alignment: Alignment.topRight,
+                child: icon,
+              ),
             ),
 
             ///Name
-            Container(
-              padding: EdgeInsets.only(left: 0.01 * width),
-              alignment: Alignment.topLeft,
-              child: Text(
-                text,
-                style: TextStyle(
-                  fontFamily: 'Maven Pro',
-                  color: Colors.white,
-                  fontSize: fontSize,
+            Flexible(
+              flex: 2,
+              fit: FlexFit.tight,
+              child: Container(
+                padding: EdgeInsets.only(left: 0.01 * width),
+                alignment: Alignment.topLeft,
+                child: Text(
+                  text,
+                  style: TextStyle(
+                    fontFamily: 'Maven Pro',
+                    color: Colors.white,
+                    fontSize: fontSize,
+                  ),
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
             ),

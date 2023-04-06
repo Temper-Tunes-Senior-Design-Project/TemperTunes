@@ -33,30 +33,24 @@ class LargeScreen extends StatelessWidget {
               fit: BoxFit.cover),
         ),
 
-        ///back arrow
+
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Container(
-              padding: EdgeInsets.only(top: 0.01 * height, left: 0),
-              child: Row(
-                children: [
-                  IconButton(
-                    icon: Icon(
-                      const IconData(0xf05bc, fontFamily: 'MaterialIcons'),
-                      color: Colors.white,
-                      size: 40,
+            ///back arrow
+            Align(
+              alignment: Alignment.centerLeft,
+              child: IconButton(
+                      icon: Icon(
+                        const IconData(0xf05bc, fontFamily: 'MaterialIcons'),
+                        color: Colors.white,
+                        size: 40,
+                      ),
+                      onPressed: () => Navigator.pop(context),
                     ),
-                    onPressed: () => Navigator.pop(context),
-                  ),
-                ],
-              ),
             ),
-
             ///Main Container
-            Flexible(
-              flex: 6,
-              child: FittedBox(
+            FittedBox(
                 child: Container(
                   height: height * 0.8,
                   width: width * 0.3,
@@ -94,20 +88,22 @@ class LargeScreen extends StatelessWidget {
 
                       Flexible(
                         flex: 1,
-                        child: PreferenceOption(
-                          "Account",
-                          height,
-                          width,
-                          Icon(Icons.person, color: Colors.white, size: 24),
-                          () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => UserPage(),
-                              ),
-                            );
-                          },
-                          24,
+                        child: Center(
+                          child: PreferenceOption(
+                            "Account",
+                            height,
+                            width,
+                            Icon(Icons.person, color: Colors.white, size: 24),
+                            () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => UserPage(),
+                                ),
+                              );
+                            },
+                            24,
+                          ),
                         ),
                       ),
 
@@ -195,7 +191,6 @@ class LargeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-            ),
           ],
         ),
       ),
@@ -213,20 +208,17 @@ class SmallScreen extends StatelessWidget {
         height: height,
         width: width,
         decoration: BoxDecoration(
-          //set img to bg of body
           image: DecorationImage(
               image: AssetImage("assets/loginPageSmall.png"),
               fit: BoxFit.cover),
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Container(
               ///Back arrow
               padding: EdgeInsets.only(top: 10),
-              child: Container(
-                alignment: Alignment.topLeft,
-                child: IconButton(
+              child: IconButton(
                   icon: Icon(
                     const IconData(0xf05bc, fontFamily: 'MaterialIcons'),
                     color: Colors.white,
@@ -234,155 +226,157 @@ class SmallScreen extends StatelessWidget {
                   ),
                   onPressed: () => Navigator.pop(context),
                 ),
-              ),
             ),
-            FittedBox(
-              child: Container(
-                alignment: Alignment.center,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        ///Preferences Title
-                        Container(
-                          alignment: Alignment.center,
-                          padding: EdgeInsets.only(top: height * 0.01),
-                          child: Text(
-                            'Preferences',
-                            style: TextStyle(
-                              fontSize: 58,
-                              fontFamily: 'Share Tech',
-                              color: MyPalette.lightPurple,
-                            ),
-                          ),
-                        ),
-
-                        Center(
-                          child: Container(
+            Flexible(
+              flex: 6,
+              child: FittedBox(
+                child: Container(
+                  alignment: Alignment.center,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          ///Preferences Title
+                          Container(
                             alignment: Alignment.center,
-                            padding: EdgeInsets.only(
-                                right: 0.03 * width, left: 0.03 * width),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                ///Account
-                                Flexible(
-                                  flex: 1,
-                                  child: PreferenceOption(
-                                    "Account",
-                                    height,
-                                    width,
-                                    Icon(Icons.person,
-                                        color: Colors.white, size: 40),
-                                    () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => UserPage(),
-                                        ),
-                                      );
-                                    },
-                                    28,
-                                  ),
-                                ),
-
-                                ///Change Email
-                                Flexible(
-                                  flex: 1,
-                                  child: PreferenceOption(
-                                    "Change Email",
-                                    height,
-                                    width,
-                                    Icon(Icons.email,
-                                        color: Colors.white, size: 40),
-                                    () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              ChangeEmailPage(),
-                                        ),
-                                      );
-                                    },
-                                    28,
-                                  ),
-                                ),
-
-                                ///Change Password
-                                Flexible(
-                                  flex: 1,
-                                  child: PreferenceOption(
-                                    "Change Password",
-                                    height,
-                                    width,
-                                    Icon(Icons.key,
-                                        color: Colors.white, size: 40),
-                                    () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              ChangePasswordPage(),
-                                        ),
-                                      );
-                                    },
-                                    28,
-                                  ),
-                                ),
-
-                                ///Adjust Presets
-                                Flexible(
-                                  flex: 1,
-                                  child: PreferenceOption(
-                                    "Adjust Presets",
-                                    height,
-                                    width,
-                                    Icon(Icons.tune,
-                                        color: Colors.white, size: 40),
-                                    () {},
-                                    28,
-                                  ),
-                                ),
-
-                                ///Link Accounts
-                                Flexible(
-                                  flex: 1,
-                                  child: PreferenceOption(
-                                    "Link Spotify",
-                                    height,
-                                    width,
-                                    Icon(Icons.link,
-                                        color: Colors.white, size: 40),
-                                    () async {
-                                      APIRouter().classifySpotifyLibrary();
-                                    },
-                                    28,
-                                  ),
-                                ),
-
-                                ///Logout
-                                Flexible(
-                                  flex: 1,
-                                  child: PreferenceOption(
-                                    "Logout",
-                                    height,
-                                    width,
-                                    Icon(Icons.logout,
-                                        color: Colors.white, size: 40),
-                                    () {},
-                                    28,
-                                  ),
-                                ),
-                              ],
+                            padding: EdgeInsets.only(top: height * 0.01),
+                            child: Text(
+                              'Preferences',
+                              style: TextStyle(
+                                fontSize: 58,
+                                fontFamily: 'Share Tech',
+                                color: MyPalette.lightPurple,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+
+                          Center(
+                            child: Container(
+                              alignment: Alignment.center,
+                              padding: EdgeInsets.only(
+                                  right: 0.03 * width, left: 0.03 * width),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  ///Account
+                                  Flexible(
+                                    flex: 1,
+                                    child: PreferenceOption(
+                                      "Account",
+                                      height,
+                                      width,
+                                      Icon(Icons.person,
+                                          color: Colors.white, size: 40),
+                                      () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => UserPage(),
+                                          ),
+                                        );
+                                      },
+                                      28,
+                                    ),
+                                  ),
+
+                                  ///Change Email
+                                  Flexible(
+                                    flex: 1,
+                                    child: PreferenceOption(
+                                      "Change Email",
+                                      height,
+                                      width,
+                                      Icon(Icons.email,
+                                          color: Colors.white, size: 40),
+                                      () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                ChangeEmailPage(),
+                                          ),
+                                        );
+                                      },
+                                      28,
+                                    ),
+                                  ),
+
+                                  ///Change Password
+                                  Flexible(
+                                    flex: 1,
+                                    child: PreferenceOption(
+                                      "Change Password",
+                                      height,
+                                      width,
+                                      Icon(Icons.key,
+                                          color: Colors.white, size: 40),
+                                      () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                ChangePasswordPage(),
+                                          ),
+                                        );
+                                      },
+                                      28,
+                                    ),
+                                  ),
+
+                                  ///Adjust Presets
+                                  Flexible(
+                                    flex: 1,
+                                    child: PreferenceOption(
+                                      "Adjust Presets",
+                                      height,
+                                      width,
+                                      Icon(Icons.tune,
+                                          color: Colors.white, size: 40),
+                                      () {},
+                                      28,
+                                    ),
+                                  ),
+
+                                  ///Link Accounts
+                                  Flexible(
+                                    flex: 1,
+                                    child: PreferenceOption(
+                                      "Link Spotify",
+                                      height,
+                                      width,
+                                      Icon(Icons.link,
+                                          color: Colors.white, size: 40),
+                                      () async {
+                                        APIRouter().classifySpotifyLibrary();
+                                      },
+                                      28,
+                                    ),
+                                  ),
+
+                                  ///Logout
+                                  Flexible(
+                                    flex: 1,
+                                    child: PreferenceOption(
+                                      "Logout",
+                                      height,
+                                      width,
+                                      Icon(Icons.logout,
+                                          color: Colors.white, size: 40),
+                                      () {},
+                                      28,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
