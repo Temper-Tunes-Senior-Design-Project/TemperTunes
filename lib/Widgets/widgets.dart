@@ -13,3 +13,5 @@ export 'PreferenceOption.dart';
 export 'ExternalAUthBtn.dart';
 export 'ForgotPassword.dart';
 export 'BackArrowBtn.dart';
+export 'PasswordForm.dart';
+export 'ChangeForm.dart';

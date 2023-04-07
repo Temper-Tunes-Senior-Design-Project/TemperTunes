@@ -51,32 +51,8 @@ class _LargeScreenState extends State<LargeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Container(
-                //back button
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      child: Row(
-                        children: [
-                          TextButton(
-                            style: ElevatedButton.styleFrom(
-                              shape: CircleBorder(),
-                            ),
-                            child: Icon(
-                              const IconData(0xf05bc,
-                                  fontFamily: 'MaterialIcons'),
-                              color: Colors.white,
-                              size: 35,
-                            ),
-                            onPressed: () => Navigator.pop(context),
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              ///Back button
+              BackArrowBtn(),
 
               ///Main Container
               Form(
@@ -315,28 +291,7 @@ class _SmallScreenState extends State<SmallScreen> {
               ///Back button
               BackArrowBtn(),
 
-              // Row(
-              //   crossAxisAlignment: CrossAxisAlignment.start,
-              //   children: [
-              //     Container(
-              //       padding: EdgeInsets.only(top: 10),
-              //       child: ElevatedButton(
-              //         style: ElevatedButton.styleFrom(
-              //           shape: CircleBorder(),
-              //         ),
-              //         child: Icon(
-              //           const IconData(0xf05bc, fontFamily: 'MaterialIcons'),
-              //           color: Colors.white,
-              //           size: 40,
-              //         ),
-              //         onPressed: () => Navigator.pop(context),
-              //       ),
-              //     ),
-              //   ],
-              // ),
-
               ///Main Container
-
               Form(
                 key: _formKey,
                 child: Container(
@@ -378,7 +333,7 @@ class _SmallScreenState extends State<SmallScreen> {
                               icon: Icons.key,
                               label: "Please enter your password",
                             ),
-                            SizedBox(height: 0.01 * height),
+                            SizedBox(height: 0.02 * height),
                           ],
                         ),
                       ),
@@ -387,7 +342,7 @@ class _SmallScreenState extends State<SmallScreen> {
 
                       SizedBox(height: 0.04 * height),
 
-                      ///Buttons
+                      ///Button
                       //Login Button
                       Container(
                         //padding: EdgeInsets.only(top: height*0.03),
@@ -543,6 +498,61 @@ void login(BuildContext context) async {
   }, context);
 }
 
+class LoginPage extends StatelessWidget {
+  const LoginPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(Object context) {
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: Body(),
+    );
+  }
+}
+
+class LoginEmailForm extends StatelessWidget {
+  final TextEditingController controller;
+  final FormFieldValidator<String> validator;
+  final IconData icon;
+  final String label;
+  final BuildContext context;
+  const LoginEmailForm(
+      {required this.controller,
+      required this.validator,
+      required this.context,
+      required this.icon,
+      required this.label,
+      super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      controller: controller,
+      validator: validator,
+      textAlign: TextAlign.left,
+      cursorColor: Colors.white,
+      style: TextStyle(
+        fontFamily: 'Maven Pro',
+        fontWeight: FontWeight.w100,
+        color: Colors.white,
+        fontSize: 20,
+      ),
+      decoration: InputDecoration(
+        prefixIcon: Icon(icon, color: Colors.white, size: 34),
+        hintStyle: TextStyle(color: Colors.white60),
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.white, width: 3),
+        ),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: new BorderSide(color: MyPalette.darkTurqoise, width: 3),
+        ),
+        labelText: label,
+        labelStyle: TextStyle(fontSize: 15, color: Colors.white54),
+      ),
+    );
+  }
+}
+
 class LoginPasswordForm extends StatefulWidget {
   final TextEditingController controller;
   final FormFieldValidator<String> validator;
@@ -608,61 +618,6 @@ class _LoginPasswordFormState extends State<LoginPasswordForm> {
           borderSide: new BorderSide(color: MyPalette.darkTurqoise, width: 3),
         ),
         labelText: widget.label,
-        labelStyle: TextStyle(fontSize: 15, color: Colors.white54),
-      ),
-    );
-  }
-}
-
-class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(Object context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Body(),
-    );
-  }
-}
-
-class LoginEmailForm extends StatelessWidget {
-  final TextEditingController controller;
-  final FormFieldValidator<String> validator;
-  final IconData icon;
-  final String label;
-  final BuildContext context;
-  const LoginEmailForm(
-      {required this.controller,
-      required this.validator,
-      required this.context,
-      required this.icon,
-      required this.label,
-      super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      controller: controller,
-      validator: validator,
-      textAlign: TextAlign.left,
-      cursorColor: Colors.white,
-      style: TextStyle(
-        fontFamily: 'Maven Pro',
-        fontWeight: FontWeight.w100,
-        color: Colors.white,
-        fontSize: 20,
-      ),
-      decoration: InputDecoration(
-        prefixIcon: Icon(icon, color: Colors.white, size: 34),
-        hintStyle: TextStyle(color: Colors.white60),
-        enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.white, width: 3),
-        ),
-        focusedBorder: UnderlineInputBorder(
-          borderSide: new BorderSide(color: MyPalette.darkTurqoise, width: 3),
-        ),
-        labelText: label,
         labelStyle: TextStyle(fontSize: 15, color: Colors.white54),
       ),
     );
