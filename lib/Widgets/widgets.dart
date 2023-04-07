@@ -12,3 +12,4 @@ export 'WaveLoader.dart';
 export 'PreferenceOption.dart';
 export 'ExternalAUthBtn.dart';
 export 'ForgotPassword.dart';
+export 'BackArrowBtn.dart';

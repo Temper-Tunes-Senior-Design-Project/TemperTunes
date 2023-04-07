@@ -312,33 +312,28 @@ class _SmallScreenState extends State<SmallScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Container(
-                ///Back button
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      padding: EdgeInsets.only(top: 0.02 * height),
-                      child: Row(
-                        children: [
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              shape: CircleBorder(),
-                            ),
-                            child: Icon(
-                              const IconData(0xf05bc,
-                                  fontFamily: 'MaterialIcons'),
-                              color: Colors.white,
-                              size: 40,
-                            ),
-                            onPressed: () => Navigator.pop(context),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              ///Back button
+              BackArrowBtn(),
+
+              // Row(
+              //   crossAxisAlignment: CrossAxisAlignment.start,
+              //   children: [
+              //     Container(
+              //       padding: EdgeInsets.only(top: 10),
+              //       child: ElevatedButton(
+              //         style: ElevatedButton.styleFrom(
+              //           shape: CircleBorder(),
+              //         ),
+              //         child: Icon(
+              //           const IconData(0xf05bc, fontFamily: 'MaterialIcons'),
+              //           color: Colors.white,
+              //           size: 40,
+              //         ),
+              //         onPressed: () => Navigator.pop(context),
+              //       ),
+              //     ),
+              //   ],
+              // ),
 
               ///Main Container
 
