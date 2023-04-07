@@ -91,7 +91,7 @@ class SmallScreen extends StatelessWidget {
 }
 
 class HomePage extends StatelessWidget {
-  HomePage({super.key});
+  HomePage({super.key, bool shouldOnboard = false});
 
   @override
   Widget build(BuildContext context) {

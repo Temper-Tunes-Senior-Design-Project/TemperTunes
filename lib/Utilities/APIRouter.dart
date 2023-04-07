@@ -7,7 +7,13 @@ import 'package:mood_swing/Utilities/AuthRouter.dart';
 import 'SpotifyRouter.dart';
 
 class APIRouter {
+
+  /**
+   * Communicate with Firebase Cloud Function to categorize a user's photo/video
+   * to a Mood enum classification.
+   */
   Future<Mood> getUserMood(String firebasePath) async {
+    ///Send a response to the cloud function
     Response response = await http
         .get(Uri.parse(
             "https://moodswing-mood-classifier-ilvif34q5a-ue.a.run.app/get_mood?storage_path=" +
@@ -15,7 +21,7 @@ class APIRouter {
         .timeout(Duration(minutes: 1));
     if (response.statusCode == 200) {
       Map<String, dynamic> resBody = jsonDecode(response.body);
-      //Aggregate the moods to find the maximum value
+      ///Aggregate the moods to find the maximum value
       Mood m = Mood.values
           .where((element) =>
               element.name.toLowerCase() ==
