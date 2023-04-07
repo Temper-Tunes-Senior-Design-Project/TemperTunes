@@ -9,3 +9,5 @@ export 'VerificationSmall.dart';
 export 'RippleSmall.dart';
 export 'WaveAnimation.dart';
 export 'WaveLoader.dart';
+export 'PreferenceOption.dart';
+export 'ExternalAUthBtn.dart';

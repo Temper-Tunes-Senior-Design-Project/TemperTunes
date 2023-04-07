@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+//import 'package:form_field_validator/form_field_validator.dart';
 import '../Utilities/AuthRouter.dart';
 import '../Widgets/widgets.dart';
 import 'OTPEmailPage.dart';
 import 'HomePage.dart';
-import 'package:form_field_validator/form_field_validator.dart';
+import 'package:form_field_validator/form_field_validator.dart' as validator;
 import 'package:bouncing_widget/bouncing_widget.dart';
 
 class Body extends StatelessWidget {
@@ -18,10 +19,10 @@ class Body extends StatelessWidget {
 
 TextEditingController _emailController = new TextEditingController();
 TextEditingController _passwordController = new TextEditingController();
-MultiValidator emailValidator = MultiValidator([
-  //   RequiredValidator(errorText: "* Required"),
-  //   EmailValidator(errorText: "Enter valid email ID"),
-]);
+// MultiValidator emailValidator = MultiValidator([
+//   //   RequiredValidator(errorText: "* Required"),
+//   //   EmailValidator(errorText: "Enter valid email ID"),
+// ]);
 
 class LargeScreen extends StatefulWidget {
   _LargeScreenState createState() => _LargeScreenState();
@@ -110,41 +111,13 @@ class _LargeScreenState extends State<LargeScreen> {
                           Container(
                             padding: EdgeInsets.only(
                                 left: 0.02 * width, right: 0.02 * width),
-
-                            ///TextFormField
-                            child: TextFormField(
+                            child: LoginEmailForm(
+                              context: context,
                               controller: _emailController,
-                              validator: RequiredValidator(
+                              validator: validator.RequiredValidator(
                                   errorText: AutofillHints.email),
-                              textAlign: TextAlign.left,
-                              cursorColor: Colors.white,
-                              style: TextStyle(
-                                fontFamily: 'Maven Pro',
-                                fontWeight: FontWeight.w100,
-                                color: Colors.white,
-                                fontSize: 20,
-                              ),
-                              decoration: InputDecoration(
-                                //icon
-                                prefixIcon: Icon(
-                                  const IconData(0xe491,
-                                      fontFamily: 'MaterialIcons'),
-                                  color: MyPalette.white,
-                                  size: 34,
-                                ),
-                                hintStyle: TextStyle(color: Colors.white60),
-                                enabledBorder: UnderlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.white, width: 3),
-                                ),
-                                focusedBorder: UnderlineInputBorder(
-                                  borderSide: new BorderSide(
-                                      color: MyPalette.darkTurqoise, width: 3),
-                                ),
-                                labelText: 'Please enter your email',
-                                labelStyle: TextStyle(
-                                    fontSize: 15, color: Colors.white54),
-                              ),
+                              icon: Icons.email,
+                              label: 'Please enter your email',
                             ),
                           ),
                         ],
@@ -164,63 +137,64 @@ class _LargeScreenState extends State<LargeScreen> {
                               right: 0.02 * width,
                             ),
                             //textformfield
-                            child: TextFormField(
-                              controller: _passwordController,
-                              validator: RequiredValidator(
-                                  errorText: AutofillHints.password),
-                              textAlign: TextAlign.left,
-                              obscureText: !_isVisible,
-                              obscuringCharacter: "*",
-                              cursorColor: Colors.white,
-                              style: TextStyle(
-                                fontFamily: 'Maven Pro',
-                                fontWeight: FontWeight.w100,
-                                color: Colors.white,
-                                fontSize: 20,
-                              ),
-                              decoration: InputDecoration(
-                                ///Eye icon (see password)
-                                suffixIcon: Align(
-                                  widthFactor: 0,
-                                  child: IconButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        _isVisible = !_isVisible;
-                                      });
-                                    },
-                                    icon: _isVisible
-                                        ? Icon(
-                                            Icons.visibility,
-                                            color: MyPalette.darkTurqoise,
-                                          )
-                                        : Icon(
-                                            Icons.visibility_off,
-                                            color: Colors.grey,
-                                          ),
-                                  ),
-                                ),
 
-                                ///PrefixIcon
-                                prefixIcon: Icon(
-                                  const IconData(0xe3ae,
-                                      fontFamily: 'MaterialIcons'),
-                                  color: MyPalette.white,
-                                  size: 34,
-                                ),
-                                hintStyle: TextStyle(color: Colors.white60),
-                                enabledBorder: UnderlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.white, width: 3),
-                                ),
-                                focusedBorder: UnderlineInputBorder(
-                                  borderSide: new BorderSide(
-                                      color: MyPalette.darkTurqoise, width: 3),
-                                ),
-                                labelText: 'Please enter your password',
-                                labelStyle: TextStyle(
-                                    fontSize: 15, color: Colors.white54),
-                              ),
-                            ),
+                            // child: TextFormField(
+                            //   controller: _passwordController,
+                            //   validator: RequiredValidator(
+                            //       errorText: AutofillHints.password),
+                            //   textAlign: TextAlign.left,
+                            //   obscureText: !_isVisible,
+                            //   obscuringCharacter: "*",
+                            //   cursorColor: Colors.white,
+                            //   style: TextStyle(
+                            //     fontFamily: 'Maven Pro',
+                            //     fontWeight: FontWeight.w100,
+                            //     color: Colors.white,
+                            //     fontSize: 20,
+                            //   ),
+                            //   decoration: InputDecoration(
+                            //     ///Eye icon (see password)
+                            //     suffixIcon: Align(
+                            //       widthFactor: 0,
+                            //       child: IconButton(
+                            //         onPressed: () {
+                            //           setState(() {
+                            //             _isVisible = !_isVisible;
+                            //           });
+                            //         },
+                            //         icon: _isVisible
+                            //             ? Icon(
+                            //                 Icons.visibility,
+                            //                 color: MyPalette.darkTurqoise,
+                            //               )
+                            //             : Icon(
+                            //                 Icons.visibility_off,
+                            //                 color: Colors.grey,
+                            //               ),
+                            //       ),
+                            //     ),
+                            //
+                            //     ///PrefixIcon
+                            //     prefixIcon: Icon(
+                            //       const IconData(0xe3ae,
+                            //           fontFamily: 'MaterialIcons'),
+                            //       color: MyPalette.white,
+                            //       size: 34,
+                            //     ),
+                            //     hintStyle: TextStyle(color: Colors.white60),
+                            //     enabledBorder: UnderlineInputBorder(
+                            //       borderSide:
+                            //           BorderSide(color: Colors.white, width: 3),
+                            //     ),
+                            //     focusedBorder: UnderlineInputBorder(
+                            //       borderSide: new BorderSide(
+                            //           color: MyPalette.darkTurqoise, width: 3),
+                            //     ),
+                            //     labelText: 'Please enter your password',
+                            //     labelStyle: TextStyle(
+                            //         fontSize: 15, color: Colors.white54),
+                            //   ),
+                            // ),
                           ),
                         ],
                       ),
@@ -332,54 +306,53 @@ class _LargeScreenState extends State<LargeScreen> {
                             EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                         height: height * 0.15,
                         child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              ExternalAuthBtn(
-                                context: context,
-                                heroTag: "Google",
-                                toolTipText: "Google",
-                                img: Image.asset("assets/googleIcon.png",
-                                    height: 15),
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => HomePage(),
-                                    ),
-                                  );
-                                },
-                              ),
-                              ExternalAuthBtn(
-                                context: context,
-                                heroTag: "Facebook",
-                                toolTipText: "Facebook",
-                                img: Image.asset("assets/facebookIcon.png"),
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => HomePage(),
-                                    ),
-                                  );
-                                },
-                              ),
-                              ExternalAuthBtn(
-                                context: context,
-                                img: Image.asset("assets/appleIcon.png"),
-                                toolTipText: "AppleID",
-                                heroTag: "Apple Login",
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => HomePage(),
-                                    ),
-                                  );
-                                },
-                              ),
-                            ],
-                          ),
-
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            ExternalAuthBtn(
+                              context: context,
+                              heroTag: "Google",
+                              toolTipText: "Google",
+                              img: Image.asset("assets/googleIcon.png",
+                                  height: 15),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => HomePage(),
+                                  ),
+                                );
+                              },
+                            ),
+                            ExternalAuthBtn(
+                              context: context,
+                              heroTag: "Facebook",
+                              toolTipText: "Facebook",
+                              img: Image.asset("assets/facebookIcon.png"),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => HomePage(),
+                                  ),
+                                );
+                              },
+                            ),
+                            ExternalAuthBtn(
+                              context: context,
+                              img: Image.asset("assets/appleIcon.png"),
+                              toolTipText: "AppleID",
+                              heroTag: "Apple Login",
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => HomePage(),
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -474,42 +447,13 @@ class _SmallScreenState extends State<SmallScreen> {
                               left: 0.10 * width,
                               right: 0.10 * width,
                             ),
-                            child: TextFormField(
+                            child: LoginEmailForm(
+                              context: context,
                               controller: _emailController,
-                              validator: RequiredValidator(
+                              validator: validator.RequiredValidator(
                                   errorText: AutofillHints.email),
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                fontFamily: 'Maven Pro',
-                                fontWeight: FontWeight.w100,
-                                color: Colors.white,
-                                fontSize: 20,
-                              ),
-                              decoration: InputDecoration(
-                                prefixIcon: Align(
-                                  widthFactor: 0,
-                                  heightFactor: 1.0,
-                                  child: Icon(
-                                    const IconData(0xe491,
-                                        fontFamily: 'MaterialIcons'),
-                                    color: MyPalette.white,
-                                    size: 30,
-                                  ),
-                                ),
-                                hintStyle: TextStyle(color: Colors.white60),
-                                enabledBorder: UnderlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.white, width: 4),
-                                ),
-                                focusedBorder: UnderlineInputBorder(
-                                  borderSide: new BorderSide(
-                                      color: MyPalette.darkTurqoise, width: 4),
-                                ),
-                                labelText: 'Please enter your email',
-                                labelStyle: TextStyle(
-                                    fontSize: 15, color: Colors.white54),
-                                //  errorText: _emailErrorText,
-                              ),
+                              icon: Icons.email,
+                              label: 'Please enter your email',
                             ),
                           ),
                         ],
@@ -527,62 +471,63 @@ class _SmallScreenState extends State<SmallScreen> {
                           Container(
                             padding: EdgeInsets.only(
                                 left: 0.1 * width, right: 0.1 * width),
-                            child: TextFormField(
-                              controller: _passwordController,
-                              validator: RequiredValidator(
-                                  errorText: AutofillHints.password),
-                              obscureText: !_isVisible,
-                              obscuringCharacter: "*",
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                fontFamily: 'Maven Pro',
-                                fontWeight: FontWeight.w100,
-                                color: Colors.white,
-                                fontSize: 20,
-                              ),
-                              decoration: InputDecoration(
-                                suffixIcon: Align(
-                                  widthFactor: 0,
-                                  child: IconButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        _isVisible = !_isVisible;
-                                      });
-                                    },
-                                    icon: _isVisible
-                                        ? Icon(
-                                            Icons.visibility,
-                                            color: MyPalette.darkTurqoise,
-                                          )
-                                        : Icon(
-                                            Icons.visibility_off,
-                                            color: Colors.grey,
-                                          ),
-                                  ),
-                                ),
-                                prefixIcon: Align(
-                                  widthFactor: 1.0,
-                                  child: Icon(
-                                    const IconData(0xe3ae,
-                                        fontFamily: 'MaterialIcons'),
-                                    color: MyPalette.white,
-                                    size: 32,
-                                  ),
-                                ),
-                                hintStyle: TextStyle(color: Colors.white60),
-                                enabledBorder: UnderlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.white, width: 4),
-                                ),
-                                focusedBorder: UnderlineInputBorder(
-                                  borderSide: new BorderSide(
-                                      color: MyPalette.darkTurqoise, width: 4),
-                                ),
-                                labelText: 'Please enter your password',
-                                labelStyle: TextStyle(
-                                    fontSize: 15, color: Colors.white54),
-                              ),
-                            ),
+
+                            // child: TextFormField(
+                            //   controller: _passwordController,
+                            //   validator: RequiredValidator(
+                            //       errorText: AutofillHints.password),
+                            //   obscureText: !_isVisible,
+                            //   obscuringCharacter: "*",
+                            //   textAlign: TextAlign.left,
+                            //   style: TextStyle(
+                            //     fontFamily: 'Maven Pro',
+                            //     fontWeight: FontWeight.w100,
+                            //     color: Colors.white,
+                            //     fontSize: 20,
+                            //   ),
+                            //   decoration: InputDecoration(
+                            //     suffixIcon: Align(
+                            //       widthFactor: 0,
+                            //       child: IconButton(
+                            //         onPressed: () {
+                            //           setState(() {
+                            //             _isVisible = !_isVisible;
+                            //           });
+                            //         },
+                            //         icon: _isVisible
+                            //             ? Icon(
+                            //                 Icons.visibility,
+                            //                 color: MyPalette.darkTurqoise,
+                            //               )
+                            //             : Icon(
+                            //                 Icons.visibility_off,
+                            //                 color: Colors.grey,
+                            //               ),
+                            //       ),
+                            //     ),
+                            //     prefixIcon: Align(
+                            //       widthFactor: 1.0,
+                            //       child: Icon(
+                            //         const IconData(0xe3ae,
+                            //             fontFamily: 'MaterialIcons'),
+                            //         color: MyPalette.white,
+                            //         size: 32,
+                            //       ),
+                            //     ),
+                            //     hintStyle: TextStyle(color: Colors.white60),
+                            //     enabledBorder: UnderlineInputBorder(
+                            //       borderSide:
+                            //           BorderSide(color: Colors.white, width: 4),
+                            //     ),
+                            //     focusedBorder: UnderlineInputBorder(
+                            //       borderSide: new BorderSide(
+                            //           color: MyPalette.darkTurqoise, width: 4),
+                            //     ),
+                            //     labelText: 'Please enter your password',
+                            //     labelStyle: TextStyle(
+                            //         fontSize: 15, color: Colors.white54),
+                            //   ),
+                            // ),
                           ),
                         ],
                       ),
@@ -765,37 +710,47 @@ void login(BuildContext context) async {
   }, context);
 }
 
-class ExternalAuthBtn extends StatelessWidget {
-  final Image img;
-  final String toolTipText;
-  final void Function()? onPressed;
+class LoginEmailForm extends StatelessWidget {
+  final TextEditingController controller;
+  final FormFieldValidator<String> validator;
+  final IconData icon;
+  final String label;
   final BuildContext context;
-  final String heroTag;
-  const ExternalAuthBtn(
-      {required this.context,
-      required this.heroTag,
-      required this.img,
-      required this.onPressed,
-      required this.toolTipText,
+
+  const LoginEmailForm(
+      {required this.controller,
+      required this.validator,
+      required this.context,
+      required this.icon,
+      required this.label,
       super.key});
 
+  //he argument type 'String' can't be assigned to the parameter type 'String? Function(String?)?'.
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-    return Container(
-      decoration: BoxDecoration(
-          // shape: BoxShape.circle,
-          //  border: Border.all(width: width * 0.002, color: Colors.black),
-          ),
-      child: FloatingActionButton(
-        hoverColor: Color.fromARGB(255, 75, 79, 95),
-        hoverElevation: height * 0.04,
-        elevation: 0,
-        heroTag: heroTag,
-        tooltip: toolTipText,
-        backgroundColor: MyPalette.white,
-        onPressed: onPressed,
-        child: Container(height: 42, child: img),
+    return TextFormField(
+      controller: controller,
+      validator: validator,
+      textAlign: TextAlign.left,
+      cursorColor: Colors.white,
+      style: TextStyle(
+        fontFamily: 'Maven Pro',
+        fontWeight: FontWeight.w100,
+        color: Colors.white,
+        fontSize: 20,
+      ),
+      decoration: InputDecoration(
+        prefixIcon: Icon(icon, color: Colors.white, size: 34),
+        hintStyle: TextStyle(color: Colors.white60),
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.white, width: 3),
+        ),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: new BorderSide(color: MyPalette.darkTurqoise, width: 3),
+        ),
+        labelText: label,
+        labelStyle: TextStyle(fontSize: 15, color: Colors.white54),
       ),
     );
   }

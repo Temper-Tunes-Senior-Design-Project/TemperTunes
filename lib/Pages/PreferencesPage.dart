@@ -4,8 +4,6 @@ import 'package:mood_swing/Pages/ChangePasswordPage.dart';
 import 'package:mood_swing/Utilities/APIRouter.dart';
 import 'package:mood_swing/Pages/UserPage.dart';
 import 'package:mood_swing/Utilities/SpotifyRouter.dart';
-import 'package:mood_swing/Widgets/PreferenceOption.dart';
-import 'ChangePasswordPage.dart';
 import '../Widgets/widgets.dart';
 
 class Body extends StatelessWidget {

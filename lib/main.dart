@@ -10,7 +10,7 @@ import 'package:mood_swing/Utilities/AuthRouter.dart';
 import 'Widgets/MockNavigator.dart';
 import 'firebase_options.dart';
 
-import 'package:mood_swing/Pages/PreferencesPage.dart';
+import 'package:mood_swing/Pages/LoginPage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -69,7 +69,7 @@ class App extends StatelessWidget {
             }
 
             //return LandingPage();
-            return PreferencesPage();
+            return LoginPage();
           }),
     );
   }
