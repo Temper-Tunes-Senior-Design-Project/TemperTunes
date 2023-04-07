@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-//import 'package:form_field_validator/form_field_validator.dart';
 import '../Utilities/AuthRouter.dart';
 import '../Widgets/widgets.dart';
 import 'OTPEmailPage.dart';
@@ -101,17 +100,18 @@ class _LargeScreenState extends State<LargeScreen> {
                         alignment: Alignment.topCenter,
                         padding: EdgeInsets.only(top: height * 0.02),
                         child: Image.asset("assets/music_swing_logo_small.png",
-                            scale: 2.5),
+                            scale: 2.4),
                       ),
 
                       ///User input area
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Container(
-                            padding: EdgeInsets.only(
-                                left: 0.02 * width, right: 0.02 * width),
-                            child: LoginEmailForm(
+                      Container(
+                        padding: EdgeInsets.only(
+                            left: 0.02 * width, right: 0.02 * width),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            ///login
+                            LoginEmailForm(
                               context: context,
                               controller: _emailController,
                               validator: validator.RequiredValidator(
@@ -119,111 +119,29 @@ class _LargeScreenState extends State<LargeScreen> {
                               icon: Icons.email,
                               label: 'Please enter your email',
                             ),
-                          ),
-                        ],
-                      ),
 
-                      ///spacer
-                      SizedBox(height: 0.03 * height),
+                            ///spacer
+                            SizedBox(height: 0.04 * height),
 
-                      ///password icon
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          ///TextField
-                          Container(
-                            padding: EdgeInsets.only(
-                              left: 0.02 * width,
-                              right: 0.02 * width,
+                            ///password
+                            LoginPasswordForm(
+                              context: context,
+                              validator: validator.RequiredValidator(
+                                  errorText: AutofillHints.password),
+                              controller: _passwordController,
+                              obscuringChar: "*",
+                              icon: Icons.key,
+                              label: "Please enter your password",
                             ),
-                            //textformfield
-
-                            // child: TextFormField(
-                            //   controller: _passwordController,
-                            //   validator: RequiredValidator(
-                            //       errorText: AutofillHints.password),
-                            //   textAlign: TextAlign.left,
-                            //   obscureText: !_isVisible,
-                            //   obscuringCharacter: "*",
-                            //   cursorColor: Colors.white,
-                            //   style: TextStyle(
-                            //     fontFamily: 'Maven Pro',
-                            //     fontWeight: FontWeight.w100,
-                            //     color: Colors.white,
-                            //     fontSize: 20,
-                            //   ),
-                            //   decoration: InputDecoration(
-                            //     ///Eye icon (see password)
-                            //     suffixIcon: Align(
-                            //       widthFactor: 0,
-                            //       child: IconButton(
-                            //         onPressed: () {
-                            //           setState(() {
-                            //             _isVisible = !_isVisible;
-                            //           });
-                            //         },
-                            //         icon: _isVisible
-                            //             ? Icon(
-                            //                 Icons.visibility,
-                            //                 color: MyPalette.darkTurqoise,
-                            //               )
-                            //             : Icon(
-                            //                 Icons.visibility_off,
-                            //                 color: Colors.grey,
-                            //               ),
-                            //       ),
-                            //     ),
-                            //
-                            //     ///PrefixIcon
-                            //     prefixIcon: Icon(
-                            //       const IconData(0xe3ae,
-                            //           fontFamily: 'MaterialIcons'),
-                            //       color: MyPalette.white,
-                            //       size: 34,
-                            //     ),
-                            //     hintStyle: TextStyle(color: Colors.white60),
-                            //     enabledBorder: UnderlineInputBorder(
-                            //       borderSide:
-                            //           BorderSide(color: Colors.white, width: 3),
-                            //     ),
-                            //     focusedBorder: UnderlineInputBorder(
-                            //       borderSide: new BorderSide(
-                            //           color: MyPalette.darkTurqoise, width: 3),
-                            //     ),
-                            //     labelText: 'Please enter your password',
-                            //     labelStyle: TextStyle(
-                            //         fontSize: 15, color: Colors.white54),
-                            //   ),
-                            // ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
 
                       ///spacer
                       SizedBox(height: 0.02 * height),
 
                       ///Forgot Password
-                      Container(
-                        child: TextButton(
-                            child: Text(
-                              'Forgot your password?',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontFamily: 'Maven Pro',
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15,
-                                color: MyPalette.turqoise,
-                              ),
-                            ),
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => OTPEmailPage(),
-                                ),
-                              );
-                            }),
-                      ),
+                      ForgotPassword(),
 
                       ///spacer
                       SizedBox(height: 0.04 * height),
@@ -433,21 +351,19 @@ class _SmallScreenState extends State<SmallScreen> {
                       Container(
                         alignment: Alignment.topCenter,
                         padding: EdgeInsets.only(
-                            top: height * 0.01, bottom: height * 0.012),
+                            top: height * 0.01, bottom: height * 0.01),
                         child: Image.asset("assets/music_swing_logo_small.png",
-                            scale: 2.3),
+                            scale: 2.5),
                       ),
 
-                      ///User input area
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Container(
-                            padding: EdgeInsets.only(
-                              left: 0.10 * width,
-                              right: 0.10 * width,
-                            ),
-                            child: LoginEmailForm(
+                      ///input area
+                      Container(
+                        padding: EdgeInsets.only(
+                            left: 0.1 * width, right: 0.1 * width),
+                        child: Column(
+                          children: [
+                            ///email
+                            LoginEmailForm(
                               context: context,
                               controller: _emailController,
                               validator: validator.RequiredValidator(
@@ -455,110 +371,24 @@ class _SmallScreenState extends State<SmallScreen> {
                               icon: Icons.email,
                               label: 'Please enter your email',
                             ),
-                          ),
-                        ],
-                      ),
+                            SizedBox(height: 0.04 * height),
 
-                      ///spacer
-                      // SizedBox(height: height * 0.03),
-                      SizedBox(height: 0.04 * height),
-
-                      /// Password icon
-                      Column(
-                        children: [
-                          //errorText getter
-                          ///Text field
-                          Container(
-                            padding: EdgeInsets.only(
-                                left: 0.1 * width, right: 0.1 * width),
-
-                            // child: TextFormField(
-                            //   controller: _passwordController,
-                            //   validator: RequiredValidator(
-                            //       errorText: AutofillHints.password),
-                            //   obscureText: !_isVisible,
-                            //   obscuringCharacter: "*",
-                            //   textAlign: TextAlign.left,
-                            //   style: TextStyle(
-                            //     fontFamily: 'Maven Pro',
-                            //     fontWeight: FontWeight.w100,
-                            //     color: Colors.white,
-                            //     fontSize: 20,
-                            //   ),
-                            //   decoration: InputDecoration(
-                            //     suffixIcon: Align(
-                            //       widthFactor: 0,
-                            //       child: IconButton(
-                            //         onPressed: () {
-                            //           setState(() {
-                            //             _isVisible = !_isVisible;
-                            //           });
-                            //         },
-                            //         icon: _isVisible
-                            //             ? Icon(
-                            //                 Icons.visibility,
-                            //                 color: MyPalette.darkTurqoise,
-                            //               )
-                            //             : Icon(
-                            //                 Icons.visibility_off,
-                            //                 color: Colors.grey,
-                            //               ),
-                            //       ),
-                            //     ),
-                            //     prefixIcon: Align(
-                            //       widthFactor: 1.0,
-                            //       child: Icon(
-                            //         const IconData(0xe3ae,
-                            //             fontFamily: 'MaterialIcons'),
-                            //         color: MyPalette.white,
-                            //         size: 32,
-                            //       ),
-                            //     ),
-                            //     hintStyle: TextStyle(color: Colors.white60),
-                            //     enabledBorder: UnderlineInputBorder(
-                            //       borderSide:
-                            //           BorderSide(color: Colors.white, width: 4),
-                            //     ),
-                            //     focusedBorder: UnderlineInputBorder(
-                            //       borderSide: new BorderSide(
-                            //           color: MyPalette.darkTurqoise, width: 4),
-                            //     ),
-                            //     labelText: 'Please enter your password',
-                            //     labelStyle: TextStyle(
-                            //         fontSize: 15, color: Colors.white54),
-                            //   ),
-                            // ),
-                          ),
-                        ],
-                      ),
-
-                      SizedBox(height: 0.005 * height),
-
-                      ///Forgot Password
-                      Container(
-                        padding: EdgeInsets.only(top: 0.01 * height),
-                        child: TextButton(
-                            child: Container(
-                              child: Text(
-                                'Forgot your password?',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontFamily: 'Maven Pro',
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                  color: MyPalette.turqoise,
-                                ),
-                              ),
+                            ///password
+                            LoginPasswordForm(
+                              context: context,
+                              validator: validator.RequiredValidator(
+                                  errorText: AutofillHints.password),
+                              controller: _passwordController,
+                              obscuringChar: "*",
+                              icon: Icons.key,
+                              label: "Please enter your password",
                             ),
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => OTPEmailPage(),
-                                ),
-                              );
-                            }),
+                            SizedBox(height: 0.01 * height),
+                          ],
+                        ),
                       ),
+
+                      ForgotPassword(),
 
                       SizedBox(height: 0.04 * height),
 
@@ -636,13 +466,13 @@ class _SmallScreenState extends State<SmallScreen> {
                         padding:
                             EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                         height: height * 0.15,
-                        child: Flexible(
-                          flex: 3,
-                          fit: FlexFit.loose,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              ExternalAuthBtn(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            Flexible(
+                              flex: 1,
+                              fit: FlexFit.loose,
+                              child: ExternalAuthBtn(
                                 context: context,
                                 heroTag: "Google",
                                 toolTipText: "Google",
@@ -656,7 +486,11 @@ class _SmallScreenState extends State<SmallScreen> {
                                   );
                                 },
                               ),
-                              ExternalAuthBtn(
+                            ),
+                            Flexible(
+                              flex: 1,
+                              fit: FlexFit.loose,
+                              child: ExternalAuthBtn(
                                 context: context,
                                 heroTag: "Facebook",
                                 toolTipText: "Facebook",
@@ -670,7 +504,11 @@ class _SmallScreenState extends State<SmallScreen> {
                                   );
                                 },
                               ),
-                              ExternalAuthBtn(
+                            ),
+                            Flexible(
+                              flex: 1,
+                              fit: FlexFit.loose,
+                              child: ExternalAuthBtn(
                                 context: context,
                                 img: Image.asset("assets/appleIcon.png"),
                                 toolTipText: "AppleID",
@@ -684,8 +522,8 @@ class _SmallScreenState extends State<SmallScreen> {
                                   );
                                 },
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
@@ -710,13 +548,95 @@ void login(BuildContext context) async {
   }, context);
 }
 
+class LoginPasswordForm extends StatefulWidget {
+  final TextEditingController controller;
+  final FormFieldValidator<String> validator;
+  final String obscuringChar;
+  final IconData icon;
+  final String label;
+  final BuildContext context;
+
+  const LoginPasswordForm(
+      {required this.controller,
+      required this.validator,
+      required this.context,
+      required this.icon,
+      required this.label,
+      required this.obscuringChar,
+      super.key});
+
+  @override
+  _LoginPasswordFormState createState() => _LoginPasswordFormState();
+}
+
+class _LoginPasswordFormState extends State<LoginPasswordForm> {
+  bool _isVisible = false;
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      controller: widget.controller,
+      validator: widget.validator,
+      textAlign: TextAlign.left,
+      cursorColor: Colors.white,
+      style: TextStyle(
+        fontFamily: 'Maven Pro',
+        fontWeight: FontWeight.w100,
+        color: Colors.white,
+        fontSize: 20,
+      ),
+      decoration: InputDecoration(
+        suffixIcon: Align(
+          widthFactor: 0,
+          child: IconButton(
+            onPressed: () {
+              setState(() {
+                _isVisible = !_isVisible;
+              });
+            },
+            icon: _isVisible
+                ? Icon(Icons.visibility, color: MyPalette.darkTurqoise)
+                : Icon(
+                    Icons.visibility_off,
+                    color: Colors.grey,
+                  ),
+          ),
+        ),
+        prefixIcon: Align(
+          widthFactor: 1.0,
+          child: Icon(widget.icon, color: Colors.white, size: 34),
+        ),
+        hintStyle: TextStyle(color: Colors.white60),
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.white, width: 3),
+        ),
+        focusedBorder: UnderlineInputBorder(
+          borderSide: new BorderSide(color: MyPalette.darkTurqoise, width: 3),
+        ),
+        labelText: widget.label,
+        labelStyle: TextStyle(fontSize: 15, color: Colors.white54),
+      ),
+    );
+  }
+}
+
+class LoginPage extends StatelessWidget {
+  const LoginPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(Object context) {
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: Body(),
+    );
+  }
+}
+
 class LoginEmailForm extends StatelessWidget {
   final TextEditingController controller;
   final FormFieldValidator<String> validator;
   final IconData icon;
   final String label;
   final BuildContext context;
-
   const LoginEmailForm(
       {required this.controller,
       required this.validator,
@@ -725,10 +645,8 @@ class LoginEmailForm extends StatelessWidget {
       required this.label,
       super.key});
 
-  //he argument type 'String' can't be assigned to the parameter type 'String? Function(String?)?'.
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
     return TextFormField(
       controller: controller,
       validator: validator,
@@ -752,18 +670,6 @@ class LoginEmailForm extends StatelessWidget {
         labelText: label,
         labelStyle: TextStyle(fontSize: 15, color: Colors.white54),
       ),
-    );
-  }
-}
-
-class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(Object context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Body(),
     );
   }
 }
