@@ -219,28 +219,28 @@ class _SmallScreenState extends State<SmallScreen> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    return SingleChildScrollView(
-      child: SafeArea(
-        child: Container(
-          height: height,
-          width: width,
-          decoration: BoxDecoration(
-            //set img to bg of body
-            image: DecorationImage(
-                image: AssetImage("assets/ribbon_bottom.png"),
-                fit: BoxFit.cover),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              ///back button
-              BackArrowBtn(),
+    return SafeArea(
+      child: Container(
+        height: height,
+        width: width,
+        decoration: BoxDecoration(
+          //set img to bg of body
+          image: DecorationImage(
+              image: AssetImage("assets/ribbon_bottom.png"), fit: BoxFit.cover),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            ///back button
+            BackArrowBtn(),
 
-              Form(
-                key: _formKey,
-                child: Container(
-                  padding:
-                      EdgeInsets.only(left: 0.12 * width, right: 0.12 * width),
+            Form(
+              key: _formKey,
+              child: Container(
+                padding:
+                    EdgeInsets.only(left: 0.12 * width, right: 0.12 * width),
+                child: Flexible(
+                  flex: 1,
                   child: Column(
                     children: [
                       ///Logo
@@ -362,8 +362,8 @@ class _SmallScreenState extends State<SmallScreen> {
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

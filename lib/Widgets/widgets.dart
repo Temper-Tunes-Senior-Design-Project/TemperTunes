@@ -15,3 +15,4 @@ export 'ForgotPassword.dart';
 export 'BackArrowBtn.dart';
 export 'PasswordForm.dart';
 export 'ChangeForm.dart';
+export 'SpotifyIcons.dart';

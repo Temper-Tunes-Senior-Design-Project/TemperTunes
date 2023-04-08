@@ -10,7 +10,7 @@ import 'package:mood_swing/Utilities/AuthRouter.dart';
 import 'Widgets/MockNavigator.dart';
 import 'firebase_options.dart';
 
-import 'package:mood_swing/Pages/ChangeEmailPage.dart';
+import 'package:mood_swing/Pages/LinkSpotifyPage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -69,7 +69,7 @@ class App extends StatelessWidget {
             }
 
             //return LandingPage();
-            return ChangeEmailPage();
+            return LinkSpotifyPage();
           }),
     );
   }
