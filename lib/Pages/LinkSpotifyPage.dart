@@ -71,16 +71,7 @@ class LargeScreen extends StatelessWidget {
                             right: width * 0.02,
                             top: 0.02 * height,
                           ),
-                          child: Text(
-                            'Connect your Spotify account to create your personalized playlist based on your music taste.',
-                            style: TextStyle(
-                              color: Colors.white70,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: 'Maven Pro',
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
+                          child: Subheading(),
                         ),
                       ),
 
@@ -94,7 +85,7 @@ class LargeScreen extends StatelessWidget {
                         flex: 1,
                         fit: FlexFit.loose,
                         child: BouncingWidget(
-                          child: ConnectSpotify(context: context),
+                          child: ConnectSpotifyBtn(context: context),
                           onPressed: () async {
                             APIRouter().classifySpotifyLibrary();
                           },
@@ -155,22 +146,14 @@ class SmallScreen extends StatelessWidget {
                     Container(
                       padding: EdgeInsets.only(
                           left: 0.01 * width, right: 0.01 * width),
-                      child: Text(
-                        'Connect your Spotify account to create your personalized playlist based on your music taste.',
-                        style: TextStyle(
-                            color: Colors.white70,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                            fontFamily: 'Maven Pro'),
-                        textAlign: TextAlign.center,
-                      ),
+                      child: Subheading(),
                     ),
 
                     SizedBox(height: 0.08 * height),
 
                     ///Buttons
                     BouncingWidget(
-                      child: ConnectSpotify(
+                      child: ConnectSpotifyBtn(
                         context: context,
                       ),
                       onPressed: () async {
@@ -198,16 +181,14 @@ class LinkSpotifyPage extends StatelessWidget {
   }
 }
 
-class ConnectSpotify extends StatelessWidget {
+class ConnectSpotifyBtn extends StatelessWidget {
   final BuildContext context;
-
-  const ConnectSpotify({required this.context, Key? key}) : super(key: key);
+  const ConnectSpotifyBtn({required this.context, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-
     return Container(
       // width: 0.2 * width,
       // height: 0.075 * height,
@@ -234,34 +215,56 @@ class ConnectSpotify extends StatelessWidget {
           ],
         ),
       ),
-      child: Flexible(
-        flex: 1,
-        child: ElevatedButton.icon(
-          icon: Icon(
-            SpotifyIcons.whiteIcon,
-            color: Colors.white,
-            size: 30,
-          ),
-          label: Text(
-            'Connect Now',
-            style: TextStyle(
-              fontFamily: 'Share Tech',
-              color: Colors.white,
-              fontSize: 25,
+      child: Row(
+        children: [
+          Flexible(
+            flex: 1,
+            child: ElevatedButton.icon(
+              icon: Icon(
+                SpotifyIcons.whiteIcon,
+                color: Colors.white,
+                size: 30,
+              ),
+              label: Text(
+                'Connect Now',
+                style: TextStyle(
+                  fontFamily: 'Share Tech',
+                  color: Colors.white,
+                  fontSize: 25,
+                ),
+              ),
+              style: ElevatedButton.styleFrom(
+                elevation: 0,
+                shape: ContinuousRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                backgroundColor: Colors.transparent,
+              ),
+              onPressed: () async {
+                APIRouter().classifySpotifyLibrary();
+              },
             ),
           ),
-          style: ElevatedButton.styleFrom(
-            elevation: 0,
-            shape: ContinuousRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
-            ),
-            backgroundColor: Colors.transparent,
-          ),
-          onPressed: () async {
-            APIRouter().classifySpotifyLibrary();
-          },
-        ),
+        ],
       ),
+    );
+  }
+}
+
+class Subheading extends StatelessWidget {
+  const Subheading({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    return Text(
+      'Connect your Spotify account to create your personalized playlist based on your music taste.',
+      style: TextStyle(
+          color: Colors.white70,
+          fontSize: 20,
+          fontWeight: FontWeight.w700,
+          fontFamily: 'Maven Pro'),
+      textAlign: TextAlign.center,
     );
   }
 }
