@@ -5,6 +5,7 @@ import 'package:mood_swing/Utilities/APIRouter.dart';
 import 'package:mood_swing/Pages/UserPage.dart';
 import 'package:mood_swing/Utilities/SpotifyRouter.dart';
 import '../Widgets/widgets.dart';
+import 'package:mood_swing/Pages/LinkSpotifyPage.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -110,8 +111,13 @@ class LargeScreen extends StatelessWidget {
                       height,
                       width,
                       Icon(Icons.link, color: Colors.white, size: 24),
-                      () async {
-                        APIRouter().classifySpotifyLibrary();
+                      () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => LinkSpotifyPage(),
+                          ),
+                        );
                       },
                       24,
                     ),
@@ -263,8 +269,13 @@ class SmallScreen extends StatelessWidget {
                 height,
                 width,
                 Icon(Icons.link, color: Colors.white, size: 24),
-                () async {
-                  APIRouter().classifySpotifyLibrary();
+                () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => UserPage(),
+                    ),
+                  );
                 },
                 24,
               ),

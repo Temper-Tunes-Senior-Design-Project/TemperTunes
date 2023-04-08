@@ -250,6 +250,7 @@ class SmallScreen extends StatelessWidget {
 
               ///Main Container
               Container(
+                padding: EdgeInsets.only(left: 10, right: 10),
                 child: Column(
                   children: [
                     ///Logo

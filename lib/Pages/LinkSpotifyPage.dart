@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mood_swing/Pages/VerificationPage.dart';
 import '../Widgets/widgets.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
+import 'package:mood_swing/Utilities/APIRouter.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -25,127 +26,85 @@ class LargeScreen extends StatelessWidget {
           height: height,
           decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("assets/loginPageLarge.png"),
-                fit: BoxFit.cover),
+              image: AssetImage("assets/loginPageLarge.png"),
+              fit: BoxFit.cover,
+            ),
           ),
-          child: Padding(
-            padding: EdgeInsets.only(top: 0.01 * height),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                BackArrowBtn(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              BackArrowBtn(),
 
-                ///Main Container
-                Container(
+              ///Main Container
+              Expanded(
+                child: Container(
                   padding: EdgeInsets.only(
-                      top: 0.12 * height,
-                      bottom: 0.13 * height,
-                      left: 15,
-                      right: 15),
-                  height: height * 0.8,
-                  width: width * 0.3,
-                  decoration: BoxDecoration(
-                    color: Colors.grey.withOpacity(0.3),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(20),
-                    ),
+                    top: 0.1 * height,
+                    bottom: 0.13 * height,
+                    left: 15,
+                    right: 15,
                   ),
-                  child: Expanded(
-                    child: Column(
-                      children: [
-                        Container(
-                          alignment: Alignment.topCenter,
-                          padding: EdgeInsets.only(
-                              top: height * 0.03, bottom: 0.04 * height),
-                          child: Image.asset("assets/spotifyLogoWhite.png",
-                              scale: 2.0),
+                  child: Column(
+                    children: [
+                      Container(
+                        alignment: Alignment.topCenter,
+                        padding: EdgeInsets.only(
+                          top: height * 0.03,
+                          bottom: 0.03 * height,
                         ),
-
-                        ///Subheading
-                        Flexible(
-                          flex: 1,
-                          fit: FlexFit.loose,
-                          child: Container(
-                            padding: EdgeInsets.only(
-                                left: width * 0.02,
-                                right: width * 0.02,
-                                top: 0.02 * height),
-                            child: Text(
-                              'Connect your Spotify account to create your personalized playlist based on your music taste.',
-                              style: TextStyle(
-                                  color: MyPalette.darkTurqoise,
-                                  fontSize: 20,
-                                  fontFamily: 'Maven Pro'),
-                              textAlign: TextAlign.center,
-                            ),
+                        child: FittedBox(
+                          fit: BoxFit.contain,
+                          child: Image.asset(
+                            "assets/spotifyLogoWhite.png",
+                            scale: 2.5,
                           ),
                         ),
+                      ),
 
-                        ///Spacer
-                        SizedBox(
-                          height: 0.03 * height,
+                      ///Subheading
+                      Flexible(
+                        flex: 1,
+                        fit: FlexFit.loose,
+                        child: Container(
+                          padding: EdgeInsets.only(
+                            left: width * 0.02,
+                            right: width * 0.02,
+                            top: 0.02 * height,
+                          ),
+                          child: Text(
+                            'Connect your Spotify account to create your personalized playlist based on your music taste.',
+                            style: TextStyle(
+                              color: Colors.white70,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700,
+                              fontFamily: 'Maven Pro',
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
+                      ),
 
-                        ///Buttons
-                        ConnectSpotify(
-                          context: context,
+                      ///Spacer
+                      SizedBox(
+                        height: 0.045 * height,
+                      ),
+
+                      ///Buttons
+                      Flexible(
+                        flex: 1,
+                        fit: FlexFit.loose,
+                        child: BouncingWidget(
+                          child: ConnectSpotify(context: context),
+                          onPressed: () async {
+                            APIRouter().classifySpotifyLibrary();
+                          },
                         ),
-                        //Login button
-                        // Container(
-                        //   padding: EdgeInsets.only(top: 0.016 * height),
-                        //   child: BouncingWidget(
-                        //       child: Container(
-                        //         width: 0.2 * width,
-                        //         height: 0.075 * height,
-                        //         decoration: BoxDecoration(
-                        //           gradient: LinearGradient(
-                        //             begin: Alignment.topRight,
-                        //             end: Alignment.bottomLeft,
-                        //             colors: [
-                        //               MyPalette.slateBlue,
-                        //               MyPalette.brightMagenta,
-                        //               MyPalette.turqoise,
-                        //             ],
-                        //           ),
-                        //           borderRadius: BorderRadius.all(
-                        //             Radius.circular(15),
-                        //           ),
-                        //           boxShadow: [
-                        //             BoxShadow(
-                        //               offset: Offset(0, 1),
-                        //               color: MyPalette.brightMagenta,
-                        //               blurRadius: 16,
-                        //             )
-                        //           ],
-                        //         ),
-                        //         child: Align(
-                        //           alignment: Alignment.center,
-                        //           child: Text(
-                        //             "Send Code",
-                        //             textAlign: TextAlign.center,
-                        //             style: TextStyle(
-                        //               fontSize: 25,
-                        //               fontFamily: 'Share Tech',
-                        //               color: Colors.white,
-                        //             ),
-                        //           ),
-                        //         ),
-                        //       ),
-                        //       onPressed: () {
-                        //         Navigator.push(
-                        //           context,
-                        //           MaterialPageRoute(
-                        //             builder: (context) => VerificationPage(),
-                        //           ),
-                        //         );
-                        //       }),
-                        // ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
@@ -176,6 +135,8 @@ class SmallScreen extends StatelessWidget {
 
               ///Main Container
               Container(
+                padding:
+                    EdgeInsets.only(left: 10, right: 10, top: 0.15 * height),
                 child: Column(
                   children: [
                     ///Logo
@@ -183,25 +144,8 @@ class SmallScreen extends StatelessWidget {
                       alignment: Alignment.topCenter,
                       padding: EdgeInsets.only(
                           top: height * 0.01, bottom: height * 0.012),
-                      child: Image.asset("assets/music_swing_logo_small.png",
-                          scale: 2.0),
-                    ),
-
-                    ///spacer
-                    SizedBox(height: 0.02 * height),
-
-                    ///Title
-                    FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: Text(
-                        'One-tme Password'.toUpperCase(),
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 48,
-                          fontFamily: 'Share Tech',
-                          color: MyPalette.lightPurple,
-                        ),
-                      ),
+                      child: Image.asset("assets/spotifyLogoWhite.png",
+                          scale: 2.3),
                     ),
 
                     ///spacer
@@ -210,122 +154,28 @@ class SmallScreen extends StatelessWidget {
                     ///Subheading
                     Container(
                       padding: EdgeInsets.only(
-                          left: width * 0.1, right: width * 0.1),
+                          left: 0.01 * width, right: 0.01 * width),
                       child: Text(
-                        'We will send you a one-time passcode to your registered email.',
+                        'Connect your Spotify account to create your personalized playlist based on your music taste.',
                         style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15,
+                            color: Colors.white70,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
                             fontFamily: 'Maven Pro'),
                         textAlign: TextAlign.center,
                       ),
                     ),
 
-                    SizedBox(height: 0.02 * height),
-
-                    /// Enter Email
-                    Column(
-                      children: [
-                        ///Text field
-                        Container(
-                          padding: EdgeInsets.only(
-                              left: 0.12 * width, top: 0.02 * height),
-                          child: TextField(
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              fontFamily: 'Maven Pro',
-                              fontWeight: FontWeight.w100,
-                              color: Colors.white,
-                              fontSize: 20,
-                            ),
-                            decoration: const InputDecoration(
-                                prefixIcon: Align(
-                                  widthFactor: 1.0,
-                                  child: Icon(
-                                    IconData(0xe22a,
-                                        fontFamily: 'MaterialIcons'),
-                                    color: MyPalette.white,
-                                    size: 32,
-                                  ),
-                                ),
-                                hintStyle: TextStyle(color: Colors.white60),
-                                border: UnderlineInputBorder(
-                                  borderSide:
-                                      BorderSide(width: 0, color: Colors.white),
-                                ),
-                                labelText: 'Please enter your password',
-                                labelStyle: TextStyle(
-                                    fontSize: 15, color: Colors.white54)),
-                          ),
-                        ),
-
-                        ///Horizontal line
-                        Container(
-                          padding: EdgeInsets.only(
-                              left: 0.1 * width,
-                              right: 0.1 * width,
-                              top: 3,
-                              bottom: height * 0.045),
-                          child: const Divider(
-                            height: 5,
-                            thickness: 2,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
+                    SizedBox(height: 0.08 * height),
 
                     ///Buttons
-                    //Send Button
-                    Container(
-                      //padding: EdgeInsets.only(top: height*0.03),
-                      child: BouncingWidget(
-                          child: Container(
-                            width: 0.5 * width,
-                            height: 0.07 * height,
-                            decoration: BoxDecoration(
-                              //color: MyPalette.slateBlue,
-                              gradient: LinearGradient(
-                                begin: Alignment.topRight,
-                                end: Alignment.bottomLeft,
-                                colors: [
-                                  MyPalette.slateBlue,
-                                  MyPalette.brightMagenta,
-                                  MyPalette.turqoise,
-                                ],
-                              ),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(15),
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  offset: Offset(0, 1),
-                                  color: MyPalette.brightMagenta,
-                                  blurRadius: 16,
-                                ),
-                              ],
-                            ),
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: Text(
-                                "Send Code",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 25,
-                                  fontFamily: 'Share Tech',
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => VerificationPage(),
-                              ),
-                            );
-                          }),
+                    BouncingWidget(
+                      child: ConnectSpotify(
+                        context: context,
+                      ),
+                      onPressed: () async {
+                        APIRouter().classifySpotifyLibrary();
+                      },
                     ),
                   ],
                 ),
@@ -351,7 +201,7 @@ class LinkSpotifyPage extends StatelessWidget {
 class ConnectSpotify extends StatelessWidget {
   final BuildContext context;
 
-  const ConnectSpotify({required this.context, super.key});
+  const ConnectSpotify({required this.context, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -359,9 +209,21 @@ class ConnectSpotify extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
 
     return Container(
-      width: 0.2 * width,
-      height: 0.075 * height,
+      // width: 0.2 * width,
+      // height: 0.075 * height,
+      width: 200,
+      height: 70,
       decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(
+          Radius.circular(15),
+        ),
+        boxShadow: [
+          BoxShadow(
+            offset: Offset(0, 1),
+            color: MyPalette.brightMagenta,
+            blurRadius: 16,
+          )
+        ],
         gradient: LinearGradient(
           begin: Alignment.topRight,
           end: Alignment.bottomLeft,
@@ -375,25 +237,28 @@ class ConnectSpotify extends StatelessWidget {
       child: Flexible(
         flex: 1,
         child: ElevatedButton.icon(
-          icon: Icon(SpotifyIcons.whiteIcon),
+          icon: Icon(
+            SpotifyIcons.whiteIcon,
+            color: Colors.white,
+            size: 30,
+          ),
           label: Text(
             'Connect Now',
             style: TextStyle(
               fontFamily: 'Share Tech',
               color: Colors.white,
+              fontSize: 25,
             ),
           ),
           style: ElevatedButton.styleFrom(
             elevation: 0,
+            shape: ContinuousRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
             backgroundColor: Colors.transparent,
           ),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => VerificationPage(),
-              ),
-            );
+          onPressed: () async {
+            APIRouter().classifySpotifyLibrary();
           },
         ),
       ),
