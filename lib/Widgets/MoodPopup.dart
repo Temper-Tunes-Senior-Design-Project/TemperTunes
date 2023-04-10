@@ -51,38 +51,61 @@ class MoodPopup extends StatelessWidget {
             print("Rebuilding");
             if (snapshot.hasData) {
               Widget w = Container();
-
-              ///For adding emotion icons
               switch (snapshot.data!) {
                 case Mood.Angry:
-                  w = Image.asset("assets/mood/angry.png",
-                      height: 0.12 * height);
+                  w = Text("ANGRY");
                   break;
-                case Mood.Disgust:
-                  w = Image.asset("assets/mood/disgust.png",
-                      height: 0.12 * height);
+                case Mood.Calm:
+                  w = Text("CALM");
                   break;
-                case Mood.Fear:
-                  w = Image.asset("assets/mood/fear.png",
-                      height: 0.12 * height);
+                case Mood.Content:
+                  w = Text("Content");
+                  break;
+                case Mood.Depressed:
+                  w = Text("DEPRESSED");
+                  break;
+                case Mood.Energetic:
+                  w = Text("ENERGETIC");
+                  break;
+                case Mood.Excited:
+                  w = Text("EXCITED");
                   break;
                 case Mood.Happy:
-                  w = Image.asset("assets/mood/happy.png",
-                      height: 0.12 * height);
+                  w = Text("HAPPY");
                   break;
                 case Mood.Sad:
-                  w = Image.asset("assets/mood/sad.png", height: 0.12 * height);
+                  w = Text("SAD");
                   break;
-                case Mood.Surprise:
-                  w = Image.asset("assets/mood/surprise.png",
-                      height: 0.12 * height);
-                  break;
-                case Mood.Neutral:
-                  // w = Image.asset("assets/emotions/neutral.png");
-                  w = Image.asset("assets/mood/neutral.png",
-                      height: 0.12 * height);
+                default:
+                  w = Text("ERROR - emotion could not be identified");
                   break;
               }
+
+              ///For adding emotion icons
+              // switch (snapshot.data!) {
+              //   case Mood.Angry:
+              //     w = Image.asset("assets/angry.png", height: 0.12 * height);
+              //     break;
+              //   case Mood.Disgust:
+              //     w = Image.asset("assets/disgust.png", height: 0.12 * height);
+              //     break;
+              //   case Mood.Fear:
+              //     w = Image.asset("assets/fear.png", height: 0.12 * height);
+              //     break;
+              //   case Mood.Happy:
+              //     w = Image.asset("assets/happy.png", height: 0.12 * height);
+              //     break;
+              //   case Mood.Sad:
+              //     w = Image.asset("assets/sad.png", height: 0.12 * height);
+              //     break;
+              //   case Mood.Surprise:
+              //     w = Image.asset("assets/surprise.png", height: 0.12 * height);
+              //     break;
+              //   case Mood.Neutral :
+              //     // w = Image.asset("assets/emotions/neutral.png");
+              //     w = Image.asset("assets/neutral.png", height: 0.12 * height);
+              //     break;
+              // }
               return Stack(
                 children: [
                   Column(
@@ -112,11 +135,12 @@ class MoodPopup extends StatelessWidget {
                 // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    alignment: Alignment.center,
-                    height: 0.05 * height,
-                    width: 0.05 * width,
-                    child: WaveLoader(title: 'Wave'),
-                  ),
+                      alignment: Alignment.center,
+                      height: 0.05 * height,
+                      width: 0.05 * width,
+                      child: Text("Loading...")
+                      // WaveLoader(title: 'Wave'),
+                      ),
                   Container(
                     alignment: Alignment.center,
                     child: Text(
