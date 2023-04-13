@@ -53,36 +53,30 @@ class MoodPopup extends StatelessWidget {
               Widget w = Container();
               switch (snapshot.data!) {
                 case Mood.Angry:
-                  w = Image.asset("assets/presets/angry.png",
-                      height: 0.12 * height);
+                  w = Image.asset("assets/angry.png", height: 0.12 * height);
                   break;
                 case Mood.Calm:
-                  w = Image.asset("assets/presets/calm.png",
-                      height: 0.12 * height);
+                  w = Image.asset("assets/calm.png", height: 0.12 * height);
                   break;
                 case Mood.Content:
-                  w = Image.asset("assets/presets/content.png",
-                      height: 0.12 * height);
+                  w = Image.asset("assets/content.png", height: 0.12 * height);
                   break;
                 case Mood.Depressed:
-                  w = Image.asset("assets/presets/depressed.png",
+                  w = Image.asset("assets/depressed.png",
                       height: 0.12 * height);
                   break;
                 case Mood.Energetic:
-                  w = Image.asset("assets/presets/energetic.png",
+                  w = Image.asset("assets/energetic.png",
                       height: 0.12 * height);
                   break;
                 case Mood.Excited:
-                  w = Image.asset("assets/presets/excited.png",
-                      height: 0.12 * height);
+                  w = Image.asset("assets/excited.png", height: 0.12 * height);
                   break;
                 case Mood.Happy:
-                  w = Image.asset("assets/presets/happy.png",
-                      height: 0.12 * height);
+                  w = Image.asset("assets/happy.png", height: 0.12 * height);
                   break;
                 case Mood.Sad:
-                  w = Image.asset("assets/presets/sad.png",
-                      height: 0.12 * height);
+                  w = Image.asset("assets/sad.png", height: 0.12 * height);
                   break;
                 default:
                   w = Text("ERROR - emotion could not be identified");
