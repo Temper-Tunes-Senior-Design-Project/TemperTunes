@@ -11,6 +11,7 @@ import 'Widgets/MockNavigator.dart';
 import 'firebase_options.dart';
 
 import 'package:mood_swing/Pages/TestingPage.dart';
+import 'package:mood_swing/Pages/CameraPage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -69,7 +70,7 @@ class App extends StatelessWidget {
             }
 
             //return LandingPage();
-            return TestingPage();
+            return CameraPage();
           }),
     );
   }

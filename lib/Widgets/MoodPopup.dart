@@ -53,28 +53,36 @@ class MoodPopup extends StatelessWidget {
               Widget w = Container();
               switch (snapshot.data!) {
                 case Mood.Angry:
-                  w = Text("ANGRY");
+                  w = Image.asset("assets/presets/angry.png",
+                      height: 0.12 * height);
                   break;
                 case Mood.Calm:
-                  w = Text("CALM");
+                  w = Image.asset("assets/presets/calm.png",
+                      height: 0.12 * height);
                   break;
                 case Mood.Content:
-                  w = Text("Content");
+                  w = Image.asset("assets/presets/content.png",
+                      height: 0.12 * height);
                   break;
                 case Mood.Depressed:
-                  w = Text("DEPRESSED");
+                  w = Image.asset("assets/presets/depressed.png",
+                      height: 0.12 * height);
                   break;
                 case Mood.Energetic:
-                  w = Text("ENERGETIC");
+                  w = Image.asset("assets/presets/energetic.png",
+                      height: 0.12 * height);
                   break;
                 case Mood.Excited:
-                  w = Text("EXCITED");
+                  w = Image.asset("assets/presets/excited.png",
+                      height: 0.12 * height);
                   break;
                 case Mood.Happy:
-                  w = Text("HAPPY");
+                  w = Image.asset("assets/presets/happy.png",
+                      height: 0.12 * height);
                   break;
                 case Mood.Sad:
-                  w = Text("SAD");
+                  w = Image.asset("assets/presets/sad.png",
+                      height: 0.12 * height);
                   break;
                 default:
                   w = Text("ERROR - emotion could not be identified");
@@ -135,12 +143,11 @@ class MoodPopup extends StatelessWidget {
                 // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                      alignment: Alignment.center,
-                      height: 0.05 * height,
-                      width: 0.05 * width,
-                      child: Text("Loading...")
-                      // WaveLoader(title: 'Wave'),
-                      ),
+                    alignment: Alignment.center,
+                    height: 0.05 * height,
+                    width: 0.05 * width,
+                    child: WaveLoader(title: 'Wave'),
+                  ),
                   Container(
                     alignment: Alignment.center,
                     child: Text(
