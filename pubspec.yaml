@@ -60,6 +60,9 @@ flutter_icons:
 flutter:
   uses-material-design: true
   fonts:
+    - family: GenerationIcons
+      fonts:
+        - asset: fonts/GenerationIcons.ttf
     - family: SpotifyIcons
       fonts:
         - asset: fonts/SpotifyIcons.ttf

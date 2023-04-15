@@ -1,8 +1,7 @@
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:mood_swing/Pages/CameraPage.dart';
 import '../Widgets/widgets.dart';
 import 'package:flutter/foundation.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -18,30 +17,78 @@ class LargeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    // return SingleChildScrollView(
-    //     child: Container(
-    //   width: width,
-    //   height: height,
-    //   decoration: BoxDecoration(
-    //     image: DecorationImage(
-    //         image: (defaultTargetPlatform == TargetPlatform.iOS ||
-    //                 defaultTargetPlatform == TargetPlatform.android)
-    //             ? AssetImage("assets/userPageSmall.png")
-    //             : AssetImage("assets/userPageLarge.png"),
-    //         fit: BoxFit.cover),
-    //   ),
-    //   child: Center(
-    //     child: ElevatedButton(
-    //         //Goto: Camera Page
-    //         onPressed: () async {
-    //           await availableCameras().then((value) => Navigator.push(context,
-    //               MaterialPageRoute(builder: (context) => CameraPage())));
-    //         },
-    //         child: Text("TEST WIDGET")),
-    //   ),
-    // ));
+
     return SafeArea(
-      child: Text('print'),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            child: OptionButton(
+              context: context,
+              text: 'Use Camera Only',
+              icon: Icons.photo_camera,
+              onPressed: () {},
+            ),
+          ),
+          SizedBox(width: 10),
+          OptionButton(
+            context: context,
+            text: 'Use Sensor Only',
+            icon: Icons.photo_camera,
+            onPressed: () {},
+          ),
+          SizedBox(width: 10),
+          OptionButton(
+            context: context,
+            text: 'Use Sensor Only',
+            icon: Icons.photo_camera,
+            onPressed: () {},
+          ),
+          SizedBox(width: 10),
+          OptionButton(
+            context: context,
+            text: 'Use Sensor Only',
+            icon: Icons.photo_camera,
+            onPressed: () {},
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class OptionButton extends StatelessWidget {
+  final String text;
+  final void Function()? onPressed;
+  final BuildContext context;
+  final IconData icon;
+  const OptionButton(
+      {required this.context,
+      required this.text,
+      required this.icon,
+      required this.onPressed,
+      super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    return Padding(
+      padding: const EdgeInsets.only(
+        top: 100,
+      ),
+      child: Stack(
+        children: [
+          Container(
+            height: 0.4 * height,
+            width: 0.20 * width,
+            decoration: BoxDecoration(
+              color: Colors.purple,
+            ),
+          ),
+          Icon(icon, size: height * 0.05, color: Colors.grey),
+        ],
+      ),
     );
   }
 }

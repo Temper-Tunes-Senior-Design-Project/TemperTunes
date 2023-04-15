@@ -16,3 +16,4 @@ export 'BackArrowBtn.dart';
 export 'PasswordForm.dart';
 export 'ChangeForm.dart';
 export 'SpotifyIcons.dart';
+export 'GenerationIcons.dart';

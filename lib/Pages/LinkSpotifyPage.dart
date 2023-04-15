@@ -260,10 +260,11 @@ class Subheading extends StatelessWidget {
     return Text(
       'Connect your Spotify account to create your personalized playlist based on your music taste.',
       style: TextStyle(
-          color: Colors.white70,
-          fontSize: 20,
-          fontWeight: FontWeight.w700,
-          fontFamily: 'Maven Pro'),
+        color: Colors.white70,
+        fontSize: 20,
+        fontWeight: FontWeight.w700,
+        fontFamily: 'Maven Pro',
+      ),
       textAlign: TextAlign.center,
     );
   }
