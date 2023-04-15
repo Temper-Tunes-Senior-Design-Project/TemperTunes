@@ -21,24 +21,28 @@ class WaveAnimationState extends State<WaveAnimation> {
 
     return CustomAnimation<double>(
       tween: Tween(
-          begin: -2 * width,
-          end: -width), //Show only the last and middle element
+          begin: -width,
+          end: width), //Show only the last and middle element
       duration: Duration(milliseconds: duration),
       control: control,
       builder: (context, child, value) {
         return Transform.translate(
           offset: Offset(value, y),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: List.filled(
-              3,
-              Image(
-                image: AssetImage("assets/wave.png"),
-                fit: BoxFit.fill,
-                width: width,
-                height: 0.5 * height,
-                //   height: double.maxFinite,
-                filterQuality: FilterQuality.high,
+          child: OverflowBox(
+            maxWidth: 3*width,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: List.filled(
+                3,
+
+                Image(
+                  image: AssetImage("assets/wave.png"),
+                  fit: BoxFit.fill,
+                  width: width,
+                  height: 0.5 * height,
+                  //   height: double.maxFinite,
+                  filterQuality: FilterQuality.high,
+                ),
               ),
             ),
           ),
