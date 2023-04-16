@@ -461,9 +461,8 @@ class CameraButtonConfirmOrBack extends StatelessWidget {
           left: width * 0.05, right: width * 00.05, bottom: 0.05 * height),
       child: Container(
         decoration: BoxDecoration(
-          shape: BoxShape.rectangle, borderRadius: BorderRadius.circular(20),
-
-          //   border: Border.all(width: width * 0.002, color: Colors.black),
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(20),
         ),
         child: SizedBox(
           height: 0.07 * height,

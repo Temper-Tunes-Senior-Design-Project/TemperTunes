@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../Widgets/widgets.dart';
 import 'package:flutter/foundation.dart';
+import 'package:mood_swing/Pages/CameraPage.dart';
+import 'package:bouncing_widget/bouncing_widget.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -30,67 +32,50 @@ class LargeScreen extends StatelessWidget {
           children: [
             Container(
               padding: EdgeInsets.only(top: 0.1 * height),
-              child: FittedBox(
-                alignment: Alignment.center,
-                child: Text(
-                  'Verification',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 60,
-                    fontFamily: 'Share Tech',
-                    color: MyPalette.lightPurple,
-                  ),
-                ),
-              ),
+              child: Title(),
             ),
 
             Container(
               padding: EdgeInsets.only(top: 0.01 * height),
-              child: FittedBox(
-                alignment: Alignment.center,
-                child: Text(
-                  'Please select how you would like us to get your mood',
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontFamily: 'Maven Pro',
-                    fontWeight: FontWeight.w200,
-                    color: Colors.white60,
-                  ),
-                ),
-              ),
+              child: Subtitle(),
             ),
 
             ///Options
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  child: LargeOptButton(
-                    context: context,
-                    text: 'Use Camera Only',
-                    image: Image.asset('assets/cameraOnly.png'),
-                    onPressed: () {},
-                  ),
+                LargeOptButton(
+                  context: context,
+                  text: 'Use Camera Only',
+                  icon: GenerationIcons.cameraOnly,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CameraPage(),
+                      ),
+                    );
+                  },
                 ),
                 SizedBox(width: 20),
                 LargeOptButton(
                   context: context,
                   text: 'Use Sensor Only',
-                  image: Image.asset('assets/sensorOnly.png'),
+                  icon: GenerationIcons.sensorOnly,
                   onPressed: () {},
                 ),
                 SizedBox(width: 20),
                 LargeOptButton(
                   context: context,
-                  text: 'Use Sensor Only',
-                  image: Image.asset('assets/both.png'),
+                  text: 'Use both',
+                  icon: GenerationIcons.both,
                   onPressed: () {},
                 ),
                 SizedBox(width: 20),
                 LargeOptButton(
                   context: context,
-                  text: 'Use Sensor Only',
-                  image: Image.asset('assets/neither.png'),
+                  text: 'Use Presets',
+                  icon: GenerationIcons.neither,
                   onPressed: () {},
                 ),
               ],
@@ -107,7 +92,6 @@ class SmallScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-
     return SafeArea(
       child: Container(
         width: width,
@@ -120,52 +104,55 @@ class SmallScreen extends StatelessWidget {
           children: [
             ///Title
             Container(
-              padding: EdgeInsets.only(top: 10),
-              child: FittedBox(
-                alignment: Alignment.center,
-                child: Text(
-                  'Verification',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 40,
-                    fontFamily: 'Share Tech',
-                    color: MyPalette.lightPurple,
-                  ),
-                ),
+              padding: EdgeInsets.only(top: 0.1 * height),
+              child: Title(),
+            ),
+
+            Container(
+              padding: EdgeInsets.only(
+                top: 0.01 * height,
+                right: 0.1 * width,
+                left: 0.1 * width,
               ),
+              child: Subtitle(),
             ),
 
             //Options
-            Row(
+            Column(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
                   child: SmallOptButton(
                     context: context,
                     text: 'Use Camera Only',
-                    icon: Icons.photo_camera,
-                    onPressed: () {},
+                    icon: GenerationIcons.cameraOnly,
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CameraPage(),
+                        ),
+                      );
+                    },
                   ),
                 ),
-                SizedBox(width: 20),
                 SmallOptButton(
                   context: context,
                   text: 'Use Sensor Only',
-                  icon: Icons.photo_camera,
+                  icon: GenerationIcons.sensorOnly,
                   onPressed: () {},
                 ),
-                SizedBox(width: 20),
                 SmallOptButton(
                   context: context,
-                  text: 'Use Sensor Only',
-                  icon: Icons.photo_camera,
+                  text: 'Use Both',
+                  icon: GenerationIcons.both,
                   onPressed: () {},
                 ),
-                SizedBox(width: 20),
                 SmallOptButton(
                   context: context,
-                  text: 'Use Sensor Only',
-                  icon: Icons.photo_camera,
+                  text: 'Use Presets',
+                  icon: GenerationIcons.neither,
                   onPressed: () {},
                 ),
               ],
@@ -179,10 +166,90 @@ class SmallScreen extends StatelessWidget {
 
 class SmallOptButton extends StatelessWidget {
   final String text;
-  final void Function()? onPressed;
+  final void Function() onPressed;
   final BuildContext context;
   final IconData icon;
   const SmallOptButton(
+      {required this.context,
+      required this.text,
+      required this.icon,
+      required this.onPressed,
+      super.key});
+  @override
+  Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    return Padding(
+      padding: EdgeInsets.only(top: 0.04 * height),
+      child: BouncingWidget(
+        child: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            ///Rectangle Title holder
+            Container(
+              height: 0.12 * height,
+              width: 0.8 * width,
+              decoration: BoxDecoration(
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.circular(20),
+                color: MyPalette.lightPurple.withOpacity(0.3),
+              ),
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Container(
+                  padding: EdgeInsets.only(left: 0.2 * width),
+                  child: Text(
+                    text,
+                    style: TextStyle(
+                      fontFamily: 'Maven Pro',
+                      fontSize: 20,
+                      color: MyPalette.darkTurqoise,
+                    ),
+                    textAlign: TextAlign.right,
+                  ),
+                ),
+              ),
+            ),
+
+            ///Icon holder
+            Positioned(
+              top: -height * 0.01,
+              child: Container(
+                height: 0.14 * height,
+                width: 0.25 * width,
+                decoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(20),
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      MyPalette.hanPurple,
+                      MyPalette.brightMagenta,
+                      MyPalette.turqoise,
+                    ],
+                  ),
+                ),
+                child: Container(
+                  constraints: BoxConstraints.expand(width: double.infinity),
+                  child: Icon(icon, size: 50, color: Colors.white),
+                ),
+              ),
+            ),
+          ],
+        ),
+        onPressed: onPressed,
+      ),
+    );
+  }
+}
+
+class LargeOptButton extends StatelessWidget {
+  final String text;
+  final void Function() onPressed;
+  final BuildContext context;
+  final IconData icon;
+  const LargeOptButton(
       {required this.context,
       required this.text,
       required this.icon,
@@ -194,98 +261,104 @@ class SmallOptButton extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Padding(
-      padding: const EdgeInsets.only(
-        top: 100,
+      padding: EdgeInsets.only(
+        top: height * 0.1,
       ),
-      child: Stack(
-        children: [
-          Container(
-            height: 0.4 * height,
-            width: 0.20 * width,
-            decoration: BoxDecoration(
-              shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.circular(20),
-              color: Colors.purple,
+      child: BouncingWidget(
+        child: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            ///Square
+            Container(
+              height: 0.4 * height,
+              width: 0.20 * width,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.circular(20),
+                color: MyPalette.lightPurple.withOpacity(0.3),
+              ),
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  text,
+                  style: TextStyle(
+                    fontFamily: 'Maven Pro',
+                    fontSize: 20,
+                    color: MyPalette.darkTurqoise,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
             ),
-          ),
-          Container(
-            decoration: BoxDecoration(),
-            child: Icon(icon, size: height * 0.1, color: MyPalette.darkBlue),
-          ),
-        ],
+
+            ///Circle Icon
+            Positioned(
+              top: -height * 0.05,
+              child: Container(
+                alignment: Alignment.center,
+                height: height * 0.2,
+                width: width * 0.2,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      MyPalette.hanPurple,
+                      MyPalette.brightMagenta,
+                      MyPalette.turqoise,
+                    ],
+                  ),
+                ),
+                child: Container(
+                  constraints: BoxConstraints.expand(width: double.infinity),
+                  height: 0.1 * height,
+                  child: Icon(icon, size: height * 0.1, color: Colors.white),
+                ),
+              ),
+            ),
+          ],
+        ),
+        onPressed: onPressed,
       ),
     );
   }
 }
 
-class LargeOptButton extends StatelessWidget {
-  final String text;
-  final void Function()? onPressed;
-  final BuildContext context;
-  final Image image;
-  const LargeOptButton(
-      {required this.context,
-      required this.text,
-      required this.image,
-      required this.onPressed,
-      super.key});
-
+class Title extends StatelessWidget {
+  const Title({super.key});
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: 100,
+    return FittedBox(
+      alignment: Alignment.center,
+      child: Text(
+        'Mood Selection',
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 60,
+          fontFamily: 'Share Tech',
+          color: MyPalette.lightPurple,
+        ),
       ),
-      child: Stack(
-        fit: StackFit.passthrough,
-        clipBehavior: Clip.none,
-        children: [
-          Container(
-            height: 0.4 * height,
-            width: 0.20 * width,
-            decoration: BoxDecoration(
-              shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.circular(20),
-              color: Colors.purple,
-            ),
-          ),
-          Positioned(
-            top: -height * 0.05,
-            child: Container(
-              alignment: Alignment.center,
-              height: height * 0.2,
-              width: width * 0.2,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.greenAccent,
-              ),
-              child: Align(
-                alignment: Alignment.center,
-                child: SizedBox(
-                  width: 50,
-                  height: 50,
-                  child: image,
-                ),
-              ),
-              // child: Align(
-              //   alignment: Alignment.topLeft,
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.center,
-              //     crossAxisAlignment: CrossAxisAlignment.center,
-              //     children: [
-              //       Icon(
-              //         icon,
-              //         size: height * 0.05,
-              //         color: Colors.white,
-              //       ),
-              //     ],
-              //   ),
-              // ),
-            ),
-          ),
-        ],
+    );
+  }
+}
+
+class Subtitle extends StatelessWidget {
+  const Subtitle({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return FittedBox(
+      alignment: Alignment.center,
+      child: Text(
+        'Please select how you would like us to get your mood',
+        style: TextStyle(
+          fontSize: 25,
+          fontFamily: 'Maven Pro',
+          fontWeight: FontWeight.w200,
+          color: Colors.white60,
+        ),
       ),
     );
   }

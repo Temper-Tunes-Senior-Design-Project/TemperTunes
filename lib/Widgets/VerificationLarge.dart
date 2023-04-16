@@ -70,27 +70,7 @@ class _VerificationLargeState extends State<VerificationLarge> {
             padding: EdgeInsets.zero,
             children: <Widget>[
               ///Back button
-              Container(
-                padding:
-                    EdgeInsets.only(top: 0.03 * height, bottom: 0.02 * height),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        shape: CircleBorder(),
-                      ),
-                      child: Icon(
-                        const IconData(0xf05bc, fontFamily: 'MaterialIcons'),
-                        color: Colors.white,
-                        size: 40,
-                      ),
-                      //    onPressed: () => Navigator.pop(context),),
-                      onPressed: () => Navigator.pop(context),
-                    ),
-                  ],
-                ),
-              ),
+              BackArrowBtn(),
 
               ///Main Container
               Column(

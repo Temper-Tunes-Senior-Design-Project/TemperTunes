@@ -11,7 +11,8 @@
 ///      fonts:
 ///       - asset: fonts/GenerationIcons.ttf
 ///
-
+///
+///
 import 'package:flutter/widgets.dart';
 
 class GenerationIcons {
@@ -20,12 +21,12 @@ class GenerationIcons {
   static const _kFontFam = 'GenerationIcons';
   static const String? _kFontPkg = null;
 
-  static const IconData cameraonly =
+  static const IconData both =
+      IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData cameraOnly =
       IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData neither =
       IconData(0xe802, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData both =
+  static const IconData sensorOnly =
       IconData(0xe803, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData sensoronly =
-      IconData(0xe804, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }
