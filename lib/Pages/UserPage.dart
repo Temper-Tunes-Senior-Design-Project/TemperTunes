@@ -11,6 +11,175 @@ class Body extends StatelessWidget {
   }
 }
 
+// class LargeScreen extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     double height = MediaQuery.of(context).size.height;
+//     double width = MediaQuery.of(context).size.width;
+//     return SafeArea(
+//       child: Container(
+//         width: width,
+//         height: height,
+//         decoration: BoxDecoration(
+//           image: DecorationImage(
+//               image: AssetImage("assets/userPageLarge.png"), fit: BoxFit.cover),
+//         ),
+//         child: Column(
+//           children: [
+//             BackArrowBtn(),
+//             Padding(
+//               padding: EdgeInsets.only(top: 10),
+//               child: Center(
+//                 child: FittedBox(
+//                   fit: BoxFit.scaleDown,
+//                   child: Container(
+//                     padding: EdgeInsets.only(bottom: height * 0.02),
+//                     child: CircleAvatar(
+//                       backgroundImage: AssetImage("assets/profilepic.png"),
+//                       radius: 90,
+//                     ),
+//                   ),
+//                 ),
+//               ),
+//             ),
+//             Text(
+//               'John Doe',
+//               style: TextStyle(
+//                 fontFamily: 'Share Tech',
+//                 color: Colors.white,
+//                 fontSize: 42,
+//               ),
+//               textAlign: TextAlign.center,
+//             ),
+//
+//             ///Member since
+//             Container(
+//               padding: EdgeInsets.only(bottom: height * 0.02),
+//               child: Text(
+//                 'Member since September 2022',
+//                 style: TextStyle(
+//                   fontFamily: 'Maven Pro',
+//                   fontWeight: FontWeight.w300,
+//                   color: Colors.white54,
+//                   fontSize: 16,
+//                 ),
+//               ),
+//             ),
+//
+//             SizedBox(height: 0.01 * height),
+//
+//             ///Container
+//             Container(
+//               width: 0.7 * width,
+//               height: 0.2 * height,
+//               decoration: BoxDecoration(
+//                 borderRadius: BorderRadius.circular(30),
+//                 color: MyPalette.lightPurple.withOpacity(0.2),
+//               ),
+//               child: Row(
+//                 ///Playlists
+//                 children: [
+//                   Expanded(
+//                     child: Container(
+//                       decoration: BoxDecoration(
+//                         border: Border(
+//                           right: BorderSide(
+//                             color: Colors.white70,
+//                             width: 2.0,
+//                           ),
+//                         ),
+//                       ),
+//                       child: UserStat(
+//                         context: context,
+//                         category: 'Playlists',
+//                         num: '19',
+//                       ),
+//                     ),
+//                   ),
+//                   Expanded(
+//                     child: Container(
+//                       decoration: BoxDecoration(
+//                         border: Border(
+//                           right: BorderSide(
+//                             color: Colors.white70,
+//                             width: 2.0,
+//                           ),
+//                         ),
+//                       ),
+//                       child: UserStat(
+//                         context: context,
+//                         category: 'Songs',
+//                         num: '80',
+//                       ),
+//                     ),
+//                   ),
+//                   Expanded(
+//                     child: Container(
+//                       width: 0.2 * width,
+//                       child: UserStat(
+//                         context: context,
+//                         category: 'Mood Categories',
+//                         num: '4',
+//                       ),
+//                     ),
+//                   ),
+//                 ],
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+class UserStat extends StatelessWidget {
+  final BuildContext context;
+  final String category;
+  final String num;
+  const UserStat(
+      {required this.context,
+      required this.category,
+      required this.num,
+      super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+      FittedBox(
+        fit: BoxFit.scaleDown,
+        child: Text(
+          num,
+          style: TextStyle(
+            fontFamily: 'Maven Pro',
+            fontWeight: FontWeight.w100,
+            fontSize: 60,
+            color: Colors.white60,
+          ),
+        ),
+      ),
+
+      SizedBox(height: 10),
+
+      ///name
+      FittedBox(
+        fit: BoxFit.scaleDown,
+        child: Text(
+          category,
+          style: TextStyle(
+            fontFamily: 'Maven Pro',
+            fontWeight: FontWeight.w400,
+            fontSize: 20,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    ]);
+  }
+}
+
 class profileBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -230,34 +399,6 @@ class LargeScreen extends StatelessWidget {
           ),
           child: Column(
             children: [
-              Container(
-                ///back button
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      padding: EdgeInsets.only(
-                          top: 0.03 * height, bottom: 0.02 * height),
-                      child: Row(
-                        children: [
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              shape: CircleBorder(),
-                            ),
-                            child: Icon(
-                              const IconData(0xf05bc,
-                                  fontFamily: 'MaterialIcons'),
-                              color: Colors.white,
-                              size: 40,
-                            ),
-                            onPressed: () => Navigator.pop(context),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
               Padding(
                 padding: EdgeInsets.only(left: 50, right: width * 0.02),
                 child: Row(

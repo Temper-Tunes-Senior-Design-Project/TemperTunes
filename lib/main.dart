@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:mood_swing/Pages/CameraPage.dart';
 import 'package:mood_swing/Pages/LandingPage.dart';
 import 'package:mood_swing/Pages/HomePage.dart';
 import 'dart:ui';
@@ -12,7 +11,7 @@ import 'Widgets/MockNavigator.dart';
 import 'firebase_options.dart';
 
 import 'package:mood_swing/Pages/LinkSpotifyPage.dart';
-import 'package:mood_swing/Pages/GenerationOptions.dart';
+import 'package:mood_swing/Pages/UserPage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -71,7 +70,7 @@ class App extends StatelessWidget {
             }
 
             //return LandingPage();
-            return GenerationOptions();
+            return UserPage();
           }),
     );
   }
