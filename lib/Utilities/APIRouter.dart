@@ -32,8 +32,10 @@ class APIRouter {
         .post(Uri.parse(url), headers: headers, body: json.encode(jsonBody))
         .timeout(Duration(minutes: 1));
     if (response.statusCode == 200) {
-      Map<String, List<String>> resBody = jsonDecode(response.body);
-      return resBody["songs"]!;
+      var resBody = jsonDecode(response.body);
+      List<String> final_list = [];
+      resBody["songs"]!.forEach((element) => final_list.add(element));
+      return final_list;
     } else {
       return [];
     }
