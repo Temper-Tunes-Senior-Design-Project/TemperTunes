@@ -11,127 +11,127 @@ class Body extends StatelessWidget {
   }
 }
 
-// class LargeScreen extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     double height = MediaQuery.of(context).size.height;
-//     double width = MediaQuery.of(context).size.width;
-//     return SafeArea(
-//       child: Container(
-//         width: width,
-//         height: height,
-//         decoration: BoxDecoration(
-//           image: DecorationImage(
-//               image: AssetImage("assets/userPageLarge.png"), fit: BoxFit.cover),
-//         ),
-//         child: Column(
-//           children: [
-//             BackArrowBtn(),
-//             Padding(
-//               padding: EdgeInsets.only(top: 10),
-//               child: Center(
-//                 child: FittedBox(
-//                   fit: BoxFit.scaleDown,
-//                   child: Container(
-//                     padding: EdgeInsets.only(bottom: height * 0.02),
-//                     child: CircleAvatar(
-//                       backgroundImage: AssetImage("assets/profilepic.png"),
-//                       radius: 90,
-//                     ),
-//                   ),
-//                 ),
-//               ),
-//             ),
-//             Text(
-//               'John Doe',
-//               style: TextStyle(
-//                 fontFamily: 'Share Tech',
-//                 color: Colors.white,
-//                 fontSize: 42,
-//               ),
-//               textAlign: TextAlign.center,
-//             ),
-//
-//             ///Member since
-//             Container(
-//               padding: EdgeInsets.only(bottom: height * 0.02),
-//               child: Text(
-//                 'Member since September 2022',
-//                 style: TextStyle(
-//                   fontFamily: 'Maven Pro',
-//                   fontWeight: FontWeight.w300,
-//                   color: Colors.white54,
-//                   fontSize: 16,
-//                 ),
-//               ),
-//             ),
-//
-//             SizedBox(height: 0.01 * height),
-//
-//             ///Container
-//             Container(
-//               width: 0.7 * width,
-//               height: 0.2 * height,
-//               decoration: BoxDecoration(
-//                 borderRadius: BorderRadius.circular(30),
-//                 color: MyPalette.lightPurple.withOpacity(0.2),
-//               ),
-//               child: Row(
-//                 ///Playlists
-//                 children: [
-//                   Expanded(
-//                     child: Container(
-//                       decoration: BoxDecoration(
-//                         border: Border(
-//                           right: BorderSide(
-//                             color: Colors.white70,
-//                             width: 2.0,
-//                           ),
-//                         ),
-//                       ),
-//                       child: UserStat(
-//                         context: context,
-//                         category: 'Playlists',
-//                         num: '19',
-//                       ),
-//                     ),
-//                   ),
-//                   Expanded(
-//                     child: Container(
-//                       decoration: BoxDecoration(
-//                         border: Border(
-//                           right: BorderSide(
-//                             color: Colors.white70,
-//                             width: 2.0,
-//                           ),
-//                         ),
-//                       ),
-//                       child: UserStat(
-//                         context: context,
-//                         category: 'Songs',
-//                         num: '80',
-//                       ),
-//                     ),
-//                   ),
-//                   Expanded(
-//                     child: Container(
-//                       width: 0.2 * width,
-//                       child: UserStat(
-//                         context: context,
-//                         category: 'Mood Categories',
-//                         num: '4',
-//                       ),
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
+class LargeScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    return SafeArea(
+      child: Container(
+        width: width,
+        height: height,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("assets/userPageSmall.png"), fit: BoxFit.cover),
+        ),
+        child: Column(
+          children: [
+            BackArrowBtn(),
+            Padding(
+              padding: EdgeInsets.only(top: 10),
+              child: Center(
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Container(
+                    padding: EdgeInsets.only(bottom: height * 0.02),
+                    child: CircleAvatar(
+                      backgroundImage: AssetImage("assets/profilepic.png"),
+                      radius: 90,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Text(
+              'John Doe',
+              style: TextStyle(
+                fontFamily: 'Share Tech',
+                color: Colors.white,
+                fontSize: 42,
+              ),
+              textAlign: TextAlign.center,
+            ),
+
+            ///Member since
+            Container(
+              padding: EdgeInsets.only(bottom: height * 0.02),
+              child: Text(
+                'Member since September 2022',
+                style: TextStyle(
+                  fontFamily: 'Maven Pro',
+                  fontWeight: FontWeight.w300,
+                  color: Colors.white54,
+                  fontSize: 16,
+                ),
+              ),
+            ),
+
+            SizedBox(height: 0.01 * height),
+
+            ///Container
+            Container(
+              width: 0.7 * width,
+              height: 0.2 * height,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                color: MyPalette.lightPurple.withOpacity(0.2),
+              ),
+              child: Row(
+                ///Playlists
+                children: [
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border(
+                          right: BorderSide(
+                            color: Colors.white70,
+                            width: 2.0,
+                          ),
+                        ),
+                      ),
+                      child: UserStat(
+                        context: context,
+                        category: 'Playlists',
+                        num: '19',
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border(
+                          right: BorderSide(
+                            color: Colors.white70,
+                            width: 2.0,
+                          ),
+                        ),
+                      ),
+                      child: UserStat(
+                        context: context,
+                        category: 'Songs',
+                        num: '80',
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      width: 0.2 * width,
+                      child: UserStat(
+                        context: context,
+                        category: 'Mood Categories',
+                        num: '4',
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
 class UserStat extends StatelessWidget {
   final BuildContext context;
@@ -382,344 +382,345 @@ class profileBar extends StatelessWidget {
   }
 }
 
-class LargeScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-    return SingleChildScrollView(
-      child: SafeArea(
-        child: Container(
-          width: width,
-          height: height,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("assets/userPageLarge.png"),
-                fit: BoxFit.cover),
-          ),
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(left: 50, right: width * 0.02),
-                child: Row(
-                  children: <Widget>[
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Container(
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            ///profileBar
-                            Container(
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(30),
-                                child: Container(
-                                  width: width * 0.3,
-                                  height: height * 0.7,
-                                  color: MyPalette.darkTurqoise,
-                                  child: profileBar(),
-                                ),
-                              ),
-                            ),
-                            SizedBox(width: width * 0.04), //separator
-                            Column(
-                              children: [
-                                //Linked Devices
-                                Container(
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(30),
-                                    child: Container(
-                                      padding: EdgeInsets.only(
-                                          top: 0.01 * height, left: 0),
-                                      width: width * 0.55,
-                                      height: height * 0.32,
-                                      color: MyPalette.magenta,
-                                      child: Column(
-                                        children: [
-                                          FittedBox(
-                                            child: Text(
-                                              "Linked Devices",
-                                              style: TextStyle(
-                                                fontFamily: 'Share Tech',
-                                                color: Colors.white,
-                                                fontSize: 30,
-                                              ),
-                                            ),
-                                          ),
-                                          Divider(
-                                            color: Colors.white,
-                                            height: height * 0.01,
-                                          ),
-                                          //list of devices
-                                          Container(
-                                            alignment: Alignment.centerLeft,
-                                            child: Column(
-                                              children: [
-                                                SizedBox(
-                                                  height: height * 0.24,
-                                                  child: Container(
-                                                    height: 0.3 * height,
-                                                    width: 0.15 * width,
-                                                    margin: EdgeInsets.only(
-                                                        left: 0.02 * width,
-                                                        top: 0.01 * width),
-                                                    child: Container(
-                                                      height: 0.5 * height,
-                                                      decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                          Radius.circular(10),
-                                                        ),
-                                                        color: MyPalette.dark
-                                                            .withOpacity(0.2),
-                                                      ),
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          //Watch icon
-                                                          Container(
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                                    top: 0.02 *
-                                                                        height),
-                                                            child: Icon(
-                                                              IconData(0xf4b2,
-                                                                  fontFamily:
-                                                                      'MaterialIcons'),
-                                                              color: MyPalette
-                                                                  .white,
-                                                              size: 70,
-                                                            ),
-                                                          ),
-                                                          //Device Descr.
-                                                          Container(
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                                    top: 0.03 *
-                                                                        height),
-                                                            child: Text(
-                                                              "John Doe's FitBit",
-                                                              style: TextStyle(
-                                                                fontFamily:
-                                                                    'Maven Pro',
-                                                                color: Colors
-                                                                    .white,
-                                                                fontSize:
-                                                                    17, //  fontWeight: FontWeight.bold,
-                                                              ),
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .center,
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(height: height * 0.05),
-                                ////Separator
-                                //Linked Accounts:
-                                Container(
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(30),
-                                    child: Container(
-                                      padding: EdgeInsets.only(
-                                          left: 0, top: 0.01 * height),
-                                      width: width * 0.55,
-                                      height: height * 0.32,
-                                      color: MyPalette.magenta,
-                                      child: Column(
-                                        children: [
-                                          Text(
-                                            "Linked Accounts",
-                                            style: TextStyle(
-                                              fontFamily: 'Share Tech',
-                                              color: Colors.white,
-                                              fontSize: 30,
-                                            ),
-                                          ),
-                                          Divider(
-                                            color: Colors.white,
-                                            height: height * 0.01,
-                                          ),
-                                          Container(
-                                            alignment: Alignment.bottomLeft,
-                                            child: Column(
-                                              children: <Widget>[
-                                                Row(
-                                                  children: [
-                                                    SizedBox(
-                                                      height: height * 0.24,
-                                                      child: Container(
-                                                        height: 0.3 * height,
-                                                        width: 0.15 * width,
-                                                        margin: EdgeInsets.only(
-                                                            left: 0.02 * width,
-                                                            top: 0.01 * width),
-                                                        child: Container(
-                                                          height: 0.5 * height,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .all(
-                                                              Radius.circular(
-                                                                  10),
-                                                            ),
-                                                            color: MyPalette
-                                                                .dark
-                                                                .withOpacity(
-                                                                    0.2),
-                                                          ),
-                                                          child: Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              //Watch icon
-                                                              Container(
-                                                                padding: EdgeInsets.only(
-                                                                    top: 0.01 *
-                                                                        height),
-                                                                child: Image.asset(
-                                                                    "assets/spotifyLogo.png",
-                                                                    height: 0.1 *
-                                                                        height,
-                                                                    width: 0.11 *
-                                                                        width),
-                                                              ),
-                                                              //Device Descr.
-                                                              Container(
-                                                                padding: EdgeInsets.only(
-                                                                    top: 0.02 *
-                                                                        height),
-                                                                child: Text(
-                                                                  "Spotify",
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontFamily:
-                                                                        'Maven Pro',
-                                                                    color: Colors
-                                                                        .white,
-                                                                    fontSize:
-                                                                        17,
-                                                                  ),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .center,
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                        width: 0.005 * width),
-                                                    SizedBox(
-                                                      height: height * 0.24,
-                                                      child: Container(
-                                                        height: 0.3 * height,
-                                                        width: 0.15 * width,
-                                                        margin: EdgeInsets.only(
-                                                          left: 0.02 * width,
-                                                          top: 0.01 * width,
-                                                        ),
-                                                        child: Container(
-                                                          height: 0.5 * height,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .all(
-                                                              Radius.circular(
-                                                                  10),
-                                                            ),
-                                                            color: MyPalette
-                                                                .dark
-                                                                .withOpacity(
-                                                                    0.2),
-                                                          ),
-                                                          child: Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              //Watch icon
-                                                              Container(
-                                                                padding: EdgeInsets.only(
-                                                                    top: 0.01 *
-                                                                        height),
-                                                                child: Image.asset(
-                                                                    "assets/appleMusicLogo.png",
-                                                                    height: 0.12 *
-                                                                        height,
-                                                                    width: width *
-                                                                        0.11),
-                                                              ),
-                                                              //Device Descr.
-                                                              Container(
-                                                                padding: EdgeInsets.only(
-                                                                    top: 0.02 *
-                                                                        height),
-                                                                child: Text(
-                                                                  "Apple Music",
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontFamily:
-                                                                        'Maven Pro',
-                                                                    color: Colors
-                                                                        .white,
-                                                                    fontSize:
-                                                                        17,
-                                                                  ),
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .center,
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
+// class LargeScreen extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     double height = MediaQuery.of(context).size.height;
+//     double width = MediaQuery.of(context).size.width;
+//     return SingleChildScrollView(
+//       child: SafeArea(
+//         child: Container(
+//           width: width,
+//           height: height,
+//           decoration: BoxDecoration(
+//             image: DecorationImage(
+//                 image: AssetImage("assets/userPageSmall.png"),
+//                 fit: BoxFit.cover),
+//           ),
+//           child: Column(
+//             children: [
+//               BackArrowBtn(),
+//               Padding(
+//                 padding: EdgeInsets.only(left: 50, right: width * 0.02),
+//                 child: Row(
+//                   children: <Widget>[
+//                     Align(
+//                       alignment: Alignment.topLeft,
+//                       child: Container(
+//                         child: Row(
+//                           crossAxisAlignment: CrossAxisAlignment.start,
+//                           children: [
+//                             ///profileBar
+//                             Container(
+//                               child: ClipRRect(
+//                                 borderRadius: BorderRadius.circular(30),
+//                                 child: Container(
+//                                   width: width * 0.3,
+//                                   height: height * 0.7,
+//                                   color: MyPalette.darkTurqoise,
+//                                   child: profileBar(),
+//                                 ),
+//                               ),
+//                             ),
+//                             SizedBox(width: width * 0.04), //separator
+//                             Column(
+//                               children: [
+//                                 //Linked Devices
+//                                 Container(
+//                                   child: ClipRRect(
+//                                     borderRadius: BorderRadius.circular(30),
+//                                     child: Container(
+//                                       padding: EdgeInsets.only(
+//                                           top: 0.01 * height, left: 0),
+//                                       width: width * 0.55,
+//                                       height: height * 0.32,
+//                                       color: MyPalette.magenta,
+//                                       child: Column(
+//                                         children: [
+//                                           FittedBox(
+//                                             child: Text(
+//                                               "Linked Devices",
+//                                               style: TextStyle(
+//                                                 fontFamily: 'Share Tech',
+//                                                 color: Colors.white,
+//                                                 fontSize: 30,
+//                                               ),
+//                                             ),
+//                                           ),
+//                                           Divider(
+//                                             color: Colors.white,
+//                                             height: height * 0.01,
+//                                           ),
+//                                           //list of devices
+//                                           Container(
+//                                             alignment: Alignment.centerLeft,
+//                                             child: Column(
+//                                               children: [
+//                                                 SizedBox(
+//                                                   height: height * 0.24,
+//                                                   child: Container(
+//                                                     height: 0.3 * height,
+//                                                     width: 0.15 * width,
+//                                                     margin: EdgeInsets.only(
+//                                                         left: 0.02 * width,
+//                                                         top: 0.01 * width),
+//                                                     child: Container(
+//                                                       height: 0.5 * height,
+//                                                       decoration: BoxDecoration(
+//                                                         borderRadius:
+//                                                             BorderRadius.all(
+//                                                           Radius.circular(10),
+//                                                         ),
+//                                                         color: MyPalette.dark
+//                                                             .withOpacity(0.2),
+//                                                       ),
+//                                                       child: Column(
+//                                                         crossAxisAlignment:
+//                                                             CrossAxisAlignment
+//                                                                 .center,
+//                                                         children: [
+//                                                           //Watch icon
+//                                                           Container(
+//                                                             padding:
+//                                                                 EdgeInsets.only(
+//                                                                     top: 0.02 *
+//                                                                         height),
+//                                                             child: Icon(
+//                                                               IconData(0xf4b2,
+//                                                                   fontFamily:
+//                                                                       'MaterialIcons'),
+//                                                               color: MyPalette
+//                                                                   .white,
+//                                                               size: 70,
+//                                                             ),
+//                                                           ),
+//                                                           //Device Descr.
+//                                                           Container(
+//                                                             padding:
+//                                                                 EdgeInsets.only(
+//                                                                     top: 0.03 *
+//                                                                         height),
+//                                                             child: Text(
+//                                                               "John Doe's FitBit",
+//                                                               style: TextStyle(
+//                                                                 fontFamily:
+//                                                                     'Maven Pro',
+//                                                                 color: Colors
+//                                                                     .white,
+//                                                                 fontSize:
+//                                                                     17, //  fontWeight: FontWeight.bold,
+//                                                               ),
+//                                                               textAlign:
+//                                                                   TextAlign
+//                                                                       .center,
+//                                                             ),
+//                                                           ),
+//                                                         ],
+//                                                       ),
+//                                                     ),
+//                                                   ),
+//                                                 ),
+//                                               ],
+//                                             ),
+//                                           ),
+//                                         ],
+//                                       ),
+//                                     ),
+//                                   ),
+//                                 ),
+//                                 SizedBox(height: height * 0.05),
+//                                 ////Separator
+//                                 //Linked Accounts:
+//                                 Container(
+//                                   child: ClipRRect(
+//                                     borderRadius: BorderRadius.circular(30),
+//                                     child: Container(
+//                                       padding: EdgeInsets.only(
+//                                           left: 0, top: 0.01 * height),
+//                                       width: width * 0.55,
+//                                       height: height * 0.32,
+//                                       color: MyPalette.magenta,
+//                                       child: Column(
+//                                         children: [
+//                                           Text(
+//                                             "Linked Accounts",
+//                                             style: TextStyle(
+//                                               fontFamily: 'Share Tech',
+//                                               color: Colors.white,
+//                                               fontSize: 30,
+//                                             ),
+//                                           ),
+//                                           Divider(
+//                                             color: Colors.white,
+//                                             height: height * 0.01,
+//                                           ),
+//                                           Container(
+//                                             alignment: Alignment.bottomLeft,
+//                                             child: Column(
+//                                               children: <Widget>[
+//                                                 Row(
+//                                                   children: [
+//                                                     SizedBox(
+//                                                       height: height * 0.24,
+//                                                       child: Container(
+//                                                         height: 0.3 * height,
+//                                                         width: 0.15 * width,
+//                                                         margin: EdgeInsets.only(
+//                                                             left: 0.02 * width,
+//                                                             top: 0.01 * width),
+//                                                         child: Container(
+//                                                           height: 0.5 * height,
+//                                                           decoration:
+//                                                               BoxDecoration(
+//                                                             borderRadius:
+//                                                                 BorderRadius
+//                                                                     .all(
+//                                                               Radius.circular(
+//                                                                   10),
+//                                                             ),
+//                                                             color: MyPalette
+//                                                                 .dark
+//                                                                 .withOpacity(
+//                                                                     0.2),
+//                                                           ),
+//                                                           child: Column(
+//                                                             crossAxisAlignment:
+//                                                                 CrossAxisAlignment
+//                                                                     .center,
+//                                                             children: [
+//                                                               //Watch icon
+//                                                               Container(
+//                                                                 padding: EdgeInsets.only(
+//                                                                     top: 0.01 *
+//                                                                         height),
+//                                                                 child: Image.asset(
+//                                                                     "assets/spotifyLogo.png",
+//                                                                     height: 0.1 *
+//                                                                         height,
+//                                                                     width: 0.11 *
+//                                                                         width),
+//                                                               ),
+//                                                               //Device Descr.
+//                                                               Container(
+//                                                                 padding: EdgeInsets.only(
+//                                                                     top: 0.02 *
+//                                                                         height),
+//                                                                 child: Text(
+//                                                                   "Spotify",
+//                                                                   style:
+//                                                                       TextStyle(
+//                                                                     fontFamily:
+//                                                                         'Maven Pro',
+//                                                                     color: Colors
+//                                                                         .white,
+//                                                                     fontSize:
+//                                                                         17,
+//                                                                   ),
+//                                                                   textAlign:
+//                                                                       TextAlign
+//                                                                           .center,
+//                                                                 ),
+//                                                               ),
+//                                                             ],
+//                                                           ),
+//                                                         ),
+//                                                       ),
+//                                                     ),
+//                                                     SizedBox(
+//                                                         width: 0.005 * width),
+//                                                     SizedBox(
+//                                                       height: height * 0.24,
+//                                                       child: Container(
+//                                                         height: 0.3 * height,
+//                                                         width: 0.15 * width,
+//                                                         margin: EdgeInsets.only(
+//                                                           left: 0.02 * width,
+//                                                           top: 0.01 * width,
+//                                                         ),
+//                                                         child: Container(
+//                                                           height: 0.5 * height,
+//                                                           decoration:
+//                                                               BoxDecoration(
+//                                                             borderRadius:
+//                                                                 BorderRadius
+//                                                                     .all(
+//                                                               Radius.circular(
+//                                                                   10),
+//                                                             ),
+//                                                             color: MyPalette
+//                                                                 .dark
+//                                                                 .withOpacity(
+//                                                                     0.2),
+//                                                           ),
+//                                                           child: Column(
+//                                                             crossAxisAlignment:
+//                                                                 CrossAxisAlignment
+//                                                                     .center,
+//                                                             children: [
+//                                                               //Watch icon
+//                                                               Container(
+//                                                                 padding: EdgeInsets.only(
+//                                                                     top: 0.01 *
+//                                                                         height),
+//                                                                 child: Image.asset(
+//                                                                     "assets/appleMusicLogo.png",
+//                                                                     height: 0.12 *
+//                                                                         height,
+//                                                                     width: width *
+//                                                                         0.11),
+//                                                               ),
+//                                                               //Device Descr.
+//                                                               Container(
+//                                                                 padding: EdgeInsets.only(
+//                                                                     top: 0.02 *
+//                                                                         height),
+//                                                                 child: Text(
+//                                                                   "Apple Music",
+//                                                                   style:
+//                                                                       TextStyle(
+//                                                                     fontFamily:
+//                                                                         'Maven Pro',
+//                                                                     color: Colors
+//                                                                         .white,
+//                                                                     fontSize:
+//                                                                         17,
+//                                                                   ),
+//                                                                   textAlign:
+//                                                                       TextAlign
+//                                                                           .center,
+//                                                                 ),
+//                                                               ),
+//                                                             ],
+//                                                           ),
+//                                                         ),
+//                                                       ),
+//                                                     ),
+//                                                   ],
+//                                                 ),
+//                                               ],
+//                                             ),
+//                                           ),
+//                                         ],
+//                                       ),
+//                                     ),
+//                                   ),
+//                                 ),
+//                               ],
+//                             ),
+//                           ],
+//                         ),
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 class SmallScreen extends StatelessWidget {
   @override

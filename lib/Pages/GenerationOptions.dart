@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../Widgets/widgets.dart';
-import 'package:flutter/foundation.dart';
+
 import 'package:mood_swing/Pages/CameraPage.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
 

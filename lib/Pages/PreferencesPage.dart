@@ -203,17 +203,7 @@ class SmallScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             ///back button
-            Align(
-              alignment: Alignment.topLeft,
-              child: IconButton(
-                icon: Icon(
-                  const IconData(0xf05bc, fontFamily: 'MaterialIcons'),
-                  color: Colors.white,
-                  size: 40,
-                ),
-                onPressed: () => Navigator.pop(context),
-              ),
-            ),
+            BackArrowBtn(),
 
             ///logo
             Container(
