@@ -3,6 +3,10 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:spotify_sdk/spotify_sdk.dart';
 
 class SpotifyRouter {
+
+  /**
+   * Gets the authentication token from a user authenticated spotify.
+   */
   Future<String> getToken() async {
     String redirect = (kIsWeb
             ? dotenv.env['SPOTIFY_WEB_REDIRECT_URI']
