@@ -39,6 +39,7 @@ dependencies:
   spotify_sdk: ^2.3.1
   spotify: ^0.11.0
   awesome_dialog: ^3.0.2
+  flutter_reactive_ble: ^5.0.3
 
 dev_dependencies:
   flutter_test:

@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:mood_swing/Pages/BluetoothLoaderPage.dart';
 import 'package:mood_swing/Pages/LandingPage.dart';
 import 'package:mood_swing/Pages/HomePage.dart';
 import 'dart:ui';
@@ -65,7 +66,7 @@ class App extends StatelessWidget {
             if (snapshot.data != null) {
               return HomePage();
             }
-            return LandingPage();
+            return BluetoothLoaderPage();
           }),
     );
   }
