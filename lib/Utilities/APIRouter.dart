@@ -85,4 +85,15 @@ class APIRouter {
       print("Successfully classified user songs");
     }
   }
+
+  /**
+   * Partition a list into x lists of 50
+   */
+  List<List<String>> partition(List<String> values) {
+    List<List<String>> partitions = [];
+    for (int i = 0; i < values.length; i += 50) {
+      partitions.add(values.sublist(i, i + 50));
+    }
+    return partitions;
+  }
 }
