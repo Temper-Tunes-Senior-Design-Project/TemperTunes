@@ -27,7 +27,7 @@ class SpotifyRouter {
   }
 
   /**
-   * Gets the users access token for Spotify api access.
+   * Gets the authentication token from a user authenticated spotify.
    */
   Future<String> getToken() async {
     if (token == "") {

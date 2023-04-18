@@ -7,27 +7,63 @@ import 'package:mood_swing/Utilities/AuthRouter.dart';
 import 'SpotifyRouter.dart';
 
 class APIRouter {
+  /**
+   * Communicate with Firebase Cloud Function to categorize a user's photo/video
+   * to a Mood enum classification.
+   */
   Future<Mood> getUserMood(String firebasePath) async {
+    ///Send a response to the cloud function
     Response response = await http
         .get(Uri.parse(
             "https://moodswing-mood-classifier-ilvif34q5a-ue.a.run.app/get_mood?storage_path=" +
                 firebasePath))
         .timeout(Duration(minutes: 1));
     if (response.statusCode == 200) {
+      //constants
+      int LOW = 0;
+      int MEDIUM = 1;
+      int HIGH = 2;
       Map<String, dynamic> resBody = jsonDecode(response.body);
-      //Aggregate the moods to find the maximum value
-      Mood m = Mood.values
-          .where((element) =>
-              element.name.toLowerCase() ==
-              resBody.entries
-                  .reduce((value, element2) =>
-                      (double.tryParse(value.value) ?? 0.0) >=
-                              (double.tryParse(element2.value) ?? 0.0)
-                          ? value
-                          : element2)
-                  .key)
-          .first;
-      return m;
+      var valence = resBody["valence"]!;
+      var arousal = resBody["arousal"]!;
+      //get size label of valence and arousal
+      int toLabeledSize(double val) => (val >= 0.5)
+          ? HIGH
+          : (val <= -0.5)
+              ? LOW
+              : MEDIUM;
+      var valenceLabel = toLabeledSize(valence);
+      var arousalLabel = toLabeledSize(arousal);
+
+      if (valenceLabel == MEDIUM && arousalLabel == MEDIUM) {
+        //case where both are medium
+        valenceLabel = (valence > 0.25)
+            ? HIGH
+            : (valence < -0.25)
+                ? LOW
+                : MEDIUM;
+        arousalLabel = (arousal > 0.25)
+            ? HIGH
+            : (arousal < -0.25)
+                ? LOW
+                : MEDIUM;
+        //check if they are both still medium
+        if (valenceLabel == MEDIUM && arousalLabel == MEDIUM) {
+          var valenceIsBiggerExtreme = (valence.abs() <= arousal.abs());
+          valenceLabel = (valenceIsBiggerExtreme)
+              ? (valence < 0)
+                  ? LOW
+                  : HIGH
+              : valenceLabel;
+          arousalLabel = (!valenceIsBiggerExtreme)
+              ? (arousal < 0)
+                  ? LOW
+                  : HIGH
+              : arousalLabel;
+        }
+      }
+
+      return valenceArousalToLabel[valenceLabel][arousalLabel];
     }
     return Mood.Neutral;
   }
@@ -35,30 +71,29 @@ class APIRouter {
   /**
    * Classifies the users song library when they have authenticated with the application
    */
-  void classifySpotifyLibrary() async
-  {
+  void classifySpotifyLibrary() async {
     String token = await SpotifyRouter().getToken();
     String uid = AuthRouter().getUserUID();
     Response response = await http
         .get(Uri.parse(
-        "https://user-song-classification-ilvif34q5a-ue.a.run.app/get_classified_mood?spotify_token="+ token+ "uid=" + uid ))
+            "https://user-song-classification-ilvif34q5a-ue.a.run.app/get_classified_mood?spotify_token=" +
+                token +
+                "uid=" +
+                uid))
         .timeout(Duration(minutes: 1));
-    if(response.statusCode == 200)
-      {
-        print("Successfully classified user songs");
-      }
+    if (response.statusCode == 200) {
+      print("Successfully classified user songs");
+    }
   }
 
   /**
    * Partition a list into x lists of 50
    */
-  List<List<String>> partition(List<String> values)
-  {
-      List<List<String>> partitions = [];
-      for(int i = 0; i < values.length; i +=50)
-      {
-        partitions.add(values.sublist(i,i+50));
-      }
-      return partitions;
+  List<List<String>> partition(List<String> values) {
+    List<List<String>> partitions = [];
+    for (int i = 0; i < values.length; i += 50) {
+      partitions.add(values.sublist(i, i + 50));
+    }
+    return partitions;
   }
 }
