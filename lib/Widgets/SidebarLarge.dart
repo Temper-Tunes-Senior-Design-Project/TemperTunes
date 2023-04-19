@@ -4,6 +4,7 @@ import 'package:mood_swing/Pages/PreferencesPage.dart';
 import 'package:mood_swing/Pages/UserPage.dart';
 import 'package:collapsible_sidebar/collapsible_sidebar.dart';
 import 'dart:math' as math show pi;
+import '../Pages/LinkSpotifyPage.dart';
 import '../Widgets/widgets.dart';
 
 ///Large Sidebar
@@ -40,6 +41,20 @@ class _SidebarLargeState extends State<SidebarLarge> {
             context,
             MaterialPageRoute(
               builder: (context) => UserPage(),
+            ),
+          );
+        },
+      ),
+
+      ///Link to spotify
+      CollapsibleItem(
+        text: 'Link To Spotify',
+        icon: SpotifyIcons.whiteIcon,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => LinkSpotifyPage(),
             ),
           );
         },

@@ -3,6 +3,7 @@ import '../Widgets/widgets.dart';
 
 import 'package:mood_swing/Pages/CameraPage.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
+import 'package:mood_swing/Pages/PresetsPage.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -76,7 +77,14 @@ class LargeScreen extends StatelessWidget {
                   context: context,
                   text: 'Use Presets',
                   icon: GenerationIcons.neither,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PresetsPage(),
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
@@ -153,7 +161,14 @@ class SmallScreen extends StatelessWidget {
                   context: context,
                   text: 'Use Presets',
                   icon: GenerationIcons.neither,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PresetsPage(),
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
@@ -364,7 +379,7 @@ class Subtitle extends StatelessWidget {
   }
 }
 
-class GenerationOptions extends StatelessWidget {
+class GenerationOptionsPage extends StatelessWidget {
   static const Key PageKey = Key("Testing Page");
 
   @override

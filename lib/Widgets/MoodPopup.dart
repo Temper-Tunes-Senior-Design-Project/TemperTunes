@@ -79,8 +79,7 @@ class MoodPopup extends StatelessWidget {
                   w = Image.asset("assets/sad.png", height: 0.15 * height);
                   break;
                 default:
-                  w = Image.asset("assets/questionMarkMood",
-                      height: 0.15 * height);
+                  w = Image.asset("assets/neutral.png", height: 0.15 * height);
                   break;
               }
 

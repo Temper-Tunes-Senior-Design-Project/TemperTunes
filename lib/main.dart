@@ -9,9 +9,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mood_swing/Utilities/AuthRouter.dart';
 import 'Widgets/MockNavigator.dart';
 import 'firebase_options.dart';
-
-import 'package:mood_swing/Pages/UserPage.dart';
-import 'package:mood_swing/Pages/PresetsPage.dart';
+import 'package:mood_swing/Pages/SignupPage.dart';
+import 'package:mood_swing/Pages/DevicesPage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -70,7 +69,7 @@ class App extends StatelessWidget {
             }
 
             //return LandingPage();
-            return PresetsPage();
+            return LandingPage();
           }),
     );
   }

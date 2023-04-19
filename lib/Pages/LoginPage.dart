@@ -333,6 +333,7 @@ class _SmallScreenState extends State<SmallScreen> {
                               icon: Icons.key,
                               label: "Please enter your password",
                             ),
+
                             SizedBox(height: 0.02 * height),
                           ],
                         ),
@@ -582,6 +583,7 @@ class _LoginPasswordFormState extends State<LoginPasswordForm> {
       controller: widget.controller,
       validator: widget.validator,
       textAlign: TextAlign.left,
+      obscureText: !_isVisible,
       cursorColor: Colors.white,
       style: TextStyle(
         fontFamily: 'Maven Pro',

@@ -156,16 +156,6 @@ class LargeScreen extends StatelessWidget {
                       24,
                     ),
 
-                    ///Adjust Presets
-                    PreferenceOption(
-                      "Adjust Presets",
-                      height,
-                      width,
-                      Icon(Icons.tune, color: Colors.white, size: 24),
-                      () {},
-                      24,
-                    ),
-
                     ///Logout
                     PreferenceOption(
                       "Logout",
@@ -307,19 +297,6 @@ class SmallScreen extends StatelessWidget {
                     ),
                   );
                 },
-                24,
-              ),
-            ),
-
-            ///Adjust Presets
-            Flexible(
-              flex: 1,
-              child: PreferenceOption(
-                "Adjust Presets",
-                height,
-                width,
-                Icon(Icons.tune, color: Colors.white, size: 24),
-                () {},
                 24,
               ),
             ),
