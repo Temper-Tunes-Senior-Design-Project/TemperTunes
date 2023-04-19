@@ -7,7 +7,12 @@ import 'package:mood_swing/Utilities/AuthRouter.dart';
 import 'SpotifyRouter.dart';
 
 class APIRouter {
+  /**
+   * Communicate with Firebase Cloud Function to categorize a user's photo/video
+   * to a Mood enum classification.
+   */
   Future<Mood> getUserMood(String firebasePath) async {
+    ///Send a response to the cloud function
     Response response = await http
         .get(Uri.parse(
             "https://moodswing-mood-classifier-ilvif34q5a-ue.a.run.app/get_mood?storage_path=" +
@@ -59,19 +64,6 @@ class APIRouter {
       }
 
       return valenceArousalToLabel[valenceLabel][arousalLabel];
-
-      //Aggregate the moods to find the maximum value
-      // Mood m = Mood.values
-      //     .where((element) =>
-      //         element.name.toLowerCase() ==
-      //         resBody.entries
-      //             .reduce((value, element2) =>
-      //                 (double.tryParse(value.value) ?? 0.0) >=
-      //                         (double.tryParse(element2.value) ?? 0.0)
-      //                     ? value
-      //                     : element2)
-      //             .key)
-      //     .first;
     }
     return Mood.Neutral;
   }
@@ -92,5 +84,16 @@ class APIRouter {
     if (response.statusCode == 200) {
       print("Successfully classified user songs");
     }
+  }
+
+  /**
+   * Partition a list into x lists of 50
+   */
+  List<List<String>> partition(List<String> values) {
+    List<List<String>> partitions = [];
+    for (int i = 0; i < values.length; i += 50) {
+      partitions.add(values.sublist(i, i + 50));
+    }
+    return partitions;
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mood_swing/Pages/CameraPage.dart';
+import 'package:mood_swing/Pages/ExistingPlaylistsPage.dart';
 import 'package:mood_swing/Pages/PreferencesPage.dart';
 import 'package:mood_swing/Pages/UserPage.dart';
 import 'package:collapsible_sidebar/collapsible_sidebar.dart';
@@ -74,7 +75,14 @@ class _SidebarLargeState extends State<SidebarLarge> {
       CollapsibleItem(
         text: 'Existing Playlists',
         icon: const IconData(0xe4d3, fontFamily: 'MaterialIcons'),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ExistingPlaylistsPage(),
+            ),
+          );
+        },
       ),
 
       ///User Preferences

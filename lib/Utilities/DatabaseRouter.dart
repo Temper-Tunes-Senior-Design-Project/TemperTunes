@@ -8,11 +8,18 @@ import 'package:mood_swing/Objects/Mood.dart';
 class DatabaseRouter {
   String uid = FirebaseAuth.instance.currentUser?.uid ?? "-1";
 
+  /**
+   * Check if the user has a database entry already
+   */
   Future<bool> userExists() async
   {
     //await FirebaseFirestore.instance.collection("users").doc(uid).
     return false;
   }
+
+  /**
+   * Instantiates a user within the database
+   */
   void createUser(String username) async {
     await FirebaseFirestore.instance.collection("users").doc(uid).set(
       {
@@ -26,6 +33,9 @@ class DatabaseRouter {
 
   }
 
+  /**
+   * Generates a random playlist from the cached songs within the database
+   */
   Future<List<String>> generatePlaylist(List<String> userLikedSongs, Mood mood) async
   {
     List<String> playlist = [];
@@ -40,6 +50,9 @@ class DatabaseRouter {
     return playlist;
   }
 
+  /**
+   * Uploads a file to Firebase Cloud Storage and returns the file path.
+   */
   Future<String?> uploadFile(XFile? file, FileType encodingFormat) async
   {
     if(file != null) {
