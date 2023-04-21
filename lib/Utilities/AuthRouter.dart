@@ -14,42 +14,72 @@ enum AuthProviders {
 }
 
 class AuthRouter {
+  /**
+   * Returns a stream that listens to authentication state changes
+   */
   Stream<User?> authMonitor() {
     return FirebaseAuth.instance.authStateChanges();
   }
 
+  /**
+   * Checks if the current user is signed in and exists
+   */
   bool isLoggedIn() {
     return FirebaseAuth.instance.currentUser != null;
   }
 
+  /**
+   * Returns the users UID
+   */
   String getUserUID() {
     return FirebaseAuth.instance.currentUser?.uid ?? "";
   }
 
+  /**
+   *Generates login credentials using email and password. If an error occurs the
+   *callback function is invoked.
+   */
   void login(String email, String password, Function callback, context) async {
     try {
-     UserCredential cred =  await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
-      credentialSignIn(LoginCredentials(cred, EmailAuthProvider.credential(email: email, password: password)),context);
+      UserCredential cred = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+      credentialSignIn(
+          LoginCredentials(cred,
+              EmailAuthProvider.credential(email: email, password: password)),
+          context);
     } on FirebaseAuthException catch (e) {
       print(e);
       callback.call();
     }
   }
 
-  void credentialSignIn(LoginCredentials credentials, BuildContext context) async {
-    if (credentials.uc.additionalUserInfo?.isNewUser ?? false)
-    {
+  /**
+   * Uses a set of credentials to sign the user. Create a database entry for the
+   * user if they are new. Reroutes user to the home page.
+   */
+  void credentialSignIn(
+      LoginCredentials credentials, BuildContext context) async {
+    if (credentials.uc.additionalUserInfo?.isNewUser ?? false) {
       DatabaseRouter().createUser(credentials.uc.user?.displayName ?? "");
     }
 
     await FirebaseAuth.instance.signInWithCredential(credentials.ac);
-    if(FirebaseAuth.instance.currentUser != null)
-      {
-        Navigator.pushAndRemoveUntil(context,
-            MaterialPageRoute(builder: (ctxt) => HomePage()), (route) => false);
-      }
+    if (FirebaseAuth.instance.currentUser != null) {
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (ctxt) => HomePage(
+              shouldOnboard:
+                  credentials.uc.additionalUserInfo?.isNewUser ?? false,
+            ),
+          ),
+          (route) => false);
+    }
   }
 
+  /**
+   * Generates an authentication credential using an OAuth 2.0 provider
+   */
   Future<AuthCredential?> signInWithProvider(String provider) async {
     try {
       GoogleSignInAccount? account = await GoogleSignIn().signIn();
@@ -65,6 +95,9 @@ class AuthRouter {
     }
   }
 
+  /**
+   * Creates a user using an email and password.
+   */
   Future<LoginCredentials?> registerUser(
       String email, String password, String username, Function callback) async {
     try {
@@ -72,7 +105,8 @@ class AuthRouter {
           .createUserWithEmailAndPassword(email: email, password: password);
       FirebaseAuth.instance.currentUser?.sendEmailVerification();
 
-      return LoginCredentials(credentials, EmailAuthProvider.credential(email: email, password: password));
+      return LoginCredentials(credentials,
+          EmailAuthProvider.credential(email: email, password: password));
     } on FirebaseAuthException catch (e) {
       print(e);
       callback.call();
@@ -80,10 +114,16 @@ class AuthRouter {
     }
   }
 
+  /**
+   * Changes the user's password
+   */
   void changePassword(String password) async {
     await FirebaseAuth.instance.currentUser?.updatePassword(password);
   }
 
+  /**
+   * Changes the user's email.
+   */
   void changeEmail(String email) async {
     await FirebaseAuth.instance.currentUser?.updateEmail(email);
   }

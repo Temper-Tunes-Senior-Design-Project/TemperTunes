@@ -8,6 +8,9 @@ import 'package:mood_swing/Utilities/AuthRouter.dart';
 import 'SpotifyRouter.dart';
 
 class APIRouter {
+  /**
+  * Sorts the user's song list by closest distance to the specified mood centroid
+  */
   Future<List<String>> getClosestSongs(
       Map<String, List<double>> songs, Mood mood, String? user_id) async {
     List<String> closestSongList = [];
@@ -35,7 +38,12 @@ class APIRouter {
     }
   }
 
+  /**
+   * Communicate with Firebase Cloud Function to categorize a user's photo/video
+   * to a Mood enum classification.
+   */
   Future<Mood> getUserMood(String firebasePath) async {
+    ///Send a response to the cloud function
     Response response = await http
         .get(Uri.parse(
             "https://moodswing-mood-classifier-ilvif34q5a-ue.a.run.app/get_mood?storage_path=" +
@@ -106,5 +114,16 @@ class APIRouter {
     if (response.statusCode == 200) {
       print("Successfully classified user songs");
     }
+  }
+
+  /**
+   * Partition a list into x lists of 50
+   */
+  List<List<String>> partition(List<String> values) {
+    List<List<String>> partitions = [];
+    for (int i = 0; i < values.length; i += 50) {
+      partitions.add(values.sublist(i, i + 50));
+    }
+    return partitions;
   }
 }
