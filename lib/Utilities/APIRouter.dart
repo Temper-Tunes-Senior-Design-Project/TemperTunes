@@ -30,9 +30,8 @@ class APIRouter {
         .timeout(Duration(minutes: 1));
     if (response.statusCode == 200) {
       var resBody = jsonDecode(response.body);
-      List<String> final_list = [];
-      resBody["songs"]!.forEach((element) => final_list.add(element));
-      return final_list;
+      resBody["songs"]!.forEach((element) => closestSongList.add(element));
+      return closestSongList;
     } else {
       return [];
     }
