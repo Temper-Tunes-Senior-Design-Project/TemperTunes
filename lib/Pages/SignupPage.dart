@@ -5,6 +5,7 @@ import '../Objects/LoginCredentials.dart';
 import '../Widgets/widgets.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'dart:async';
+import 'package:animate_do/animate_do.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -60,85 +61,90 @@ class _LargeScreenState extends State<LargeScreen> {
             BackArrowBtn(),
 
             ///Main Container
-            Form(
-              key: _formKey,
-              child: Container(
-                height: height * 0.8,
-                width: width * 0.3,
-                padding:
-                    EdgeInsets.only(left: 0.03 * width, right: 0.03 * height),
-                decoration: BoxDecoration(
-                  color: Colors.grey.withOpacity(0.3),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(20),
+            FadeInUpBig(
+              child: Form(
+                key: _formKey,
+                child: Container(
+                  constraints: BoxConstraints(
+                    maxHeight: height * 0.9,
+                    minHeight: height * 0.8,
+                    minWidth: width * 0.3,
+                    maxWidth: width * 0.3,
                   ),
-                ),
-                child: Expanded(
-                  child: Column(
-                    children: [
-                      Flexible(
-                        fit: FlexFit.tight,
-                        child: Column(
-                          children: [
-                            ///App logo
-                            Container(
-                              alignment: Alignment.topCenter,
-                              padding: EdgeInsets.only(top: height * 0.02),
-                              child: Image.asset(
-                                  "assets/music_swing_logo_small.png",
-                                  scale: 2.5),
-                            ),
+                  height: height * 0.85,
+                  width: width * 0.3,
+                  padding:
+                      EdgeInsets.only(left: 0.03 * width, right: 0.03 * height),
+                  decoration: BoxDecoration(
+                    color: Colors.grey.withOpacity(0.3),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(20),
+                    ),
+                  ),
+                  child: Expanded(
+                    child: Column(
+                      children: [
+                        Flexible(
+                          fit: FlexFit.tight,
+                          child: Column(
+                            children: [
+                              ///App logo
+                              Container(
+                                alignment: Alignment.topCenter,
+                                padding: EdgeInsets.only(top: height * 0.02),
+                                child: Image.asset(
+                                    "assets/music_swing_logo_small.png",
+                                    scale: 2.5),
+                              ),
 
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                ///Username
-                                ChangeForm(
-                                  context: context,
-                                  controller: _usernameController,
-                                  validator: RequiredValidator(
-                                      errorText: AutofillHints.username),
-                                  label: 'Username',
-                                ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  ///Username
+                                  ChangeForm(
+                                    context: context,
+                                    controller: _usernameController,
+                                    validator: RequiredValidator(
+                                        errorText: AutofillHints.username),
+                                    label: 'Username',
+                                  ),
 
-                                ///Email
-                                ChangeForm(
-                                  context: context,
-                                  controller: _emailController,
-                                  validator: RequiredValidator(
-                                      errorText: AutofillHints.email),
-                                  label: 'Email',
-                                ),
+                                  ///Email
+                                  ChangeForm(
+                                    context: context,
+                                    controller: _emailController,
+                                    validator: RequiredValidator(
+                                        errorText: AutofillHints.email),
+                                    label: 'Email',
+                                  ),
 
-                                ///Password
-                                PasswordForm(
-                                  context: context,
-                                  controller: _passwordController,
-                                  validator: RequiredValidator(
-                                      errorText: AutofillHints.password),
-                                  label: 'Password',
-                                  obscuringChar: '*',
-                                ),
+                                  ///Password
+                                  PasswordForm(
+                                    context: context,
+                                    controller: _passwordController,
+                                    validator: RequiredValidator(
+                                        errorText: AutofillHints.password),
+                                    label: 'Password',
+                                    obscuringChar: '*',
+                                  ),
 
-                                ///Confirm Password
-                                PasswordForm(
-                                  context: context,
-                                  controller: _passwordController2,
-                                  validator: RequiredValidator(
-                                      errorText: "confirm password"),
-                                  label: 'Confirm Password',
-                                  obscuringChar: '*',
-                                ),
-                              ],
-                            ),
+                                  ///Confirm Password
+                                  PasswordForm(
+                                    context: context,
+                                    controller: _passwordController2,
+                                    validator: RequiredValidator(
+                                        errorText: "confirm password"),
+                                    label: 'Confirm Password',
+                                    obscuringChar: '*',
+                                  ),
+                                ],
+                              ),
 
-                            SizedBox(height: height * 0.023),
+                              SizedBox(height: height * 0.023),
 
-                            ///Register button
-                            Flexible(
-                              flex: 1,
-                              fit: FlexFit.tight,
-                              child: Container(
+                              ///Register button
+
+                              Container(
                                 child: TextButton(
                                   child: Container(
                                     child: Container(
@@ -188,57 +194,57 @@ class _LargeScreenState extends State<LargeScreen> {
                                   ),
                                 ),
                               ),
-                            ),
 
-                            Container(
-                              padding: EdgeInsets.only(
-                                  top: 0.01 * height, bottom: 0),
-                              child: Column(
-                                children: [
-                                  ///Regular Text
-                                  Text(
-                                    'Have an account already?',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontFamily: 'Maven Pro',
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-
-                                  ///Linked text to login
-                                  Container(
-                                    alignment: Alignment.center,
-                                    padding: EdgeInsets.only(top: 0),
-                                    child: TextButton(
-                                      child: Text(
-                                        'Go to login',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontFamily: 'Maven Pro',
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16,
-                                          color: MyPalette.turqoise,
-                                        ),
+                              Container(
+                                padding: EdgeInsets.only(
+                                    top: 0.01 * height, bottom: 0),
+                                child: Column(
+                                  children: [
+                                    ///Regular Text
+                                    Text(
+                                      'Have an account already?',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontFamily: 'Maven Pro',
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.white,
                                       ),
-                                      onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => LoginPage(),
-                                          ),
-                                        );
-                                      },
                                     ),
-                                  ),
-                                ],
+
+                                    ///Linked text to login
+                                    Container(
+                                      alignment: Alignment.center,
+                                      padding: EdgeInsets.only(top: 0),
+                                      child: TextButton(
+                                        child: Text(
+                                          'Go to login',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontFamily: 'Maven Pro',
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16,
+                                            color: MyPalette.turqoise,
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => LoginPage(),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -278,168 +284,170 @@ class _SmallScreenState extends State<SmallScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             BackArrowBtn(),
-            Form(
-              key: _formKey,
-              child: Container(
-                padding:
-                    EdgeInsets.only(left: 0.12 * width, right: 0.12 * width),
-                child: Column(
-                  children: [
-                    ///Logo
-                    Container(
-                      alignment: Alignment.topCenter,
-                      padding: EdgeInsets.only(
-                          top: height * 0.01, bottom: height * 0.005),
-                      child: Image.asset("assets/music_swing_logo_small.png",
-                          scale: 2.5),
-                    ),
+            FadeInUpBig(
+              child: Form(
+                key: _formKey,
+                child: Container(
+                  padding:
+                      EdgeInsets.only(left: 0.12 * width, right: 0.12 * width),
+                  child: Column(
+                    children: [
+                      ///Logo
+                      Container(
+                        alignment: Alignment.topCenter,
+                        padding: EdgeInsets.only(
+                            top: height * 0.01, bottom: height * 0.005),
+                        child: Image.asset("assets/music_swing_logo_small.png",
+                            scale: 2.5),
+                      ),
 
-                    ///Username
-                    ChangeForm(
-                      context: context,
-                      controller: _usernameController,
-                      validator:
-                          RequiredValidator(errorText: AutofillHints.username),
-                      label: 'Username',
-                    ),
+                      ///Username
+                      ChangeForm(
+                        context: context,
+                        controller: _usernameController,
+                        validator: RequiredValidator(
+                            errorText: AutofillHints.username),
+                        label: 'Username',
+                      ),
 
-                    SizedBox(height: height * 0.015),
+                      SizedBox(height: height * 0.015),
 
-                    ///Email
-                    ChangeForm(
-                      context: context,
-                      controller: _emailController,
-                      validator:
-                          RequiredValidator(errorText: AutofillHints.email),
-                      label: 'Email',
-                    ),
+                      ///Email
+                      ChangeForm(
+                        context: context,
+                        controller: _emailController,
+                        validator:
+                            RequiredValidator(errorText: AutofillHints.email),
+                        label: 'Email',
+                      ),
 
-                    SizedBox(height: height * 0.015),
+                      SizedBox(height: height * 0.015),
 
-                    ///Password
-                    PasswordForm(
-                      context: context,
-                      controller: _passwordController,
-                      validator:
-                          RequiredValidator(errorText: AutofillHints.password),
-                      label: 'Password',
-                      obscuringChar: '*',
-                    ),
+                      ///Password
+                      PasswordForm(
+                        context: context,
+                        controller: _passwordController,
+                        validator: RequiredValidator(
+                            errorText: AutofillHints.password),
+                        label: 'Password',
+                        obscuringChar: '*',
+                      ),
 
-                    SizedBox(height: height * 0.015),
+                      SizedBox(height: height * 0.015),
 
-                    ///Confirm Password
-                    PasswordForm(
-                      context: context,
-                      controller: _passwordController2,
-                      validator:
-                          RequiredValidator(errorText: "confirm password"),
-                      label: 'Confirm Password',
-                      obscuringChar: '*',
-                    ),
+                      ///Confirm Password
+                      PasswordForm(
+                        context: context,
+                        controller: _passwordController2,
+                        validator:
+                            RequiredValidator(errorText: "confirm password"),
+                        label: 'Confirm Password',
+                        obscuringChar: '*',
+                      ),
 
-                    ///spacer
-                    SizedBox(height: height * 0.02),
+                      ///spacer
+                      SizedBox(height: height * 0.02),
 
-                    ///Register Button
-                    Container(
-                      child: TextButton(
-                        child: Container(
-                          padding: EdgeInsets.only(top: height * 0.02),
+                      ///Register Button
+                      Container(
+                        child: TextButton(
                           child: Container(
-                            width: 0.8 * width,
-                            height: 0.05 * height,
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                begin: Alignment.topRight,
-                                end: Alignment.bottomLeft,
-                                colors: [
-                                  MyPalette.slateBlue,
-                                  MyPalette.brightMagenta,
-                                  MyPalette.turqoise,
+                            padding: EdgeInsets.only(top: height * 0.02),
+                            child: Container(
+                              width: 0.8 * width,
+                              height: 0.05 * height,
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topRight,
+                                  end: Alignment.bottomLeft,
+                                  colors: [
+                                    MyPalette.slateBlue,
+                                    MyPalette.brightMagenta,
+                                    MyPalette.turqoise,
+                                  ],
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(15),
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    offset: Offset(0, 1),
+                                    color: MyPalette.brightMagenta,
+                                    blurRadius: 16,
+                                  ),
                                 ],
                               ),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(15),
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text("Register",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      fontFamily: 'Share Tech',
+                                      color: Colors.white,
+                                    )),
                               ),
-                              boxShadow: [
-                                BoxShadow(
-                                  offset: Offset(0, 1),
-                                  color: MyPalette.brightMagenta,
-                                  blurRadius: 16,
-                                ),
-                              ],
                             ),
-                            child: Align(
+                          ),
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              register(context);
+                            }
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.transparent,
+                            foregroundColor: Colors.transparent,
+                          ),
+                        ),
+                      ),
+
+                      ///Already Have an account
+                      Container(
+                        padding: EdgeInsets.only(top: 0.01 * height, bottom: 0),
+                        child: Column(
+                          children: [
+                            ///Regular Text
+                            Text(
+                              'Have an account already?',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontFamily: 'Maven Pro',
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Colors.white,
+                              ),
+                            ),
+
+                            ///Linked text to login
+                            Container(
                               alignment: Alignment.center,
-                              child: Text("Register",
+                              padding: EdgeInsets.only(top: 0),
+                              child: TextButton(
+                                child: Text(
+                                  'Go to login',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                    fontSize: 25,
-                                    fontFamily: 'Share Tech',
-                                    color: Colors.white,
-                                  )),
-                            ),
-                          ),
-                        ),
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            register(context);
-                          }
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.transparent,
-                          foregroundColor: Colors.transparent,
-                        ),
-                      ),
-                    ),
-
-                    ///Already Have an account
-                    Container(
-                      padding: EdgeInsets.only(top: 0.01 * height, bottom: 0),
-                      child: Column(
-                        children: [
-                          ///Regular Text
-                          Text(
-                            'Have an account already?',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: 'Maven Pro',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                              color: Colors.white,
-                            ),
-                          ),
-
-                          ///Linked text to login
-                          Container(
-                            alignment: Alignment.center,
-                            padding: EdgeInsets.only(top: 0),
-                            child: TextButton(
-                              child: Text(
-                                'Go to login',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontFamily: 'Maven Pro',
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                  color: MyPalette.turqoise,
-                                ),
-                              ),
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => LoginPage(),
+                                    fontFamily: 'Maven Pro',
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                    color: MyPalette.turqoise,
                                   ),
-                                );
-                              },
+                                ),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => LoginPage(),
+                                    ),
+                                  );
+                                },
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             )

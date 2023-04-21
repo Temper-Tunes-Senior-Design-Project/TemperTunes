@@ -24,8 +24,7 @@ class PreferenceOption extends StatelessWidget {
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
             elevation: 0,
-            backgroundColor: Colors.transparent,
-            foregroundColor: Colors.pinkAccent,
+            foregroundColor: MyPalette.brightMagenta,
           ),
           icon: icon,
           label: FittedBox(

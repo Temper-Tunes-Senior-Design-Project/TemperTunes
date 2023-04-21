@@ -6,6 +6,7 @@ import 'package:mood_swing/Pages/HomePage.dart';
 import 'package:mood_swing/Utilities/AuthRouter.dart';
 import 'package:form_field_validator/form_field_validator.dart' as validator;
 import 'dart:async';
+import 'package:animate_do/animate_do.dart';
 
 import 'OTPEmailPage.dart';
 
@@ -55,144 +56,147 @@ class _LargeScreenState extends State<LargeScreen> {
               BackArrowBtn(),
 
               ///Main Container
-              Form(
-                key: _formKey,
-                child: Container(
-                  height: height * 0.8,
-                  width: width * 0.3,
-                  padding:
-                      EdgeInsets.only(left: 0.03 * width, right: 0.03 * height),
-                  decoration: BoxDecoration(
-                    color: Colors.grey.withOpacity(0.3),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(20),
+              FadeInDown(
+                child: Form(
+                  key: _formKey,
+                  child: Container(
+                    height: height * 0.8,
+                    width: width * 0.3,
+                    padding: EdgeInsets.only(
+                        left: 0.03 * width, right: 0.03 * height),
+                    decoration: BoxDecoration(
+                      color: Colors.grey.withOpacity(0.3),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(20),
+                      ),
                     ),
-                  ),
-                  child: Expanded(
-                    child: Column(
-                      children: [
-                        Flexible(
-                          flex: 1,
-                          fit: FlexFit.tight,
-                          child: Column(
-                            children: [
-                              ///App logo
-                              Container(
-                                alignment: Alignment.topCenter,
-                                padding: EdgeInsets.only(top: height * 0.02),
-                                child: Image.asset(
-                                    "assets/music_swing_logo_small.png",
-                                    scale: 2.5),
-                              ),
+                    child: Expanded(
+                      child: Column(
+                        children: [
+                          Flexible(
+                            flex: 1,
+                            fit: FlexFit.tight,
+                            child: Column(
+                              children: [
+                                ///App logo
+                                Container(
+                                  alignment: Alignment.topCenter,
+                                  padding: EdgeInsets.only(top: height * 0.02),
+                                  child: Image.asset(
+                                      "assets/music_swing_logo_small.png",
+                                      scale: 2.5),
+                                ),
 
-                              ///Forms
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  ///current email
-                                  ChangeForm(
-                                    context: context,
-                                    controller: _currentEmailController,
-                                    validator: validator.RequiredValidator(
-                                      errorText: AutofillHints.email,
+                                ///Forms
+                                Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: [
+                                    ///current email
+                                    ChangeForm(
+                                      context: context,
+                                      controller: _currentEmailController,
+                                      validator: validator.RequiredValidator(
+                                        errorText: AutofillHints.email,
+                                      ),
+                                      label: 'Current Email',
                                     ),
-                                    label: 'Current Email',
-                                  ),
 
-                                  ///new email
-                                  ChangeForm(
-                                    context: context,
-                                    controller: _newEmailController,
-                                    validator: validator.RequiredValidator(
-                                      errorText: "new email",
+                                    ///new email
+                                    ChangeForm(
+                                      context: context,
+                                      controller: _newEmailController,
+                                      validator: validator.RequiredValidator(
+                                        errorText: "new email",
+                                      ),
+                                      label: 'New Email',
                                     ),
-                                    label: 'New Email',
-                                  ),
 
-                                  ///confirm new email
-                                  ChangeForm(
-                                    context: context,
-                                    controller: _newEmailController2,
-                                    validator: validator.RequiredValidator(
-                                      errorText: "confirm new email",
+                                    ///confirm new email
+                                    ChangeForm(
+                                      context: context,
+                                      controller: _newEmailController2,
+                                      validator: validator.RequiredValidator(
+                                        errorText: "confirm new email",
+                                      ),
+                                      label: 'Confirm New Email',
                                     ),
-                                    label: 'Confirm New Email',
-                                  ),
 
-                                  ///password
-                                  PasswordForm(
-                                    context: context,
-                                    validator: validator.RequiredValidator(
-                                        errorText: AutofillHints.password),
-                                    controller: _passwordController,
-                                    obscuringChar: "*",
-                                    label: "Please enter your password",
-                                  ),
-                                ],
-                              ),
+                                    ///password
+                                    PasswordForm(
+                                      context: context,
+                                      validator: validator.RequiredValidator(
+                                          errorText: AutofillHints.password),
+                                      controller: _passwordController,
+                                      obscuringChar: "*",
+                                      label: "Please enter your password",
+                                    ),
+                                  ],
+                                ),
 
-                              SizedBox(height: height * 0.03),
+                                SizedBox(height: height * 0.03),
 
-                              ///Submit button
-                              Container(
-                                child: TextButton(
-                                  child: Container(
-                                    width: 0.2 * width,
-                                    height: 0.056 * height,
-                                    decoration: BoxDecoration(
-                                      gradient: LinearGradient(
-                                        begin: Alignment.topRight,
-                                        end: Alignment.bottomLeft,
-                                        colors: [
-                                          MyPalette.slateBlue,
-                                          MyPalette.brightMagenta,
-                                          MyPalette.turqoise,
+                                ///Submit button
+                                Container(
+                                  child: TextButton(
+                                    child: Container(
+                                      width: 0.2 * width,
+                                      height: 0.056 * height,
+                                      decoration: BoxDecoration(
+                                        gradient: LinearGradient(
+                                          begin: Alignment.topRight,
+                                          end: Alignment.bottomLeft,
+                                          colors: [
+                                            MyPalette.slateBlue,
+                                            MyPalette.brightMagenta,
+                                            MyPalette.turqoise,
+                                          ],
+                                        ),
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(15),
+                                        ),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            offset: Offset(0, 1),
+                                            color: MyPalette.brightMagenta,
+                                            blurRadius: 16,
+                                          ),
                                         ],
                                       ),
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(15),
-                                      ),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          offset: Offset(0, 1),
-                                          color: MyPalette.brightMagenta,
-                                          blurRadius: 16,
-                                        ),
-                                      ],
-                                    ),
-                                    child: Align(
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        "Submit",
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: 25,
-                                          fontFamily: 'Share Tech',
-                                          color: Colors.white,
+                                      child: Align(
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          "Submit",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontSize: 25,
+                                            fontFamily: 'Share Tech',
+                                            color: Colors.white,
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  onPressed: () {
-                                    if (_formKey.currentState!.validate()) {
-                                      changeEmail(context);
-                                    }
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.transparent,
-                                    foregroundColor: Colors.transparent,
+                                    onPressed: () {
+                                      if (_formKey.currentState!.validate()) {
+                                        changeEmail(context);
+                                      }
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      foregroundColor: Colors.transparent,
+                                    ),
                                   ),
                                 ),
-                              ),
 
-                              SizedBox(height: height * 0.005),
+                                SizedBox(height: height * 0.005),
 
-                              ///Forgot Password
-                              ForgotPassword(),
-                            ],
+                                ///Forgot Password
+                                ForgotPassword(),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -234,131 +238,134 @@ class _SmallScreenState extends State<SmallScreen> {
             ///back button
             BackArrowBtn(),
 
-            Form(
-              key: _formKey,
-              child: Container(
-                padding:
-                    EdgeInsets.only(left: 0.12 * width, right: 0.12 * width),
-                child: Flexible(
-                  flex: 1,
-                  child: Column(
-                    children: [
-                      ///Logo
-                      Container(
-                        alignment: Alignment.topCenter,
-                        child: Image.asset("assets/music_swing_logo_small.png",
-                            scale: 2.5),
-                      ),
+            FadeInDown(
+              child: Form(
+                key: _formKey,
+                child: Container(
+                  padding:
+                      EdgeInsets.only(left: 0.12 * width, right: 0.12 * width),
+                  child: Flexible(
+                    flex: 1,
+                    child: Column(
+                      children: [
+                        ///Logo
+                        Container(
+                          alignment: Alignment.topCenter,
+                          child: Image.asset(
+                              "assets/music_swing_logo_small.png",
+                              scale: 2.5),
+                        ),
 
-                      ///Forms
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          ///current email
-                          ChangeForm(
-                            context: context,
-                            controller: _currentEmailController,
-                            validator: validator.RequiredValidator(
-                              errorText: AutofillHints.email,
+                        ///Forms
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            ///current email
+                            ChangeForm(
+                              context: context,
+                              controller: _currentEmailController,
+                              validator: validator.RequiredValidator(
+                                errorText: AutofillHints.email,
+                              ),
+                              label: 'Current Email',
                             ),
-                            label: 'Current Email',
-                          ),
 
-                          ///new email
-                          ChangeForm(
-                            context: context,
-                            controller: _newEmailController,
-                            validator: validator.RequiredValidator(
-                              errorText: "new email",
+                            ///new email
+                            ChangeForm(
+                              context: context,
+                              controller: _newEmailController,
+                              validator: validator.RequiredValidator(
+                                errorText: "new email",
+                              ),
+                              label: 'New Email',
                             ),
-                            label: 'New Email',
-                          ),
 
-                          ///confirm new email
-                          ChangeForm(
-                            context: context,
-                            controller: _newEmailController2,
-                            validator: validator.RequiredValidator(
-                              errorText: "confirm new email",
+                            ///confirm new email
+                            ChangeForm(
+                              context: context,
+                              controller: _newEmailController2,
+                              validator: validator.RequiredValidator(
+                                errorText: "confirm new email",
+                              ),
+                              label: 'Confirm New Email',
                             ),
-                            label: 'Confirm New Email',
-                          ),
 
-                          ///password
-                          PasswordForm(
-                            context: context,
-                            validator: validator.RequiredValidator(
-                                errorText: AutofillHints.password),
-                            controller: _passwordController,
-                            obscuringChar: "*",
-                            label: "Please enter your password",
-                          ),
-                        ],
-                      ),
+                            ///password
+                            PasswordForm(
+                              context: context,
+                              validator: validator.RequiredValidator(
+                                  errorText: AutofillHints.password),
+                              controller: _passwordController,
+                              obscuringChar: "*",
+                              label: "Please enter your password",
+                            ),
+                          ],
+                        ),
 
-                      ///spacer
-                      SizedBox(height: height * 0.015),
+                        ///spacer
+                        SizedBox(height: height * 0.015),
 
-                      ///Submit Button
-                      Container(
-                        child: TextButton(
-                          child: Container(
-                            padding: EdgeInsets.only(top: height * 0.015),
+                        ///Submit Button
+                        Container(
+                          child: TextButton(
                             child: Container(
-                              width: 0.4 * width,
-                              height: 0.05 * height,
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  begin: Alignment.topRight,
-                                  end: Alignment.bottomLeft,
-                                  colors: [
-                                    MyPalette.slateBlue,
-                                    MyPalette.brightMagenta,
-                                    MyPalette.turqoise,
+                              padding: EdgeInsets.only(top: height * 0.015),
+                              child: Container(
+                                width: 0.4 * width,
+                                height: 0.05 * height,
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    begin: Alignment.topRight,
+                                    end: Alignment.bottomLeft,
+                                    colors: [
+                                      MyPalette.slateBlue,
+                                      MyPalette.brightMagenta,
+                                      MyPalette.turqoise,
+                                    ],
+                                  ),
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(15),
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      offset: Offset(0, 1),
+                                      color: MyPalette.brightMagenta,
+                                      blurRadius: 16,
+                                    ),
                                   ],
                                 ),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(15),
-                                ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    offset: Offset(0, 1),
-                                    color: MyPalette.brightMagenta,
-                                    blurRadius: 16,
-                                  ),
-                                ],
-                              ),
-                              child: Align(
-                                alignment: Alignment.center,
-                                child: Text(
-                                  "Submit",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 25,
-                                    fontFamily: 'Share Tech',
-                                    color: Colors.white,
+                                child: Align(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    "Submit",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      fontFamily: 'Share Tech',
+                                      color: Colors.white,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              changeEmail(context);
-                            }
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.transparent,
-                            foregroundColor: Colors.transparent,
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                changeEmail(context);
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.transparent,
+                              foregroundColor: Colors.transparent,
+                            ),
                           ),
                         ),
-                      ),
 
-                      SizedBox(height: 0.01 * height),
+                        SizedBox(height: 0.01 * height),
 
-                      ///Forgot password
-                      ForgotPassword(),
-                    ],
+                        ///Forgot password
+                        ForgotPassword(),
+                      ],
+                    ),
                   ),
                 ),
               ),
