@@ -11,12 +11,6 @@ class APIRouter {
   Future<List<String>> getClosestSongs(
       Map<String, List<double>> songs, Mood mood, String? user_id) async {
     List<String> closestSongList = [];
-    if (songs.length <= 5) {
-      songs.keys.forEach((song) {
-        closestSongList.add(song);
-      });
-      return closestSongList;
-    }
     var uid = user_id ?? FirebaseAuth.instance.currentUser?.uid;
     var strMood = mood.toString();
     final url = "https://moodswing-closest-songs-ilvif34q5a-ue.a.run.app";
