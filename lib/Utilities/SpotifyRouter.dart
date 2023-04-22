@@ -63,18 +63,22 @@ class SpotifyRouter {
           {},
           (await client.tracks.me.saved.all()).map<Song>((e) {
             return Song(e.track?.id ?? "", e.track?.name ?? "", {});
-          }).toList())
+          }).toList(),
+          [])
     ];
 
     /// Add all other playlists into the list of playlists
     Iterable<PlaylistSimple> playlists = await client.playlists.me.all();
     for (PlaylistSimple p in playlists) {
+      print(p.images);
+
       Iterable? data =
           (await client.playlists.get(p.id ?? "")).tracks?.itemsNative;
       List<Song>? songs =
           data?.map((e) => Song("", e["track"]["name"], {})).toList();
 
-      rPlaylists.add(CP.Playlist("", p.name ?? "No name", {}, songs ?? []));
+      rPlaylists.add(CP.Playlist("", p.name ?? "No name", {}, songs ?? [],
+          p.images?.map((e) => e.url ?? "").toList() ?? []));
     }
     return rPlaylists;
   }

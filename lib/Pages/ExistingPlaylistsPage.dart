@@ -38,97 +38,79 @@ class ExistingPlaylistsPageState extends State<ExistingPlaylistsPage> {
               fit: BoxFit.cover,
             ),
           ),
-          child: Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: 0.05 * width,
-              vertical: 0.05 * height,
-            ),
-            child: Stack(
-              children: [
-                // FittedBox(
-                //   fit: BoxFit.scaleDown,
-                //   child: Center(
-                //     child: Text(
-                //       'Preferences',
-                //       style: TextStyle(
-                //         fontSize: 53,
-                //         fontFamily: 'Share Tech',
-                //         color: MyPalette.lightPurple,
-                //       ),
-                //       textAlign: TextAlign.center,
-                //     ),
-                //   ),
-                // ),
-                FutureBuilder<List<Playlist>>(
-                  future: SpotifyRouter().getSongLibrary(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData && snapshot.data != null) {
-                      return Stack(
-                        children: [
-                          GridView.builder(
-                              itemCount: snapshot.data?.length ?? 0,
-                              gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 4,
-                                crossAxisSpacing: 0.04 * width,
-                                mainAxisSpacing: 0.04 * height,
-                                childAspectRatio: 4 / 3,
-                              ),
-                              itemBuilder: (context, index) {
-                                return GestureDetector(
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: AssetImage(
-                                            "assets/music_swing_logo_small.png"),
-                                        scale: 3.2,
-                                        alignment: Alignment.center,
-                                      ),
-                                      color: MyPalette.circleIcon,
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(20),
-                                      ),
-                                    ),
-                                    child: Container(
-                                      alignment: Alignment.bottomCenter,
-                                      padding: EdgeInsets.only(bottom: 10),
-                                      child: Text(
-                                        snapshot.data![index].name,
-                                        style: TextStyle(
-                                          fontFamily: 'Maven Pro',
-                                          color: Colors.white,
-                                          fontSize: 14,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  onTap: () {
-                                    print("Clicked");
-                                    setState(() {
-                                      isPlaylistSelected = true;
-                                    });
-                                  },
-                                );
-                              }),
-                          Visibility(
-                            visible: true,
-                            child: Center(
-                              child: Container(
-                                height: 500,
-                                width: 500,
-                                color: Colors.red,
-                              ),
-                            ),
-                          ),
-                        ],
-                      );
-                    } else {
-                      return CircularProgressIndicator();
-                    }
-                  },
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  vertical: 0.01 * height,
                 ),
-              ],
-            ),
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Center(
+                    child: Text(
+                      'Playlists',
+                      style: TextStyle(
+                        fontSize: 53,
+                        fontFamily: 'Share Tech',
+                        color: MyPalette.lightPurple,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 0.02 * width,
+                  vertical: 0.01 * height,
+                ),
+                child: Column(
+                  children: [
+                    FutureBuilder<List<Playlist>>(
+                      future: SpotifyRouter().getSongLibrary(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData && snapshot.data != null) {
+                          return Column(
+                            children: [
+                              Container(
+                                height: 500,
+                                child: GridView.builder(
+                                    itemCount: snapshot.data?.length ?? 0,
+                                    gridDelegate:
+                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 4,
+                                      crossAxisSpacing: 0.04 * width,
+                                      mainAxisSpacing: 0.04 * height,
+                                      childAspectRatio: 4 / 3,
+                                    ),
+                                    itemBuilder: (context, index) {
+                                      return GestureDetector(
+                                          child: PlaylistHover(
+                                              playlistName:
+                                                  snapshot.data![index].name));
+                                    }),
+                              ),
+                              // Visibility(
+                              //   visible: isPlaylistSelected,
+                              //   child: Center(
+                              //     child: Container(
+                              //       height: 500,
+                              //       width: 500,
+                              //       color: Colors.red,
+                              //     ),
+                              //   ),
+                              // ),
+                            ],
+                          );
+                        } else {
+                          return CircularProgressIndicator();
+                        }
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ),
@@ -209,5 +191,58 @@ class ExistingPlaylistsPageState extends State<ExistingPlaylistsPage> {
     //     ),
     //   ),
     // );
+  }
+}
+
+class PlaylistHover extends StatefulWidget {
+  final dynamic playlistName;
+
+  const PlaylistHover({required this.playlistName, Key? key}) : super(key: key);
+
+  @override
+  _PlaylistHoverState createState() => _PlaylistHoverState();
+}
+
+class _PlaylistHoverState extends State<PlaylistHover> {
+  bool isHovered = false;
+
+  @override
+  Widget build(context) {
+    return InkWell(
+      onTap: () {},
+      onHover: (value) {
+        if (value) {
+          setState(() {
+            isHovered = value;
+          });
+        }
+        ;
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: isHovered ? Colors.grey[300] : MyPalette.circleIcon,
+          borderRadius: BorderRadius.circular(8.0),
+          boxShadow: [
+            if (isHovered)
+              BoxShadow(
+                color: Colors.pink.withOpacity(0.7),
+                spreadRadius: 7.0,
+                blurRadius: 8.0,
+              ),
+          ],
+        ),
+        child: Container(
+          alignment: Alignment.bottomCenter,
+          child: Text(
+            widget.playlistName,
+            style: TextStyle(
+              fontFamily: 'Maven Pro',
+              color: isHovered ? Colors.black : Colors.white,
+              fontSize: 18,
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
