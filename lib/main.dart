@@ -70,7 +70,7 @@ class App extends StatelessWidget {
             }
 
             //return LandingPage();
-            return ExistingPlaylistsPage();
+            return LandingPage();
           }),
     );
   }
