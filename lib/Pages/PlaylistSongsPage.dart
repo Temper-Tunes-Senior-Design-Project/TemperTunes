@@ -77,7 +77,7 @@ class _LargeScreenState extends State<LargeScreen> {
                     SizedBox(width: 20),
                     Container(
                       padding: EdgeInsets.only(right: 0.1 * width),
-                      height: 0.8 * height,
+                      height: 0.7 * height,
                       width: 0.45 * width,
                       child: Container(
                         height: height - (height * 0.8),
