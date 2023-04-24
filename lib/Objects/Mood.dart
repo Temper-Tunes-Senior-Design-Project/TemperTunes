@@ -7,7 +7,10 @@ enum Mood {
   Excited,
   Happy,
   Sad,
-  Neutral //If not found
+  Neutral; //If not found
+
+  @override
+  String toString() => this.name.toLowerCase();
 }
 
 var valenceArousalToLabel = [
