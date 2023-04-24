@@ -62,7 +62,16 @@ class SpotifyRouter {
           "Liked Songs",
           {},
           (await client.tracks.me.saved.all()).map<Song>((e) {
-            return Song(e.track?.id ?? "", e.track?.name ?? "", {});
+            return Song(
+              // e.track?.id ?? "",
+              // e.track?.name ?? "", {});
+              e.track?.id ?? "",
+              e.track?.name ?? "",
+              Map.fromIterable(e.track?.artists ?? [],
+                  key: (artist) => artist.id ?? "", // Use artist ID as the key
+                  value: (artist) => ""),
+              {},
+            );
           }).toList(),
           [])
     ];
@@ -74,8 +83,10 @@ class SpotifyRouter {
 
       Iterable? data =
           (await client.playlists.get(p.id ?? "")).tracks?.itemsNative;
-      List<Song>? songs =
-          data?.map((e) => Song("", e["track"]["name"], {})).toList();
+      List<Song>? songs = data
+          ?.map(
+              (e) => Song("", e["track"]["name"], {}, e.cast<String, String>()))
+          .toList();
 
       rPlaylists.add(CP.Playlist("", p.name ?? "No name", {}, songs ?? [],
           p.images?.map((e) => e.url ?? "").toList() ?? []));
