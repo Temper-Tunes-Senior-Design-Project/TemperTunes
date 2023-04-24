@@ -111,6 +111,21 @@ class AuthRouter {
   }
 
   /**
+   * Sign in using the Facebook SDK
+   */
+  Future<AuthCredential?> facebookSignIn() async
+  {
+    LoginResult result = await FacebookAuth.i.login();
+    if (result.status == LoginStatus.success) {
+      OAuthCredential credential = FacebookAuthProvider.credential(result.accessToken!.token);
+      return credential;
+    } else {
+      return null;
+    }
+  }
+
+
+  /**
    * Creates a user using an email and password.
    */
   Future<LoginCredentials?> registerUser(
