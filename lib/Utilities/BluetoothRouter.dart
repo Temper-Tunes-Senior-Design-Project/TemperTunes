@@ -8,7 +8,10 @@ class BluetoothRouter {
     return bluetoothDriver.scanForDevices(
         withServices: [], scanMode: ScanMode.lowLatency).map((event) {
       devices[event.id] = event;
-      return devices.entries.where((element) => element.value.name != "").map((e) => e.value).toList();
+      return devices.entries
+          .where((element) => element.value.name != "")
+          .map((e) => e.value)
+          .toList();
     });
   }
 }
