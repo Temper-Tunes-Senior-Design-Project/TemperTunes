@@ -38,51 +38,59 @@ class _LargeScreenState extends State<LargeScreen> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return SafeArea(
-      child: Scaffold(
-          body: Column(
+      child: Container(
+          width: width,
+          height: height,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("assets/userPageLarge.png"),
+                fit: BoxFit.cover),
+          ),
+          child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ///Playlist cover
-                Container(
-                  padding: EdgeInsets.only(left: 0.1 * width),
-                  height: 0.8 * height,
-                  width: 0.45 * width,
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Container(
-                            height: 0.8 * height,
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: NetworkImage(
-                                  widget.playlist.images[0],
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ///Playlist cover
+                    Container(
+                      padding: EdgeInsets.only(left: 0.1 * width),
+                      height: 0.8 * height,
+                      width: 0.45 * width,
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Expanded(
+                              child: Container(
+                                height: 0.8 * height,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: NetworkImage(
+                                      widget.playlist.images[0],
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ))
-                      ]),
-                ),
-                Container(
-                  padding: EdgeInsets.only(right: 0.1 * width),
-                  height: 0.8 * height,
-                  width: 0.45 * width,
-                  color: Colors.green,
-                  child: Column(
-                    children: [
-                      Container(
+                            )
+                          ]),
+                    ),
+                    SizedBox(width: 20),
+                    Container(
+                      padding: EdgeInsets.only(right: 0.1 * width),
+                      height: 0.8 * height,
+                      width: 0.45 * width,
+                      child: Container(
                         height: height - (height * 0.8),
                         child: Column(
                           children: [
                             Container(
-                              height: 0.1 * (height - (height * 0.8)),
                               child: Text(
-                                'Playlist: ${widget.playlist.name}',
+                                '${widget.playlist.name}',
                                 style: TextStyle(
                                   fontFamily: 'Maven Pro',
-                                  color: Colors.blue,
-                                  fontSize: 20,
+                                  color: MyPalette.magenta,
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.w900,
                                 ),
                               ),
                             ),
@@ -92,8 +100,17 @@ class _LargeScreenState extends State<LargeScreen> {
                                 itemBuilder: (context, index) {
                                   // Build the list of songs using the playlist data
                                   return ListTile(
-                                    title:
-                                        Text(widget.playlist.songs[index].name),
+                                    title: Text(
+                                      widget.playlist.songs[index].name,
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    subtitle: Text(
+                                      widget.playlist.songs[index].artists
+                                          .join(", "),
+                                      style: TextStyle(color: Colors.white54),
+                                    ),
                                   );
                                 },
                               ),
@@ -101,12 +118,10 @@ class _LargeScreenState extends State<LargeScreen> {
                           ],
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ])
+              ])
           // ListView.builder(
           //   itemCount: widget.playlist.songs.length,
           //   itemBuilder: (context, index) {

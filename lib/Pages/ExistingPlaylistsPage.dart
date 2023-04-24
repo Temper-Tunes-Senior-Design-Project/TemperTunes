@@ -161,7 +161,7 @@ class SmallScreenState extends State<SmallScreen> {
                   child: Text(
                     'Playlists',
                     style: TextStyle(
-                      fontSize: 43,
+                      fontSize: 48,
                       fontFamily: 'Share Tech',
                       color: MyPalette.lightPurple,
                     ),

@@ -1,13 +1,8 @@
 class Song {
   String uid;
   String name;
-  Map<String, String> artists;
   Map<String, String> songLinks;
+  List<String> artists;
 
-  Song(this.uid, this.name, this.artists, this.songLinks);
-
-  String get artist {
-    return artists['artist'] ??
-        ''; // Replace 'artist' with the actual key for artist name in your map
-  }
+  Song(this.uid, this.name, this.songLinks, this.artists);
 }
