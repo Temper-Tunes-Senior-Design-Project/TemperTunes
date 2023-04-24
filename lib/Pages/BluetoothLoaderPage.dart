@@ -10,7 +10,7 @@ class BluetoothLoaderPage extends StatelessWidget
       body: Column(
         children: [
           Text("Found Devices"),
-          StreamBuilder<Map<String,DiscoveredDevice>>(
+          StreamBuilder<List<DiscoveredDevice>>(
             stream: BluetoothRouter().getNearbyDevices(),
               builder: (context,snapshot){
 
@@ -21,7 +21,7 @@ class BluetoothLoaderPage extends StatelessWidget
                       itemBuilder: (context,i)
                   {
                     return ListTile(
-                      title: Text(snapshot.data?.entries.toList()[i].value.name??"No data"),
+                      title: Text(snapshot.data?[i].name??"No data"),
                     );
                   }),
                 );
