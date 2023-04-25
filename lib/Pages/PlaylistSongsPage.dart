@@ -51,7 +51,7 @@ class _LargeScreenState extends State<LargeScreen> {
               children: [
                 BackArrowBtn(),
                 Padding(
-                  padding: EdgeInsets.all(30.0),
+                  padding: const EdgeInsets.all(30.0),
                   child: Container(
                     decoration: BoxDecoration(
                       color: Colors.grey.withOpacity(0.3),
@@ -206,7 +206,7 @@ class _SmallScreenState extends State<SmallScreen> {
                               widget.playlist.songs[index].name,
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 20,
+                                  fontSize: 17,
                                   fontWeight: FontWeight.w500),
                             ),
                             subtitle: Text(

@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:easy_stepper/easy_stepper.dart';
+import 'package:easy_stepper/easy_stepper.dart';
 import 'package:mood_swing/Utilities/SpotifyRouter.dart';
 import 'package:mood_swing/Widgets/MyPalette.dart';
 import '../Widgets/widgets.dart';
@@ -89,7 +90,7 @@ class LargeScreenState extends State<LargeScreen> {
                                         crossAxisCount: 4,
                                         crossAxisSpacing: 0.04 * width,
                                         mainAxisSpacing: 0.04 * height,
-                                        childAspectRatio: 4 / 3,
+                                        childAspectRatio: 1.0,
                                       ),
                                       itemBuilder: (context, index) {
                                         return GestureDetector(
@@ -192,7 +193,7 @@ class SmallScreenState extends State<SmallScreen> {
                                         crossAxisCount: 2,
                                         crossAxisSpacing: 0.04 * width,
                                         mainAxisSpacing: 0.04 * height,
-                                        childAspectRatio: 4 / 3,
+                                        childAspectRatio: 1.0,
                                       ),
                                       itemBuilder: (context, index) {
                                         return GestureDetector(
@@ -282,13 +283,14 @@ class _PlaylistItemState extends State<PlaylistItem> {
             children: [
               Expanded(
                 child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
+                  physics: NeverScrollableScrollPhysics(),
                   itemCount: widget.playlist.images.length,
                   itemBuilder: (context, index) {
                     return Container(
                       child: Image.network(
                         widget.playlist.images[index],
-                        fit: BoxFit.cover,
+                        fit: BoxFit.fitWidth,
+                        repeat: ImageRepeat.noRepeat,
                       ),
                     );
                   },
