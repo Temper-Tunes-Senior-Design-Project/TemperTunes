@@ -6,12 +6,15 @@ import 'package:mood_swing/Pages/HomePage.dart';
 import 'dart:ui';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mood_swing/Pages/TestingPage.dart';
 import 'package:mood_swing/Utilities/AuthRouter.dart';
+import 'Pages/CameraPage.dart';
+import 'Pages/PresetsPage.dart';
 import 'Widgets/MockNavigator.dart';
 import 'firebase_options.dart';
 
-import 'package:mood_swing/Pages/VerificationPage.dart';
-import 'package:mood_swing/Pages/ExistingPlaylistsPage.dart';
+import 'package:mood_swing/Pages/BluetoothLoaderPage.dart';
+import 'package:mood_swing/Pages/GenerationOptionsPage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,11 +37,16 @@ void main() async {
   runApp(App());
 }
 
-class App extends StatelessWidget {
+class App extends StatefulWidget {
   final MockNavigator? mockNavigator; //Used to add a binding for testing
 
   App({this.mockNavigator});
 
+  @override
+  _AppState createState() => _AppState();
+}
+
+class _AppState extends State<App> {
   final Map<int, Color> color = {
     50: Color.fromRGBO(13, 0, 54, 0.1),
     100: Color.fromRGBO(13, 0, 54, 0.2),
@@ -61,6 +69,12 @@ class App extends StatelessWidget {
         primarySwatch: MaterialColor(0xd789ff, color),
         fontFamily: 'Maven Pro',
       ),
+      routes: {
+        '/camera': (context) => CameraPage(),
+        '/bluetooth': (context) => BluetoothLoaderPage(),
+        '/presets': (context) => PresetsPage(),
+        '/compiling': (context) => TestingPage(),
+      },
       home: StreamBuilder<User?>(
           initialData: FirebaseAuth.instance.currentUser,
           stream: AuthRouter().authMonitor(),
@@ -70,7 +84,7 @@ class App extends StatelessWidget {
             }
 
             //return LandingPage();
-            return ExistingPlaylistsPage();
+            return GenerationOptionsPage();
           }),
     );
   }

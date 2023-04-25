@@ -23,6 +23,15 @@ class LargeScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
+            child: Text(
+              'TEST PAGE',
+              style: TextStyle(
+                fontSize: 80,
+                color: Colors.purple,
+              ),
+            ),
+          ),
+          Container(
             child: OptionButton(
               context: context,
               text: 'Use Camera Only',

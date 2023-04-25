@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mood_swing/Pages/CameraPage.dart';
 import 'package:mood_swing/Pages/ExistingPlaylistsPage.dart';
+import 'package:mood_swing/Pages/GenerationOptionsPage.dart';
 import 'package:mood_swing/Pages/PreferencesPage.dart';
 import 'package:mood_swing/Pages/UserPage.dart';
 import 'package:collapsible_sidebar/collapsible_sidebar.dart';
@@ -67,7 +67,11 @@ class _SidebarLargeState extends State<SidebarLarge> {
         icon: Icons.create_rounded,
         onPressed: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => CameraPage()));
+            context,
+            MaterialPageRoute(
+              builder: (context) => GenerationOptionsPage(),
+            ),
+          );
         },
       ),
 

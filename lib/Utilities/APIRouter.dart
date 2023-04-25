@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:mood_swing/Objects/Mood.dart';
@@ -7,6 +8,35 @@ import 'package:mood_swing/Utilities/AuthRouter.dart';
 import 'SpotifyRouter.dart';
 
 class APIRouter {
+  /**
+  * Sorts the user's song list by closest distance to the specified mood centroid
+  */
+  Future<List<String>> getClosestSongs(
+      Map<String, List<double>> songs, Mood mood, String? user_id) async {
+    List<String> closestSongList = [];
+    var uid = user_id ?? FirebaseAuth.instance.currentUser?.uid;
+    var strMood = mood.toString();
+    final url = "https://moodswing-closest-songs-ilvif34q5a-ue.a.run.app";
+    final headers = {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'POST',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Max-Age': '3600',
+      'Content-Type': 'application/json'
+    };
+    final jsonBody = {'mood': strMood, 'user_id': uid, "songs": songs};
+    Response response = await http
+        .post(Uri.parse(url), headers: headers, body: json.encode(jsonBody))
+        .timeout(Duration(minutes: 1));
+    if (response.statusCode == 200) {
+      var resBody = jsonDecode(response.body);
+      resBody["songs"]!.forEach((element) => closestSongList.add(element));
+      return closestSongList;
+    } else {
+      return [];
+    }
+  }
+
   /**
    * Communicate with Firebase Cloud Function to categorize a user's photo/video
    * to a Mood enum classification.
@@ -62,7 +92,6 @@ class APIRouter {
               : arousalLabel;
         }
       }
-
       return valenceArousalToLabel[valenceLabel][arousalLabel];
     }
     return Mood.Neutral;

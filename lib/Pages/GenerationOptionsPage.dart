@@ -31,6 +31,7 @@ class LargeScreen extends StatelessWidget {
         ),
         child: Column(
           children: [
+            BackArrowBtn(),
             Container(
               padding: EdgeInsets.only(top: 0.1 * height),
               child: Title(),
@@ -41,6 +42,8 @@ class LargeScreen extends StatelessWidget {
               child: Subtitle(),
             ),
 
+            SizedBox(height: 20),
+
             ///Options
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -50,12 +53,7 @@ class LargeScreen extends StatelessWidget {
                   text: 'Use Camera Only',
                   icon: GenerationIcons.cameraOnly,
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => CameraPage(),
-                      ),
-                    );
+                    Navigator.pushNamed(context, '/camera');
                   },
                 ),
                 SizedBox(width: 20),
@@ -63,14 +61,18 @@ class LargeScreen extends StatelessWidget {
                   context: context,
                   text: 'Use Sensor Only',
                   icon: GenerationIcons.sensorOnly,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/bluetooth');
+                  },
                 ),
                 SizedBox(width: 20),
                 LargeOptButton(
                   context: context,
-                  text: 'Use both',
+                  text: 'Use Both',
                   icon: GenerationIcons.both,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/camera');
+                  },
                 ),
                 SizedBox(width: 20),
                 LargeOptButton(
@@ -78,12 +80,7 @@ class LargeScreen extends StatelessWidget {
                   text: 'Use Presets',
                   icon: GenerationIcons.neither,
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => PresetsPage(),
-                      ),
-                    );
+                    Navigator.pushNamed(context, 'presets');
                   },
                 ),
               ],
@@ -110,9 +107,10 @@ class SmallScreen extends StatelessWidget {
         ),
         child: Column(
           children: [
+            BackArrowBtn(),
+
             ///Title
             Container(
-              padding: EdgeInsets.only(top: 0.1 * height),
               child: Title(),
             ),
 
@@ -136,12 +134,7 @@ class SmallScreen extends StatelessWidget {
                     text: 'Use Camera Only',
                     icon: GenerationIcons.cameraOnly,
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CameraPage(),
-                        ),
-                      );
+                      Navigator.pushNamed(context, '/camera');
                     },
                   ),
                 ),
@@ -162,12 +155,7 @@ class SmallScreen extends StatelessWidget {
                   text: 'Use Presets',
                   icon: GenerationIcons.neither,
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => PresetsPage(),
-                      ),
-                    );
+                    Navigator.pushNamed(context, '/presets');
                   },
                 ),
               ],
@@ -219,6 +207,7 @@ class SmallOptButton extends StatelessWidget {
                       fontFamily: 'Maven Pro',
                       fontSize: 20,
                       color: MyPalette.darkTurqoise,
+                      fontWeight: FontWeight.bold,
                     ),
                     textAlign: TextAlign.right,
                   ),
@@ -301,6 +290,7 @@ class LargeOptButton extends StatelessWidget {
                     fontFamily: 'Maven Pro',
                     fontSize: 20,
                     color: MyPalette.darkTurqoise,
+                    fontWeight: FontWeight.bold,
                   ),
                   textAlign: TextAlign.center,
                 ),
