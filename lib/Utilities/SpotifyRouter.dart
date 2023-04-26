@@ -56,21 +56,22 @@ class SpotifyRouter {
     SpotifyApi client = SpotifyApi.withAccessToken(accessToken);
 
     ///Instantiate playlists with liked songs
+    List<String> likedSongURLs = [];
     List<CP.Playlist> rPlaylists = [
       CP.Playlist(
           "",
           "Liked Songs",
           {},
           (await client.tracks.me.saved.all()).map<Song>((e) {
+            likedSongURLs.add(e.track?.album?.images?[0].url??"");
             return Song(
-                // e.track?.id ?? "",
-                // e.track?.name ?? "", {});
                 e.track?.id ?? "",
                 e.track?.name ?? "",
                 {},
                 e.track?.artists?.map((e) => e.name ?? "").toList() ?? []);
           }).toList(),
-          [])
+        likedSongURLs
+          )
     ];
 
     /// Add all other playlists into the list of playlists
