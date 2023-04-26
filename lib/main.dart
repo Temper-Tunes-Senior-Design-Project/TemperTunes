@@ -66,62 +66,17 @@ class App extends StatelessWidget {
         primarySwatch: MaterialColor(0xd789ff, color),
         fontFamily: 'Maven Pro',
       ),
-      home:
-      Scaffold(
-        body: Center(
-          child: Row(
-            children: [
-              Container(
-                height: 200,
-                width: 200,
-                color: Colors.red,
-                child: TextButton(
-                  child: Text("Scan for Devices"),
-                  onPressed: () async
-                  {
-                   WebBluetoothRouter().getWebDevices();
-                  },
-                ),
-              ),
-              Container(
-                height: 200,
-                width: 200,
-                color: Colors.blue,
-                child: TextButton(
-                  child: Text("Write"),
-                  onPressed: ()
-                  {
-                    WebBluetoothRouter().writeToDevice();
-                  },
-                ),
-              ),
-              Container(
-                height: 200,
-                width: 200,
-                color: Colors.green,
-                child: TextButton(
-                  child: Text("Read"),
-                  onPressed: ()
-                  {
-                    WebBluetoothRouter().readFromDevice();
-                  },
-                ),
-              ),
-            ],
-          ),
-        ),
-      )
-      // StreamBuilder<User?>(
-      //     initialData: FirebaseAuth.instance.currentUser,
-      //     stream: AuthRouter().authMonitor(),
-      //     builder: (context, snapshot) {
-      //       if (snapshot.data != null) {
-      //         return HomePage();
-      //       }
-      //
-      //       //return LandingPage();
-      //       return LandingPage();
-      //     }),
+      home: StreamBuilder<User?>(
+          initialData: FirebaseAuth.instance.currentUser,
+          stream: AuthRouter().authMonitor(),
+          builder: (context, snapshot) {
+            if (snapshot.data != null) {
+              return HomePage();
+            }
+
+            //return LandingPage();
+            return LandingPage();
+          }),
     );
   }
 }
