@@ -124,13 +124,7 @@ class _SmallCarouselState extends State<SmallCarousel> {
                             _selectedIndex = {};
                           } else {
                             _selectedIndex = mood;
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    NextPage(selectedMood: mood['title']),
-                              ),
-                            );
+                            Navigator.pushNamed(context, '/compiling');
                           }
                         });
                       },
@@ -275,21 +269,22 @@ class _LargeCarouselState extends State<LargeCarousel> {
           alignment: Alignment.center,
           margin: const EdgeInsets.only(bottom: 80),
           child: CarouselSlider(
-              carouselController: _carouselController,
-              options: CarouselOptions(
-                  height: height * 0.43,
-                  aspectRatio: 16 / 9,
-                  viewportFraction: 0.3,
-                  enlargeFactor: 0.2,
-                  enlargeCenterPage: true,
-                  pageSnapping: true,
-                  onPageChanged: (index, reason) {
-                    setState(() {
-                      _current = index;
-                      //print(index);
-                    });
-                  }),
-              items: _products.map((mood) {
+            carouselController: _carouselController,
+            options: CarouselOptions(
+                height: height * 0.43,
+                aspectRatio: 16 / 9,
+                viewportFraction: 0.3,
+                enlargeFactor: 0.2,
+                enlargeCenterPage: true,
+                pageSnapping: true,
+                onPageChanged: (index, reason) {
+                  setState(() {
+                    _current = index;
+                    //print(index);
+                  });
+                }),
+            items: _products.map(
+              (mood) {
                 return Builder(
                   builder: (BuildContext context) {
                     return GestureDetector(
@@ -373,7 +368,9 @@ class _LargeCarouselState extends State<LargeCarousel> {
                     );
                   },
                 );
-              }).toList()),
+              },
+            ).toList(),
+          ),
         ),
       ],
     ));

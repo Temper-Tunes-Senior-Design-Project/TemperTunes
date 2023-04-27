@@ -19,106 +19,93 @@ class LargeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    // final args = ModalRoute.of(context)?.settings.arguments as Map;
+    //  final args = ModalRoute.of(context)?.settings.arguments as Map;
     final Map<dynamic, dynamic>? args =
         ModalRoute.of(context)?.settings.arguments as Map<dynamic, dynamic>?;
-    if (args == null) {
-      return Scaffold(
-        body: Center(
-          child: Text("No arguments passed."),
+    return SafeArea(
+      child: Container(
+        width: width,
+        height: height,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/loginPageLarge.png"),
+            fit: BoxFit.cover,
+          ),
         ),
-      );
-    } else {
-      return Scaffold(
-        body: Center(
-          child: Text("Option selected: ${args['option']}"),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            BackArrowBtn(),
+            FadeInDown(
+              child: FittedBox(
+                child: Container(
+                  height: height * 0.8,
+                  width: width * 0.4,
+                  decoration: BoxDecoration(
+                    color: Colors.grey.withOpacity(0.3),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(20),
+                    ),
+                  ),
+                  child: Container(
+                    padding: EdgeInsets.only(
+                        top: 0.01 * height, bottom: 0.01 * height),
+                    height: double.maxFinite,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ///Title
+                        FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: Container(
+                            alignment: Alignment.center,
+                            padding: EdgeInsets.only(top: 0.04 * height),
+                            child: Text(
+                              'Select Your Device',
+                              style: TextStyle(
+                                fontSize: 49,
+                                fontFamily: 'Share Tech',
+                                color: MyPalette.lightPurple,
+                              ),
+                            ),
+                          ),
+                        ),
+
+                        Subtitle(),
+                        StreamBuilder<List<DiscoveredDevice>>(
+                          stream: BluetoothRouter().getNearbyDevices(),
+                          builder: (context, snapshot) {
+                            return Expanded(
+                              child: Container(
+                                height: double.minPositive,
+                                child: ListView.builder(
+                                    itemCount: snapshot.data?.length ?? 0,
+                                    itemBuilder: (context, i) {
+                                      return ListTile(
+                                        title: Text(
+                                          snapshot.data?[i].name ?? "No data",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      );
+                                    }),
+                              ),
+                            );
+                          },
+                        ),
+                        ContinueBtn(option: args!['option']),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
-      );
-    }
-    // return SafeArea(
-    //   child: Container(
-    //     width: width,
-    //     height: height,
-    //     decoration: BoxDecoration(
-    //       image: DecorationImage(
-    //         image: AssetImage("assets/loginPageLarge.png"),
-    //         fit: BoxFit.cover,
-    //       ),
-    //     ),
-    //     child: Column(
-    //       crossAxisAlignment: CrossAxisAlignment.center,
-    //       children: <Widget>[
-    //         BackArrowBtn(),
-    //         FadeInDown(
-    //           child: FittedBox(
-    //             child: Container(
-    //               height: height * 0.8,
-    //               width: width * 0.4,
-    //               decoration: BoxDecoration(
-    //                 color: Colors.grey.withOpacity(0.3),
-    //                 borderRadius: BorderRadius.all(
-    //                   Radius.circular(20),
-    //                 ),
-    //               ),
-    //               child: Container(
-    //                 padding: EdgeInsets.only(
-    //                     top: 0.01 * height, bottom: 0.01 * height),
-    //                 height: double.maxFinite,
-    //                 child: Column(
-    //                   crossAxisAlignment: CrossAxisAlignment.center,
-    //                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    //                   children: [
-    //                     ///Title
-    //                     FittedBox(
-    //                       fit: BoxFit.scaleDown,
-    //                       child: Container(
-    //                         alignment: Alignment.center,
-    //                         padding: EdgeInsets.only(top: 0.04 * height),
-    //                         child: Text(
-    //                           'Select Your Device',
-    //                           style: TextStyle(
-    //                             fontSize: 49,
-    //                             fontFamily: 'Share Tech',
-    //                             color: MyPalette.lightPurple,
-    //                           ),
-    //                         ),
-    //                       ),
-    //                     ),
-    //
-    //                     Subtitle(),
-    //                     StreamBuilder<List<DiscoveredDevice>>(
-    //                       stream: BluetoothRouter().getNearbyDevices(),
-    //                       builder: (context, snapshot) {
-    //                         return Expanded(
-    //                           child: Container(
-    //                             height: double.minPositive,
-    //                             child: ListView.builder(
-    //                                 itemCount: snapshot.data?.length ?? 0,
-    //                                 itemBuilder: (context, i) {
-    //                                   return ListTile(
-    //                                     title: Text(
-    //                                       snapshot.data?[i].name ?? "No data",
-    //                                       style: TextStyle(
-    //                                         color: Colors.white,
-    //                                       ),
-    //                                     ),
-    //                                   );
-    //                                 }),
-    //                           ),
-    //                         );
-    //                       },
-    //                     ),
-    //                     ContinueBtn(option: args['option']),
-    //                   ],
-    //                 ),
-    //               ),
-    //             ),
-    //           ),
-    //         ),
-    //       ],
-    //     ),
-    //   ),
-    // );
+      ),
+    );
   }
 }
 
@@ -197,7 +184,7 @@ class SmallScreen extends StatelessWidget {
                         );
                       },
                     ),
-                    ContinueBtn(option: args['option']),
+                    ContinueBtn(option: args!['option']),
                   ],
                 ),
               ),

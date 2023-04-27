@@ -116,7 +116,11 @@ class MoodPopup extends StatelessWidget {
                         child: Text('Yes'),
                         onPressed: () {
                           if (option == 'UseBoth') {
-                            Navigator.pushNamed(context, '/bluetooth');
+                            Navigator.pushNamed(
+                              context,
+                              '/bluetooth',
+                              arguments: {'option': 'UseBoth'},
+                            );
                           } else {
                             Navigator.pushNamed(context, '/compiling');
                           }

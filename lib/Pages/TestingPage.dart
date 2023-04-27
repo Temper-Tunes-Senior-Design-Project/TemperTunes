@@ -31,35 +31,6 @@ class LargeScreen extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            child: OptionButton(
-              context: context,
-              text: 'Use Camera Only',
-              icon: Icons.photo_camera,
-              onPressed: () {},
-            ),
-          ),
-          SizedBox(width: 10),
-          OptionButton(
-            context: context,
-            text: 'Use Sensor Only',
-            icon: Icons.photo_camera,
-            onPressed: () {},
-          ),
-          SizedBox(width: 10),
-          OptionButton(
-            context: context,
-            text: 'Use Sensor Only',
-            icon: Icons.photo_camera,
-            onPressed: () {},
-          ),
-          SizedBox(width: 10),
-          OptionButton(
-            context: context,
-            text: 'Use Sensor Only',
-            icon: Icons.photo_camera,
-            onPressed: () {},
-          ),
         ],
       ),
     );
