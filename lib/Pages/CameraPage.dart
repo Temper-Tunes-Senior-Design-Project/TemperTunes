@@ -151,12 +151,6 @@ class _LargeScreenState extends State<LargeScreen> {
         //background
         decoration: BoxDecoration(
           color: Colors.black,
-          // image: DecorationImage(
-          //     image: (defaultTargetPlatform == TargetPlatform.iOS ||
-          //             defaultTargetPlatform == TargetPlatform.android)
-          //         ? AssetImage("assets/userPageSmall.png")
-          //         : AssetImage("assets/userPageLarge.png"),
-          //     fit: BoxFit.cover),
         ),
         child: Column(
           children: [
@@ -258,10 +252,15 @@ class _LargeScreenState extends State<LargeScreen> {
                                       .uploadFile(
                                           pictureFile ?? videoFile, type) ??
                                   "Processing Data/file.jpg";
+                              final args = ModalRoute.of(context)
+                                  ?.settings
+                                  .arguments as Map;
                               showDialog(
                                   context: context,
                                   builder: (ctxt) {
-                                    return MoodPopup(filePath);
+                                    return MoodPopup(
+                                        filePath: filePath,
+                                        option: args['option']);
                                   });
 
                               // ClassPopup().getDialogue(context);

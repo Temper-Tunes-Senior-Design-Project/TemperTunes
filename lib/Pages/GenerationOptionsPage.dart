@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../Widgets/widgets.dart';
 
-import 'package:mood_swing/Pages/CameraPage.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:mood_swing/Pages/PresetsPage.dart';
 
@@ -53,7 +52,11 @@ class LargeScreen extends StatelessWidget {
                   text: 'Use Camera Only',
                   icon: GenerationIcons.cameraOnly,
                   onPressed: () {
-                    Navigator.pushNamed(context, '/camera');
+                    Navigator.pushNamed(
+                      context,
+                      '/camera',
+                      arguments: {'option': 'UseCameraOnly'},
+                    );
                   },
                 ),
                 SizedBox(width: 20),
@@ -62,7 +65,11 @@ class LargeScreen extends StatelessWidget {
                   text: 'Use Sensor Only',
                   icon: GenerationIcons.sensorOnly,
                   onPressed: () {
-                    Navigator.pushNamed(context, '/bluetooth');
+                    Navigator.pushNamed(
+                      context,
+                      '/bluetooth',
+                      arguments: {'option': 'UseSensorOnly'},
+                    );
                   },
                 ),
                 SizedBox(width: 20),
@@ -71,7 +78,11 @@ class LargeScreen extends StatelessWidget {
                   text: 'Use Both',
                   icon: GenerationIcons.both,
                   onPressed: () {
-                    Navigator.pushNamed(context, '/camera');
+                    Navigator.pushNamed(
+                      context,
+                      '/camera',
+                      arguments: {'option': 'UseBoth'},
+                    );
                   },
                 ),
                 SizedBox(width: 20),
@@ -80,7 +91,11 @@ class LargeScreen extends StatelessWidget {
                   text: 'Use Presets',
                   icon: GenerationIcons.neither,
                   onPressed: () {
-                    Navigator.pushNamed(context, 'presets');
+                    Navigator.pushNamed(
+                      context,
+                      '/presets',
+                      arguments: {'option': 'UsePresetsOnly'},
+                    );
                   },
                 ),
               ],
@@ -134,7 +149,11 @@ class SmallScreen extends StatelessWidget {
                     text: 'Use Camera Only',
                     icon: GenerationIcons.cameraOnly,
                     onPressed: () {
-                      Navigator.pushNamed(context, '/camera');
+                      Navigator.pushNamed(
+                        context,
+                        '/camera',
+                        arguments: {'option': 'UseCameraOnly'},
+                      );
                     },
                   ),
                 ),
@@ -142,20 +161,36 @@ class SmallScreen extends StatelessWidget {
                   context: context,
                   text: 'Use Sensor Only',
                   icon: GenerationIcons.sensorOnly,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(
+                      context,
+                      '/bluetooth',
+                      arguments: {'option': 'UseSensorOnly'},
+                    );
+                  },
                 ),
                 SmallOptButton(
                   context: context,
                   text: 'Use Both',
                   icon: GenerationIcons.both,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(
+                      context,
+                      '/camera',
+                      arguments: {'option': 'UseBoth'},
+                    );
+                  },
                 ),
                 SmallOptButton(
                   context: context,
                   text: 'Use Presets',
                   icon: GenerationIcons.neither,
                   onPressed: () {
-                    Navigator.pushNamed(context, '/presets');
+                    Navigator.pushNamed(
+                      context,
+                      '/presets',
+                      arguments: {'option': 'UsePresetsOnly'},
+                    );
                   },
                 ),
               ],
@@ -172,12 +207,13 @@ class SmallOptButton extends StatelessWidget {
   final void Function() onPressed;
   final BuildContext context;
   final IconData icon;
-  const SmallOptButton(
-      {required this.context,
-      required this.text,
-      required this.icon,
-      required this.onPressed,
-      super.key});
+  const SmallOptButton({
+    required this.context,
+    required this.text,
+    required this.icon,
+    required this.onPressed,
+    Key? key, // Updated parameter name and type
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -253,12 +289,13 @@ class LargeOptButton extends StatelessWidget {
   final void Function() onPressed;
   final BuildContext context;
   final IconData icon;
-  const LargeOptButton(
-      {required this.context,
-      required this.text,
-      required this.icon,
-      required this.onPressed,
-      super.key});
+  const LargeOptButton({
+    required this.context,
+    required this.text,
+    required this.icon,
+    required this.onPressed,
+    Key? key, // Updated parameter name and type
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

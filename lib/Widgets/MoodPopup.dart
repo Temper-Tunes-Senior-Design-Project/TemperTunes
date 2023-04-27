@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mood_swing/Pages/TestingPage.dart';
 import '../Widgets/widgets.dart';
 
 import '../Objects/Mood.dart';
@@ -6,8 +7,10 @@ import '../Utilities/APIRouter.dart';
 
 class MoodPopup extends StatelessWidget {
   final String filePath;
-  MoodPopup(this.filePath);
+  final String option;
   late final Future<Mood> emotion;
+  //MoodPopup(filePath, option);
+  MoodPopup({required this.filePath, required this.option});
 
   @override
   Widget build(BuildContext context) {
@@ -24,15 +27,6 @@ class MoodPopup extends StatelessWidget {
         width: width * 0.2,
         decoration: BoxDecoration(
           color: Colors.white,
-          // gradient: LinearGradient(
-          //   begin: Alignment.topRight,
-          //   end: Alignment.bottomLeft,
-          //   colors: [
-          //     MyPalette.brightMagenta,
-          //     MyPalette.turqoise,
-          //   ],
-          // ),
-
           borderRadius: BorderRadius.all(
             Radius.circular(20),
           ),
@@ -79,7 +73,8 @@ class MoodPopup extends StatelessWidget {
                   w = Image.asset("assets/sad.png", height: 0.15 * height);
                   break;
                 default:
-                  w = Image.asset("assets/neutral.png", height: 0.15 * height);
+                  w = Text("ERROR - emotion could not be identified");
+
                   break;
               }
 
@@ -119,7 +114,13 @@ class MoodPopup extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Text('Yes'),
-                        onPressed: () {},
+                        onPressed: () {
+                          if (option == 'UseBoth') {
+                            Navigator.pushNamed(context, '/bluetooth');
+                          } else {
+                            Navigator.pushNamed(context, '/compiling');
+                          }
+                        },
                       ),
                     ),
                   ),
@@ -160,24 +161,6 @@ class MoodPopup extends StatelessWidget {
                       child: w,
                     ),
                   ),
-
-                  // Column(
-                  //   mainAxisAlignment: MainAxisAlignment.center,
-                  //   crossAxisAlignment: CrossAxisAlignment.center,
-                  //   children: [
-                  //     Container(
-                  //       child: Text(
-                  //         snapshot.data?.name ?? "No data",
-                  //         style: TextStyle(
-                  //           fontFamily: 'Share Tech',
-                  //           color: MyPalette.darkBlue,
-                  //           fontSize: 30,
-                  //         ),
-                  //       ),
-                  //     ),
-                  //     Container(padding: EdgeInsets.only(top: 20), child: w),
-                  //   ],
-                  // ),
                 ],
               );
             }
@@ -202,11 +185,6 @@ class MoodPopup extends StatelessWidget {
                   ),
                 ],
               ),
-
-              // SpinKitWave(
-              //   color: Colors.white,
-              //   size: 50.0,
-              // ),
             );
           },
         ),
