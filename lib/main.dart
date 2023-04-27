@@ -1,20 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_web_bluetooth/flutter_web_bluetooth.dart';
 import 'package:mood_swing/Pages/LandingPage.dart';
 import 'package:mood_swing/Pages/HomePage.dart';
 import 'dart:ui';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mood_swing/Utilities/AuthRouter.dart';
-import 'package:mood_swing/Utilities/BluetoothRouter.dart';
-import 'package:mood_swing/Utilities/WebBluetoothRouter.dart';
 import 'Widgets/MockNavigator.dart';
 import 'firebase_options.dart';
-
-import 'package:mood_swing/Pages/VerificationPage.dart';
-import 'package:mood_swing/Pages/ExistingPlaylistsPage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -53,9 +47,6 @@ class App extends StatelessWidget {
     800: Color.fromRGBO(13, 0, 54, 0.9),
     900: Color.fromRGBO(13, 0, 54, 1),
   };
-  
-
-  WebBluetoothRouter wbr = new WebBluetoothRouter();
 
   @override
   Widget build(BuildContext context) {

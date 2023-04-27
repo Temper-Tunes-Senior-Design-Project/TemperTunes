@@ -41,8 +41,8 @@ class WebBluetoothRouter {
     await device?.connect();
     print(await device?.discoverServices());
     device?.services.listen((event) async {
-      BluetoothCharacteristic? char = (await event[0].getCharacteristics())?[0];
-      char?.writeValueWithoutResponse(Uint8List.fromList(utf8.encode("on")));
+      BluetoothCharacteristic? char = (await event[0].getCharacteristics())[0];
+      char.writeValueWithoutResponse(Uint8List.fromList(utf8.encode("on")));
       print("Written");
     });
   }
