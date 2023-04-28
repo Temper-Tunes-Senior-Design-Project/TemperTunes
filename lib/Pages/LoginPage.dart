@@ -47,9 +47,7 @@ class _LargeScreenState extends State<LargeScreen> {
               image: AssetImage("assets/loginPageLarge.png"),
               fit: BoxFit.cover),
         ),
-        child: Expanded(
-          flex: 1,
-          child: Column(
+        child: Column(
             children: <Widget>[
               ///Back button
               BackArrowBtn(),
@@ -257,7 +255,6 @@ class _LargeScreenState extends State<LargeScreen> {
               ),
             ],
           ),
-        ),
       ),
     );
   }

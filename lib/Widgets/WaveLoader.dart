@@ -98,6 +98,14 @@ class _AutomatedAnimatorState extends State<AutomatedAnimator>
   }
 
   @override
+  void dispose()
+  {
+    controller.dispose();
+    super.dispose();
+
+
+  }
+  @override
   Widget build(BuildContext context) {
     return widget.buildWidget(controller.value);
   }
@@ -304,16 +312,33 @@ class WaveLoadingBubblePainter extends CustomPainter {
 }
 
 class WavePathHorizontal {
-  WavePathHorizontal({
-    required this.width,
-    required this.amplitude,
-    required this.period,
-    required this.startPoint,
-    this.phaseShift = 0.0,
-    this.doClosePath = false,
-    this.crossAxisEndPoint = 0,
-  }) : assert(doClosePath == false,
-            "if doClosePath is true you must provide an end point (crossAxisEndPoint)");
+  WavePathHorizontal(
+
+  {
+
+  required
+
+  this
+
+      .
+
+  width,
+  required this.amplitude,
+  required this.period,
+  required this.startPoint,
+  this.phaseShift = 0.0,
+  this.doClosePath = false,
+  this.crossAxisEndPoint
+
+  =
+
+  0
+
+  ,
+});
+
+  // }) : assert(doClosePath == false,
+  //           "if doClosePath is true you must provide an end point (crossAxisEndPoint)");
 
   final double width;
   final double amplitude;

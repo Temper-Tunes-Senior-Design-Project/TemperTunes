@@ -81,8 +81,7 @@ class _LargeScreenState extends State<LargeScreen> {
                       Radius.circular(20),
                     ),
                   ),
-                  child: Expanded(
-                    child: Column(
+                  child: Column(
                       children: [
                         Flexible(
                           fit: FlexFit.tight,
@@ -245,7 +244,6 @@ class _LargeScreenState extends State<LargeScreen> {
                         ),
                       ],
                     ),
-                  ),
                 ),
               ),
             ),
