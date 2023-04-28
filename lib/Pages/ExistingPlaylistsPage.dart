@@ -284,6 +284,7 @@ class _PlaylistItemState extends State<PlaylistItem> {
               Expanded(
                 child: ListView.builder(
                   physics: NeverScrollableScrollPhysics(),
+                  //scrollDirection: axisDirectionToAxis(AxisDirection.left),
                   itemCount: widget.playlist.images.length,
                   itemBuilder: (context, index) {
                     return Container(

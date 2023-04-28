@@ -194,4 +194,18 @@ class APIRouter {
     }
     return partitions;
   }
+
+/********F
+ * Integrate playlist generation flow with our client application so
+ */
+  Future<List<String>> fetchSongs() async {
+    final response = await http.get(Uri.parse('http://localhost:8080'));
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      final List<dynamic> songs = data['songs'];
+      return songs.cast<String>().toList();
+    } else {
+      throw Exception('failed to load songs');
+    }
+  }
 }
