@@ -5,6 +5,7 @@ import '../Objects/Song.dart';
 import '../Widgets/widgets.dart';
 import 'package:mood_swing/Utilities/APIRouter.dart';
 import 'package:mood_swing/Utilities/SpotifyRouter.dart';
+import 'package:bouncing_widget/bouncing_widget.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -79,6 +80,7 @@ class LargePlaylistLayout extends StatefulWidget {
 }
 
 class _LargePlaylistLayoutState extends State<LargePlaylistLayout> {
+  TextEditingController playlistName = TextEditingController();
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -89,14 +91,15 @@ class _LargePlaylistLayoutState extends State<LargePlaylistLayout> {
       height: height,
       decoration: BoxDecoration(
         image: DecorationImage(
-            image: AssetImage("assets/userPageLarge.png"), fit: BoxFit.cover),
+            image: AssetImage("assets/appbarBG.png"), fit: BoxFit.cover),
       ),
       child: Column(
         children: [
           BackArrowBtn(),
           Padding(
-            padding: const EdgeInsets.all(30.0),
+            padding: EdgeInsets.only(top: 40.0),
             child: Container(
+              width: 0.8 * width,
               decoration: BoxDecoration(
                 color: Colors.grey.withOpacity(0.3),
                 borderRadius: BorderRadius.all(
@@ -106,17 +109,17 @@ class _LargePlaylistLayoutState extends State<LargePlaylistLayout> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ///Playlist cover
+                  ///Holds the art and song list
                   Container(
-                    height: 0.7 * height,
-                    width: 0.35 * width,
+                    height: 0.6 * height,
+                    width: 0.4 * width,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Expanded(
                           child: Container(
                             padding:
-                                EdgeInsets.symmetric(vertical: 0.1 * height),
+                                EdgeInsets.symmetric(vertical: 0.05 * height),
                             child: Image.network(
                               widget.songList[0].imageURl,
                               fit: BoxFit.cover,
@@ -128,14 +131,17 @@ class _LargePlaylistLayoutState extends State<LargePlaylistLayout> {
                   ),
 
                   SizedBox(width: 20),
+
+                  ///song list and name
                   Container(
-                    height: 0.6 * height,
-                    width: 0.4 * width,
+                    height: 0.55 * height,
+                    width: 0.3 * width,
                     child: Container(
                       height: height - (height * 0.8),
                       child: Column(
                         children: [
                           Container(
+                            padding: EdgeInsets.only(bottom: 15),
                             child: TextFormField(
                               textAlign: TextAlign.center,
                               style: TextStyle(
@@ -146,6 +152,9 @@ class _LargePlaylistLayoutState extends State<LargePlaylistLayout> {
                               ),
                               decoration: InputDecoration(
                                 hintStyle: TextStyle(color: Colors.white60),
+                                hintText: 'Playlist Name',
+                                enabledBorder: inputborder(),
+                                focusedBorder: focusborder(),
                               ),
                             ),
                           ),
@@ -177,7 +186,98 @@ class _LargePlaylistLayoutState extends State<LargePlaylistLayout> {
               ),
             ),
           ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 0.1 * width),
+            child: Row(
+              children: [
+                OptionButtons(
+                  text: 'Restart',
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: OptionButtons(
+                    text: 'Continue',
+                  ),
+                )
+              ],
+            ),
+          ),
         ],
+      ),
+    );
+  }
+}
+
+OutlineInputBorder inputborder() {
+  //return type is OutlineInputBorder
+  return OutlineInputBorder(
+      //Outline border type for TextFeild
+      borderRadius: BorderRadius.all(Radius.circular(20)),
+      borderSide: BorderSide(
+        color: Colors.white,
+        width: 3,
+      ));
+}
+
+OutlineInputBorder focusborder() {
+  return OutlineInputBorder(
+      borderRadius: BorderRadius.all(Radius.circular(20)),
+      borderSide: BorderSide(
+        color: MyPalette.turqoise,
+        width: 3,
+      ));
+}
+
+class OptionButtons extends StatelessWidget {
+  final String text;
+
+  OptionButtons({required this.text, super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+    return Container(
+      padding: EdgeInsets.only(top: 0.016 * height),
+      child: BouncingWidget(
+        child: Container(
+          width: 0.2 * width,
+          height: 0.075 * height,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [
+                MyPalette.slateBlue,
+                MyPalette.brightMagenta,
+                MyPalette.turqoise,
+              ],
+            ),
+            borderRadius: BorderRadius.all(
+              Radius.circular(15),
+            ),
+            boxShadow: [
+              BoxShadow(
+                offset: Offset(0, 1),
+                color: MyPalette.brightMagenta,
+                blurRadius: 16,
+              )
+            ],
+          ),
+          child: Align(
+            alignment: Alignment.center,
+            child: Text(
+              text,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 25,
+                fontFamily: 'Share Tech',
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+        onPressed: () {},
       ),
     );
   }
