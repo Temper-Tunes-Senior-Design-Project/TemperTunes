@@ -22,89 +22,75 @@ class LargeScreen extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
 
     return FutureBuilder<List<String>>(
+      key: UniqueKey(),
       future: APIRouter().fetchSongs(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
             child: CircularProgressIndicator(),
           );
-        }
-        if (snapshot.hasError) {
+        } else if (snapshot.hasError) {
           return Center(
             child: Text("error fetching songs"),
           );
-        }
-        List<String> songs = snapshot.data!;
-        return SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                height: 200,
-                child: Text(
-                  'test page',
-                  style: TextStyle(
-                    fontSize: 80,
+        } else if (snapshot.connectionState == ConnectionState.done) {
+          List<String> songs = snapshot.data!;
+          return SafeArea(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  height: 200,
+                  child: Text(
+                    'test page',
+                    style: TextStyle(
+                      fontSize: 80,
+                    ),
                   ),
                 ),
-              ),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: songs.length,
-                  itemBuilder: (context, index) {
-                    return FutureBuilder<Song>(
-                      future: SpotifyRouter().getSong(songs[index]),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: songs.length,
+                    itemBuilder: (context, index) {
+                      return FutureBuilder<Song>(
+                        future: SpotifyRouter().getSong(songs[index]),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return ListTile(
+                              title: Text('Loading... '),
+                            );
+                          }
+                          if (snapshot.hasError) {
+                            return ListTile(
+                              title: Text('Error fetching song'),
+                            );
+                          }
+                          Song song = snapshot.data!;
+                          String formattedSong = '${song.name}';
                           return ListTile(
-                            title: Text('Loading... '),
+                            title: Text(formattedSong),
                           );
-                        }
-                        if (snapshot.hasError) {
-                          return ListTile(
-                            title: Text('Error fetching song'),
-                          );
-                        }
-                        Song song = snapshot.data!;
-                        String formattedSong =
-                            '${song.name} by ${song.artists.join(", ")}';
-                        return ListTile(
-                          title: Text(formattedSong),
-                        );
-                      },
-                    );
-                  },
+                        },
+                      );
+                    },
+                  ),
                 ),
-              ),
-            ],
-          ),
-        );
+              ],
+            ),
+          );
+        } else {
+          return Center(
+            child: Text("Unknown connection state"),
+          );
+        }
       },
     );
-
-    // return SafeArea(
-    //   child: Row(
-    //     mainAxisAlignment: MainAxisAlignment.center,
-    //     children: [
-    //       Container(
-    //         child: Text(
-    //           'TEST PAGE',
-    //           style: TextStyle(
-    //             fontSize: 80,
-    //             color: Colors.purple,
-    //           ),
-    //         ),
-    //       ),
-    //       Column(children: [])
-    //     ],
-    //   ),
-    // );
   }
 }
 
 class NewlyGeneratedPlaylistPage extends StatelessWidget {
-  static const Key PageKey = Key("Testing Page");
+  static const Key PageKey = Key("Generated Playlist Page");
 
   @override
   Widget build(BuildContext context) {

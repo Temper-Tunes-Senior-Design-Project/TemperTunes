@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mood_swing/Pages/LandingPage.dart';
 import 'package:mood_swing/Pages/HomePage.dart';
+import 'package:mood_swing/Pages/BluetoothLoaderPage.dart';
 import 'dart:ui';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,8 +14,8 @@ import 'Pages/PresetsPage.dart';
 import 'Widgets/MockNavigator.dart';
 import 'firebase_options.dart';
 
-import 'package:mood_swing/Pages/BluetoothLoaderPage.dart';
 import 'package:mood_swing/Pages/NewlyGeneratedPlaylistPage.dart';
+import 'package:mood_swing/Pages/TestingPage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
