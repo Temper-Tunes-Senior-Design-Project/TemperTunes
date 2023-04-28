@@ -187,7 +187,8 @@ class _LargePlaylistLayoutState extends State<LargePlaylistLayout> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 0.05 * width),
+            padding:
+                EdgeInsets.symmetric(horizontal: 0.01 * width, vertical: 15),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -231,7 +232,6 @@ OutlineInputBorder focusborder() {
 
 class OptionButtons extends StatelessWidget {
   final String text;
-
   OptionButtons({required this.text, super.key});
 
   @override
