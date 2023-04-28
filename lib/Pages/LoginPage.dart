@@ -332,54 +332,58 @@ class _LargeScreenState extends State<LargeScreen> {
                             EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                         height: height * 0.15,
                         child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              ExternalAuthBtn(
-                                context: context,
-                                heroTag: "Google",
-                                toolTipText: "Google",
-                                img: Image.asset("assets/googleIcon.png",
-                                    height: 15),
-                                onPressed: () {
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            ExternalAuthBtn(
+                              context: context,
+                              heroTag: "Google",
+                              toolTipText: "Google",
+                              img: Image.asset("assets/googleIcon.png",
+                                  height: 15),
+                              onPressed: () async {
+                                await AuthRouter().signInWithProvider("Google");
+                                if (AuthRouter().isLoggedIn())
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) => HomePage(),
                                     ),
                                   );
-                                },
-                              ),
-                              ExternalAuthBtn(
-                                context: context,
-                                heroTag: "Facebook",
-                                toolTipText: "Facebook",
-                                img: Image.asset("assets/facebookIcon.png"),
-                                onPressed: () {
+                              },
+                            ),
+                            ExternalAuthBtn(
+                              context: context,
+                              heroTag: "Facebook",
+                              toolTipText: "Facebook",
+                              img: Image.asset("assets/facebookIcon.png"),
+                              onPressed: () async {
+                                await AuthRouter().facebookSignIn();
+                                if (AuthRouter().isLoggedIn()) {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) => HomePage(),
                                     ),
                                   );
-                                },
-                              ),
-                              ExternalAuthBtn(
-                                context: context,
-                                img: Image.asset("assets/appleIcon.png"),
-                                toolTipText: "AppleID",
-                                heroTag: "Apple Login",
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => HomePage(),
-                                    ),
-                                  );
-                                },
-                              ),
-                            ],
-                          ),
-
+                                }
+                              },
+                            ),
+                            ExternalAuthBtn(
+                              context: context,
+                              img: Image.asset("assets/appleIcon.png"),
+                              toolTipText: "AppleID",
+                              heroTag: "Apple Login",
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => HomePage(),
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
