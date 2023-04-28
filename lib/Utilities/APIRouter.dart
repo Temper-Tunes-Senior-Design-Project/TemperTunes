@@ -196,7 +196,8 @@ class APIRouter {
   }
 
 /********F
- * Integrate playlist generation flow with our client application so
+ * Integrate playlist generation flow with our client application so that we can
+ * fetch the songs within the generated playlist.
  */
   Future<List<String>> fetchSongs() async {
     final response = await http.get(Uri.parse('http://localhost:8080'));
