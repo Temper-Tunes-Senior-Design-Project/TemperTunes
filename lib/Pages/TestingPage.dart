@@ -21,67 +21,68 @@ class LargeScreen extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
 
-    return FutureBuilder<List<String>>(
-      future: APIRouter().fetchSongs(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-        if (snapshot.hasError) {
-          return Center(
-            child: Text("error fetching songs"),
-          );
-        }
-        List<String> songs = snapshot.data!;
-        return SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                height: 200,
-                child: Text(
-                  'test page',
-                  style: TextStyle(
-                    fontSize: 80,
-                  ),
-                ),
-              ),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: songs.length,
-                  itemBuilder: (context, index) {
-                    return FutureBuilder<Song>(
-                      future: SpotifyRouter().getSong(songs[index]),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return ListTile(
-                            title: Text('Loading... '),
-                          );
-                        }
-                        if (snapshot.hasError) {
-                          return ListTile(
-                            title: Text('Error fetching song'),
-                          );
-                        }
-                        Song song = snapshot.data!;
-                        String formattedSong =
-                            '${song.name} by ${song.artists.join(", ")}';
-                        return ListTile(
-                          title: Text(formattedSong),
-                        );
-                      },
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
+    return Container();
+    // return FutureBuilder<List<String>>(
+    //   future: APIRouter().fetchSongs(),
+    //   builder: (context, snapshot) {
+    //     if (snapshot.connectionState == ConnectionState.waiting) {
+    //       return Center(
+    //         child: CircularProgressIndicator(),
+    //       );
+    //     }
+    //     if (snapshot.hasError) {
+    //       return Center(
+    //         child: Text("error fetching songs"),
+    //       );
+    //     }
+    //     List<String> songs = snapshot.data!;
+    //     return SafeArea(
+    //       child: Column(
+    //         mainAxisAlignment: MainAxisAlignment.center,
+    //         children: [
+    //           Container(
+    //             height: 200,
+    //             child: Text(
+    //               'test page',
+    //               style: TextStyle(
+    //                 fontSize: 80,
+    //               ),
+    //             ),
+    //           ),
+    //           Expanded(
+    //             child: ListView.builder(
+    //               itemCount: songs.length,
+    //               itemBuilder: (context, index) {
+    //                 return FutureBuilder<Song>(
+    //                   future: SpotifyRouter().getSong(songs[index]),
+    //                   builder: (context, snapshot) {
+    //                     if (snapshot.connectionState ==
+    //                         ConnectionState.waiting) {
+    //                       return ListTile(
+    //                         title: Text('Loading... '),
+    //                       );
+    //                     }
+    //                     if (snapshot.hasError) {
+    //                       return ListTile(
+    //                         title: Text('Error fetching song'),
+    //                       );
+    //                     }
+    //                     Song song = snapshot.data!;
+    //                     String formattedSong =
+    //                         '${song.name} by ${song.artists.join(", ")}';
+    //                     return ListTile(
+    //                       title: Text(formattedSong),
+    //                     );
+    //                   },
+    //                 );
+    //               },
+    //             ),
+    //           ),
+    //         ],
+    //       ),
+    //     );
+    //   },
+    // );
 
     // return SafeArea(
     //   child: Row(

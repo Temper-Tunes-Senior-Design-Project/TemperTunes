@@ -113,9 +113,13 @@ class LargeScreenState extends State<LargeScreen> {
                               // ),
                             ],
                           );
-                        } else {
-                          return CircularProgressIndicator();
                         }
+                        return Container(
+                          alignment: Alignment.center,
+                          height: 0.7 * height,
+                          width: 0.7 * width,
+                          child: WaveLoader(title: 'Wave'),
+                        );
                       },
                     ),
                   ],
@@ -203,22 +207,15 @@ class SmallScreenState extends State<SmallScreen> {
                                       }),
                                 ),
                               ),
-
-                              // Visibility(
-                              //   visible: isPlaylistSelected,
-                              //   child: Center(
-                              //     child: Container(
-                              //       height: 500,
-                              //       width: 500,
-                              //       color: Colors.red,
-                              //     ),
-                              //   ),
-                              // ),
                             ],
                           );
-                        } else {
-                          return CircularProgressIndicator();
                         }
+                        return Container(
+                          alignment: Alignment.center,
+                          height: 0.5 * height,
+                          width: 0.5 * width,
+                          child: WaveLoader(title: 'Wave'),
+                        );
                       },
                     ),
                   ],
@@ -234,7 +231,6 @@ class SmallScreenState extends State<SmallScreen> {
 
 class PlaylistItem extends StatefulWidget {
   final Playlist playlist;
-
   const PlaylistItem({required this.playlist, Key? key}) : super(key: key);
 
   @override
@@ -315,7 +311,6 @@ class _PlaylistItemState extends State<PlaylistItem> {
 
 class ExistingPlaylistsPage extends StatelessWidget {
   const ExistingPlaylistsPage({Key? key}) : super(key: key);
-
   @override
   Widget build(Object context) {
     return Scaffold(

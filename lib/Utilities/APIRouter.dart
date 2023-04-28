@@ -3,8 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:mood_swing/Objects/Mood.dart';
+import 'package:mood_swing/Objects/Playlist.dart';
 import 'package:mood_swing/Utilities/AuthRouter.dart';
 
+import '../Objects/Song.dart';
 import 'SpotifyRouter.dart';
 
 class APIRouter {
@@ -199,12 +201,19 @@ class APIRouter {
  * Integrate playlist generation flow with our client application so that we can
  * fetch the songs within the generated playlist.
  */
-  Future<List<String>> fetchSongs() async {
+  Future<Playlist> fetchSongs() async {
     final response = await http.get(Uri.parse('http://localhost:8080'));
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
       final List<dynamic> songs = data['songs'];
-      return songs.cast<String>().toList();
+      List<Song> spotifySongs = [];
+      for (String songID in songs) {
+        spotifySongs.add(await SpotifyRouter().getSong(songID));
+      }
+
+      return Playlist("-1", "Mood Swing Generated Playlist", {}, spotifySongs,
+          spotifySongs.map((e) => e.imageURl).toList());
+      //return songs.cast<String>().toList();
     } else {
       throw Exception('failed to load songs');
     }

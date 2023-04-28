@@ -71,7 +71,8 @@ class SpotifyRouter {
                 e.track?.id ?? "",
                 e.track?.name ?? "",
                 {},
-                e.track?.artists?.map((e) => e.name ?? "").toList() ?? []);
+                e.track?.artists?.map((e) => e.name ?? "").toList() ?? [],
+                "");
           }).toList(),
           likedSongURLs)
     ];
@@ -85,7 +86,7 @@ class SpotifyRouter {
       List<Song>? songs = data?.map((e) {
         List<String> artists = List<String>.from(
             e["track"]["artists"].map((e) => e["name"] ?? "").toList());
-        return Song("", e["track"]["name"], {}, artists);
+        return Song("", e["track"]["name"], {}, artists, "");
       }).toList();
 
       rPlaylists.add(CP.Playlist("", p.name ?? "No name", {}, songs ?? [],
@@ -102,7 +103,16 @@ class SpotifyRouter {
     SpotifyApi client = SpotifyApi.withAccessToken(accessToken);
 
     Track t = await client.tracks.get(uid);
-    return Song(t.id ?? "", t.name ?? "", {},
-        t.artists?.map((e) => e.name ?? "").toList() ?? []);
+    return Song(
+        t.id ?? "",
+        t.name ?? "",
+        {},
+        t.artists?.map((e) => e.name ?? "").toList() ?? [],
+        t.album?.images?[0].url ?? "");
   }
+
+  // Future<CP.Playlist> getPlaylist(List<Song> songs)
+  // {
+  //   // return CP.Playlist("","Mood Swing Generated Playlist",{}, songs);
+  // }
 }
