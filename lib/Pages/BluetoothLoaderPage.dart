@@ -22,6 +22,10 @@ class BluetoothLoaderPage extends StatelessWidget
                   {
                     return ListTile(
                       title: Text(snapshot.data?[i].name??"No data"),
+                      onTap: ()
+                      {
+                        BluetoothRouter().writeToDevice(snapshot.data![i]);
+                      },
                     );
                   }),
                 );

@@ -16,6 +16,26 @@ class BluetoothRouter {
   }
 
   void writeToDevice(DiscoveredDevice device) async {
+    bluetoothDriver.connectToDevice(
+        id: device.id).listen((event) async {
+          if(event.connectionState == DeviceConnectionState.connected)
+            {
+              print("Device services:");
+              List<DiscoveredService> services = await bluetoothDriver.discoverServices(device.id);
+              services.forEach((service) {
+                service.characteristics.forEach((char) async
+                {
+                QualifiedCharacteristic c = QualifiedCharacteristic(characteristicId: char.characteristicId, serviceId: service.serviceId, deviceId: device.id);
+                // await bluetoothDriver.writeCharacteristicWithoutResponse(c, value:  );
+                }
+                );
+              });
+
+              Uuid serviceUID = device.serviceUuids[0];
+              //
+            }
+    });
+
     // print(device);
     // await device?.connect();
     // print(await device?.discoverServices());

@@ -52,8 +52,8 @@ class WebBluetoothRouter {
     await device?.connect();
     print(await device?.discoverServices());
     device?.services.listen((event) async {
-      BluetoothCharacteristic? char = (await event[0].getCharacteristics())?[0];
-      print(await char?.readValue());
+      BluetoothCharacteristic? char = (await event[0].getCharacteristics())[0];
+      print(await char.readValue());
       //ByteData? b = await char?.readValue();
       print("Read");
       // print(b?.buffer.asUint8List());
