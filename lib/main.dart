@@ -14,7 +14,7 @@ import 'Widgets/MockNavigator.dart';
 import 'firebase_options.dart';
 
 import 'package:mood_swing/Pages/BluetoothLoaderPage.dart';
-import 'package:mood_swing/Pages/TestingPage.dart';
+import 'package:mood_swing/Pages/NewlyGeneratedPlaylistPage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -84,7 +84,7 @@ class _AppState extends State<App> {
             }
 
             //return LandingPage();
-            return TestingPage();
+            return NewlyGeneratedPlaylistPage();
           }),
     );
   }

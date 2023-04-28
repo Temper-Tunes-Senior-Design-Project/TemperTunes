@@ -103,7 +103,7 @@ class LargeScreen extends StatelessWidget {
   }
 }
 
-class TestingPage extends StatelessWidget {
+class NewlyGeneratedPlaylistPage extends StatelessWidget {
   static const Key PageKey = Key("Testing Page");
 
   @override

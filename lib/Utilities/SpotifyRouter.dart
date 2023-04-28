@@ -93,4 +93,16 @@ class SpotifyRouter {
     }
     return rPlaylists;
   }
+
+/** Get the songs in the user's newly generated playlist
+ */
+  Future<Song> getSong(String uid) async {
+    ///Instantiate the spotify client library
+    String accessToken = await getToken();
+    SpotifyApi client = SpotifyApi.withAccessToken(accessToken);
+
+    Track t = await client.tracks.get(uid);
+    return Song(t.id ?? "", t.name ?? "", {},
+        t.artists?.map((e) => e.name ?? "").toList() ?? []);
+  }
 }
