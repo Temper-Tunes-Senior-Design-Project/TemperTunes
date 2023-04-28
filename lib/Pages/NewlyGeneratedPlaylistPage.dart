@@ -187,14 +187,15 @@ class _LargePlaylistLayoutState extends State<LargePlaylistLayout> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 0.1 * width),
+            padding: EdgeInsets.symmetric(horizontal: 0.05 * width),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 OptionButtons(
                   text: 'Restart',
                 ),
                 Align(
-                  alignment: Alignment.centerRight,
+                  alignment: Alignment.bottomRight,
                   child: OptionButtons(
                     text: 'Continue',
                   ),
