@@ -17,7 +17,7 @@ import 'firebase_options.dart';
 
 import 'package:mood_swing/Pages/NewlyGeneratedPlaylistPage.dart';
 import 'package:mood_swing/Pages/ExistingPlaylistsPage.dart';
-import 'package:mood_swing/Pages/TestingPage.dart';
+import 'package:mood_swing/Pages/GenerationOptionsPage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

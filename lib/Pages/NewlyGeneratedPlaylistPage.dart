@@ -11,8 +11,7 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ResponsiveWidget(
-      largeScreen: LargeScreen(),
-    );
+        largeScreen: LargeScreen(), smallScreen: SmallScreen());
   }
 }
 
@@ -279,6 +278,100 @@ class OptionButtons extends StatelessWidget {
           ),
         ),
         onPressed: () {},
+      ),
+    );
+  }
+}
+
+class SmallScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+
+    return FutureBuilder<Playlist>(
+      future: APIRouter().fetchSongs(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        if (snapshot.hasError) {
+          return Center(
+            child: Text("error fetching songs"),
+          );
+        }
+        List<Song> songs = snapshot.data?.songs ?? [];
+
+        ///playlist songs
+        return SafeArea(
+          child: SmallPlaylistLayout(
+            songList: songs,
+          ),
+        );
+      },
+    );
+  }
+}
+
+class SmallPlaylistLayout extends StatefulWidget {
+  final List<Song> songList;
+
+  SmallPlaylistLayout({required this.songList, super.key});
+
+  @override
+  _SmallPlaylistLayoutState createState() => _SmallPlaylistLayoutState();
+}
+
+class _SmallPlaylistLayoutState extends State<SmallPlaylistLayout> {
+  TextEditingController playlistName = TextEditingController();
+  @override
+  Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+
+    return Container(
+      width: width,
+      height: height,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage("assets/appbarBG.png"), fit: BoxFit.cover),
+      ),
+      child: Column(
+        children: [
+          BackArrowBtn(),
+          Padding(
+            padding: EdgeInsets.only(top: 40.0),
+            child: Container(
+              width: 0.8 * width,
+              decoration: BoxDecoration(
+                color: Colors.grey.withOpacity(0.3),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(20),
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding:
+                EdgeInsets.symmetric(horizontal: 0.01 * width, vertical: 15),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                OptionButtons(
+                  text: 'Restart',
+                ),
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: OptionButtons(
+                    text: 'Continue',
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

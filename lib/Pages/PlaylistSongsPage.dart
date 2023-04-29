@@ -153,7 +153,8 @@ class SmallScreen extends StatelessWidget {
           children: [
             BackArrowBtn(),
 
-            Center(
+            ///Title
+            Container(
               child: Text(
                 '${playlist.name}',
                 style: TextStyle(
@@ -164,21 +165,26 @@ class SmallScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 15),
+
+            SizedBox(height: 0.01 * height),
 
             ///Image of the playlist
             Container(
               height: height * 0.4,
-              width: 0.85 * width,
+              width: 0.76 * width,
               decoration: BoxDecoration(
+                color: Colors.blue,
                 image: DecorationImage(
                   image: NetworkImage(
                     playlist.images[0],
                   ),
+                  fit: BoxFit.cover,
                 ),
-                borderRadius: BorderRadius.circular(20),
               ),
             ),
+
+            ///Name of Playlist
+
             SizedBox(height: 15),
             Expanded(
               child: SingleChildScrollView(
