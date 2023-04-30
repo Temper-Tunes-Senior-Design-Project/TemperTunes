@@ -9,11 +9,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mood_swing/Pages/TestingPage.dart';
 import 'package:mood_swing/Utilities/AuthRouter.dart';
 import 'Pages/CameraPage.dart';
+import 'Pages/LandingPage.dart';
 import 'Pages/PresetsPage.dart';
 import 'Widgets/MockNavigator.dart';
 import 'firebase_options.dart';
-
-import 'package:mood_swing/Pages/NewlyGeneratedPlaylistPage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -82,8 +81,8 @@ class _AppState extends State<App> {
               return HomePage();
             }
 
-            //return LandingPage();
-            return NewlyGeneratedPlaylistPage();
+            return LandingPage();
+            // return NewlyGeneratedPlaylistPage();
           }),
     );
   }
