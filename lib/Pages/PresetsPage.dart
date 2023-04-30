@@ -218,7 +218,7 @@ class _LargeCarouselState extends State<LargeCarousel> {
   final CarouselController _carouselController = CarouselController();
   final List<dynamic> _products = [
     {'title': 'Angry', 'image': 'assets/angry.png'},
-    {'title': 'tired', 'image': 'assets/tired.png'},
+    {'title': 'Tired', 'image': 'assets/tired.png'},
     {
       'title': 'Content',
       'image': 'assets/content.png',
@@ -359,7 +359,7 @@ class _LargeCarouselState extends State<LargeCarousel> {
                               Text(
                                 mood['title'],
                                 style: const TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
+                                    fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
                               ),
                             ],
                           ),

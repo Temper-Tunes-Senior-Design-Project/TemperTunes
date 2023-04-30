@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mood_swing/Objects/Playlist.dart';
-import 'dart:async';
 import '../Objects/Song.dart';
 import '../Widgets/widgets.dart';
 import 'package:mood_swing/Utilities/APIRouter.dart';
-import 'package:mood_swing/Utilities/SpotifyRouter.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
 
 class Body extends StatelessWidget {
@@ -26,7 +24,7 @@ class LargeScreen extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
-            child: CircularProgressIndicator(),
+            child: WaveLoader(title: 'wave'),
           );
         }
         if (snapshot.hasError) {
@@ -36,7 +34,7 @@ class LargeScreen extends StatelessWidget {
         }
         List<Song> songs = snapshot.data?.songs ?? [];
 
-        ///playlist songs
+        ///playlist songs content
         return SafeArea(
           child: LargePlaylistLayout(
             songList: songs,
@@ -49,7 +47,6 @@ class LargeScreen extends StatelessWidget {
 
 class LargePlaylistLayout extends StatefulWidget {
   final List<Song> songList;
-
   LargePlaylistLayout({required this.songList, super.key});
 
   @override
@@ -65,8 +62,8 @@ class _LargePlaylistLayoutState extends State<LargePlaylistLayout> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-
     return Container(
+      ///background image
       width: width,
       height: height,
       decoration: BoxDecoration(
@@ -76,6 +73,8 @@ class _LargePlaylistLayoutState extends State<LargePlaylistLayout> {
       child: Column(
         children: [
           BackArrowBtn(),
+
+          ///Playlist Container
           Padding(
             padding: EdgeInsets.only(top: 40.0),
             child: Container(
@@ -141,6 +140,8 @@ class _LargePlaylistLayoutState extends State<LargePlaylistLayout> {
               ),
             ),
           ),
+
+          ///Save button
           Padding(
             padding: EdgeInsets.only(top: 0.05 * height),
             child: OptionButtons(
@@ -168,35 +169,6 @@ class _LargePlaylistLayoutState extends State<LargePlaylistLayout> {
           ),
         ],
       ),
-    );
-  }
-}
-
-/*
-Just a temporary class. I just wanted to ensure that the playlistName and songlist were being passed
- */
-class NextPage extends StatelessWidget {
-  final String playlistName;
-  final List<Song> songList;
-
-  const NextPage({required this.playlistName, required this.songList});
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          height: 150,
-          child: Text(playlistName),
-        ),
-        Container(
-          height: 200,
-          child: Image.network(songList[0].imageURl),
-        ),
-        SongListView(
-          songList: songList,
-        )
-      ],
     );
   }
 }
@@ -345,6 +317,64 @@ class _SmallPlaylistLayoutState extends State<SmallPlaylistLayout> {
   }
 }
 
+/*
+Just a temporary class. I just wanted to ensure that the playlistName and songlist were being passed
+ */
+class NextPage extends StatelessWidget {
+  final String playlistName;
+  final List<Song> songList;
+
+  const NextPage({required this.playlistName, required this.songList});
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          height: 150,
+          child: Text(playlistName),
+        ),
+        Container(
+          height: 200,
+          child: Image.network(songList[0].imageURl),
+        ),
+        SongListView(
+          songList: songList,
+        )
+      ],
+    );
+  }
+}
+
+///Form where use puts playlist name
+class PlaylistNameForm extends StatelessWidget {
+  final TextEditingController controller;
+  final double fontSize;
+
+  PlaylistNameForm(this.fontSize, this.controller);
+  @override
+  Widget build(BuildContext) {
+    return TextFormField(
+      controller: controller,
+      textAlign: TextAlign.center,
+      style: TextStyle(
+        fontFamily: 'Maven Pro',
+        color: MyPalette.lightPurple,
+        fontSize: fontSize,
+        fontWeight: FontWeight.w900,
+      ),
+      decoration: InputDecoration(
+        hintStyle: TextStyle(color: Colors.white60),
+        hintText: 'Playlist Name',
+        focusColor: Colors.white54,
+        enabledBorder: inputborder(),
+        focusedBorder: focusborder(),
+      ),
+    );
+  }
+}
+
+///Formatting form
 OutlineInputBorder inputborder() {
   //return type is OutlineInputBorder
   return OutlineInputBorder(
@@ -366,6 +396,7 @@ OutlineInputBorder focusborder() {
       ));
 }
 
+///Save Button Formatting
 class OptionButtons extends StatelessWidget {
   final String text;
   final void Function() onPressed;
@@ -430,41 +461,14 @@ class OptionButtons extends StatelessWidget {
   }
 }
 
-class PlaylistNameForm extends StatelessWidget {
-  final TextEditingController controller;
-  final double fontSize;
-
-  PlaylistNameForm(this.fontSize, this.controller);
-  @override
-  Widget build(BuildContext) {
-    return TextFormField(
-      controller: controller,
-      textAlign: TextAlign.center,
-      style: TextStyle(
-        fontFamily: 'Maven Pro',
-        color: MyPalette.lightPurple,
-        fontSize: fontSize,
-        fontWeight: FontWeight.w900,
-      ),
-      decoration: InputDecoration(
-        hintStyle: TextStyle(color: Colors.white60),
-        hintText: 'Playlist Name',
-        focusColor: Colors.white54,
-        enabledBorder: inputborder(),
-        focusedBorder: focusborder(),
-      ),
-    );
-  }
-}
-
+///Main function
 class NewlyGeneratedPlaylistPage extends StatelessWidget {
-  static const Key PageKey = Key("Testing Page");
+  static const Key PageKey = Key("Newly Generated Playlist");
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       //  key: PageKey,
-
       body: Body(),
     );
   }
