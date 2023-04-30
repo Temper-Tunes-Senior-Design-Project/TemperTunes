@@ -341,14 +341,7 @@ class _LargeScreenState extends State<LargeScreen> {
                               img: Image.asset("assets/googleIcon.png",
                                   height: 15),
                               onPressed: () async {
-                                await AuthRouter().signInWithProvider("Google");
-                                if (AuthRouter().isLoggedIn())
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => HomePage(),
-                                    ),
-                                  );
+                                AuthRouter().googleSignIn(context);
                               },
                             ),
                             ExternalAuthBtn(
@@ -357,15 +350,7 @@ class _LargeScreenState extends State<LargeScreen> {
                               toolTipText: "Facebook",
                               img: Image.asset("assets/facebookIcon.png"),
                               onPressed: () async {
-                                await AuthRouter().facebookSignIn();
-                                if (AuthRouter().isLoggedIn()) {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => HomePage(),
-                                    ),
-                                  );
-                                }
+                                AuthRouter().facebookSignIn(context);
                               },
                             ),
                             ExternalAuthBtn(

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:mood_swing/Objects/LoginCredentials.dart';
 import 'package:mood_swing/Utilities/DatabaseRouter.dart';
 
 import '../Pages/HomePage.dart';
@@ -43,11 +42,10 @@ class AuthRouter {
    */
   void login(String email, String password, Function callback, context) async {
     try {
-      UserCredential cred = await FirebaseAuth.instance
+      await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
       credentialSignIn(
-          LoginCredentials(cred,
-              EmailAuthProvider.credential(email: email, password: password)),
+          EmailAuthProvider.credential(email: email, password: password),
           context);
     } on FirebaseAuthException catch (e) {
       print(e);
@@ -58,10 +56,9 @@ class AuthRouter {
   /**
    * Initializes the Facebook Javascript SDK
    */
-  void initializeFacebookSDK() async
-  {
+  void initializeFacebookSDK() async {
     await FacebookAuth.i.webAndDesktopInitialize(
-      appId: dotenv.env["FACEBOOK_APP_ID"]??"",
+      appId: dotenv.env["FACEBOOK_APP_ID"] ?? "",
       cookie: true,
       xfbml: true,
       version: "v14.0",
@@ -72,20 +69,18 @@ class AuthRouter {
    * Uses a set of credentials to sign the user. Create a database entry for the
    * user if they are new. Reroutes user to the home page.
    */
-  void credentialSignIn(
-      LoginCredentials credentials, BuildContext context) async {
-    if (credentials.uc.additionalUserInfo?.isNewUser ?? false) {
-      DatabaseRouter().createUser(credentials.uc.user?.displayName ?? "");
+  void credentialSignIn(AuthCredential ac, BuildContext context) async {
+    UserCredential uc = await FirebaseAuth.instance.signInWithCredential(ac);
+    if (!await DatabaseRouter().userExists(uc.user?.uid??"No user")) {
+      DatabaseRouter().createUser(uc.user?.displayName ?? "Invalid User");
     }
 
-    await FirebaseAuth.instance.signInWithCredential(credentials.ac);
     if (FirebaseAuth.instance.currentUser != null) {
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
             builder: (ctxt) => HomePage(
-              shouldOnboard:
-                  credentials.uc.additionalUserInfo?.isNewUser ?? false,
+              shouldOnboard: uc.additionalUserInfo?.isNewUser ?? false,
             ),
           ),
           (route) => false);
@@ -95,7 +90,7 @@ class AuthRouter {
   /**
    * Generates an authentication credential using an OAuth 2.0 provider
    */
-  Future<AuthCredential?> signInWithProvider(String provider) async {
+  void googleSignIn(context) async {
     try {
       GoogleSignInAccount? account = await GoogleSignIn().signIn();
       GoogleSignInAuthentication? auth = await account?.authentication;
@@ -103,7 +98,7 @@ class AuthRouter {
         accessToken: auth?.accessToken,
         idToken: auth?.idToken,
       );
-      return credential;
+      credentialSignIn(credential, context);
     } on Exception catch (e) {
       print(e);
       return null;
@@ -113,30 +108,29 @@ class AuthRouter {
   /**
    * Sign in using the Facebook SDK
    */
-  Future<AuthCredential?> facebookSignIn() async
-  {
+  void facebookSignIn(context) async {
     LoginResult result = await FacebookAuth.i.login();
     if (result.status == LoginStatus.success) {
-      OAuthCredential credential = FacebookAuthProvider.credential(result.accessToken!.token);
-      return credential;
+      OAuthCredential credential =
+          FacebookAuthProvider.credential(result.accessToken!.token);
+      credentialSignIn(credential, context);
     } else {
-      return null;
+      //Log an error
     }
   }
-
 
   /**
    * Creates a user using an email and password.
    */
-  Future<LoginCredentials?> registerUser(
-      String email, String password, String username, Function callback) async {
+  Future<AuthCredential?> registerUser(
+      String name, String email, String password, String username, Function callback) async {
     try {
       UserCredential credentials = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
+      credentials.user?.updateDisplayName(name);
       FirebaseAuth.instance.currentUser?.sendEmailVerification();
 
-      return LoginCredentials(credentials,
-          EmailAuthProvider.credential(email: email, password: password));
+      return EmailAuthProvider.credential(email: email, password: password);
     } on FirebaseAuthException catch (e) {
       print(e);
       callback.call();
