@@ -1,9 +1,7 @@
-import 'dart:math';
+
 
 import 'package:easy_stepper/easy_stepper.dart';
-import 'package:easy_stepper/easy_stepper.dart';
 import 'package:mood_swing/Utilities/SpotifyRouter.dart';
-import 'package:mood_swing/Widgets/MyPalette.dart';
 import '../Widgets/widgets.dart';
 
 import '../Objects/Playlist.dart';
@@ -36,8 +34,7 @@ class LargeScreenState extends State<LargeScreen> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    bool isPlaylistSelected =
-        false; // Track whether a playlist is selected or not
+    // bool isPlaylistSelected = false; // Track whether a playlist is selected or not
 
     return Scaffold(
       body: SafeArea(

@@ -26,7 +26,7 @@ class LargeScreen extends StatefulWidget {
 }
 
 class _LargeScreenState extends State<LargeScreen> {
-  bool _isVisible = false;
+  // bool _isVisible = false;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -178,7 +178,7 @@ class SmallScreen extends StatefulWidget {
 
 class _SmallScreenState extends State<SmallScreen> {
   //lets user see their password if they choose to
-  bool _isVisible = false;
+  // bool _isVisible = false;
 
   final _formKey = GlobalKey<FormState>();
 

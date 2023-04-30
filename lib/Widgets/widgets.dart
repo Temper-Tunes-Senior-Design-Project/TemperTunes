@@ -10,7 +10,7 @@ export 'RippleSmall.dart';
 export 'WaveAnimation.dart';
 export 'WaveLoader.dart';
 export 'PreferenceOption.dart';
-export 'ExternalAUthBtn.dart';
+export 'ExternalAuthBtn.dart';
 export 'ForgotPassword.dart';
 export 'BackArrowBtn.dart';
 export 'PasswordForm.dart';

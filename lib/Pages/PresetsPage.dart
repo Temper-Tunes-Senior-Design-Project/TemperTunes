@@ -15,8 +15,8 @@ class Body extends StatelessWidget {
 class LargeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
+    // double height = MediaQuery.of(context).size.height;
+    // double width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: LargeCarousel(),
     );
@@ -26,8 +26,8 @@ class LargeScreen extends StatelessWidget {
 class SmallScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
+    // double height = MediaQuery.of(context).size.height;
+    // double width = MediaQuery.of(context).size.width;
 
     return SafeArea(
       child: SmallCarousel(),
@@ -43,7 +43,7 @@ class SmallCarousel extends StatefulWidget {
 }
 
 class _SmallCarouselState extends State<SmallCarousel> {
-  int _current = 0;
+  // int _current = 0;
   dynamic _selectedIndex = {};
 
   final CarouselController _carouselController = CarouselController();
@@ -110,7 +110,7 @@ class _SmallCarouselState extends State<SmallCarousel> {
                   pageSnapping: true,
                   onPageChanged: (index, reason) {
                     setState(() {
-                      _current = index;
+                      // _current = index;
                       //print(index);
                     });
                   }),
@@ -213,7 +213,7 @@ class LargeCarousel extends StatefulWidget {
 }
 
 class _LargeCarouselState extends State<LargeCarousel> {
-  int _current = 0;
+  // int _current = 0;
   dynamic _selectedIndex = {};
   final CarouselController _carouselController = CarouselController();
   final List<dynamic> _products = [
@@ -279,7 +279,7 @@ class _LargeCarouselState extends State<LargeCarousel> {
                 pageSnapping: true,
                 onPageChanged: (index, reason) {
                   setState(() {
-                    _current = index;
+                    // _current = index;
                     //print(index);
                   });
                 }),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mood_swing/Pages/TestingPage.dart';
 import '../Widgets/widgets.dart';
 
 import '../Objects/Mood.dart';

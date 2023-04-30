@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../Utilities/AuthRouter.dart';
 import '../Widgets/widgets.dart';
-import 'OTPEmailPage.dart';
 import 'HomePage.dart';
 import 'package:form_field_validator/form_field_validator.dart' as validator;
 import 'package:bouncing_widget/bouncing_widget.dart';
@@ -30,7 +29,7 @@ class LargeScreen extends StatefulWidget {
 
 class _LargeScreenState extends State<LargeScreen> {
   //lets user see their password if they choose to
-  bool _isVisible = false;
+  // bool _isVisible = false;
   final _formKey = GlobalKey<FormState>();
   double _scaleFactor = 1.5;
 
@@ -266,7 +265,7 @@ class SmallScreen extends StatefulWidget {
 
 class _SmallScreenState extends State<SmallScreen> {
   //lets user see their password if they choose to
-  bool _isVisible = false;
+  // bool _isVisible = false;
 
   final _formKey = GlobalKey<FormState>();
 

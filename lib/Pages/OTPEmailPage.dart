@@ -1,5 +1,4 @@
 //OTP EMAIL
-import 'dart:async';
 import 'package:animate_do/animate_do.dart';
 
 import 'package:flutter/material.dart';
@@ -28,17 +27,17 @@ class _LargeScreenState extends State<LargeScreen> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
 
-    bool _isContainerVisible = false;
+    // bool _isContainerVisible = false;
 
-    @override
-    void initState() {
-      super.initState();
-      Timer(Duration(seconds: 3), () {
-        setState(() {
-          _isContainerVisible = true;
-        });
-      });
-    }
+    // @override
+    // void initState() {
+    //   super.initState();
+    //   Timer(Duration(seconds: 3), () {
+    //     setState(() {
+    //       // _isContainerVisible = true;
+    //     });
+    //   });
+    // }
 
     return SafeArea(
       child: Container(
