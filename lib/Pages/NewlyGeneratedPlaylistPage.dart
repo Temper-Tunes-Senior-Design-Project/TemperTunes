@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mood_swing/Objects/Playlist.dart';
-import 'dart:async';
 import '../Objects/Song.dart';
 import '../Widgets/widgets.dart';
 import 'package:mood_swing/Utilities/APIRouter.dart';
-import 'package:mood_swing/Utilities/SpotifyRouter.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
 
 class Body extends StatelessWidget {
@@ -19,8 +17,8 @@ class Body extends StatelessWidget {
 class LargeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
+    // double height = MediaQuery.of(context).size.height;
+    // double width = MediaQuery.of(context).size.width;
 
     return FutureBuilder<Playlist>(
       future: APIRouter().fetchSongs(),

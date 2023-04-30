@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../Widgets/widgets.dart';
 
 import 'package:bouncing_widget/bouncing_widget.dart';
-import 'package:mood_swing/Pages/PresetsPage.dart';
 
 class Body extends StatelessWidget {
   @override

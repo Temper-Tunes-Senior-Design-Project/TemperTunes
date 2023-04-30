@@ -1,8 +1,6 @@
-import 'dart:math';
+
 
 import 'package:easy_stepper/easy_stepper.dart';
-import 'package:mood_swing/Utilities/SpotifyRouter.dart';
-import 'package:mood_swing/Widgets/MyPalette.dart';
 import '../Widgets/widgets.dart';
 
 import '../Objects/Playlist.dart';

@@ -184,7 +184,7 @@ class SmallScreen extends StatelessWidget {
                         );
                       },
                     ),
-                    ContinueBtn(option: args!['option']),
+                    ContinueBtn(option: args['option']),
                   ],
                 ),
               ),

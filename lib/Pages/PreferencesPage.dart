@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mood_swing/Pages/ChangeEmailPage.dart';
 import 'package:mood_swing/Pages/ChangePasswordPage.dart';
-import 'package:mood_swing/Utilities/APIRouter.dart';
 import 'package:mood_swing/Pages/UserPage.dart';
-import 'package:mood_swing/Utilities/SpotifyRouter.dart';
 import '../Widgets/widgets.dart';
 import 'package:mood_swing/Pages/LinkSpotifyPage.dart';
 import 'package:animate_do/animate_do.dart';
