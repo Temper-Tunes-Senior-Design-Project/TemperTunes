@@ -49,8 +49,8 @@ class MoodPopup extends StatelessWidget {
                 case Mood.Angry:
                   w = Image.asset("assets/angry.png", height: 0.15 * height);
                   break;
-                case Mood.Calm:
-                  w = Image.asset("assets/calm.png", height: 0.15 * height);
+                case Mood.Tired:
+                  w = Image.asset("assets/tired.png", height: 0.15 * height);
                   break;
                 case Mood.Content:
                   w = Image.asset("assets/content.png", height: 0.15 * height);

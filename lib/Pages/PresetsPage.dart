@@ -50,7 +50,7 @@ class _SmallCarouselState extends State<SmallCarousel> {
 
   final List<dynamic> _products = [
     {'title': 'Angry', 'image': 'assets/angry.png'},
-    {'title': 'Calm', 'image': 'assets/calm.png'},
+    {'title': 'tired', 'image': 'assets/tired.png'},
     {
       'title': 'Content',
       'image': 'assets/content.png',
@@ -218,7 +218,7 @@ class _LargeCarouselState extends State<LargeCarousel> {
   final CarouselController _carouselController = CarouselController();
   final List<dynamic> _products = [
     {'title': 'Angry', 'image': 'assets/angry.png'},
-    {'title': 'Calm', 'image': 'assets/calm.png'},
+    {'title': 'tired', 'image': 'assets/tired.png'},
     {
       'title': 'Content',
       'image': 'assets/content.png',

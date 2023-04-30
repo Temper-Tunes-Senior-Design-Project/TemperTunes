@@ -1,6 +1,6 @@
 enum Mood {
   Angry,
-  Calm,
+  Tired,
   Content,
   Depressed,
   Energetic,
@@ -16,6 +16,6 @@ enum Mood {
 var valenceArousalToLabel = [
   //Low, Medium, High Arousal
   [Mood.Depressed, Mood.Sad, Mood.Angry], //Low Valence
-  [Mood.Calm, Mood.Neutral, Mood.Energetic], //Medium Valence
+  [Mood.Tired, Mood.Neutral, Mood.Energetic], //Medium Valence
   [Mood.Content, Mood.Happy, Mood.Excited], //High Valence
 ];
