@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
+import 'package:mood_swing/Widgets/MyPalette.dart';
+
 class WaveLoader extends StatefulWidget {
   WaveLoader({Key? key, required this.title}) : super(key: key);
 
@@ -23,12 +25,12 @@ class _WaveLoaderState extends State<WaveLoader>
         child: AutomatedAnimator(
           animateToggle: true,
           doRepeatAnimation: true,
-          duration: Duration(seconds: 5),
+          duration: Duration(seconds: 14),
           buildWidget: (double animationPosition) {
             return WaveLoadingBubble(
-              foregroundWaveColor: Color(0xFF6AA0E1),
-              backgroundWaveColor: Color(0xFF4D90DF),
-              loadingWheelColor: Color(0xFF77AAEE),
+              foregroundWaveColor: MyPalette.magenta,
+              backgroundWaveColor: MyPalette.darkMagenta,
+              loadingWheelColor: MyPalette.circleIcon,
               period: animationPosition,
               backgroundWaveVerticalOffset: 90 - animationPosition * 200,
               foregroundWaveVerticalOffset: 90 +
@@ -95,6 +97,12 @@ class _AutomatedAnimatorState extends State<AutomatedAnimator>
       return;
     }
     controller.reverse();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -312,8 +320,10 @@ class WavePathHorizontal {
     this.phaseShift = 0.0,
     this.doClosePath = false,
     this.crossAxisEndPoint = 0,
-  }) : assert(doClosePath == false,
-            "if doClosePath is true you must provide an end point (crossAxisEndPoint)");
+  });
+
+  // }) : assert(doClosePath == false,
+  //           "if doClosePath is true you must provide an end point (crossAxisEndPoint)");
 
   final double width;
   final double amplitude;

@@ -6,8 +6,10 @@ import '../Utilities/APIRouter.dart';
 
 class MoodPopup extends StatelessWidget {
   final String filePath;
-  MoodPopup(this.filePath);
+  final String option;
   late final Future<Mood> emotion;
+  //MoodPopup(filePath, option);
+  MoodPopup({required this.filePath, required this.option});
 
   @override
   Widget build(BuildContext context) {
@@ -21,18 +23,9 @@ class MoodPopup extends StatelessWidget {
       ),
       child: Container(
         height: height * 0.3,
-        width: width * 0.3,
+        width: width * 0.2,
         decoration: BoxDecoration(
           color: Colors.white,
-          // gradient: LinearGradient(
-          //   begin: Alignment.topRight,
-          //   end: Alignment.bottomLeft,
-          //   colors: [
-          //     MyPalette.brightMagenta,
-          //     MyPalette.turqoise,
-          //   ],
-          // ),
-
           borderRadius: BorderRadius.all(
             Radius.circular(20),
           ),
@@ -53,77 +46,123 @@ class MoodPopup extends StatelessWidget {
               Widget w = Container();
               switch (snapshot.data!) {
                 case Mood.Angry:
-                  w = Text("ANGRY");
+                  w = Image.asset("assets/angry.png", height: 0.15 * height);
                   break;
                 case Mood.Calm:
-                  w = Text("CALM");
+                  w = Image.asset("assets/calm.png", height: 0.15 * height);
                   break;
                 case Mood.Content:
-                  w = Text("Content");
+                  w = Image.asset("assets/content.png", height: 0.15 * height);
                   break;
                 case Mood.Depressed:
-                  w = Text("DEPRESSED");
+                  w = Image.asset("assets/depressed.png",
+                      height: 0.15 * height);
                   break;
                 case Mood.Energetic:
-                  w = Text("ENERGETIC");
+                  w = Image.asset("assets/energetic.png",
+                      height: 0.15 * height);
                   break;
                 case Mood.Excited:
-                  w = Text("EXCITED");
+                  w = Image.asset("assets/excited.png", height: 0.15 * height);
                   break;
                 case Mood.Happy:
-                  w = Text("HAPPY");
+                  w = Image.asset("assets/happy.png", height: 0.15 * height);
                   break;
                 case Mood.Sad:
-                  w = Text("SAD");
+                  w = Image.asset("assets/sad.png", height: 0.15 * height);
                   break;
                 default:
                   w = Text("ERROR - emotion could not be identified");
+
                   break;
               }
 
               ///For adding emotion icons
-              // switch (snapshot.data!) {
-              //   case Mood.Angry:
-              //     w = Image.asset("assets/angry.png", height: 0.12 * height);
-              //     break;
-              //   case Mood.Disgust:
-              //     w = Image.asset("assets/disgust.png", height: 0.12 * height);
-              //     break;
-              //   case Mood.Fear:
-              //     w = Image.asset("assets/fear.png", height: 0.12 * height);
-              //     break;
-              //   case Mood.Happy:
-              //     w = Image.asset("assets/happy.png", height: 0.12 * height);
-              //     break;
-              //   case Mood.Sad:
-              //     w = Image.asset("assets/sad.png", height: 0.12 * height);
-              //     break;
-              //   case Mood.Surprise:
-              //     w = Image.asset("assets/surprise.png", height: 0.12 * height);
-              //     break;
-              //   case Mood.Neutral :
-              //     // w = Image.asset("assets/emotions/neutral.png");
-              //     w = Image.asset("assets/neutral.png", height: 0.12 * height);
-              //     break;
-              // }
               return Stack(
+                clipBehavior: Clip.none,
+                alignment: Alignment.center,
                 children: [
+                  ///Buttons
+
+                  //Back
+                  Align(
+                    alignment: Alignment.bottomLeft,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: FloatingActionButton(
+                          hoverColor: Color.fromARGB(255, 124, 77, 255),
+                          hoverElevation: height * 0.035,
+                          shape: ContinuousRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Text('No'),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          }),
+                    ),
+                  ),
+
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: FloatingActionButton(
+                        hoverColor: Color.fromARGB(255, 124, 77, 255),
+                        hoverElevation: height * 0.035,
+                        shape: ContinuousRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Text('Yes'),
+                        onPressed: () {
+                          if (option == 'UseBoth') {
+                            Navigator.pushNamed(
+                              context,
+                              '/bluetooth',
+                              arguments: {'option': 'UseBoth'},
+                            );
+                          } else {
+                            Navigator.pushNamed(context, '/compiling');
+                          }
+                        },
+                      ),
+                    ),
+                  ),
+
                   Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
+                        padding: EdgeInsets.only(top: height * 0.08),
+                        child: Text(
+                          "Did we correctly identify your mood?",
+                          style: TextStyle(
+                            fontFamily: 'Maven Pro',
+                            fontWeight: FontWeight.w300,
+                            color: MyPalette.grey,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(top: height * 0.01),
                         child: Text(
                           snapshot.data?.name ?? "No data",
                           style: TextStyle(
-                            fontFamily: 'Share Tech',
+                            fontFamily: 'Maven Pro',
+                            fontWeight: FontWeight.w800,
                             color: MyPalette.darkBlue,
                             fontSize: 30,
                           ),
                         ),
                       ),
-                      Container(padding: EdgeInsets.only(top: 20), child: w),
                     ],
+                  ),
+
+                  Positioned(
+                    top: -height * 0.1,
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: w,
+                    ),
                   ),
                 ],
               );
@@ -135,12 +174,11 @@ class MoodPopup extends StatelessWidget {
                 // mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                      alignment: Alignment.center,
-                      height: 0.05 * height,
-                      width: 0.05 * width,
-                      child: Text("Loading...")
-                      // WaveLoader(title: 'Wave'),
-                      ),
+                    alignment: Alignment.center,
+                    height: 0.05 * height,
+                    width: 0.05 * width,
+                    child: WaveLoader(title: 'Wave'),
+                  ),
                   Container(
                     alignment: Alignment.center,
                     child: Text(
@@ -150,11 +188,6 @@ class MoodPopup extends StatelessWidget {
                   ),
                 ],
               ),
-
-              // SpinKitWave(
-              //   color: Colors.white,
-              //   size: 50.0,
-              // ),
             );
           },
         ),

@@ -151,12 +151,6 @@ class _LargeScreenState extends State<LargeScreen> {
         //background
         decoration: BoxDecoration(
           color: Colors.black,
-          // image: DecorationImage(
-          //     image: (defaultTargetPlatform == TargetPlatform.iOS ||
-          //             defaultTargetPlatform == TargetPlatform.android)
-          //         ? AssetImage("assets/userPageSmall.png")
-          //         : AssetImage("assets/userPageLarge.png"),
-          //     fit: BoxFit.cover),
         ),
         child: Column(
           children: [
@@ -258,10 +252,15 @@ class _LargeScreenState extends State<LargeScreen> {
                                       .uploadFile(
                                           pictureFile ?? videoFile, type) ??
                                   "Processing Data/file.jpg";
+                              final args = ModalRoute.of(context)
+                                  ?.settings
+                                  .arguments as Map;
                               showDialog(
                                   context: context,
                                   builder: (ctxt) {
-                                    return MoodPopup(filePath);
+                                    return MoodPopup(
+                                        filePath: filePath,
+                                        option: args['option']);
                                   });
 
                               // ClassPopup().getDialogue(context);
@@ -461,9 +460,8 @@ class CameraButtonConfirmOrBack extends StatelessWidget {
           left: width * 0.05, right: width * 00.05, bottom: 0.05 * height),
       child: Container(
         decoration: BoxDecoration(
-          shape: BoxShape.rectangle, borderRadius: BorderRadius.circular(20),
-
-          //   border: Border.all(width: width * 0.002, color: Colors.black),
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(20),
         ),
         child: SizedBox(
           height: 0.07 * height,
