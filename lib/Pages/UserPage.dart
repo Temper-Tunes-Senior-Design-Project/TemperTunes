@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mood_swing/Utilities/AuthRouter.dart';
 import '../Widgets/widgets.dart';
 
 class Body extends StatelessWidget {
@@ -37,7 +38,7 @@ class profileBar extends StatelessWidget {
               ),
               //Name
               Text(
-                'John Doe',
+                AuthRouter().getUser().username,
                 style: TextStyle(
                   fontFamily: 'Share Tech',
                   color: Colors.white,
@@ -655,7 +656,7 @@ class SmallScreen extends StatelessWidget {
                               children: [
                                 //Name
                                 Text(
-                                  "John Doe",
+                                  AuthRouter().getUser().username,
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontFamily: 'Share Tech',

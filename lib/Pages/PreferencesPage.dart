@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mood_swing/Pages/ChangeEmailPage.dart';
 import 'package:mood_swing/Pages/UserPage.dart';
 import 'package:mood_swing/Utilities/APIRouter.dart';
+import 'package:mood_swing/Utilities/AuthRouter.dart';
 import 'package:mood_swing/Utilities/SpotifyRouter.dart';
 import 'package:mood_swing/Widgets/PreferenceOption.dart';
 import 'ChangePasswordPage.dart';
@@ -139,7 +140,9 @@ class LargeScreen extends StatelessWidget {
                           height,
                           width,
                           const IconData(0xe22a, fontFamily: 'MaterialIcons'),
-                          () {}),
+                          () {
+                            AuthRouter().logout(context);
+                          }),
                       PreferenceOption(
                           "Delete Account",
                           height,

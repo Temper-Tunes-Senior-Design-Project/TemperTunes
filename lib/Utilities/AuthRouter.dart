@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:mood_swing/Pages/LandingPage.dart';
 import 'package:mood_swing/Utilities/DatabaseRouter.dart';
+import 'package:mood_swing/Objects/User.dart' as AppUser;
 
 import '../Pages/HomePage.dart';
 
@@ -22,11 +24,27 @@ class AuthRouter {
     return FirebaseAuth.instance.authStateChanges();
   }
 
+  AppUser.User getUser()
+  {
+    return AppUser.User(FirebaseAuth.instance.currentUser?.displayName??"No Display Name Set");
+  }
+
   /**
    * Checks if the current user is signed in and exists
    */
   bool isLoggedIn() {
     return FirebaseAuth.instance.currentUser != null;
+  }
+
+  void logout(BuildContext context)
+  {
+    FirebaseAuth.instance.signOut();
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(
+          builder: (ctxt) => LandingPage()
+        ),
+            (route) => false);
   }
 
   /**
