@@ -23,7 +23,7 @@ class SpotifyRouter {
    * Instantiate the Spotify Router Singleton
    */
   SpotifyRouter._internal() {
-    getToken();
+    //getToken();
   }
 
   /**
@@ -31,6 +31,7 @@ class SpotifyRouter {
    */
   Future<String> getToken() async {
     if (token == "") {
+      print("Token doesn't exist");
       String redirect = (kIsWeb
               ? dotenv.env['SPOTIFY_WEB_REDIRECT_URI']
               : dotenv.env['SPOTIFY_REDIRECT_URI']) ??
@@ -41,7 +42,7 @@ class SpotifyRouter {
           scope:
               "app-remote-control,user-modify-playback-state,playlist-read-private,user-library-read");
       token = accessToken;
-      return accessToken;
+      return token;
     } else {
       return token;
     }
@@ -54,13 +55,12 @@ class SpotifyRouter {
     ///Instantiate the spotify client library
     String accessToken = await getToken();
     SpotifyApi client = SpotifyApi.withAccessToken(accessToken);
-
     ///Instantiate playlists with liked songs
     List<String> likedSongURLs = [];
 
     List<CP.Playlist> rPlaylists = [
       CP.Playlist(
-          "",
+          "No ID exists for Liked Songs",
           "Liked Songs",
           {},
           (await client.tracks.me.saved.all()).map<Song>((e) {
@@ -81,6 +81,7 @@ class SpotifyRouter {
     Iterable<PlaylistSimple> playlists = await client.playlists.me.all();
 
     for (PlaylistSimple p in playlists) {
+      print("Getting playlist: " + (p.name?? ""));
       Iterable? data =
           (await client.playlists.get(p.id ?? "")).tracks?.itemsNative;
       List<Song>? songs = data?.map((e) {
@@ -89,7 +90,7 @@ class SpotifyRouter {
         return Song("", e["track"]["name"], {}, artists, "");
       }).toList();
 
-      rPlaylists.add(CP.Playlist("", p.name ?? "No name", {}, songs ?? [],
+      rPlaylists.add(CP.Playlist(p.id??"No id exists", p.name ?? "No name", {}, songs ?? [],
           p.images?.map((e) => e.url ?? "").toList() ?? []));
     }
     return rPlaylists;

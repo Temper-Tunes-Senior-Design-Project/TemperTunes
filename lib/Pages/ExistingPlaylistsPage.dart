@@ -79,8 +79,7 @@ class LargeScreenState extends State<LargeScreen> {
                             children: [
                               Container(
                                 height: height * 0.8,
-                                child: Expanded(
-                                  child: GridView.builder(
+                                child: GridView.builder(
                                       itemCount: snapshot.data?.length ?? 0,
                                       gridDelegate:
                                           SliverGridDelegateWithFixedCrossAxisCount(
@@ -95,7 +94,6 @@ class LargeScreenState extends State<LargeScreen> {
                                               playlist: snapshot.data![index]),
                                         );
                                       }),
-                                ),
                               ),
 
                               // Visibility(
