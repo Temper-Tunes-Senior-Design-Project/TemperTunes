@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import '../Widgets/widgets.dart';
+import 'GenerationLoadingPage.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -297,8 +298,8 @@ class _LargeCarouselState extends State<LargeCarousel> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    NextPage(selectedMood: mood['title']),
+                                builder: (context) => GenerationLoadingPage(
+                                    selectedMood: mood['title']),
                               ),
                             );
                           }
@@ -359,7 +360,9 @@ class _LargeCarouselState extends State<LargeCarousel> {
                               Text(
                                 mood['title'],
                                 style: const TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
                               ),
                             ],
                           ),

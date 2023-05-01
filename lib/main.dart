@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:mood_swing/Pages/ExistingPlaylistsPage.dart';
 import 'package:mood_swing/Pages/LandingPage.dart';
 import 'package:mood_swing/Pages/HomePage.dart';
 import 'package:mood_swing/Pages/BluetoothLoaderPage.dart';
@@ -15,9 +14,9 @@ import 'Pages/PresetsPage.dart';
 import 'Widgets/MockNavigator.dart';
 import 'firebase_options.dart';
 
-import 'package:mood_swing/Pages/NewlyGeneratedPlaylistPage.dart';
-import 'package:mood_swing/Pages/ExistingPlaylistsPage.dart';
 import 'package:mood_swing/Pages/GenerationOptionsPage.dart';
+import 'package:mood_swing/Pages/ExistingPlaylistsPage.dart';
+import 'package:mood_swing/Pages/GenerationLoadingPage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -76,7 +75,7 @@ class _AppState extends State<App> {
         '/camera': (context) => CameraPage(),
         '/bluetooth': (context) => BluetoothLoaderPage(),
         '/presets': (context) => PresetsPage(),
-        '/compiling': (context) => TestingPage(),
+        '/compiling': (context) => GenerationLoadingPage(),
       },
       home: StreamBuilder<User?>(
           initialData: FirebaseAuth.instance.currentUser,
@@ -87,7 +86,7 @@ class _AppState extends State<App> {
             }
 
             //return LandingPage();
-            return NewlyGeneratedPlaylistPage();
+            return GenerationOptionsPage();
           }),
     );
   }

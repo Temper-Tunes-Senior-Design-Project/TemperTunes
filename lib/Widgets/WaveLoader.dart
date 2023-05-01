@@ -36,7 +36,7 @@ class _WaveLoaderState extends State<WaveLoader>
               foregroundWaveVerticalOffset: 90 +
                   reversingSplitParameters(
                     position: animationPosition,
-                    numberBreaks: 6,
+                    numberBreaks: 8,
                     parameterBase: 8.0,
                     parameterVariation: 8.0,
                     reversalPoint: 0.75,
