@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mood_swing/Pages/CameraPage.dart';
 import 'package:mood_swing/Pages/ExistingPlaylistsPage.dart';
+import 'package:mood_swing/Pages/GenerationOptionsPage.dart';
 import 'package:mood_swing/Pages/PreferencesPage.dart';
 import 'package:mood_swing/Pages/UserPage.dart';
-
+import '../Pages/LinkSpotifyPage.dart';
 import '../Widgets/widgets.dart';
 import 'package:sidebarx/sidebarx.dart';
 
@@ -145,6 +145,20 @@ class SidebarDrawer extends StatelessWidget {
           },
         ),
 
+        ///Link to spotify
+        SidebarXItem(
+          icon: SpotifyIcons.whiteIcon,
+          label: 'Link To Spotify',
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => LinkSpotifyPage(),
+              ),
+            );
+          },
+        ),
+
         ///Create New Playlist
         SidebarXItem(
           icon: Icons.create_rounded,
@@ -153,7 +167,7 @@ class SidebarDrawer extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (_) => CameraPage(),
+                builder: (_) => GenerationOptionsPage(),
               ),
             );
           },

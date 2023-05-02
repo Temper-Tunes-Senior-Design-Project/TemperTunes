@@ -1,8 +1,5 @@
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:mood_swing/Pages/CameraPage.dart';
 import '../Widgets/widgets.dart';
-import 'package:flutter/foundation.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -16,30 +13,89 @@ class Body extends StatelessWidget {
 class LargeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-    return SingleChildScrollView(
-        child: Container(
-      width: width,
-      height: height,
-      decoration: BoxDecoration(
-        image: DecorationImage(
-            image: (defaultTargetPlatform == TargetPlatform.iOS ||
-                    defaultTargetPlatform == TargetPlatform.android)
-                ? AssetImage("assets/userPageSmall.png")
-                : AssetImage("assets/userPageLarge.png"),
-            fit: BoxFit.cover),
-      ),
-      child: Center(
-        child: ElevatedButton(
-            //Goto: Camera Page
-            onPressed: () async {
-              await availableCameras().then((value) => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => CameraPage())));
-            },
-            child: Text("TEST WIDGET")),
-      ),
-    ));
+    // double height = MediaQuery.of(context).size.height;
+    // double width = MediaQuery.of(context).size.width;
+
+    return Container();
+    // return FutureBuilder<List<String>>(
+    //   future: APIRouter().fetchSongs(),
+    //   builder: (context, snapshot) {
+    //     if (snapshot.connectionState == ConnectionState.waiting) {
+    //       return Center(
+    //         child: CircularProgressIndicator(),
+    //       );
+    //     }
+    //     if (snapshot.hasError) {
+    //       return Center(
+    //         child: Text("error fetching songs"),
+    //       );
+    //     }
+    //     List<String> songs = snapshot.data!;
+    //     return SafeArea(
+    //       child: Column(
+    //         mainAxisAlignment: MainAxisAlignment.center,
+    //         children: [
+    //           Container(
+    //             height: 200,
+    //             child: Text(
+    //               'test page',
+    //               style: TextStyle(
+    //                 fontSize: 80,
+    //               ),
+    //             ),
+    //           ),
+    //           Expanded(
+    //             child: ListView.builder(
+    //               itemCount: songs.length,
+    //               itemBuilder: (context, index) {
+    //                 return FutureBuilder<Song>(
+    //                   future: SpotifyRouter().getSong(songs[index]),
+    //                   builder: (context, snapshot) {
+    //                     if (snapshot.connectionState ==
+    //                         ConnectionState.waiting) {
+    //                       return ListTile(
+    //                         title: Text('Loading... '),
+    //                       );
+    //                     }
+    //                     if (snapshot.hasError) {
+    //                       return ListTile(
+    //                         title: Text('Error fetching song'),
+    //                       );
+    //                     }
+    //                     Song song = snapshot.data!;
+    //                     String formattedSong =
+    //                         '${song.name} by ${song.artists.join(", ")}';
+    //                     return ListTile(
+    //                       title: Text(formattedSong),
+    //                     );
+    //                   },
+    //                 );
+    //               },
+    //             ),
+    //           ),
+    //         ],
+    //       ),
+    //     );
+    //   },
+    // );
+
+    // return SafeArea(
+    //   child: Row(
+    //     mainAxisAlignment: MainAxisAlignment.center,
+    //     children: [
+    //       Container(
+    //         child: Text(
+    //           'TEST PAGE',
+    //           style: TextStyle(
+    //             fontSize: 80,
+    //             color: Colors.purple,
+    //           ),
+    //         ),
+    //       ),
+    //       Column(children: [])
+    //     ],
+    //   ),
+    // );
   }
 }
 
@@ -49,7 +105,8 @@ class TestingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: PageKey,
+      //  key: PageKey,
+
       body: Body(),
     );
   }
