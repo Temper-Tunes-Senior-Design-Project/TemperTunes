@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:mood_swing/Pages/CameraPage.dart';
 import 'package:mood_swing/Pages/ExistingPlaylistsPage.dart';
+import 'package:mood_swing/Pages/GenerationOptionsPage.dart';
 import 'package:mood_swing/Pages/PreferencesPage.dart';
 import 'package:mood_swing/Pages/UserPage.dart';
 import 'package:collapsible_sidebar/collapsible_sidebar.dart';
 import 'dart:math' as math show pi;
 import '../Utilities/AuthRouter.dart';
+import '../Pages/LinkSpotifyPage.dart';
 import '../Widgets/widgets.dart';
 
 ///Large Sidebar
@@ -47,13 +48,31 @@ class _SidebarLargeState extends State<SidebarLarge> {
         },
       ),
 
+      ///Link to spotify
+      CollapsibleItem(
+        text: 'Link To Spotify',
+        icon: SpotifyIcons.whiteIcon,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => LinkSpotifyPage(),
+            ),
+          );
+        },
+      ),
+
       ///Make New Playlist
       CollapsibleItem(
         text: 'Create New Playlist',
         icon: Icons.create_rounded,
         onPressed: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => CameraPage()));
+            context,
+            MaterialPageRoute(
+              builder: (context) => GenerationOptionsPage(),
+            ),
+          );
         },
       ),
 
