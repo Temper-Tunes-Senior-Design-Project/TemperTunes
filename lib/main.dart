@@ -70,29 +70,30 @@ class App extends StatelessWidget {
 
             //return LandingPage();
             //return ExistingPlaylistsPage();
-            WebBluetoothRouter web = WebBluetoothRouter();
-            return Scaffold(
-              body: Center(
-                child: Row(
-                  children: [
-                    GestureDetector(
-                      onTap: () async{
-                        Stream<Future<double>>? ds = await web.connectToDevice();
-                        ds?.listen((result) async {
-                          print("Resulted");
-                          print(await result);
-                        });
-                      },
-                      child: Container(
-                        color: Colors.red,
-                        height: 200,
-                        width: 200,
-                      ),
-                    ),
-                  ],
-                )
-              ),
-            );
+            return BluetoothLoaderPage();
+            // WebBluetoothRouter web = WebBluetoothRouter();
+            // return Scaffold(
+            //   body: Center(
+            //     child: Row(
+            //       children: [
+            //         GestureDetector(
+            //           onTap: () async{
+            //             Stream<Future<double>>? ds = await web.connectToDevice();
+            //             ds?.listen((result) async {
+            //               print("Resulted");
+            //               print(await result);
+            //             });
+            //           },
+            //           child: Container(
+            //             color: Colors.red,
+            //             height: 200,
+            //             width: 200,
+            //           ),
+            //         ),
+            //       ],
+            //     )
+            //   ),
+            // );
           }),
     );
   }

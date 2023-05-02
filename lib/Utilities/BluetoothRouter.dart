@@ -1,4 +1,6 @@
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
+import 'dart:convert';
+import 'dart:typed_data';
 
 class BluetoothRouter {
   final FlutterReactiveBle bluetoothDriver = FlutterReactiveBle();
@@ -15,47 +17,20 @@ class BluetoothRouter {
     });
   }
 
-  void writeToDevice(DiscoveredDevice device) async {
-    bluetoothDriver.connectToDevice(
-        id: device.id).listen((event) async {
-          if(event.connectionState == DeviceConnectionState.connected)
-            {
-              print("Device services:");
-              List<DiscoveredService> services = await bluetoothDriver.discoverServices(device.id);
-              services.forEach((service) {
-                service.characteristics.forEach((char) async
-                {
-                QualifiedCharacteristic c = QualifiedCharacteristic(characteristicId: char.characteristicId, serviceId: service.serviceId, deviceId: device.id);
-                // await bluetoothDriver.writeCharacteristicWithoutResponse(c, value:  );
-                }
-                );
-              });
-
-              Uuid serviceUID = device.serviceUuids[0];
-              //
-            }
+  Future<Stream<Future<String>>> connectToDevice(DiscoveredDevice device) async {
+    return bluetoothDriver.connectToDevice(id: device.id).map((event) async {
+      List<DiscoveredService> services =
+          await bluetoothDriver.discoverServices(device.id);
+      Uuid charID = services[0].characteristics[0].characteristicId;
+      QualifiedCharacteristic c = QualifiedCharacteristic(
+          characteristicId: charID,
+          serviceId: services[0].serviceId,
+          deviceId: device.id);
+      Future.delayed(Duration(seconds: 3));
+      await bluetoothDriver.writeCharacteristicWithoutResponse(c,
+          value: Uint8List.fromList(utf8.encode("1")));
+      Future.delayed(Duration(seconds: 3));
+      return utf8.decode(await bluetoothDriver.readCharacteristic(c));
     });
-
-    // print(device);
-    // await device?.connect();
-    // print(await device?.discoverServices());
-    // device?.services.listen((event) async {
-    //   BluetoothCharacteristic? char = (await event[0].getCharacteristics())[0];
-    //   char.writeValueWithoutResponse(Uint8List.fromList(utf8.encode("on")));
-    //   print("Written");
-    // });
-  }
-
-  void readFromDevice() async {
-    // print(device.toString());
-    // await device?.connect();
-    // print(await device?.discoverServices());
-    // device?.services.listen((event) async {
-    //   BluetoothCharacteristic? char = (await event[0].getCharacteristics())?[0];
-    //   print(await char?.readValue());
-    //   //ByteData? b = await char?.readValue();
-    //   print("Read");
-    //   // print(b?.buffer.asUint8List());
-    // });
   }
 }
