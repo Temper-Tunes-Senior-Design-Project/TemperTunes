@@ -1,9 +1,9 @@
-class Song
-{
+class Song {
   String uid;
   String name;
-  Map<String,String> songLinks;
-  String imageURL;
+  Map<String, String> songLinks;
+  List<String> artists;
+  String imageURl;
 
-  Song(this.uid, this.name, this.songLinks, this.imageURL);
+  Song(this.uid, this.name, this.songLinks, this.artists, this.imageURl);
 }

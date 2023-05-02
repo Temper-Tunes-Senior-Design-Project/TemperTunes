@@ -1,10 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mood_swing/Pages/LoginPage.dart';
 import 'package:mood_swing/Utilities/AuthRouter.dart';
-import '../Objects/LoginCredentials.dart';
 import '../Widgets/widgets.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'dart:async';
+import 'package:animate_do/animate_do.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -20,7 +21,6 @@ TextEditingController _emailController = new TextEditingController();
 TextEditingController _usernameController = new TextEditingController();
 TextEditingController _passwordController = new TextEditingController();
 TextEditingController _passwordController2 = new TextEditingController();
-LoginCredentials? credential;
 
 class LargeScreen extends StatefulWidget {
   _LargeScreenState createState() => _LargeScreenState();
@@ -29,7 +29,7 @@ class LargeScreen extends StatefulWidget {
 class _LargeScreenState extends State<LargeScreen> {
   final _formKey = GlobalKey<FormState>();
   //show password
-  bool _isVisible = false;
+  // bool _isVisible = false;
 
   // snackBar Widget
   snackBar(String? message) {
@@ -45,352 +45,195 @@ class _LargeScreenState extends State<LargeScreen> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    return SingleChildScrollView(
-      child: SafeArea(
-        child: Container(
-          width: width,
-          height: height,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("assets/loginPageLarge.png"),
-                fit: BoxFit.cover),
-          ),
-          child: Padding(
-            ///back arrow
-            padding: EdgeInsets.only(top: 0.02 * height),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  child: Row(
-                    children: [
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          shape: CircleBorder(),
-                        ),
-                        child: Icon(
-                          const IconData(0xf05bc, fontFamily: 'MaterialIcons'),
-                          color: Colors.white,
-                          size: 40,
-                        ),
-                        onPressed: () => Navigator.pop(context),
-                      )
-                    ],
+    return SafeArea(
+      child: Container(
+        width: width,
+        height: height,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("assets/loginPageLarge.png"),
+              fit: BoxFit.cover),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            BackArrowBtn(),
+
+            ///Main Container
+            FadeInUpBig(
+              child: Form(
+                key: _formKey,
+                child: Container(
+                  constraints: BoxConstraints(
+                    maxHeight: height * 0.9,
+                    minHeight: height * 0.8,
+                    minWidth: width * 0.3,
+                    maxWidth: width * 0.3,
                   ),
-                ),
-
-                ///Main Container
-                Form(
-                  key: _formKey,
-                  child: Container(
-                    height: height * 0.8,
-                    width: width * 0.3,
-                    padding: EdgeInsets.only(
-                        left: 0.03 * width, right: 0.03 * height),
-                    decoration: BoxDecoration(
-                      color: Colors.grey.withOpacity(0.3),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(20),
-                      ),
+                  height: height * 0.85,
+                  width: width * 0.3,
+                  padding:
+                      EdgeInsets.only(left: 0.03 * width, right: 0.03 * height),
+                  decoration: BoxDecoration(
+                    color: Colors.grey.withOpacity(0.3),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(20),
                     ),
-                    child: Column(
+                  ),
+                  child: Column(
                       children: [
-                        ///App logo
-                        Container(
-                          alignment: Alignment.topCenter,
-                          padding: EdgeInsets.only(top: height * 0.02),
-                          child: Image.asset(
-                              "assets/music_swing_logo_small.png",
-                              scale: 2.5),
-                        ),
-
-                        ///Username
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Container(
-                              alignment: Alignment.topLeft,
-                              child: TextFormField(
-                                controller: _usernameController,
-                                validator: RequiredValidator(
-                                    errorText: AutofillHints.username),
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                  fontFamily: 'Maven Pro',
-                                  fontWeight: FontWeight.w100,
-                                  color: Colors.white,
-                                  fontSize: 15,
-                                ),
-                                decoration: InputDecoration(
-                                  hintStyle: TextStyle(color: Colors.white60),
-                                  hintText: 'Username',
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.white, width: 3),
-                                  ),
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: new BorderSide(
-                                        color: MyPalette.darkTurqoise,
-                                        width: 3),
-                                  ),
-                                  labelText: 'Please enter your username',
-                                  labelStyle: TextStyle(
-                                      fontSize: 15, color: Colors.white54),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-
-                        ///Enter Email
-                        Column(
-                          children: [
-                            Container(
-                              padding: EdgeInsets.only(top: height * 0.005),
-                              alignment: Alignment.topLeft,
-                              child: TextFormField(
-                                controller: _emailController,
-                                validator: RequiredValidator(
-                                    errorText: AutofillHints.email),
-                                style: TextStyle(
-                                  fontFamily: 'Maven Pro',
-                                  fontWeight: FontWeight.w100,
-                                  color: Colors.white,
-                                  fontSize: 15,
-                                ),
-                                decoration: InputDecoration(
-                                  hintStyle: TextStyle(color: Colors.white60),
-                                  hintText: 'Email',
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.white, width: 3),
-                                  ),
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: new BorderSide(
-                                        color: MyPalette.darkTurqoise,
-                                        width: 3),
-                                  ),
-                                  labelText: 'Please enter your email',
-                                  labelStyle: TextStyle(
-                                      fontSize: 15, color: Colors.white54),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-
-                        ///Password
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Container(
-                              padding: EdgeInsets.only(top: height * 0.005),
-                              alignment: Alignment.topLeft,
-                              child: TextFormField(
-                                controller: _passwordController,
-                                validator: RequiredValidator(
-                                    errorText: AutofillHints.password),
-                                obscureText: !_isVisible,
-                                obscuringCharacter: "*",
-                                style: TextStyle(
-                                  fontFamily: 'Maven Pro',
-                                  fontWeight: FontWeight.w100,
-                                  color: Colors.white,
-                                  fontSize: 15,
-                                ),
-                                decoration: InputDecoration(
-                                  //eye icon (see password)
-                                  suffixIcon: Align(
-                                    widthFactor: 0,
-                                    child: IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          _isVisible = !_isVisible;
-                                        });
-                                      },
-                                      icon: _isVisible
-                                          ? Icon(
-                                              Icons.visibility,
-                                              color: MyPalette.darkTurqoise,
-                                            )
-                                          : Icon(
-                                              Icons.visibility_off,
-                                              color: Colors.grey,
-                                            ),
-                                    ),
-                                  ),
-
-                                  hintStyle: TextStyle(color: Colors.white60),
-                                  hintText: 'Password',
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.white, width: 3),
-                                  ),
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: new BorderSide(
-                                        color: MyPalette.darkTurqoise,
-                                        width: 3),
-                                  ),
-                                  labelText: 'Please enter your password',
-                                  labelStyle: TextStyle(
-                                      fontSize: 15, color: Colors.white54),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-
-                        ///Confirm Password
-                        Column(
-                          children: [
-                            Container(
-                              padding: EdgeInsets.only(top: height * 0.005),
-                              alignment: Alignment.topLeft,
-                              child: TextFormField(
-                                controller: _passwordController2,
-                                validator: RequiredValidator(
-                                    errorText: AutofillHints.password),
-                                obscureText: !_isVisible,
-                                obscuringCharacter: "*",
-                                style: TextStyle(
-                                  fontFamily: 'Maven Pro',
-                                  fontWeight: FontWeight.w100,
-                                  color: Colors.white,
-                                  fontSize: 15,
-                                ),
-                                decoration: InputDecoration(
-                                  //eye icon (see password)
-                                  suffixIcon: Align(
-                                    widthFactor: 0,
-                                    child: IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          _isVisible = !_isVisible;
-                                        });
-                                      },
-                                      icon: _isVisible
-                                          ? Icon(
-                                              Icons.visibility,
-                                              color: MyPalette.darkTurqoise,
-                                            )
-                                          : Icon(
-                                              Icons.visibility_off,
-                                              color: Colors.grey,
-                                            ),
-                                    ),
-                                  ),
-
-                                  hintStyle: TextStyle(color: Colors.white60),
-                                  hintText: 'Confirm Password',
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.white, width: 3),
-                                  ),
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: new BorderSide(
-                                        color: MyPalette.darkTurqoise,
-                                        width: 3),
-                                  ),
-                                  labelText: 'Please confirm your password',
-                                  labelStyle: TextStyle(
-                                      fontSize: 15, color: Colors.white54),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-
-                        SizedBox(height: height * 0.023),
-
-                        ///Register button
-                        Container(
-                          child: TextButton(
-                            child: Container(
-                              child: Container(
-                                width: 0.5 * width,
-                                height: 0.056 * height,
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    begin: Alignment.topRight,
-                                    end: Alignment.bottomLeft,
-                                    colors: [
-                                      MyPalette.slateBlue,
-                                      MyPalette.brightMagenta,
-                                      MyPalette.turqoise,
-                                    ],
-                                  ),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(15),
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      offset: Offset(0, 1),
-                                      color: MyPalette.brightMagenta,
-                                      blurRadius: 16,
-                                    ),
-                                  ],
-                                ),
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: Text("Register",
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        fontSize: 25,
-                                        fontFamily: 'Share Tech',
-                                        color: Colors.white,
-                                      )),
-                                ),
-                              ),
-                            ),
-                            onPressed: () {
-                              if (_formKey.currentState!.validate()) {
-                                register(context);
-                              }
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.transparent,
-                              foregroundColor: Colors.transparent,
-                            ),
-                          ),
-                        ),
-
-                        ///Forgot Password
-                        Container(
-                          padding: EdgeInsets.only(top: 0.02 * height),
+                        Flexible(
+                          fit: FlexFit.tight,
                           child: Column(
                             children: [
-                              Text(
-                                'Already have an account?',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontFamily: 'Maven Pro',
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                  color: Colors.white,
+                              ///App logo
+                              Container(
+                                alignment: Alignment.topCenter,
+                                padding: EdgeInsets.only(top: height * 0.02),
+                                child: Image.asset(
+                                    "assets/music_swing_logo_small.png",
+                                    scale: 2.5),
+                              ),
+
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  ///Username
+                                  ChangeForm(
+                                    context: context,
+                                    controller: _usernameController,
+                                    validator: RequiredValidator(
+                                        errorText: AutofillHints.username),
+                                    label: 'Username',
+                                  ),
+
+                                  ///Email
+                                  ChangeForm(
+                                    context: context,
+                                    controller: _emailController,
+                                    validator: RequiredValidator(
+                                        errorText: AutofillHints.email),
+                                    label: 'Email',
+                                  ),
+
+                                  ///Password
+                                  PasswordForm(
+                                    context: context,
+                                    controller: _passwordController,
+                                    validator: RequiredValidator(
+                                        errorText: AutofillHints.password),
+                                    label: 'Password',
+                                    obscuringChar: '*',
+                                  ),
+
+                                  ///Confirm Password
+                                  PasswordForm(
+                                    context: context,
+                                    controller: _passwordController2,
+                                    validator: RequiredValidator(
+                                        errorText: "confirm password"),
+                                    label: 'Confirm Password',
+                                    obscuringChar: '*',
+                                  ),
+                                ],
+                              ),
+
+                              SizedBox(height: height * 0.023),
+
+                              ///Register button
+
+                              Container(
+                                child: TextButton(
+                                  child: Container(
+                                    child: Container(
+                                      width: 0.5 * width,
+                                      height: 0.056 * height,
+                                      decoration: BoxDecoration(
+                                        gradient: LinearGradient(
+                                          begin: Alignment.topRight,
+                                          end: Alignment.bottomLeft,
+                                          colors: [
+                                            MyPalette.slateBlue,
+                                            MyPalette.brightMagenta,
+                                            MyPalette.turqoise,
+                                          ],
+                                        ),
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(15),
+                                        ),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            offset: Offset(0, 1),
+                                            color: MyPalette.brightMagenta,
+                                            blurRadius: 16,
+                                          ),
+                                        ],
+                                      ),
+                                      child: Align(
+                                        alignment: Alignment.center,
+                                        child: Text("Register",
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              fontSize: 25,
+                                              fontFamily: 'Share Tech',
+                                              color: Colors.white,
+                                            )),
+                                      ),
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    if (_formKey.currentState!.validate()) {
+                                      register(context);
+                                    }
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.transparent,
+                                    foregroundColor: Colors.transparent,
+                                  ),
                                 ),
                               ),
+
                               Container(
-                                alignment: Alignment.center,
+                                padding: EdgeInsets.only(
+                                    top: 0.01 * height, bottom: 0),
                                 child: Column(
                                   children: [
-                                    TextButton(
-                                      child: Text(
-                                        'Go to login',
-                                        style: TextStyle(
-                                          fontFamily: 'Maven Pro',
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16,
-                                          color: MyPalette.turqoise,
-                                        ),
+                                    ///Regular Text
+                                    Text(
+                                      'Have an account already?',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontFamily: 'Maven Pro',
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16,
+                                        color: Colors.white,
                                       ),
-                                      onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => LoginPage(),
+                                    ),
+
+                                    ///Linked text to login
+                                    Container(
+                                      alignment: Alignment.center,
+                                      padding: EdgeInsets.only(top: 0),
+                                      child: TextButton(
+                                        child: Text(
+                                          'Go to login',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontFamily: 'Maven Pro',
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16,
+                                            color: MyPalette.turqoise,
                                           ),
-                                        );
-                                      },
+                                        ),
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => LoginPage(),
+                                            ),
+                                          );
+                                        },
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -400,11 +243,10 @@ class _LargeScreenState extends State<LargeScreen> {
                         ),
                       ],
                     ),
-                  ),
                 ),
-              ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );
@@ -417,7 +259,7 @@ class SmallScreen extends StatefulWidget {
 
 class _SmallScreenState extends State<SmallScreen> {
   //lets user see their password if they choose to
-  bool _isVisible = false;
+  // bool _isVisible = false;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -425,41 +267,22 @@ class _SmallScreenState extends State<SmallScreen> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    return SingleChildScrollView(
-      child: SafeArea(
-        child: Container(
-          height: height,
-          width: width,
-          decoration: BoxDecoration(
-            //set img to bg of body
-            image: DecorationImage(
-                image: AssetImage("assets/loginPageSmall.png"),
-                fit: BoxFit.cover),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              ///back button
-              Container(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        shape: CircleBorder(),
-                      ),
-                      child: Icon(
-                        const IconData(0xf05bc, fontFamily: 'MaterialIcons'),
-                        color: Colors.white,
-                        size: 40,
-                      ),
-                      onPressed: () => Navigator.pop(context),
-                    ),
-                  ],
-                ),
-              ),
-
-              Form(
+    return SafeArea(
+      child: Container(
+        height: height,
+        width: width,
+        decoration: BoxDecoration(
+          //set img to bg of body
+          image: DecorationImage(
+              image: AssetImage("assets/loginPageSmall.png"),
+              fit: BoxFit.cover),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            BackArrowBtn(),
+            FadeInUpBig(
+              child: Form(
                 key: _formKey,
                 child: Container(
                   padding:
@@ -472,202 +295,51 @@ class _SmallScreenState extends State<SmallScreen> {
                         padding: EdgeInsets.only(
                             top: height * 0.01, bottom: height * 0.005),
                         child: Image.asset("assets/music_swing_logo_small.png",
-                            scale: 2.2),
+                            scale: 2.5),
                       ),
 
                       ///Username
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Container(
-                            alignment: Alignment.topLeft,
-                            child: TextFormField(
-                              controller: _usernameController,
-                              validator: RequiredValidator(
-                                  errorText: AutofillHints.username),
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                fontFamily: 'Maven Pro',
-                                fontWeight: FontWeight.w100,
-                                color: Colors.white,
-                                fontSize: 15,
-                              ),
-                              decoration: InputDecoration(
-                                hintStyle: TextStyle(color: Colors.white60),
-                                hintText: "Username",
-                                enabledBorder: UnderlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.white, width: 3),
-                                ),
-                                focusedBorder: UnderlineInputBorder(
-                                  borderSide: new BorderSide(
-                                      color: MyPalette.darkTurqoise, width: 3),
-                                ),
-                                labelText: 'Please enter your username',
-                                labelStyle: TextStyle(
-                                    fontSize: 15, color: Colors.white54),
-                              ),
-                            ),
-                          ),
-                        ],
+                      ChangeForm(
+                        context: context,
+                        controller: _usernameController,
+                        validator: RequiredValidator(
+                            errorText: AutofillHints.username),
+                        label: 'Username',
                       ),
 
-                      ///spacer
                       SizedBox(height: height * 0.015),
 
                       ///Email
-                      Column(
-                        children: [
-                          Container(
-                            alignment: Alignment.topLeft,
-                            child: TextFormField(
-                              controller: _emailController,
-                              validator: RequiredValidator(
-                                  errorText: AutofillHints.email),
-                              style: TextStyle(
-                                fontFamily: 'Maven Pro',
-                                fontWeight: FontWeight.w100,
-                                color: Colors.white,
-                                fontSize: 15,
-                              ),
-                              decoration: InputDecoration(
-                                hintStyle: TextStyle(color: Colors.white60),
-                                hintText: 'Email',
-                                enabledBorder: UnderlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.white, width: 3),
-                                ),
-                                focusedBorder: UnderlineInputBorder(
-                                  borderSide: new BorderSide(
-                                      color: MyPalette.darkTurqoise, width: 3),
-                                ),
-                                labelText: 'Please enter your email',
-                                labelStyle: TextStyle(
-                                    fontSize: 15, color: Colors.white54),
-                              ),
-                            ),
-                          ),
-                        ],
+                      ChangeForm(
+                        context: context,
+                        controller: _emailController,
+                        validator:
+                            RequiredValidator(errorText: AutofillHints.email),
+                        label: 'Email',
                       ),
 
-                      ///spacer
                       SizedBox(height: height * 0.015),
 
                       ///Password
-                      Column(
-                        children: [
-                          Container(
-                            alignment: Alignment.topLeft,
-                            child: TextFormField(
-                              controller: _passwordController,
-                              validator: RequiredValidator(
-                                  errorText: AutofillHints.password),
-                              obscureText: !_isVisible,
-                              obscuringCharacter: "*",
-                              style: TextStyle(
-                                fontFamily: 'Maven Pro',
-                                fontWeight: FontWeight.w100,
-                                color: Colors.white,
-                                fontSize: 15,
-                              ),
-                              decoration: InputDecoration(
-                                //Eye icon (see password)
-                                suffixIcon: Align(
-                                  widthFactor: 0,
-                                  child: IconButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        _isVisible = !_isVisible;
-                                      });
-                                    },
-                                    icon: _isVisible
-                                        ? Icon(
-                                            Icons.visibility,
-                                            color: MyPalette.darkTurqoise,
-                                          )
-                                        : Icon(
-                                            Icons.visibility_off,
-                                            color: Colors.grey,
-                                          ),
-                                  ),
-                                ),
-                                hintStyle: TextStyle(color: Colors.white60),
-                                hintText: 'Password',
-                                enabledBorder: UnderlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.white, width: 3),
-                                ),
-                                focusedBorder: UnderlineInputBorder(
-                                  borderSide: new BorderSide(
-                                      color: MyPalette.darkTurqoise, width: 3),
-                                ),
-                                labelText: 'Please enter your password',
-                                labelStyle: TextStyle(
-                                    fontSize: 15, color: Colors.white54),
-                              ),
-                            ),
-                          ),
-                        ],
+                      PasswordForm(
+                        context: context,
+                        controller: _passwordController,
+                        validator: RequiredValidator(
+                            errorText: AutofillHints.password),
+                        label: 'Password',
+                        obscuringChar: '*',
                       ),
 
-                      ///spacer
                       SizedBox(height: height * 0.015),
 
                       ///Confirm Password
-                      Column(
-                        children: [
-                          Container(
-                            alignment: Alignment.topLeft,
-                            child: TextFormField(
-                              controller: _passwordController2,
-                              validator: RequiredValidator(
-                                  errorText: AutofillHints.password),
-                              obscureText: !_isVisible,
-                              obscuringCharacter: "*",
-                              style: TextStyle(
-                                fontFamily: 'Maven Pro',
-                                fontWeight: FontWeight.w100,
-                                color: Colors.white,
-                                fontSize: 15,
-                              ),
-                              decoration: InputDecoration(
-                                //eye icon (see password)
-                                suffixIcon: Align(
-                                  widthFactor: 0,
-                                  child: IconButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        _isVisible = !_isVisible;
-                                      });
-                                    },
-                                    icon: _isVisible
-                                        ? Icon(
-                                            Icons.visibility,
-                                            color: MyPalette.darkTurqoise,
-                                          )
-                                        : Icon(
-                                            Icons.visibility_off,
-                                            color: Colors.grey,
-                                          ),
-                                  ),
-                                ),
-                                hintStyle: TextStyle(color: Colors.white60),
-                                hintText: 'Confirm Password',
-                                enabledBorder: UnderlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.white, width: 3),
-                                ),
-                                focusedBorder: UnderlineInputBorder(
-                                  borderSide: new BorderSide(
-                                      color: MyPalette.darkTurqoise, width: 3),
-                                ),
-                                labelText: 'Please confirm your password',
-                                labelStyle: TextStyle(
-                                    fontSize: 15, color: Colors.white54),
-                              ),
-                            ),
-                          ),
-                        ],
+                      PasswordForm(
+                        context: context,
+                        controller: _passwordController2,
+                        validator:
+                            RequiredValidator(errorText: "confirm password"),
+                        label: 'Confirm Password',
+                        obscuringChar: '*',
                       ),
 
                       ///spacer
@@ -774,9 +446,9 @@ class _SmallScreenState extends State<SmallScreen> {
                     ],
                   ),
                 ),
-              )
-            ],
-          ),
+              ),
+            )
+          ],
         ),
       ),
     );
@@ -784,9 +456,11 @@ class _SmallScreenState extends State<SmallScreen> {
 }
 
 Future<void> register(BuildContext context) async {
-  credential ??= await AuthRouter().registerUser(
-      _emailController.text, _passwordController.text, _usernameController.text,
-      () {
+  AuthCredential? credential = await AuthRouter().registerUser(
+      _usernameController.text,
+      _emailController.text,
+      _passwordController.text,
+      _usernameController.text, () {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('Invalid credentials'),
@@ -794,14 +468,12 @@ Future<void> register(BuildContext context) async {
     );
   });
   if (credential != null) {
-    AuthRouter().credentialSignIn(credential!, context);
+    AuthRouter().credentialSignIn(credential, context);
   }
 }
 
 class SignupPage extends StatelessWidget {
-  SignupPage({super.key, LoginCredentials? authCred}) {
-    credential = authCred;
-  }
+  SignupPage({super.key}) {}
 
   @override
   Widget build(Object context) {

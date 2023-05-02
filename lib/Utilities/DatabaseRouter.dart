@@ -11,10 +11,9 @@ class DatabaseRouter {
   /**
    * Check if the user has a database entry already
    */
-  Future<bool> userExists() async
+  Future<bool> userExists(String uid) async
   {
-    //await FirebaseFirestore.instance.collection("users").doc(uid).
-    return false;
+    return (await FirebaseFirestore.instance.collection("users").doc(uid).get()).exists;
   }
 
   /**
