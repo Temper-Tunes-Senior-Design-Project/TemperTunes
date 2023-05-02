@@ -56,21 +56,7 @@ class LargeScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         ///Title
-                        FittedBox(
-                          fit: BoxFit.scaleDown,
-                          child: Container(
-                            alignment: Alignment.center,
-                            padding: EdgeInsets.only(top: 0.04 * height),
-                            child: Text(
-                              'Select Your Device',
-                              style: TextStyle(
-                                fontSize: 49,
-                                fontFamily: 'Share Tech',
-                                color: MyPalette.lightPurple,
-                              ),
-                            ),
-                          ),
-                        ),
+                        Title(),
 
                         Subtitle(),
                         StreamBuilder<List<DiscoveredDevice>>(
@@ -95,7 +81,7 @@ class LargeScreen extends StatelessWidget {
                             );
                           },
                         ),
-                        ContinueBtn(option: args!['option']),
+                        PairBtn(option: args!['option']),
                       ],
                     ),
                   ),
@@ -139,21 +125,7 @@ class SmallScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     ///Title
-                    FittedBox(
-                      fit: BoxFit.fill,
-                      child: Container(
-                        alignment: Alignment.center,
-                        padding: EdgeInsets.only(top: 0.04 * height),
-                        child: Text(
-                          'Select Your Device',
-                          style: TextStyle(
-                            fontSize: 49,
-                            fontFamily: 'Share Tech',
-                            color: MyPalette.lightPurple,
-                          ),
-                        ),
-                      ),
-                    ),
+                    Title(),
 
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 0.1 * width),
@@ -184,7 +156,7 @@ class SmallScreen extends StatelessWidget {
                         );
                       },
                     ),
-                    ContinueBtn(option: args['option']),
+                    PairBtn(option: args['option']),
                   ],
                 ),
               ),
@@ -213,15 +185,34 @@ class Subtitle extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(
           left: 0.01 * width, right: 0.01 * width, top: 0.04 * height),
-      child: FittedBox(
-        fit: BoxFit.fill,
+      child: Text(
+        "Please pair your device to get your skin conductivity values",
+        style: TextStyle(
+          fontSize: 20,
+          fontFamily: 'Maven Pro',
+          color: Colors.white60,
+        ),
+        textAlign: TextAlign.center,
+      ),
+    );
+  }
+}
+
+class Title extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    return FittedBox(
+      fit: BoxFit.fill,
+      child: Container(
         alignment: Alignment.center,
+        padding: EdgeInsets.only(top: 0.04 * height),
         child: Text(
-          "Please select the device you will use to retrieve your heartbeat and similar values",
+          'Select Your Device',
           style: TextStyle(
-            fontSize: 30,
-            fontFamily: 'Maven Pro',
-            color: Colors.white60,
+            fontSize: 49,
+            fontFamily: 'Share Tech',
+            color: MyPalette.lightPurple,
           ),
         ),
       ),
@@ -229,9 +220,9 @@ class Subtitle extends StatelessWidget {
   }
 }
 
-class ContinueBtn extends StatelessWidget {
+class PairBtn extends StatelessWidget {
   final String option;
-  ContinueBtn({required this.option});
+  PairBtn({required this.option});
 
   @override
   Widget build(BuildContext context) {
@@ -268,7 +259,7 @@ class ContinueBtn extends StatelessWidget {
           child: Align(
             alignment: Alignment.center,
             child: Text(
-              'Continue',
+              'Pair',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 25,

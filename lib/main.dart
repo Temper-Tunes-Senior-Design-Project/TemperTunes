@@ -16,6 +16,7 @@ import 'firebase_options.dart';
 
 import 'package:mood_swing/Pages/TestingPage.dart';
 
+import 'package:mood_swing/Pages/OnboardingPage.dart';
 import 'package:mood_swing/Pages/GenerationOptionsPage.dart';
 import 'package:mood_swing/Pages/GenerationLoadingPage.dart';
 
@@ -76,7 +77,7 @@ class _AppState extends State<App> {
         '/camera': (context) => CameraPage(),
         '/bluetooth': (context) => BluetoothLoaderPage(),
         '/presets': (context) => PresetsPage(),
-        '/compiling': (context) => TestingPage(),
+        '/compiling': (context) => GenerationLoadingPage(selectedMood: Moo.,),
       },
       home: StreamBuilder<User?>(
           initialData: FirebaseAuth.instance.currentUser,

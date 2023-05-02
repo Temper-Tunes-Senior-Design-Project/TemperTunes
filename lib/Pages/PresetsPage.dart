@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import '../Objects/Mood.dart';
 import '../Widgets/widgets.dart';
 import 'GenerationLoadingPage.dart';
 
@@ -125,7 +126,13 @@ class _SmallCarouselState extends State<SmallCarousel> {
                             _selectedIndex = {};
                           } else {
                             _selectedIndex = mood;
-                            Navigator.pushNamed(context, '/compiling');
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    GenerationLoadingPage(selectedMood: mood),
+                              ),
+                            );
                           }
                         });
                       },
@@ -285,7 +292,7 @@ class _LargeCarouselState extends State<LargeCarousel> {
                   });
                 }),
             items: _products.map(
-              (mood) {
+              (Mood mood) {
                 return Builder(
                   builder: (BuildContext context) {
                     return GestureDetector(
@@ -298,8 +305,10 @@ class _LargeCarouselState extends State<LargeCarousel> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => GenerationLoadingPage(
-                                    selectedMood: mood['title']),
+                                builder: (context) =>
+
+                                    ///DON'T KNOW IF THIS IS CORRECT. DON'T KNOW WHAT VALUES BEING PASSED
+                                    GenerationLoadingPage(selectedMood: mood),
                               ),
                             );
                           }
