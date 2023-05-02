@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mood_swing/Pages/ChangeEmailPage.dart';
 import 'package:mood_swing/Pages/ChangePasswordPage.dart';
 import 'package:mood_swing/Pages/UserPage.dart';
+import 'package:mood_swing/Utilities/AuthRouter.dart';
 import '../Widgets/widgets.dart';
 import 'package:mood_swing/Pages/LinkSpotifyPage.dart';
 import 'package:animate_do/animate_do.dart';
@@ -155,7 +156,9 @@ class LargeScreen extends StatelessWidget {
                           height,
                           width,
                           Icon(Icons.logout, color: Colors.white, size: 24),
-                          () {},
+                          () {
+                            AuthRouter().logout(context);
+                          },
                           24,
                         ),
                       ],
