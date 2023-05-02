@@ -45,17 +45,21 @@ class LargeScreen extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-                      Container(
-                        alignment: Alignment.topCenter,
-                        padding: EdgeInsets.only(
-                          top: height * 0.03,
-                          bottom: 0.03 * height,
-                        ),
-                        child: FittedBox(
-                          fit: BoxFit.contain,
-                          child: Image.asset(
-                            "assets/spotifyLogoWhite.png",
-                            scale: 2.5,
+                      Flexible(
+                        flex: 3,
+                        fit: FlexFit.loose,
+                        child: Container(
+                          alignment: Alignment.topCenter,
+                          padding: EdgeInsets.only(
+                            top: height * 0.03,
+                            bottom: 0.03 * height,
+                          ),
+                          child: FittedBox(
+                            fit: BoxFit.contain,
+                            child: Image.asset(
+                              "assets/spotifyLogoWhite.png",
+                              scale: 2.5,
+                            ),
                           ),
                         ),
                       ),

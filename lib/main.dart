@@ -14,8 +14,9 @@ import 'Pages/PresetsPage.dart';
 import 'Widgets/MockNavigator.dart';
 import 'firebase_options.dart';
 
+import 'package:mood_swing/Pages/TestingPage.dart';
+
 import 'package:mood_swing/Pages/GenerationOptionsPage.dart';
-import 'package:mood_swing/Pages/ExistingPlaylistsPage.dart';
 import 'package:mood_swing/Pages/GenerationLoadingPage.dart';
 
 void main() async {
@@ -75,7 +76,7 @@ class _AppState extends State<App> {
         '/camera': (context) => CameraPage(),
         '/bluetooth': (context) => BluetoothLoaderPage(),
         '/presets': (context) => PresetsPage(),
-        '/compiling': (context) => GenerationLoadingPage(),
+        '/compiling': (context) => TestingPage(),
       },
       home: StreamBuilder<User?>(
           initialData: FirebaseAuth.instance.currentUser,
