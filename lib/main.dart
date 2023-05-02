@@ -9,6 +9,7 @@ import 'dart:ui';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mood_swing/Utilities/AuthRouter.dart';
+import 'package:mood_swing/Utilities/WebBluetoothRouter.dart';
 import 'Widgets/MockNavigator.dart';
 import 'firebase_options.dart';
 
@@ -68,7 +69,30 @@ class App extends StatelessWidget {
             }
 
             //return LandingPage();
-            return ExistingPlaylistsPage();
+            //return ExistingPlaylistsPage();
+            WebBluetoothRouter web = WebBluetoothRouter();
+            return Scaffold(
+              body: Center(
+                child: Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () async{
+                        Stream<Future<double>>? ds = await web.connectToDevice();
+                        ds?.listen((result) async {
+                          print("Resulted");
+                          print(await result);
+                        });
+                      },
+                      child: Container(
+                        color: Colors.red,
+                        height: 200,
+                        width: 200,
+                      ),
+                    ),
+                  ],
+                )
+              ),
+            );
           }),
     );
   }
