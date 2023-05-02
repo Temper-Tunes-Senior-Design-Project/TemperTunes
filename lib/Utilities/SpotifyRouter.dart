@@ -55,6 +55,7 @@ class SpotifyRouter {
     ///Instantiate the spotify client library
     String accessToken = await getToken();
     SpotifyApi client = SpotifyApi.withAccessToken(accessToken);
+
     ///Instantiate playlists with liked songs
     List<String> likedSongURLs = [];
 
@@ -81,7 +82,7 @@ class SpotifyRouter {
     Iterable<PlaylistSimple> playlists = await client.playlists.me.all();
 
     for (PlaylistSimple p in playlists) {
-      print("Getting playlist: " + (p.name?? ""));
+      print("Getting playlist: " + (p.name ?? ""));
       Iterable? data =
           (await client.playlists.get(p.id ?? "")).tracks?.itemsNative;
       List<Song>? songs = data?.map((e) {
@@ -90,8 +91,8 @@ class SpotifyRouter {
         return Song("", e["track"]["name"], {}, artists, "");
       }).toList();
 
-      rPlaylists.add(CP.Playlist(p.id??"No id exists", p.name ?? "No name", {}, songs ?? [],
-          p.images?.map((e) => e.url ?? "").toList() ?? []));
+      rPlaylists.add(CP.Playlist(p.id ?? "No id exists", p.name ?? "No name",
+          {}, songs ?? [], p.images?.map((e) => e.url ?? "").toList() ?? []));
     }
     return rPlaylists;
   }
@@ -112,8 +113,15 @@ class SpotifyRouter {
         t.album?.images?[0].url ?? "");
   }
 
-  // Future<CP.Playlist> getPlaylist(List<Song> songs)
-  // {
-  //   // return CP.Playlist("","Mood Swing Generated Playlist",{}, songs);
-  // }
+  Future<void> publishPlaylist(CP.Playlist cp) async {
+    String accessToken = await getToken();
+    SpotifyApi client = SpotifyApi.withAccessToken(accessToken);
+    Playlist p = await client.playlists
+        .createPlaylist((await client.me.get()).id ?? "", cp.name);
+    List<String> uris = [];
+    for (Song s in cp.songs) {
+      uris.add((await client.tracks.get(s.uid)).uri ?? "");
+    }
+    await client.playlists.addTracks(uris, p.id ?? "");
+  }
 }
