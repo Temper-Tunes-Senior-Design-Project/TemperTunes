@@ -1,11 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import '../Widgets/widgets.dart';
-import 'package:flutter/services.dart';
 import 'dart:io' show Platform;
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:location_permissions/location_permissions.dart';
-import '../Utilities/BluetoothRouter.dart';
 
 //https://github.com/PhilipsHue/flutter_reactive_ble/tree/master/example
 //https://www.ubiqueiot.com/posts/flutter-reactive-ble

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../Utilities/AuthRouter.dart';
 import '../Widgets/widgets.dart';
-import 'OTPEmailPage.dart';
 import 'HomePage.dart';
 import 'package:form_field_validator/form_field_validator.dart' as validator;
 import 'package:bouncing_widget/bouncing_widget.dart';
@@ -30,7 +29,7 @@ class LargeScreen extends StatefulWidget {
 
 class _LargeScreenState extends State<LargeScreen> {
   //lets user see their password if they choose to
-  bool _isVisible = false;
+  // bool _isVisible = false;
   final _formKey = GlobalKey<FormState>();
   double _scaleFactor = 1.5;
 
@@ -47,216 +46,202 @@ class _LargeScreenState extends State<LargeScreen> {
               image: AssetImage("assets/loginPageLarge.png"),
               fit: BoxFit.cover),
         ),
-        child: Expanded(
-          flex: 1,
-          child: Column(
-            children: <Widget>[
-              ///Back button
-              BackArrowBtn(),
+        child: Column(
+          children: <Widget>[
+            ///Back button
+            BackArrowBtn(),
 
-              ///Main Container
-              FadeInUpBig(
-                child: Form(
-                  key: _formKey,
-                  child: Container(
-                    constraints: BoxConstraints(
-                      maxHeight: height * 0.87,
-                      minHeight: height * 0.8,
-                      minWidth: width * 0.3,
-                      maxWidth: width * 0.3,
+            ///Main Container
+            FadeInUpBig(
+              child: Form(
+                key: _formKey,
+                child: Container(
+                  constraints: BoxConstraints(
+                    maxHeight: height * 0.87,
+                    minHeight: height * 0.8,
+                    minWidth: width * 0.3,
+                    maxWidth: width * 0.3,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.grey.withOpacity(0.3),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(20),
                     ),
-                    decoration: BoxDecoration(
-                      color: Colors.grey.withOpacity(0.3),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(20),
+                  ),
+                  child: Column(
+                    children: [
+                      Container(
+                        alignment: Alignment.topCenter,
+                        padding: EdgeInsets.only(top: height * 0.02),
+                        child: Image.asset("assets/music_swing_logo_small.png",
+                            scale: 2.4),
                       ),
-                    ),
-                    child: Column(
-                      children: [
-                        Container(
-                          alignment: Alignment.topCenter,
-                          padding: EdgeInsets.only(top: height * 0.02),
-                          child: Image.asset(
-                              "assets/music_swing_logo_small.png",
-                              scale: 2.4),
+
+                      ///User input area
+                      Container(
+                        padding: EdgeInsets.only(
+                            left: 0.02 * width, right: 0.02 * width),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            ///login
+                            LoginEmailForm(
+                              context: context,
+                              controller: _emailController,
+                              validator: validator.RequiredValidator(
+                                  errorText: AutofillHints.email),
+                              icon: Icons.email,
+                              label: 'Please enter your email',
+                            ),
+
+                            ///spacer
+                            SizedBox(height: 0.04 * height),
+
+                            ///password
+                            LoginPasswordForm(
+                              context: context,
+                              validator: validator.RequiredValidator(
+                                  errorText: AutofillHints.password),
+                              controller: _passwordController,
+                              obscuringChar: "*",
+                              icon: Icons.key,
+                              label: "Please enter your password",
+                            ),
+                          ],
                         ),
+                      ),
 
-                        ///User input area
-                        Container(
-                          padding: EdgeInsets.only(
-                              left: 0.02 * width, right: 0.02 * width),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              ///login
-                              LoginEmailForm(
-                                context: context,
-                                controller: _emailController,
-                                validator: validator.RequiredValidator(
-                                    errorText: AutofillHints.email),
-                                icon: Icons.email,
-                                label: 'Please enter your email',
-                              ),
+                      ///spacer
+                      SizedBox(height: 0.02 * height),
 
-                              ///spacer
-                              SizedBox(height: 0.04 * height),
+                      ///Forgot Password
+                      ForgotPassword(),
 
-                              ///password
-                              LoginPasswordForm(
-                                context: context,
-                                validator: validator.RequiredValidator(
-                                    errorText: AutofillHints.password),
-                                controller: _passwordController,
-                                obscuringChar: "*",
-                                icon: Icons.key,
-                                label: "Please enter your password",
-                              ),
-                            ],
-                          ),
-                        ),
+                      ///spacer
+                      SizedBox(height: 0.04 * height),
 
-                        ///spacer
-                        SizedBox(height: 0.02 * height),
-
-                        ///Forgot Password
-                        ForgotPassword(),
-
-                        ///spacer
-                        SizedBox(height: 0.04 * height),
-
-                        ///Buttons
-                        //Login button
-                        BouncingWidget(
-                          scaleFactor: _scaleFactor,
-                          onPressed: () {},
-                          child: Container(
-                            child: TextButton(
-                              child: Container(
-                                width: 0.27 * width,
-                                height: 0.075 * height,
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    begin: Alignment.topRight,
-                                    end: Alignment.bottomLeft,
-                                    colors: [
-                                      MyPalette.slateBlue,
-                                      MyPalette.brightMagenta,
-                                      MyPalette.turqoise,
-                                    ],
-                                  ),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(20),
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      offset: Offset(0, 1),
-                                      color: MyPalette.brightMagenta,
-                                      blurRadius: 16,
-                                    ),
+                      ///Buttons
+                      //Login button
+                      BouncingWidget(
+                        scaleFactor: _scaleFactor,
+                        onPressed: () {},
+                        child: Container(
+                          child: TextButton(
+                            child: Container(
+                              width: 0.27 * width,
+                              height: 0.075 * height,
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topRight,
+                                  end: Alignment.bottomLeft,
+                                  colors: [
+                                    MyPalette.slateBlue,
+                                    MyPalette.brightMagenta,
+                                    MyPalette.turqoise,
                                   ],
                                 ),
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    "Login",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 25,
-                                      fontFamily: 'Share Tech',
-                                      color: Colors.white,
-                                    ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(20),
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    offset: Offset(0, 1),
+                                    color: MyPalette.brightMagenta,
+                                    blurRadius: 16,
+                                  ),
+                                ],
+                              ),
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  "Login",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                    fontFamily: 'Share Tech',
+                                    color: Colors.white,
                                   ),
                                 ),
                               ),
-                              onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                  login(context);
-                                }
+                            ),
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                login(context);
+                              }
+                            },
+                          ),
+                        ),
+                      ),
+
+                      ///Spacer
+                      SizedBox(height: 0.03 * height),
+
+                      ///Log in with
+                      Container(
+                        child: FittedBox(
+                          child: Text(
+                            'Or',
+                            style: TextStyle(
+                              color: white,
+                              fontSize: 13,
+                              fontFamily: 'Maven Pro',
+                              fontWeight: FontWeight.w400,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+
+                      ///Other account options
+                      Container(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                        height: height * 0.15,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            ExternalAuthBtn(
+                              context: context,
+                              heroTag: "Google",
+                              toolTipText: "Google",
+                              img: Image.asset("assets/googleIcon.png",
+                                  height: 15),
+                              onPressed: () async {
+                                AuthRouter().googleSignIn(context);
                               },
                             ),
-                          ),
-                        ),
-
-                        ///Spacer
-                        SizedBox(height: 0.03 * height),
-
-                        ///Log in with
-                        Container(
-                          child: FittedBox(
-                            child: Text(
-                              'Or',
-                              style: TextStyle(
-                                color: white,
-                                fontSize: 13,
-                                fontFamily: 'Maven Pro',
-                                fontWeight: FontWeight.w400,
-                              ),
-                              textAlign: TextAlign.center,
+                            ExternalAuthBtn(
+                              context: context,
+                              heroTag: "Facebook",
+                              toolTipText: "Facebook",
+                              img: Image.asset("assets/facebookIcon.png"),
+                              onPressed: () async {
+                                AuthRouter().facebookSignIn(context);
+                              },
                             ),
-                          ),
+                            ExternalAuthBtn(
+                              context: context,
+                              img: Image.asset("assets/appleIcon.png"),
+                              toolTipText: "AppleID",
+                              heroTag: "Apple Login",
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => HomePage(),
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
                         ),
-
-                        ///Other account options
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 10),
-                          height: height * 0.15,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              ExternalAuthBtn(
-                                context: context,
-                                heroTag: "Google",
-                                toolTipText: "Google",
-                                img: Image.asset("assets/googleIcon.png",
-                                    height: 15),
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => HomePage(),
-                                    ),
-                                  );
-                                },
-                              ),
-                              ExternalAuthBtn(
-                                context: context,
-                                heroTag: "Facebook",
-                                toolTipText: "Facebook",
-                                img: Image.asset("assets/facebookIcon.png"),
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => HomePage(),
-                                    ),
-                                  );
-                                },
-                              ),
-                              ExternalAuthBtn(
-                                context: context,
-                                img: Image.asset("assets/appleIcon.png"),
-                                toolTipText: "AppleID",
-                                heroTag: "Apple Login",
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => HomePage(),
-                                    ),
-                                  );
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -269,7 +254,7 @@ class SmallScreen extends StatefulWidget {
 
 class _SmallScreenState extends State<SmallScreen> {
   //lets user see their password if they choose to
-  bool _isVisible = false;
+  // bool _isVisible = false;
 
   final _formKey = GlobalKey<FormState>();
 

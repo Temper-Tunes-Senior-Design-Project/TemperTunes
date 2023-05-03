@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:mood_swing/Pages/CameraPage.dart';
 import 'package:mood_swing/Pages/ExistingPlaylistsPage.dart';
+import 'package:mood_swing/Pages/GenerationOptionsPage.dart';
 import 'package:mood_swing/Pages/PreferencesPage.dart';
 import 'package:mood_swing/Pages/UserPage.dart';
 import 'package:collapsible_sidebar/collapsible_sidebar.dart';
 import 'dart:math' as math show pi;
+import '../Utilities/AuthRouter.dart';
 import '../Pages/LinkSpotifyPage.dart';
 import '../Widgets/widgets.dart';
 
@@ -67,7 +68,11 @@ class _SidebarLargeState extends State<SidebarLarge> {
         icon: Icons.create_rounded,
         onPressed: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => CameraPage()));
+            context,
+            MaterialPageRoute(
+              builder: (context) => GenerationOptionsPage(),
+            ),
+          );
         },
       ),
 
@@ -108,7 +113,7 @@ class _SidebarLargeState extends State<SidebarLarge> {
         isCollapsed: MediaQuery.of(context).size.width <= 800,
         items: _items,
         avatarImg: _avatarImg,
-        title: 'John Smith',
+        title: AuthRouter().getUser().username,
         body: _body(context),
         selectedIconBox: MyPalette.magenta,
         backgroundColor: MyPalette.dark,

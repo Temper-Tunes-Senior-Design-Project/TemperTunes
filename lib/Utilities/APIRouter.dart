@@ -3,15 +3,82 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:mood_swing/Objects/Mood.dart';
+import 'package:mood_swing/Objects/Playlist.dart';
 import 'package:mood_swing/Utilities/AuthRouter.dart';
 
+import '../Objects/Song.dart';
 import 'SpotifyRouter.dart';
 
 class APIRouter {
+  var handledErrorCodes = [400, 503];
+
+  /**
+   * Encompasses the entire playlist generation flow, including sorting closest
+   * songs to user centroid and generating user playlist. Returns the playlist
+   * generated.
+   */
+  Future<Map<String, dynamic>> generatePlaylist(
+      Map<String, List<double>> songs,
+      Mood mood,
+      String? user_id,
+      double percentage_new_songs,
+      int total_songs) async {
+    var res = await _getClosestSongs(songs, mood, user_id);
+    if (res.containsKey("error")) {
+      return res; //returns the error
+    }
+    var closest_songs = res["closest_songs"];
+    res = await _buildPlaylist(
+        mood, percentage_new_songs, total_songs, closest_songs);
+    return res; //returns either an error or the generated playlist
+  }
+
+  /**
+   * Builds a playlist for the user given the user's mood, percentage of new songs,
+   * number of total songs, and list of closest song to the user's mood
+   */
+  Future<Map<String, dynamic>> _buildPlaylist(
+      Mood mood,
+      double percentage_new_songs,
+      int total_songs,
+      List<String> closest_songs) async {
+    var strMood = mood.toString();
+    final url = "https://moodswing-generate-playlist-ilvif34q5a-ue.a.run.app";
+    final headers = {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'POST',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Max-Age': '3600',
+      'Content-Type': 'application/json'
+    };
+    final jsonBody = {
+      'mood': strMood,
+      'percentage_new_songs': percentage_new_songs,
+      "total_songs": total_songs,
+      "closest_songs": closest_songs
+    };
+
+    List<String> playlist = [];
+    Response response = await http
+        .post(Uri.parse(url), headers: headers, body: json.encode(jsonBody))
+        .timeout(Duration(minutes: 1));
+    if (response.statusCode == 200) {
+      var resBody = jsonDecode(response.body);
+      resBody["playlist"]!.forEach((element) => playlist.add(element));
+      return {"playlist": playlist};
+    } else if (handledErrorCodes.contains(response.statusCode)) {
+      var resBody = jsonDecode(response.body);
+      String error = resBody["error"]!;
+      return {"error": error};
+    } else {
+      return {"error": "Internal server error"};
+    }
+  }
+
   /**
   * Sorts the user's song list by closest distance to the specified mood centroid
   */
-  Future<List<String>> getClosestSongs(
+  Future<Map<String, dynamic>> _getClosestSongs(
       Map<String, List<double>> songs, Mood mood, String? user_id) async {
     List<String> closestSongList = [];
     var uid = user_id ?? FirebaseAuth.instance.currentUser?.uid;
@@ -31,9 +98,13 @@ class APIRouter {
     if (response.statusCode == 200) {
       var resBody = jsonDecode(response.body);
       resBody["songs"]!.forEach((element) => closestSongList.add(element));
-      return closestSongList;
+      return {"closest_songs": closestSongList};
+    } else if (handledErrorCodes.contains(response.statusCode)) {
+      var resBody = jsonDecode(response.body);
+      String error = resBody["error"]!;
+      return {"error": error};
     } else {
-      return [];
+      return {"error": "Internal server error"};
     }
   }
 
@@ -124,5 +195,27 @@ class APIRouter {
       partitions.add(values.sublist(i, i + 50));
     }
     return partitions;
+  }
+
+/********F
+ * Integrate playlist generation flow with our client application so that we can
+ * fetch the songs within the generated playlist.
+ */
+  Future<Playlist> fetchSongs() async {
+    final response = await http.get(Uri.parse('http://localhost:8080'));
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      final List<dynamic> songs = data['songs'];
+      List<Song> spotifySongs = [];
+      for (String songID in songs) {
+        spotifySongs.add(await SpotifyRouter().getSong(songID));
+      }
+
+      return Playlist("-1", "Mood Swing Generated Playlist", {}, spotifySongs,
+          spotifySongs.map((e) => e.imageURl).toList());
+      //return songs.cast<String>().toList();
+    } else {
+      throw Exception('failed to load songs');
+    }
   }
 }

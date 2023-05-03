@@ -1,7 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mood_swing/Pages/LoginPage.dart';
 import 'package:mood_swing/Utilities/AuthRouter.dart';
-import '../Objects/LoginCredentials.dart';
 import '../Widgets/widgets.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'dart:async';
@@ -21,7 +21,6 @@ TextEditingController _emailController = new TextEditingController();
 TextEditingController _usernameController = new TextEditingController();
 TextEditingController _passwordController = new TextEditingController();
 TextEditingController _passwordController2 = new TextEditingController();
-LoginCredentials? credential;
 
 class LargeScreen extends StatefulWidget {
   _LargeScreenState createState() => _LargeScreenState();
@@ -30,7 +29,7 @@ class LargeScreen extends StatefulWidget {
 class _LargeScreenState extends State<LargeScreen> {
   final _formKey = GlobalKey<FormState>();
   //show password
-  bool _isVisible = false;
+  // bool _isVisible = false;
 
   // snackBar Widget
   snackBar(String? message) {
@@ -81,8 +80,7 @@ class _LargeScreenState extends State<LargeScreen> {
                       Radius.circular(20),
                     ),
                   ),
-                  child: Expanded(
-                    child: Column(
+                  child: Column(
                       children: [
                         Flexible(
                           fit: FlexFit.tight,
@@ -245,7 +243,6 @@ class _LargeScreenState extends State<LargeScreen> {
                         ),
                       ],
                     ),
-                  ),
                 ),
               ),
             ),
@@ -262,7 +259,7 @@ class SmallScreen extends StatefulWidget {
 
 class _SmallScreenState extends State<SmallScreen> {
   //lets user see their password if they choose to
-  bool _isVisible = false;
+  // bool _isVisible = false;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -459,9 +456,11 @@ class _SmallScreenState extends State<SmallScreen> {
 }
 
 Future<void> register(BuildContext context) async {
-  credential ??= await AuthRouter().registerUser(
-      _emailController.text, _passwordController.text, _usernameController.text,
-      () {
+  AuthCredential? credential = await AuthRouter().registerUser(
+      _usernameController.text,
+      _emailController.text,
+      _passwordController.text,
+      _usernameController.text, () {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('Invalid credentials'),
@@ -469,14 +468,12 @@ Future<void> register(BuildContext context) async {
     );
   });
   if (credential != null) {
-    AuthRouter().credentialSignIn(credential!, context);
+    AuthRouter().credentialSignIn(credential, context);
   }
 }
 
 class SignupPage extends StatelessWidget {
-  SignupPage({super.key, LoginCredentials? authCred}) {
-    credential = authCred;
-  }
+  SignupPage({super.key}) {}
 
   @override
   Widget build(Object context) {

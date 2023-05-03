@@ -1,8 +1,5 @@
-import 'dart:math';
-
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:mood_swing/Utilities/SpotifyRouter.dart';
-import 'package:mood_swing/Widgets/MyPalette.dart';
 import '../Widgets/widgets.dart';
 
 import '../Objects/Playlist.dart';
@@ -35,8 +32,7 @@ class LargeScreenState extends State<LargeScreen> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    bool isPlaylistSelected =
-        false; // Track whether a playlist is selected or not
+    // bool isPlaylistSelected = false; // Track whether a playlist is selected or not
 
     return Scaffold(
       body: SafeArea(
@@ -82,21 +78,20 @@ class LargeScreenState extends State<LargeScreen> {
                               Container(
                                 height: height * 0.8,
                                 child: GridView.builder(
-                                      itemCount: snapshot.data?.length ?? 0,
-                                      gridDelegate:
-                                          SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 4,
-                                        crossAxisSpacing: 0.04 * width,
-                                        mainAxisSpacing: 0.04 * height,
-                                        childAspectRatio: 4 / 3,
-                                      ),
-                                      itemBuilder: (context, index) {
-                                        return GestureDetector(
-                                          child: PlaylistItem(
-                                              playlist: snapshot.data![index]),
-                                        );
-                                      }),
-
+                                    itemCount: snapshot.data?.length ?? 0,
+                                    gridDelegate:
+                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 4,
+                                      crossAxisSpacing: 0.04 * width,
+                                      mainAxisSpacing: 0.04 * height,
+                                      childAspectRatio: 1.0,
+                                    ),
+                                    itemBuilder: (context, index) {
+                                      return GestureDetector(
+                                        child: PlaylistItem(
+                                            playlist: snapshot.data![index]),
+                                      );
+                                    }),
                               ),
 
                               // Visibility(
@@ -111,9 +106,13 @@ class LargeScreenState extends State<LargeScreen> {
                               // ),
                             ],
                           );
-                        } else {
-                          return CircularProgressIndicator();
                         }
+                        return Container(
+                          alignment: Alignment.center,
+                          height: 0.7 * height,
+                          width: 0.7 * width,
+                          child: WaveLoader(title: 'Wave'),
+                        );
                       },
                     ),
                   ],
@@ -191,7 +190,7 @@ class SmallScreenState extends State<SmallScreen> {
                                         crossAxisCount: 2,
                                         crossAxisSpacing: 0.04 * width,
                                         mainAxisSpacing: 0.04 * height,
-                                        childAspectRatio: 4 / 3,
+                                        childAspectRatio: 1.0,
                                       ),
                                       itemBuilder: (context, index) {
                                         return GestureDetector(
@@ -201,22 +200,15 @@ class SmallScreenState extends State<SmallScreen> {
                                       }),
                                 ),
                               ),
-
-                              // Visibility(
-                              //   visible: isPlaylistSelected,
-                              //   child: Center(
-                              //     child: Container(
-                              //       height: 500,
-                              //       width: 500,
-                              //       color: Colors.red,
-                              //     ),
-                              //   ),
-                              // ),
                             ],
                           );
-                        } else {
-                          return CircularProgressIndicator();
                         }
+                        return Container(
+                          alignment: Alignment.center,
+                          height: 0.5 * height,
+                          width: 0.5 * width,
+                          child: WaveLoader(title: 'Wave'),
+                        );
                       },
                     ),
                   ],
@@ -232,7 +224,6 @@ class SmallScreenState extends State<SmallScreen> {
 
 class PlaylistItem extends StatefulWidget {
   final Playlist playlist;
-
   const PlaylistItem({required this.playlist, Key? key}) : super(key: key);
 
   @override
@@ -281,13 +272,15 @@ class _PlaylistItemState extends State<PlaylistItem> {
             children: [
               Expanded(
                 child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
+                  physics: NeverScrollableScrollPhysics(),
+                  //scrollDirection: axisDirectionToAxis(AxisDirection.left),
                   itemCount: widget.playlist.images.length,
                   itemBuilder: (context, index) {
                     return Container(
                       child: Image.network(
                         widget.playlist.images[index],
-                        fit: BoxFit.cover,
+                        fit: BoxFit.fitWidth,
+                        repeat: ImageRepeat.noRepeat,
                       ),
                     );
                   },
@@ -311,7 +304,6 @@ class _PlaylistItemState extends State<PlaylistItem> {
 
 class ExistingPlaylistsPage extends StatelessWidget {
   const ExistingPlaylistsPage({Key? key}) : super(key: key);
-
   @override
   Widget build(Object context) {
     return Scaffold(

@@ -15,8 +15,8 @@ class Body extends StatelessWidget {
 class LargeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
+    // double height = MediaQuery.of(context).size.height;
+    // double width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: LargeCarousel(),
     );
@@ -26,8 +26,8 @@ class LargeScreen extends StatelessWidget {
 class SmallScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
+    // double height = MediaQuery.of(context).size.height;
+    // double width = MediaQuery.of(context).size.width;
 
     return SafeArea(
       child: SmallCarousel(),
@@ -43,7 +43,7 @@ class SmallCarousel extends StatefulWidget {
 }
 
 class _SmallCarouselState extends State<SmallCarousel> {
-  int _current = 0;
+  // int _current = 0;
   dynamic _selectedIndex = {};
 
   final CarouselController _carouselController = CarouselController();
@@ -110,7 +110,7 @@ class _SmallCarouselState extends State<SmallCarousel> {
                   pageSnapping: true,
                   onPageChanged: (index, reason) {
                     setState(() {
-                      _current = index;
+                      // _current = index;
                       //print(index);
                     });
                   }),
@@ -124,13 +124,7 @@ class _SmallCarouselState extends State<SmallCarousel> {
                             _selectedIndex = {};
                           } else {
                             _selectedIndex = mood;
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    NextPage(selectedMood: mood['title']),
-                              ),
-                            );
+                            Navigator.pushNamed(context, '/compiling');
                           }
                         });
                       },
@@ -219,7 +213,7 @@ class LargeCarousel extends StatefulWidget {
 }
 
 class _LargeCarouselState extends State<LargeCarousel> {
-  int _current = 0;
+  // int _current = 0;
   dynamic _selectedIndex = {};
   final CarouselController _carouselController = CarouselController();
   final List<dynamic> _products = [
@@ -275,21 +269,22 @@ class _LargeCarouselState extends State<LargeCarousel> {
           alignment: Alignment.center,
           margin: const EdgeInsets.only(bottom: 80),
           child: CarouselSlider(
-              carouselController: _carouselController,
-              options: CarouselOptions(
-                  height: height * 0.43,
-                  aspectRatio: 16 / 9,
-                  viewportFraction: 0.3,
-                  enlargeFactor: 0.2,
-                  enlargeCenterPage: true,
-                  pageSnapping: true,
-                  onPageChanged: (index, reason) {
-                    setState(() {
-                      _current = index;
-                      //print(index);
-                    });
-                  }),
-              items: _products.map((mood) {
+            carouselController: _carouselController,
+            options: CarouselOptions(
+                height: height * 0.43,
+                aspectRatio: 16 / 9,
+                viewportFraction: 0.3,
+                enlargeFactor: 0.2,
+                enlargeCenterPage: true,
+                pageSnapping: true,
+                onPageChanged: (index, reason) {
+                  setState(() {
+                    // _current = index;
+                    //print(index);
+                  });
+                }),
+            items: _products.map(
+              (mood) {
                 return Builder(
                   builder: (BuildContext context) {
                     return GestureDetector(
@@ -373,7 +368,9 @@ class _LargeCarouselState extends State<LargeCarousel> {
                     );
                   },
                 );
-              }).toList()),
+              },
+            ).toList(),
+          ),
         ),
       ],
     ));

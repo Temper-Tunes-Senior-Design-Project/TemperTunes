@@ -17,7 +17,8 @@ class BluetoothRouter {
     });
   }
 
-  Future<Stream<Future<String>>> connectToDevice(DiscoveredDevice device) async {
+  Future<Stream<Future<String>>> connectToDevice(
+      DiscoveredDevice device) async {
     return bluetoothDriver.connectToDevice(id: device.id).map((event) async {
       List<DiscoveredService> services =
           await bluetoothDriver.discoverServices(device.id);

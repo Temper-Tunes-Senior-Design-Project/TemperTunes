@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mood_swing/Pages/CameraPage.dart';
 import 'package:mood_swing/Pages/ExistingPlaylistsPage.dart';
+import 'package:mood_swing/Pages/GenerationOptionsPage.dart';
 import 'package:mood_swing/Pages/PreferencesPage.dart';
 import 'package:mood_swing/Pages/UserPage.dart';
 import '../Pages/LinkSpotifyPage.dart';
@@ -167,7 +167,7 @@ class SidebarDrawer extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (_) => CameraPage(),
+                builder: (_) => GenerationOptionsPage(),
               ),
             );
           },

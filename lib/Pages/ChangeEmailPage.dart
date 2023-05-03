@@ -8,8 +8,6 @@ import 'package:form_field_validator/form_field_validator.dart' as validator;
 import 'dart:async';
 import 'package:animate_do/animate_do.dart';
 
-import 'OTPEmailPage.dart';
-
 class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -32,7 +30,7 @@ class LargeScreen extends StatefulWidget {
 class _LargeScreenState extends State<LargeScreen> {
   final _formKey = GlobalKey<FormState>();
   //show password
-  bool _isVisible = false;
+  // bool _isVisible = false;
 
   // snackBar Widget
 
@@ -215,7 +213,7 @@ class SmallScreen extends StatefulWidget {
 
 class _SmallScreenState extends State<SmallScreen> {
   //lets user see their password if they choose to
-  bool _isVisible = false;
+  // bool _isVisible = false;
 
   final _formKey = GlobalKey<FormState>();
 

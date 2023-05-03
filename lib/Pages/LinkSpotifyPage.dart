@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mood_swing/Pages/VerificationPage.dart';
 import '../Widgets/widgets.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:mood_swing/Utilities/APIRouter.dart';
@@ -46,17 +45,20 @@ class LargeScreen extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-                      Container(
-                        alignment: Alignment.topCenter,
-                        padding: EdgeInsets.only(
-                          top: height * 0.03,
-                          bottom: 0.03 * height,
-                        ),
-                        child: FittedBox(
-                          fit: BoxFit.contain,
-                          child: Image.asset(
-                            "assets/spotifyLogoWhite.png",
-                            scale: 2.5,
+                      Flexible(
+                        flex: 3,
+                        child: Container(
+                          alignment: Alignment.topCenter,
+                          padding: EdgeInsets.only(
+                            top: height * 0.03,
+                            bottom: 0.03 * height,
+                          ),
+                          child: FittedBox(
+                            fit: BoxFit.contain,
+                            child: Image.asset(
+                              "assets/spotifyLogoWhite.png",
+                              scale: 2.5,
+                            ),
                           ),
                         ),
                       ),
@@ -187,8 +189,8 @@ class ConnectSpotifyBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
+    // double height = MediaQuery.of(context).size.height;
+    // double width = MediaQuery.of(context).size.width;
     return Container(
       // width: 0.2 * width,
       // height: 0.075 * height,
@@ -255,8 +257,8 @@ class Subheading extends StatelessWidget {
   const Subheading({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
+    // double height = MediaQuery.of(context).size.height;
+    // double width = MediaQuery.of(context).size.width;
     return Text(
       'Connect your Spotify account to create your personalized playlist based on your music taste.',
       style: TextStyle(
