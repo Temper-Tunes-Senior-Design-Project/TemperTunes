@@ -200,6 +200,32 @@ class BluetoothLoaderPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // body: Column(
+      //   children: [
+      //     Text("Found Devices"),
+      //     StreamBuilder<List<DiscoveredDevice>>(
+      //         stream: BluetoothRouter().getNearbyDevices(),
+      //         builder: (context, snapshot) {
+      //           return Container(
+      //             height: 750,
+      //             child: ListView.builder(
+      //                 itemCount: snapshot.data?.length ?? 0,
+      //                 itemBuilder: (context, i) {
+      //                   return ListTile(
+      //                     title: Text(snapshot.data?[i].name ?? "No data"),
+      //                     onTap: () async {
+      //                       Stream<Future<String>> result =
+      //                           await BluetoothRouter()
+      //                               .connectToDevice(snapshot.data![i]);
+      //                       result.listen((result) async {
+      //                         print(await result);
+      //                       });
+      //                     },
+      //                   );
+      //                 }),
+      //           );
+      //         })
+      //   ],
       body: Body(),
     );
   }
@@ -291,29 +317,3 @@ class ContinueBtn extends StatelessWidget {
     );
   }
 }
-
-//  Column(
-//   children: [
-//     Text("Found Devices"),
-//     StreamBuilder<List<DiscoveredDevice>>(
-//         stream: BluetoothRouter().getNearbyDevices(),
-//         builder: (context, snapshot) {
-//           return Container(
-//             height: double.infinity,
-//             color: MyPalette.darkBlue,
-//             child: ListView.builder(
-//                 itemCount: snapshot.data?.length ?? 0,
-//                 itemBuilder: (context, i) {
-//                   return ListTile(
-//                     title: Text(
-//                       snapshot.data?[i].name ?? "No data",
-//                       style: TextStyle(
-//                         color: Colors.white,
-//                       ),
-//                     ),
-//                   );
-//                 }),
-//           );
-//         })
-//   ],
-// ),

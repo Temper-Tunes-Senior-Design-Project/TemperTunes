@@ -1,5 +1,3 @@
-
-
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:mood_swing/Utilities/SpotifyRouter.dart';
 import '../Widgets/widgets.dart';
@@ -80,20 +78,20 @@ class LargeScreenState extends State<LargeScreen> {
                               Container(
                                 height: height * 0.8,
                                 child: GridView.builder(
-                                      itemCount: snapshot.data?.length ?? 0,
-                                      gridDelegate:
-                                          SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 4,
-                                        crossAxisSpacing: 0.04 * width,
-                                        mainAxisSpacing: 0.04 * height,
-                                        childAspectRatio: 1.0,
-                                      ),
-                                      itemBuilder: (context, index) {
-                                        return GestureDetector(
-                                          child: PlaylistItem(
-                                              playlist: snapshot.data![index]),
-                                        );
-                                      }),
+                                    itemCount: snapshot.data?.length ?? 0,
+                                    gridDelegate:
+                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 4,
+                                      crossAxisSpacing: 0.04 * width,
+                                      mainAxisSpacing: 0.04 * height,
+                                      childAspectRatio: 1.0,
+                                    ),
+                                    itemBuilder: (context, index) {
+                                      return GestureDetector(
+                                        child: PlaylistItem(
+                                            playlist: snapshot.data![index]),
+                                      );
+                                    }),
                               ),
 
                               // Visibility(

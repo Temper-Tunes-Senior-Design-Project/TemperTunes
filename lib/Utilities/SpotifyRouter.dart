@@ -42,7 +42,7 @@ class SpotifyRouter {
           scope:
               "app-remote-control,user-modify-playback-state,playlist-read-private,user-library-read");
       token = accessToken;
-      return token;
+      return accessToken;
     } else {
       return token;
     }
@@ -57,25 +57,16 @@ class SpotifyRouter {
     SpotifyApi client = SpotifyApi.withAccessToken(accessToken);
 
     ///Instantiate playlists with liked songs
-    List<String> likedSongURLs = [];
-
     List<CP.Playlist> rPlaylists = [
       CP.Playlist(
           "No ID exists for Liked Songs",
           "Liked Songs",
           {},
           (await client.tracks.me.saved.all()).map<Song>((e) {
-            likedSongURLs.add(e.track?.album?.images?[0].url ?? "");
-            return Song(
-                // e.track?.id ?? "",
-                // e.track?.name ?? "", {});
-                e.track?.id ?? "",
-                e.track?.name ?? "",
-                {},
-                e.track?.artists?.map((e) => e.name ?? "").toList() ?? [],
-                "");
+            return Song(e.track?.id ?? "", e.track?.name ?? "", {},
+                e.track?.artists?.map((e) => e.name ?? "").toList() ?? [], "");
           }).toList(),
-          likedSongURLs)
+          [])
     ];
 
     /// Add all other playlists into the list of playlists
@@ -97,8 +88,8 @@ class SpotifyRouter {
     return rPlaylists;
   }
 
-/** Get the songs in the user's newly generated playlist
- */
+  /** Get the songs in the user's newly generated playlist
+   */
   Future<Song> getSong(String uid) async {
     ///Instantiate the spotify client library
     String accessToken = await getToken();

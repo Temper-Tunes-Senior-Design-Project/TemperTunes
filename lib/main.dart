@@ -23,7 +23,6 @@ void main() async {
 
   //Load the dotenv plugin
   await dotenv.load(fileName: ".env");
-
   //Catch Flutter framework errors
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
 
@@ -87,7 +86,6 @@ class _AppState extends State<App> {
             }
 
             return LandingPage();
-            // return NewlyGeneratedPlaylistPage();
           }),
     );
   }
