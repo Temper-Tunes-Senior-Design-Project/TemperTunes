@@ -36,7 +36,7 @@ class _WaveLoaderState extends State<WaveLoader>
               foregroundWaveVerticalOffset: 90 +
                   reversingSplitParameters(
                     position: animationPosition,
-                    numberBreaks: 6,
+                    numberBreaks: 8,
                     parameterBase: 8.0,
                     parameterVariation: 8.0,
                     reversalPoint: 0.75,
@@ -175,9 +175,9 @@ class WaveLoadingBubble extends StatelessWidget {
     this.loadingCircleWidth = 10.0,
     this.waveInsetWidth = 5.0,
     this.waveHeight = 10.0,
-    this.foregroundWaveColor = Colors.lightBlue,
-    this.backgroundWaveColor = Colors.blue,
-    this.loadingWheelColor = Colors.white,
+    this.foregroundWaveColor = MyPalette.magenta,
+    this.backgroundWaveColor = MyPalette.darkMagenta,
+    this.loadingWheelColor = MyPalette.circleIcon,
     this.foregroundWaveVerticalOffset = 10.0,
     this.backgroundWaveVerticalOffset = 0.0,
     this.period = 0.0,

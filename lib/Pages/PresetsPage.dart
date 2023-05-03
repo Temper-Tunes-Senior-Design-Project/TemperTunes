@@ -1,6 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import '../Objects/Mood.dart';
 import '../Widgets/widgets.dart';
+import 'GenerationLoadingPage.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -50,7 +52,7 @@ class _SmallCarouselState extends State<SmallCarousel> {
 
   final List<dynamic> _products = [
     {'title': 'Angry', 'image': 'assets/angry.png'},
-    {'title': 'Calm', 'image': 'assets/calm.png'},
+    {'title': 'tired', 'image': 'assets/tired.png'},
     {
       'title': 'Content',
       'image': 'assets/content.png',
@@ -124,7 +126,13 @@ class _SmallCarouselState extends State<SmallCarousel> {
                             _selectedIndex = {};
                           } else {
                             _selectedIndex = mood;
-                            Navigator.pushNamed(context, '/compiling');
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    GenerationLoadingPage(selectedMood: mood),
+                              ),
+                            );
                           }
                         });
                       },
@@ -218,7 +226,7 @@ class _LargeCarouselState extends State<LargeCarousel> {
   final CarouselController _carouselController = CarouselController();
   final List<dynamic> _products = [
     {'title': 'Angry', 'image': 'assets/angry.png'},
-    {'title': 'Calm', 'image': 'assets/calm.png'},
+    {'title': 'Tired', 'image': 'assets/tired.png'},
     {
       'title': 'Content',
       'image': 'assets/content.png',
@@ -284,7 +292,7 @@ class _LargeCarouselState extends State<LargeCarousel> {
                   });
                 }),
             items: _products.map(
-              (mood) {
+              (Mood mood) {
                 return Builder(
                   builder: (BuildContext context) {
                     return GestureDetector(
@@ -298,7 +306,9 @@ class _LargeCarouselState extends State<LargeCarousel> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    NextPage(selectedMood: mood['title']),
+
+                                    ///DON'T KNOW IF THIS IS CORRECT. DON'T KNOW WHAT VALUES BEING PASSED
+                                    GenerationLoadingPage(selectedMood: mood),
                               ),
                             );
                           }
@@ -359,7 +369,9 @@ class _LargeCarouselState extends State<LargeCarousel> {
                               Text(
                                 mood['title'],
                                 style: const TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
                               ),
                             ],
                           ),

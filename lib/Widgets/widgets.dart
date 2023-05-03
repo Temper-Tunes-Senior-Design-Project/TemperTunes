@@ -17,3 +17,4 @@ export 'PasswordForm.dart';
 export 'ChangeForm.dart';
 export 'SpotifyIcons.dart';
 export 'GenerationIcons.dart';
+export 'SongListView.dart';
