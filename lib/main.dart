@@ -1,15 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:mood_swing/Pages/BluetoothLoaderPage.dart';
-import 'package:mood_swing/Pages/ExistingPlaylistsPage.dart';
 import 'package:mood_swing/Pages/LandingPage.dart';
 import 'package:mood_swing/Pages/HomePage.dart';
 import 'dart:ui';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mood_swing/Utilities/AuthRouter.dart';
-import 'package:mood_swing/Utilities/WebBluetoothRouter.dart';
 import 'Widgets/MockNavigator.dart';
 import 'firebase_options.dart';
 
@@ -68,32 +65,7 @@ class App extends StatelessWidget {
               return HomePage();
             }
 
-            //return LandingPage();
-            //return ExistingPlaylistsPage();
-            return BluetoothLoaderPage();
-            // WebBluetoothRouter web = WebBluetoothRouter();
-            // return Scaffold(
-            //   body: Center(
-            //     child: Row(
-            //       children: [
-            //         GestureDetector(
-            //           onTap: () async{
-            //             Stream<Future<double>>? ds = await web.connectToDevice();
-            //             ds?.listen((result) async {
-            //               print("Resulted");
-            //               print(await result);
-            //             });
-            //           },
-            //           child: Container(
-            //             color: Colors.red,
-            //             height: 200,
-            //             width: 200,
-            //           ),
-            //         ),
-            //       ],
-            //     )
-            //   ),
-            // );
+            return LandingPage();
           }),
     );
   }
