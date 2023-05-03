@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:mood_swing/Objects/GenerationArguments.dart';
 import '../Objects/Mood.dart';
 import '../Widgets/widgets.dart';
 import 'GenerationLoadingPage.dart';
@@ -45,35 +46,14 @@ class SmallCarousel extends StatefulWidget {
 }
 
 class _SmallCarouselState extends State<SmallCarousel> {
-  // int _current = 0;
-  dynamic _selectedIndex = {};
-
+  int? _selectedIndex = null;
   final CarouselController _carouselController = CarouselController();
+  final List<Mood> moods = Mood.values;
 
-  final List<dynamic> _products = [
-    {'title': 'Angry', 'image': 'assets/angry.png'},
-    {'title': 'tired', 'image': 'assets/tired.png'},
-    {
-      'title': 'Content',
-      'image': 'assets/content.png',
-    },
-    {
-      'title': 'Depressed',
-      'image': 'assets/depressed.png',
-    },
-    {
-      'title': 'Energetic',
-      'image': 'assets/energetic.png',
-    },
-    {
-      'title': 'Excited',
-      'image': 'assets/excited.png',
-    },
-    {'title': 'Happy', 'image': 'assets/happy.png'},
-    {'title': 'Sad', 'image': 'assets/sad.png'},
-  ];
   @override
   Widget build(BuildContext context) {
+    final GenerationArguments args =
+        ModalRoute.of(context)!.settings.arguments as GenerationArguments;
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -116,22 +96,19 @@ class _SmallCarouselState extends State<SmallCarousel> {
                       //print(index);
                     });
                   }),
-              items: _products.map((mood) {
-                return Builder(
-                  builder: (BuildContext context) {
-                    return GestureDetector(
+              items: moods.map((mood) {
+                return GestureDetector(
                       onTap: () {
                         setState(() {
-                          if (_selectedIndex == mood) {
-                            _selectedIndex = {};
+                          if (_selectedIndex == mood.index) {
+                            _selectedIndex = null;
                           } else {
-                            _selectedIndex = mood;
-                            Navigator.push(
+                            _selectedIndex = mood.index;
+                            args.moods.add(mood);
+                            Navigator.pushNamed(
                               context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    GenerationLoadingPage(selectedMood: mood),
-                              ),
+                              'compiling',
+                              arguments: args,
                             );
                           }
                         });
@@ -182,7 +159,7 @@ class _SmallCarouselState extends State<SmallCarousel> {
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(20),
                                   ),
-                                  child: Image.network(mood['image'],
+                                  child: Image.asset(mood.getImage(),
                                       fit: BoxFit.cover),
                                 ),
                               ),
@@ -192,7 +169,7 @@ class _SmallCarouselState extends State<SmallCarousel> {
                               FittedBox(
                                 fit: BoxFit.scaleDown,
                                 child: Text(
-                                  mood['title'],
+                                  mood.name,
                                   style: const TextStyle(
                                       fontSize: 16,
                                       fontFamily: 'Maven Pro',
@@ -204,8 +181,7 @@ class _SmallCarouselState extends State<SmallCarousel> {
                         ),
                       ),
                     );
-                  },
-                );
+
               }).toList()),
         ),
       ],
@@ -222,33 +198,14 @@ class LargeCarousel extends StatefulWidget {
 
 class _LargeCarouselState extends State<LargeCarousel> {
   // int _current = 0;
-  dynamic _selectedIndex = {};
+  int? _selectedIndex = null;
   final CarouselController _carouselController = CarouselController();
-  final List<dynamic> _products = [
-    {'title': 'Angry', 'image': 'assets/angry.png'},
-    {'title': 'Tired', 'image': 'assets/tired.png'},
-    {
-      'title': 'Content',
-      'image': 'assets/content.png',
-    },
-    {
-      'title': 'Depressed',
-      'image': 'assets/depressed.png',
-    },
-    {
-      'title': 'Energetic',
-      'image': 'assets/energetic.png',
-    },
-    {
-      'title': 'Excited',
-      'image': 'assets/excited.png',
-    },
-    {'title': 'Happy', 'image': 'assets/happy.png'},
-    {'title': 'Sad', 'image': 'assets/sad.png'},
-  ];
+  final List<Mood> moods = Mood.values;
 
   @override
   Widget build(BuildContext context) {
+    final GenerationArguments args =
+        ModalRoute.of(context)!.settings.arguments as GenerationArguments;
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -291,94 +248,86 @@ class _LargeCarouselState extends State<LargeCarousel> {
                     //print(index);
                   });
                 }),
-            items: _products.map(
+            items: moods.map(
               (Mood mood) {
-                return Builder(
-                  builder: (BuildContext context) {
-                    return GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          if (_selectedIndex == mood) {
-                            _selectedIndex = {};
-                          } else {
-                            _selectedIndex = mood;
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-
-                                    ///DON'T KNOW IF THIS IS CORRECT. DON'T KNOW WHAT VALUES BEING PASSED
-                                    GenerationLoadingPage(selectedMood: mood),
-                              ),
-                            );
-                          }
-                        });
-                      },
-                      child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 300),
-                        width: MediaQuery.of(context).size.width,
-                        decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topRight,
-                              end: Alignment.bottomLeft,
-                              colors: [
-                                MyPalette.slateBlue,
-                                MyPalette.brightMagenta,
-                                MyPalette.slateBlue,
-                                MyPalette.turqoise,
-                              ],
-                            ),
-                            borderRadius: BorderRadius.circular(20),
-                            border: _selectedIndex == mood
-                                ? Border.all(
-                                    color: MyPalette.lightPurple, width: 3)
-                                : null,
-                            boxShadow: _selectedIndex == mood
-                                ? [
-                                    BoxShadow(
-                                        color: Colors.blue.shade100,
-                                        blurRadius: 30,
-                                        offset: Offset(0, 10))
-                                  ]
-                                : [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.2),
-                                      blurRadius: 20,
-                                      offset: Offset(0, 5),
-                                    )
-                                  ]),
-                        child: SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              FittedBox(
-                                fit: BoxFit.scaleDown,
-                                child: Container(
-                                  height: 0.3 * height,
-                                  margin: const EdgeInsets.all(10),
-                                  clipBehavior: Clip.hardEdge,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  child: Image.network(mood['image'],
-                                      fit: BoxFit.cover),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              Text(
-                                mood['title'],
-                                style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
+                return GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      if (_selectedIndex == mood.index) {
+                        _selectedIndex = null;
+                      } else {
+                        _selectedIndex = mood.index;
+                        args.moods.add(mood);
+                        Navigator.pushNamed(
+                          context,
+                          'compiling',
+                          arguments: args,
+                        );
+                      }
+                    });
                   },
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topRight,
+                          end: Alignment.bottomLeft,
+                          colors: [
+                            MyPalette.slateBlue,
+                            MyPalette.brightMagenta,
+                            MyPalette.slateBlue,
+                            MyPalette.turqoise,
+                          ],
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                        border: _selectedIndex == mood
+                            ? Border.all(color: MyPalette.lightPurple, width: 3)
+                            : null,
+                        boxShadow: _selectedIndex == mood
+                            ? [
+                                BoxShadow(
+                                    color: Colors.blue.shade100,
+                                    blurRadius: 30,
+                                    offset: Offset(0, 10))
+                              ]
+                            : [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.2),
+                                  blurRadius: 20,
+                                  offset: Offset(0, 5),
+                                )
+                              ]),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Container(
+                              height: 0.3 * height,
+                              margin: const EdgeInsets.all(10),
+                              clipBehavior: Clip.hardEdge,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Image.asset(mood.getImage(),
+                                  fit: BoxFit.cover),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            mood.name,
+                            style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 );
               },
             ).toList(),

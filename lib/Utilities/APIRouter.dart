@@ -112,7 +112,7 @@ class APIRouter {
    * Communicate with Firebase Cloud Function to categorize a user's photo/video
    * to a Mood enum classification.
    */
-  Future<Mood> getUserMood(String firebasePath) async {
+  Future<Mood?> getUserMood(String firebasePath) async {
     ///Send a response to the cloud function
     Response response = await http
         .get(Uri.parse(
@@ -165,7 +165,8 @@ class APIRouter {
       }
       return valenceArousalToLabel[valenceLabel][arousalLabel];
     }
-    return Mood.Neutral;
+    return null;
+    return Mood.Happy;
   }
 
   /**
@@ -217,5 +218,13 @@ class APIRouter {
     } else {
       throw Exception('failed to load songs');
     }
+  }
+
+  /**
+   * Placeholder classification generation
+   */
+  Future<Mood> generateClassification(List<Mood> moods) async
+  {
+    return Mood.Happy;
   }
 }

@@ -1,5 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
+import 'package:mood_swing/Objects/Mood.dart';
+import 'package:mood_swing/Utilities/WebBluetoothRouter.dart';
+import '../Objects/GenerationArguments.dart';
 import '../Widgets/widgets.dart';
 import 'package:animate_do/animate_do.dart';
 import '../Utilities/BluetoothRouter.dart';
@@ -19,9 +23,6 @@ class LargeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    //  final args = ModalRoute.of(context)?.settings.arguments as Map;
-    final Map<dynamic, dynamic>? args =
-        ModalRoute.of(context)?.settings.arguments as Map<dynamic, dynamic>?;
     return SafeArea(
       child: Container(
         width: width,
@@ -81,7 +82,7 @@ class LargeScreen extends StatelessWidget {
                             );
                           },
                         ),
-                        PairBtn(option: args!['option']),
+                        PairBtn(),
                       ],
                     ),
                   ),
@@ -156,7 +157,7 @@ class SmallScreen extends StatelessWidget {
                         );
                       },
                     ),
-                    PairBtn(option: args['option']),
+                    PairBtn(),
                   ],
                 ),
               ),
@@ -172,32 +173,6 @@ class BluetoothLoaderPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // body: Column(
-      //   children: [
-      //     Text("Found Devices"),
-      //     StreamBuilder<List<DiscoveredDevice>>(
-      //         stream: BluetoothRouter().getNearbyDevices(),
-      //         builder: (context, snapshot) {
-      //           return Container(
-      //             height: 750,
-      //             child: ListView.builder(
-      //                 itemCount: snapshot.data?.length ?? 0,
-      //                 itemBuilder: (context, i) {
-      //                   return ListTile(
-      //                     title: Text(snapshot.data?[i].name ?? "No data"),
-      //                     onTap: () async {
-      //                       Stream<Future<String>> result =
-      //                           await BluetoothRouter()
-      //                               .connectToDevice(snapshot.data![i]);
-      //                       result.listen((result) async {
-      //                         print(await result);
-      //                       });
-      //                     },
-      //                   );
-      //                 }),
-      //           );
-      //         })
-      //   ],
       body: Body(),
     );
   }
@@ -247,11 +222,12 @@ class Title extends StatelessWidget {
 }
 
 class PairBtn extends StatelessWidget {
-  final String option;
-  PairBtn({required this.option});
+  PairBtn();
 
   @override
   Widget build(BuildContext context) {
+    final GenerationArguments args =
+    ModalRoute.of(context)!.settings.arguments as GenerationArguments;
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Container(
@@ -297,8 +273,24 @@ class PairBtn extends StatelessWidget {
         ),
 
         ///When the user gets their readings, they can push them to the PresetsPage
-        onPressed: () {
-          if (option == 'UseSensorOnly') {
+        onPressed: () async {
+          Mood? m = Mood.Happy;
+          if (kIsWeb) {
+            Stream<Future<double>>? ds =
+                await WebBluetoothRouter().connectToDevice();
+            ds?.listen((result) async {
+              //Add code to determine mood from arousal
+              await result;
+            });
+          } else {
+            // Stream<Future<String>> result =
+            //     await BluetoothRouter().connectToDevice(snapshot.data![i]);
+            // result.listen((result) async {
+            //   print(await result);
+            // });
+          }
+          args.moods.add(m);
+          if (args.route == GenerationRoutes.SensorOnly) {
             Navigator.pushNamed(context, '/presets');
           } else {
             Navigator.pushNamed(context, '/compiling');

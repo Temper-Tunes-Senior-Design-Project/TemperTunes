@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mood_swing/Objects/GenerationArguments.dart';
 import '../Widgets/widgets.dart';
 
 import 'package:bouncing_widget/bouncing_widget.dart';
@@ -14,6 +15,7 @@ class Body extends StatelessWidget {
 }
 
 class LargeScreen extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -54,7 +56,7 @@ class LargeScreen extends StatelessWidget {
                     Navigator.pushNamed(
                       context,
                       '/camera',
-                      arguments: {'option': 'UseCameraOnly'},
+                      arguments:GenerationArguments(GenerationRoutes.CameraOnly),
                     );
                   },
                 ),
@@ -67,7 +69,7 @@ class LargeScreen extends StatelessWidget {
                     Navigator.pushNamed(
                       context,
                       '/bluetooth',
-                      arguments: {'option': 'UseSensorOnly'},
+                      arguments:GenerationArguments(GenerationRoutes.SensorOnly),
                     );
                   },
                 ),
@@ -80,7 +82,7 @@ class LargeScreen extends StatelessWidget {
                     Navigator.pushNamed(
                       context,
                       '/camera',
-                      arguments: {'option': 'UseBoth'},
+                      arguments:GenerationArguments(GenerationRoutes.Both),
                     );
                   },
                 ),
@@ -93,7 +95,7 @@ class LargeScreen extends StatelessWidget {
                     Navigator.pushNamed(
                       context,
                       '/presets',
-                      arguments: {'option': 'UsePresetsOnly'},
+                      arguments:GenerationArguments(GenerationRoutes.Presets),
                     );
                   },
                 ),
@@ -151,7 +153,7 @@ class SmallScreen extends StatelessWidget {
                       Navigator.pushNamed(
                         context,
                         '/camera',
-                        arguments: {'option': 'UseCameraOnly'},
+                        arguments:GenerationArguments(GenerationRoutes.CameraOnly),
                       );
                     },
                   ),
@@ -164,7 +166,7 @@ class SmallScreen extends StatelessWidget {
                     Navigator.pushNamed(
                       context,
                       '/bluetooth',
-                      arguments: {'option': 'UseSensorOnly'},
+                      arguments:GenerationArguments(GenerationRoutes.SensorOnly),
                     );
                   },
                 ),
@@ -176,7 +178,7 @@ class SmallScreen extends StatelessWidget {
                     Navigator.pushNamed(
                       context,
                       '/camera',
-                      arguments: {'option': 'UseBoth'},
+                      arguments:GenerationArguments(GenerationRoutes.Both),
                     );
                   },
                 ),
@@ -188,7 +190,7 @@ class SmallScreen extends StatelessWidget {
                     Navigator.pushNamed(
                       context,
                       '/presets',
-                      arguments: {'option': 'UsePresetsOnly'},
+                      arguments:GenerationArguments(GenerationRoutes.Presets),
                     );
                   },
                 ),

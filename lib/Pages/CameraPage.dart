@@ -6,6 +6,8 @@ import 'package:mood_swing/Widgets/MoodPopup.dart';
 import 'package:mood_swing/Widgets/widgets.dart';
 import 'package:video_player/video_player.dart';
 
+import '../Objects/GenerationArguments.dart';
+
 class Body extends StatelessWidget {
   final List<CameraDescription>? cameras;
 
@@ -138,6 +140,8 @@ class _LargeScreenState extends State<LargeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final GenerationArguments args =
+    ModalRoute.of(context)!.settings.arguments as GenerationArguments;
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     // Ratio of device screen
@@ -252,23 +256,12 @@ class _LargeScreenState extends State<LargeScreen> {
                                       .uploadFile(
                                           pictureFile ?? videoFile, type) ??
                                   "Processing Data/file.jpg";
-                              final args = ModalRoute.of(context)
-                                  ?.settings
-                                  .arguments as Map;
                               showDialog(
                                   context: context,
                                   builder: (ctxt) {
                                     return MoodPopup(
-                                        filePath: filePath,
-                                        option: args['option']);
+                                        filePath: filePath, args: args);
                                   });
-
-                              // ClassPopup().getDialogue(context);
-
-                              //Navigator.pop(context);
-                              //var res = await CloudFunctions().get_mood();
-                              //print(res);
-                              //NEXT PAGE TBD
                             },
                           )
                         } else if (recording) ...{

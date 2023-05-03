@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mood_swing/Utilities/APIRouter.dart';
+import '../Objects/GenerationArguments.dart';
 import '../Widgets/widgets.dart';
 import 'package:animate_do/animate_do.dart';
 import '../Objects/Mood.dart';
@@ -18,10 +20,8 @@ class LargeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    //  final args = ModalRoute.of(context)?.settings.arguments as Map;
-    final Map<dynamic, dynamic>? args =
-        ModalRoute.of(context)?.settings.arguments as Map<dynamic, dynamic>?;
-    final Mood selectedMood;
+    final GenerationArguments args =
+        ModalRoute.of(context)!.settings.arguments as GenerationArguments;
     return SafeArea(
       child: Container(
         width: width,
@@ -74,9 +74,8 @@ class SmallScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    final Mood selectedMood;
-    final Map<dynamic, dynamic>? args =
-        ModalRoute.of(context)?.settings.arguments as Map<dynamic, dynamic>?;
+    final GenerationArguments args =
+        ModalRoute.of(context)!.settings.arguments as GenerationArguments;
 
     return SafeArea(
       child: Container(
@@ -133,10 +132,23 @@ class SmallScreen extends StatelessWidget {
   }
 }
 
-class GenerationLoadingPage extends StatelessWidget {
-  final Mood selectedMood;
+class PlaylistContainer extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final GenerationArguments args =
+        ModalRoute.of(context)!.settings.arguments as GenerationArguments;
+    return FutureBuilder<Mood>(
+        future: APIRouter().generateClassification(args.moods),
+        builder: (context, snapshot) {
+          return Expanded(
+            child: WaveLoader(title: 'wave'),
+          );
+        });
+  }
+}
 
-  GenerationLoadingPage({required this.selectedMood});
+class GenerationLoadingPage extends StatelessWidget {
+  GenerationLoadingPage();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
