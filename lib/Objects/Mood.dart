@@ -10,6 +10,11 @@ enum Mood {
 
   @override
   String toString() => this.name.toLowerCase();
+
+  Mood getMoodFromValence()
+  {
+    return Mood.Happy;
+  }
 }
 
 extension MoodExtension on Mood

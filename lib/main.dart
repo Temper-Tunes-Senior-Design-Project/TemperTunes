@@ -8,7 +8,6 @@ import 'dart:ui';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mood_swing/Utilities/AuthRouter.dart';
-import 'Objects/Mood.dart';
 import 'Pages/CameraPage.dart';
 import 'Pages/PresetsPage.dart';
 import 'Pages/UserInputGeneration.dart';
@@ -78,7 +77,8 @@ class _AppState extends State<App> {
         '/camera': (context) => CameraPage(),
         '/bluetooth': (context) => BluetoothLoaderPage(),
         '/presets': (context) => PresetsPage(),
-        '/compiling': (context) => GenerationLoadingPage(),
+        '/settings': (context) => UserInputGeneration(),
+        '/finalize': (context) => GenerationLoadingPage(),
       },
       home: StreamBuilder<User?>(
           initialData: FirebaseAuth.instance.currentUser,
@@ -89,7 +89,7 @@ class _AppState extends State<App> {
             }
 
             //return LandingPage();
-            return UserInputGeneration();
+            return GenerationOptionsPage();
           }),
     );
   }

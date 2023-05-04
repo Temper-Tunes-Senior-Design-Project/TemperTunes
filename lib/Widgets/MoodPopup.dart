@@ -123,7 +123,7 @@ class MoodPopup extends StatelessWidget {
                           } else {
                             Navigator.pushNamed(
                               context,
-                              '/compiling',
+                              '/settings',
                               arguments: args,
                             );
                           }

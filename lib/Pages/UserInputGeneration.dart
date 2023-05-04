@@ -140,21 +140,6 @@ class SmallScreen extends StatelessWidget {
   }
 }
 
-class PlaylistContainer extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final GenerationArguments args =
-        ModalRoute.of(context)!.settings.arguments as GenerationArguments;
-    return FutureBuilder<Mood>(
-        future: APIRouter().generateClassification(args.moods),
-        builder: (context, snapshot) {
-          return Expanded(
-            child: WaveLoader(title: 'wave'),
-          );
-        });
-  }
-}
-
 class UserInputGeneration extends StatelessWidget {
   UserInputGeneration();
   @override
@@ -196,11 +181,7 @@ class Subtitle extends StatelessWidget {
   Subtitle(this.text);
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
     return //Padding(
-        // padding: EdgeInsets.only(
-        //     left: 0.01 * width, right: 0.01 * width, top: 0.02 * height),
         Text(
       text,
       style: TextStyle(
@@ -222,6 +203,9 @@ class _UserInputsState extends State<UserInputs> {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    final GenerationArguments args =
+        ModalRoute.of(context)!.settings.arguments as GenerationArguments;
+
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
 
@@ -290,7 +274,15 @@ class _UserInputsState extends State<UserInputs> {
                   ),
                 ),
                 onPressed: () {
-                  if (_formKey.currentState!.validate()) {}
+                  if (_formKey.currentState!.validate()) {
+                    args.numberOfSongs =
+                        int.tryParse(playlistDurationController.text) ?? 50;
+                    Navigator.pushNamed(
+                      context,
+                      '/finalize',
+                      arguments: args,
+                    );
+                  }
                 },
               ),
             ),

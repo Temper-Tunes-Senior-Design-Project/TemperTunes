@@ -293,7 +293,7 @@ class PairBtn extends StatelessWidget {
           if (args.route == GenerationRoutes.SensorOnly) {
             Navigator.pushNamed(context, '/presets');
           } else {
-            Navigator.pushNamed(context, '/compiling');
+            Navigator.pushNamed(context, '/settings');
           }
         },
       ),

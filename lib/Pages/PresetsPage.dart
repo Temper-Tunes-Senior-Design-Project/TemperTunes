@@ -107,7 +107,7 @@ class _SmallCarouselState extends State<SmallCarousel> {
                             args.moods.add(mood);
                             Navigator.pushNamed(
                               context,
-                              'compiling',
+                              '/settings',
                               arguments: args,
                             );
                           }
@@ -260,7 +260,7 @@ class _LargeCarouselState extends State<LargeCarousel> {
                         args.moods.add(mood);
                         Navigator.pushNamed(
                           context,
-                          'compiling',
+                          '/settings',
                           arguments: args,
                         );
                       }

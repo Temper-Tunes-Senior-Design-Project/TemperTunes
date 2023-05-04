@@ -4,6 +4,8 @@ class GenerationArguments
 {
   List<Mood> moods = [];
   GenerationRoutes route;
+  int numberOfSongs = 50;
+  int newSongPercentage = 0;
 
   GenerationArguments(this.route);
 }
