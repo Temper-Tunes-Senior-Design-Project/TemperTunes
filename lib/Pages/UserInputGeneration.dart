@@ -30,8 +30,8 @@ class LargeScreen extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
 
-    // final GenerationArguments args =
-    //     ModalRoute.of(context)!.settings.arguments as GenerationArguments;
+    final GenerationArguments args =
+        ModalRoute.of(context)!.settings.arguments as GenerationArguments;
     return SafeArea(
       child: Container(
         width: width,
@@ -81,8 +81,8 @@ class SmallScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    // final GenerationArguments args =
-    //     ModalRoute.of(context)!.settings.arguments as GenerationArguments;
+    final GenerationArguments args =
+        ModalRoute.of(context)!.settings.arguments as GenerationArguments;
 
     return SafeArea(
       child: Container(
@@ -212,44 +212,6 @@ class Subtitle extends StatelessWidget {
     );
   }
 }
-//
-
-//
-// class _UserInputsState extends State<UserInputs> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Expanded(
-//       child:
-//           Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-//         ///Playlist length
-//         Row(
-//           children: [
-//             Subtitle("Playlist length: "),
-//             Form(
-//               context: context,
-//               controller: playlistDurationController,
-//               label: 'number of songs',
-//             )
-//           ],
-//         ),
-//
-//         ///Percentage new songs
-//         Row(
-//           children: [
-//             Container(
-//               child: Subtitle("Percentage of new songs: "),
-//             ),
-//             Form(
-//               context: context,
-//               controller: playlistNewSongPercentController,
-//               label: 'percentage',
-//             ),
-//           ],
-//         ),
-//       ]),
-//     );
-//   }
-// }
 
 class UserInputs extends StatefulWidget {
   @override
