@@ -7,8 +7,10 @@ import 'package:mood_swing/Pages/BluetoothLoaderPage.dart';
 import 'dart:ui';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mood_swing/Pages/NewlyGeneratedPlaylistPage.dart';
 import 'package:mood_swing/Utilities/AuthRouter.dart';
 import 'Pages/CameraPage.dart';
+import 'Pages/LandingPage.dart';
 import 'Pages/PresetsPage.dart';
 import 'Pages/UserInputGeneration.dart';
 import 'Widgets/MockNavigator.dart';
@@ -87,9 +89,9 @@ class _AppState extends State<App> {
             if (snapshot.data != null) {
               return HomePage();
             }
-
-            //return LandingPage();
-            return GenerationOptionsPage();
+            return LandingPage();
+            // return NewlyGeneratedPlaylistPage();
+            //return GenerationOptionsPage();
           }),
     );
   }

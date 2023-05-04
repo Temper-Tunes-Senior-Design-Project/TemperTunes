@@ -25,6 +25,7 @@ class DatabaseRouter {
         'name' : username,
         'playlists': [],
         'linkedDevices' : [],
+        'classifiedSongs': [],
         'settings': {},
         'statistics' : {},
       },
@@ -62,5 +63,13 @@ class DatabaseRouter {
       return snap.ref.fullPath;
     }
     return null;
+  }
+
+  Future<List<String>> getClassifiedSongs() async
+  {
+    DocumentSnapshot ds = await FirebaseFirestore.instance.collection("users").doc(uid).get();
+    List<String> vars = List<String>.from(ds.get("classifiedSongs"));
+    print("Vars: " + vars.toString());
+    return vars;
   }
 }

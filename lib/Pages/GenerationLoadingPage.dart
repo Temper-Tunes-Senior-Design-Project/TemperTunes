@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mood_swing/Utilities/APIRouter.dart';
 import '../Objects/GenerationArguments.dart';
+import '../Objects/Playlist.dart';
 import '../Widgets/widgets.dart';
 import 'package:animate_do/animate_do.dart';
 import '../Objects/Mood.dart';
@@ -20,8 +21,6 @@ class LargeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    final GenerationArguments args =
-        ModalRoute.of(context)!.settings.arguments as GenerationArguments;
     return SafeArea(
       child: Container(
         width: width,
@@ -56,7 +55,7 @@ class LargeScreen extends StatelessWidget {
                     Subtitle(),
 
                     Expanded(
-                      child: WaveLoader(title: 'wave'),
+                      child: PlaylistContainer(),
                     ),
                   ],
                 ),
@@ -74,8 +73,6 @@ class SmallScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    final GenerationArguments args =
-        ModalRoute.of(context)!.settings.arguments as GenerationArguments;
 
     return SafeArea(
       child: Container(
@@ -119,7 +116,7 @@ class SmallScreen extends StatelessWidget {
                     Subtitle(),
 
                     Expanded(
-                      child: WaveLoader(title: 'wave'),
+                      child: PlaylistContainer(),
                     ),
                   ],
                 ),
@@ -137,12 +134,12 @@ class PlaylistContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     final GenerationArguments args =
         ModalRoute.of(context)!.settings.arguments as GenerationArguments;
-    return FutureBuilder<Mood>(
-        future: APIRouter().generateClassification(args.moods),
+    print("Test");
+    return FutureBuilder<Playlist?>(
+        future: APIRouter().generateClassification(args),
         builder: (context, snapshot) {
-          return Expanded(
-            child: WaveLoader(title: 'wave'),
-          );
+          snapshot.data?.songs.forEach((e) => print(e.name));
+          return  WaveLoader(title: 'wave');
         });
   }
 }

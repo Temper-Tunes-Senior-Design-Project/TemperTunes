@@ -20,7 +20,7 @@ class LargeScreen extends StatelessWidget {
     // double width = MediaQuery.of(context).size.width;
 
     return FutureBuilder<Playlist>(
-      future: APIRouter().fetchSongs(),
+      // future: APIRouter().fetchSongs(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
@@ -180,7 +180,7 @@ class SmallScreen extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
 
     return FutureBuilder<Playlist>(
-      future: APIRouter().fetchSongs(),
+      // future: APIRouter().fetchSongs(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
