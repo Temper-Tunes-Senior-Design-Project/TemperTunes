@@ -139,7 +139,7 @@ class PlaylistContainer extends StatelessWidget {
         future: APIRouter().generateClassification(args),
         builder: (context, snapshot) {
           snapshot.data?.songs.forEach((e) => print(e.name));
-          return  WaveLoader(title: 'wave');
+          return WaveLoader(title: 'wave');
         });
   }
 }
@@ -188,7 +188,7 @@ class Subtitle extends StatelessWidget {
       padding: EdgeInsets.only(
           left: 0.01 * width, right: 0.01 * width, top: 0.02 * height),
       child: Text(
-        "Please be patient while we create our playlist.",
+        "Please be patient while we create your playlist.",
         style: TextStyle(
           fontSize: 20,
           fontFamily: 'Maven Pro',

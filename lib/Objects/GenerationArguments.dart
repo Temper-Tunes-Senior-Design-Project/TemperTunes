@@ -1,17 +1,15 @@
 import 'Mood.dart';
 
-class GenerationArguments
-{
+class GenerationArguments {
   List<Mood> moods = [];
   GenerationRoutes route;
   int numberOfSongs = 50;
-  int newSongPercentage = 0;
+  double newSongPercentage = 0.5;
 
   GenerationArguments(this.route);
 }
 
-enum GenerationRoutes
-{
+enum GenerationRoutes {
   Both,
   CameraOnly,
   SensorOnly,

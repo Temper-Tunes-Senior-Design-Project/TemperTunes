@@ -11,9 +11,9 @@ class DatabaseRouter {
   /**
    * Check if the user has a database entry already
    */
-  Future<bool> userExists(String uid) async
-  {
-    return (await FirebaseFirestore.instance.collection("users").doc(uid).get()).exists;
+  Future<bool> userExists(String uid) async {
+    return (await FirebaseFirestore.instance.collection("users").doc(uid).get())
+        .exists;
   }
 
   /**
@@ -22,53 +22,54 @@ class DatabaseRouter {
   void createUser(String username) async {
     await FirebaseFirestore.instance.collection("users").doc(uid).set(
       {
-        'name' : username,
+        'name': username,
         'playlists': [],
-        'linkedDevices' : [],
+        'linkedDevices': [],
         'classifiedSongs': [],
         'settings': {},
-        'statistics' : {},
+        'statistics': {},
       },
     );
-
   }
 
   /**
    * Generates a random playlist from the cached songs within the database
    */
-  Future<List<String>> generatePlaylist(List<String> userLikedSongs, Mood mood) async
-  {
+  Future<List<String>> generatePlaylist(
+      List<String> userLikedSongs, Mood mood) async {
     List<String> playlist = [];
-    for(String s in userLikedSongs)
-      {
-        DocumentSnapshot dref = await FirebaseFirestore.instance.collection("songs").doc(s).get();
-        if(dref.get("mood") == mood.index)
-          {
-            playlist.add(s);
-          }
+    for (String s in userLikedSongs) {
+      DocumentSnapshot dref =
+          await FirebaseFirestore.instance.collection("songs").doc(s).get();
+      if (dref.get("mood") == mood.index) {
+        playlist.add(s);
       }
+    }
     return playlist;
   }
 
   /**
    * Uploads a file to Firebase Cloud Storage and returns the file path.
    */
-  Future<String?> uploadFile(XFile? file, FileType encodingFormat) async
-  {
-    if(file != null) {
+  Future<String?> uploadFile(XFile? file, FileType encodingFormat) async {
+    if (file != null) {
       String path = "Processing Data/file." + encodingFormat.getPostfix();
-      TaskSnapshot snap = await FirebaseStorage.instance.ref(path).putData(await file.readAsBytes(),SettableMetadata(
-        contentType: encodingFormat.getEncoding(),
-      ));
+      TaskSnapshot snap = await FirebaseStorage.instance.ref(path).putData(
+          await file.readAsBytes(),
+          SettableMetadata(
+            contentType: encodingFormat.getEncoding(),
+          ));
       return snap.ref.fullPath;
     }
     return null;
   }
 
-  Future<List<String>> getClassifiedSongs() async
-  {
-    DocumentSnapshot ds = await FirebaseFirestore.instance.collection("users").doc(uid).get();
-    List<String> vars = List<String>.from(ds.get("classifiedSongs"));
+  Future<List<String>> getClassifiedSongs() async {
+    DocumentSnapshot ds =
+        await FirebaseFirestore.instance.collection("users").doc(uid).get();
+    List<String> vars = List<String>.from(ds.get("classifiedSongs"))
+        .map((str) => str.trim())
+        .toList();
     print("Vars: " + vars.toString());
     return vars;
   }

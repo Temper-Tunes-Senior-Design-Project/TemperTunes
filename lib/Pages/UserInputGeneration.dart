@@ -277,7 +277,8 @@ class _UserInputsState extends State<UserInputs> {
                   if (_formKey.currentState!.validate()) {
                     args.numberOfSongs =
                         int.tryParse(playlistDurationController.text) ?? 50;
-                    args.newSongPercentage = int.tryParse(playlistDurationController.text) ?? 0;
+                    args.newSongPercentage =
+                        double.tryParse(playlistDurationController.text) ?? 0.5;
                     Navigator.pushNamed(
                       context,
                       '/finalize',

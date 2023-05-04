@@ -94,7 +94,11 @@ class APIRouter {
     };
     final jsonBody = {'mood': strMood, 'user_id': uid, "songs": songs};
     print("Sent JSON");
-    print(jsonBody);
+    // print(jsonBody);
+    jsonBody.forEach((key, value) {
+      print("key: " + key + " - value:" + value.toString());
+      print("type:" + value.runtimeType.toString());
+    });
     Response response = await http
         .post(Uri.parse(url), headers: headers, body: json.encode(jsonBody))
         .timeout(Duration(minutes: 1));
@@ -211,7 +215,19 @@ class APIRouter {
     print("Classifying");
     List<String> songLibrary = await DatabaseRouter().getClassifiedSongs();
     print(songLibrary);
+    //check if the percentage was inputted as a value or a decimal
+    args.newSongPercentage = formatPercentage(args.newSongPercentage);
     return await generatePlaylist(songLibrary, args.moods[0],
         args.newSongPercentage / 100, args.numberOfSongs);
+  }
+
+  double formatPercentage(double newSongPercentage) {
+    return (newSongPercentage > 1.0)
+        ? (newSongPercentage / 100 > 1)
+            ? 1
+            : newSongPercentage / 100
+        : (newSongPercentage < 0.0)
+            ? 0.0
+            : newSongPercentage;
   }
 }
