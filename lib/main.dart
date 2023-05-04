@@ -11,6 +11,7 @@ import 'package:mood_swing/Utilities/AuthRouter.dart';
 import 'Objects/Mood.dart';
 import 'Pages/CameraPage.dart';
 import 'Pages/PresetsPage.dart';
+import 'Pages/UserInputGeneration.dart';
 import 'Widgets/MockNavigator.dart';
 import 'firebase_options.dart';
 
@@ -88,7 +89,7 @@ class _AppState extends State<App> {
             }
 
             //return LandingPage();
-            return GenerationOptionsPage();
+            return UserInputGeneration();
           }),
     );
   }
