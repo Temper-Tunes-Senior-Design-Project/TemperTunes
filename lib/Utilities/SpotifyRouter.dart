@@ -57,16 +57,18 @@ class SpotifyRouter {
     SpotifyApi client = SpotifyApi.withAccessToken(accessToken);
 
     ///Instantiate playlists with liked songs
+    Iterable<TrackSaved> tracks = await client.tracks.me.saved.all();
     List<CP.Playlist> rPlaylists = [
       CP.Playlist(
           "No ID exists for Liked Songs",
           "Liked Songs",
           {},
-          (await client.tracks.me.saved.all()).map<Song>((e) {
+         tracks.map<Song>((e) {
             return Song(e.track?.id ?? "", e.track?.name ?? "", {},
-                e.track?.artists?.map((e) => e.name ?? "").toList() ?? [], "");
+                e.track?.artists?.map((e) => e.name ?? "").toList() ?? [], e.track?.album?.images?[0].url??"");
           }).toList(),
-          [])
+          tracks.fold<List<String>>([], (previousValue, element) => [...previousValue,element.track?.album?.images?[0].url??""])
+          )
     ];
 
     /// Add all other playlists into the list of playlists
@@ -114,5 +116,12 @@ class SpotifyRouter {
       uris.add((await client.tracks.get(s.uid)).uri ?? "");
     }
     await client.playlists.addTracks(uris, p.id ?? "");
+  }
+
+  Future<List<Song>> getAllSongs() async {
+    return (await getSongLibrary()).fold<List<Song>>([],
+        (previousValue, element) {
+      return [...previousValue, ...element.songs];
+    });
   }
 }
