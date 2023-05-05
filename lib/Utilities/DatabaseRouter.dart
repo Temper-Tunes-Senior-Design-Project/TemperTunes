@@ -72,4 +72,10 @@ class DatabaseRouter {
         .toList();
     return vars;
   }
+
+  void addToUser(List<String> songs) async {
+    await FirebaseFirestore.instance.collection("users").doc(uid).set({
+      "songsClassified": FieldValue.arrayUnion(songs),
+    });
+  }
 }
