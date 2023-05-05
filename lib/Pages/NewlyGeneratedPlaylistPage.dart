@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mood_swing/Objects/GenerationArguments.dart';
 import 'package:mood_swing/Objects/Playlist.dart';
 import '../Objects/Song.dart';
 import '../Widgets/widgets.dart';
@@ -15,12 +16,13 @@ class Body extends StatelessWidget {
 
 class LargeScreen extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    // double height = MediaQuery.of(context).size.height;
-    // double width = MediaQuery.of(context).size.width;
-
-    return FutureBuilder<Playlist>(
-      // future: APIRouter().fetchSongs(),
+  Widget build(BuildContext context)
+  {
+    final GenerationArguments args =
+        ModalRoute.of(context)!.settings.arguments as GenerationArguments;
+    print("Test");
+    return FutureBuilder<Playlist?>(
+      future: APIRouter().generateClassification(args),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(

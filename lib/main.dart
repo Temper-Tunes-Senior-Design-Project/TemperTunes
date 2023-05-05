@@ -80,7 +80,7 @@ class _AppState extends State<App> {
         '/bluetooth': (context) => BluetoothLoaderPage(),
         '/presets': (context) => PresetsPage(),
         '/settings': (context) => UserInputGeneration(),
-        '/finalize': (context) => GenerationLoadingPage(),
+        '/finalize': (context) => NewlyGeneratedPlaylistPage(),
       },
       home: StreamBuilder<User?>(
           initialData: FirebaseAuth.instance.currentUser,

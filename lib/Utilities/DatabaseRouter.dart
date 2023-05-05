@@ -70,7 +70,6 @@ class DatabaseRouter {
     List<String> vars = List<String>.from(ds.get("classifiedSongs"))
         .map((str) => str.trim())
         .toList();
-    print("Vars: " + vars.toString());
     return vars;
   }
 }
