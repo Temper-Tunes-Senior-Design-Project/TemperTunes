@@ -182,6 +182,7 @@ class APIRouter {
    * Classifies the users song library when they have authenticated with the application
    */
   void classifySpotifyLibrary() async {
+    List<String> songs = (await SpotifyRouter().getAllSongs()).map((e) => e.uid).toList();
     String token = await SpotifyRouter().getToken();
     String uid = AuthRouter().getUserUID();
     Response response = await http

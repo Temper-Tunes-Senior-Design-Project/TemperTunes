@@ -75,7 +75,6 @@ class SpotifyRouter {
     Iterable<PlaylistSimple> playlists = await client.playlists.me.all();
 
     for (PlaylistSimple p in playlists) {
-      print("Getting playlist: " + (p.name ?? ""));
       Iterable? data =
           (await client.playlists.get(p.id ?? "")).tracks?.itemsNative;
       List<Song>? songs = data?.map((e) {
