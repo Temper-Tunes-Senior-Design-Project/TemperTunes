@@ -11,9 +11,20 @@ enum Mood {
   @override
   String toString() => this.name.toLowerCase();
 
-  Mood getMoodFromValence()
+  Mood getMoodFromArousal(double arousal)
   {
-    return Mood.Happy;
+    if(arousal > 0.4)
+      {
+        return Mood.Excited;
+      }
+    else if(arousal > -0.4)
+      {
+        return Mood.Happy;
+      }
+    else
+      {
+        return Mood.Content;
+      }
   }
 }
 
