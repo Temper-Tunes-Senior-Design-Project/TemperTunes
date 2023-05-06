@@ -1,5 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
+import 'package:mood_swing/Objects/Mood.dart';
+import 'package:mood_swing/Utilities/WebBluetoothRouter.dart';
+import '../Objects/GenerationArguments.dart';
 import '../Widgets/widgets.dart';
 import 'package:animate_do/animate_do.dart';
 import '../Utilities/BluetoothRouter.dart';
@@ -19,9 +23,6 @@ class LargeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    //  final args = ModalRoute.of(context)?.settings.arguments as Map;
-    final Map<dynamic, dynamic>? args =
-        ModalRoute.of(context)?.settings.arguments as Map<dynamic, dynamic>?;
     return SafeArea(
       child: Container(
         width: width,
@@ -56,21 +57,7 @@ class LargeScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         ///Title
-                        FittedBox(
-                          fit: BoxFit.scaleDown,
-                          child: Container(
-                            alignment: Alignment.center,
-                            padding: EdgeInsets.only(top: 0.04 * height),
-                            child: Text(
-                              'Select Your Device',
-                              style: TextStyle(
-                                fontSize: 49,
-                                fontFamily: 'Share Tech',
-                                color: MyPalette.lightPurple,
-                              ),
-                            ),
-                          ),
-                        ),
+                        Title(),
 
                         Subtitle(),
                         StreamBuilder<List<DiscoveredDevice>>(
@@ -95,7 +82,7 @@ class LargeScreen extends StatelessWidget {
                             );
                           },
                         ),
-                        ContinueBtn(option: args!['option']),
+                        PairBtn(),
                       ],
                     ),
                   ),
@@ -139,21 +126,7 @@ class SmallScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     ///Title
-                    FittedBox(
-                      fit: BoxFit.fill,
-                      child: Container(
-                        alignment: Alignment.center,
-                        padding: EdgeInsets.only(top: 0.04 * height),
-                        child: Text(
-                          'Select Your Device',
-                          style: TextStyle(
-                            fontSize: 49,
-                            fontFamily: 'Share Tech',
-                            color: MyPalette.lightPurple,
-                          ),
-                        ),
-                      ),
-                    ),
+                    Title(),
 
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 0.1 * width),
@@ -184,7 +157,7 @@ class SmallScreen extends StatelessWidget {
                         );
                       },
                     ),
-                    ContinueBtn(option: args['option']),
+                    PairBtn(),
                   ],
                 ),
               ),
@@ -200,32 +173,6 @@ class BluetoothLoaderPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // body: Column(
-      //   children: [
-      //     Text("Found Devices"),
-      //     StreamBuilder<List<DiscoveredDevice>>(
-      //         stream: BluetoothRouter().getNearbyDevices(),
-      //         builder: (context, snapshot) {
-      //           return Container(
-      //             height: 750,
-      //             child: ListView.builder(
-      //                 itemCount: snapshot.data?.length ?? 0,
-      //                 itemBuilder: (context, i) {
-      //                   return ListTile(
-      //                     title: Text(snapshot.data?[i].name ?? "No data"),
-      //                     onTap: () async {
-      //                       Stream<Future<String>> result =
-      //                           await BluetoothRouter()
-      //                               .connectToDevice(snapshot.data![i]);
-      //                       result.listen((result) async {
-      //                         print(await result);
-      //                       });
-      //                     },
-      //                   );
-      //                 }),
-      //           );
-      //         })
-      //   ],
       body: Body(),
     );
   }
@@ -239,15 +186,34 @@ class Subtitle extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(
           left: 0.01 * width, right: 0.01 * width, top: 0.04 * height),
-      child: FittedBox(
-        fit: BoxFit.fill,
+      child: Text(
+        "Please pair your device to get your skin conductivity values",
+        style: TextStyle(
+          fontSize: 20,
+          fontFamily: 'Maven Pro',
+          color: Colors.white60,
+        ),
+        textAlign: TextAlign.center,
+      ),
+    );
+  }
+}
+
+class Title extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    return FittedBox(
+      fit: BoxFit.fill,
+      child: Container(
         alignment: Alignment.center,
+        padding: EdgeInsets.only(top: 0.04 * height),
         child: Text(
-          "Please select the device you will use to retrieve your heartbeat and similar values",
+          'Select Your Device',
           style: TextStyle(
-            fontSize: 30,
-            fontFamily: 'Maven Pro',
-            color: Colors.white60,
+            fontSize: 49,
+            fontFamily: 'Share Tech',
+            color: MyPalette.lightPurple,
           ),
         ),
       ),
@@ -255,12 +221,13 @@ class Subtitle extends StatelessWidget {
   }
 }
 
-class ContinueBtn extends StatelessWidget {
-  final String option;
-  ContinueBtn({required this.option});
+class PairBtn extends StatelessWidget {
+  PairBtn();
 
   @override
   Widget build(BuildContext context) {
+    final GenerationArguments args =
+    ModalRoute.of(context)!.settings.arguments as GenerationArguments;
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Container(
@@ -294,7 +261,7 @@ class ContinueBtn extends StatelessWidget {
           child: Align(
             alignment: Alignment.center,
             child: Text(
-              'Continue',
+              'Pair',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 25,
@@ -306,11 +273,27 @@ class ContinueBtn extends StatelessWidget {
         ),
 
         ///When the user gets their readings, they can push them to the PresetsPage
-        onPressed: () {
-          if (option == 'UseSensorOnly') {
+        onPressed: () async {
+          Mood? m = Mood.Happy;
+          if (kIsWeb) {
+            Stream<Future<double>>? ds =
+                await WebBluetoothRouter().connectToDevice();
+            ds?.listen((result) async {
+              //Add code to determine mood from arousal
+              await result;
+            });
+          } else {
+            // Stream<Future<String>> result =
+            //     await BluetoothRouter().connectToDevice(snapshot.data![i]);
+            // result.listen((result) async {
+            //   print(await result);
+            // });
+          }
+          args.moods.add(m);
+          if (args.route == GenerationRoutes.SensorOnly) {
             Navigator.pushNamed(context, '/presets');
           } else {
-            Navigator.pushNamed(context, '/compiling');
+            Navigator.pushNamed(context, '/settings');
           }
         },
       ),

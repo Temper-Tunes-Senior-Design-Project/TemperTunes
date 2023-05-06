@@ -53,12 +53,9 @@ class LargeScreen extends StatelessWidget {
                             top: height * 0.03,
                             bottom: 0.03 * height,
                           ),
-                          child: FittedBox(
-                            fit: BoxFit.contain,
-                            child: Image.asset(
-                              "assets/spotifyLogoWhite.png",
-                              scale: 2.5,
-                            ),
+                          child: Image.asset(
+                                "assets/spotifyLogoWhite.png",
+                                scale: 2.5,
                           ),
                         ),
                       ),
@@ -89,7 +86,7 @@ class LargeScreen extends StatelessWidget {
                         child: BouncingWidget(
                           child: ConnectSpotifyBtn(context: context),
                           onPressed: () async {
-                            APIRouter().classifySpotifyLibrary();
+                            // APIRouter().classifySpotifyLibrary();
                           },
                         ),
                       ),
@@ -154,14 +151,14 @@ class SmallScreen extends StatelessWidget {
                     SizedBox(height: 0.08 * height),
 
                     ///Buttons
-                    BouncingWidget(
-                      child: ConnectSpotifyBtn(
-                        context: context,
-                      ),
-                      onPressed: () async {
-                        APIRouter().classifySpotifyLibrary();
-                      },
-                    ),
+                    // BouncingWidget(
+                    //   child: ConnectSpotifyBtn(
+                    //     context: context,
+                    //   ),
+                    //   onPressed: () async {
+                    //     APIRouter().classifySpotifyLibrary();
+                    //   },
+                    // ),
                   ],
                 ),
               ),
@@ -178,7 +175,6 @@ class LinkSpotifyPage extends StatelessWidget {
 
   @override
   Widget build(Object context) {
-    //Materialapp debugger false
     return Scaffold(resizeToAvoidBottomInset: false, body: Body());
   }
 }

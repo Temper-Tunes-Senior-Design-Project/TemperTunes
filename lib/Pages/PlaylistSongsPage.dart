@@ -1,5 +1,3 @@
-
-
 import 'package:easy_stepper/easy_stepper.dart';
 import '../Widgets/widgets.dart';
 
@@ -43,7 +41,8 @@ class LargeScreen extends StatelessWidget {
           children: [
             BackArrowBtn(),
             Padding(
-              padding: const EdgeInsets.all(30.0),
+              padding: EdgeInsets.symmetric(
+                  horizontal: 0.05 * width, vertical: 0.05 * height),
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.grey.withOpacity(0.3),
@@ -57,14 +56,14 @@ class LargeScreen extends StatelessWidget {
                     ///Playlist cover
                     Container(
                       height: 0.8 * height,
-                      width: 0.45 * width,
+                      width: 0.4 * width,
                       child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Expanded(
                               child: Container(
                                 padding: EdgeInsets.symmetric(
-                                    vertical: 0.1 * height),
+                                    vertical: 0.05 * height),
                                 child: Image.network(
                                   playlist.images[0],
                                   fit: BoxFit.cover,
@@ -92,26 +91,8 @@ class LargeScreen extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            Expanded(
-                              child: ListView.builder(
-                                itemCount: playlist.songs.length,
-                                itemBuilder: (context, index) {
-                                  // Build the list of songs using the playlist data
-                                  return ListTile(
-                                    title: Text(
-                                      playlist.songs[index].name,
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                    subtitle: Text(
-                                      playlist.songs[index].artists.join(", "),
-                                      style: TextStyle(color: Colors.white54),
-                                    ),
-                                  );
-                                },
-                              ),
-                            ),
+                            SizedBox(height: 10),
+                            SongListView(songList: playlist.songs),
                           ],
                         ),
                       ),
@@ -151,7 +132,8 @@ class SmallScreen extends StatelessWidget {
           children: [
             BackArrowBtn(),
 
-            Center(
+            ///Title
+            Container(
               child: Text(
                 '${playlist.name}',
                 style: TextStyle(
@@ -162,52 +144,27 @@ class SmallScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 15),
+
+            SizedBox(height: 0.01 * height),
 
             ///Image of the playlist
             Container(
               height: height * 0.4,
-              width: 0.85 * width,
+              width: 0.76 * width,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: NetworkImage(
                     playlist.images[0],
                   ),
+                  fit: BoxFit.cover,
                 ),
-                borderRadius: BorderRadius.circular(20),
               ),
             ),
+
+            ///Name of Playlist
+
             SizedBox(height: 15),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    ///build UI for playlist of songs
-                    ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: playlist.songs.length,
-                      itemBuilder: (context, index) {
-                        //built list of songs using playlist
-                        return ListTile(
-                          title: Text(
-                            playlist.songs[index].name,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 17,
-                                fontWeight: FontWeight.w500),
-                          ),
-                          subtitle: Text(
-                            playlist.songs[index].artists.join(", "),
-                            style:
-                                TextStyle(color: Colors.white54, fontSize: 14),
-                          ),
-                        );
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            SongListView(songList: playlist.songs),
           ],
         ),
       ),
@@ -227,44 +184,3 @@ class PlaylistSongsPage extends StatelessWidget {
     );
   }
 }
-
-//   Widget build(BuildContext context) {
-//     double height = MediaQuery.of(context).size.height;
-//     double width = MediaQuery.of(context).size.width;
-//
-//     return Scaffold(
-//       body: SafeArea(
-//         child: Container(
-//           height: height,
-//           width: width,
-//           decoration: BoxDecoration(
-//             image: DecorationImage(
-//               image: AssetImage('assets/appBarBG.png'),
-//               fit: BoxFit.cover,
-//             ),
-//           ),
-//           child: Column(
-//             children: [
-//               Text(
-//                 'Songs in ${widget.playlist.name}',
-//                 style: TextStyle(color: Colors.white),
-//               ),
-//               ListView.builder(
-//                   itemCount: widget.playlist.songs.length,
-//                   itemBuilder: (context, i) {
-//                     return Text(
-//                       widget.playlist.songs[i].name,
-//                       style: TextStyle(
-//                         fontFamily: 'Maven Pro',
-//                         color: Colors.white,
-//                         fontSize: 18,
-//                       ),
-//                     );
-//                   }),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }

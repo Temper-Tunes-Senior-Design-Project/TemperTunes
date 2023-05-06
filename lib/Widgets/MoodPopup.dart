@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../Objects/GenerationArguments.dart';
 import '../Widgets/widgets.dart';
 
 import '../Objects/Mood.dart';
@@ -6,10 +7,8 @@ import '../Utilities/APIRouter.dart';
 
 class MoodPopup extends StatelessWidget {
   final String filePath;
-  final String option;
-  late final Future<Mood> emotion;
-  //MoodPopup(filePath, option);
-  MoodPopup({required this.filePath, required this.option});
+  final GenerationArguments args;
+  MoodPopup({required this.filePath, required this.args});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +37,7 @@ class MoodPopup extends StatelessWidget {
           ],
         ),
         alignment: Alignment.center,
-        child: FutureBuilder<Mood>(
+        child: FutureBuilder<Mood?>(
           future: APIRouter().getUserMood(filePath),
           builder: (context, snapshot) {
             print("Rebuilding");
@@ -48,8 +47,8 @@ class MoodPopup extends StatelessWidget {
                 case Mood.Angry:
                   w = Image.asset("assets/angry.png", height: 0.15 * height);
                   break;
-                case Mood.Calm:
-                  w = Image.asset("assets/calm.png", height: 0.15 * height);
+                case Mood.Tired:
+                  w = Image.asset("assets/tired.png", height: 0.15 * height);
                   break;
                 case Mood.Content:
                   w = Image.asset("assets/content.png", height: 0.15 * height);
@@ -114,14 +113,19 @@ class MoodPopup extends StatelessWidget {
                         ),
                         child: Text('Yes'),
                         onPressed: () {
-                          if (option == 'UseBoth') {
+                          args.moods.add(snapshot.data!);
+                          if (args.route == GenerationRoutes.Both) {
                             Navigator.pushNamed(
                               context,
                               '/bluetooth',
-                              arguments: {'option': 'UseBoth'},
+                              arguments: args,
                             );
                           } else {
-                            Navigator.pushNamed(context, '/compiling');
+                            Navigator.pushNamed(
+                              context,
+                              '/settings',
+                              arguments: args,
+                            );
                           }
                         },
                       ),
