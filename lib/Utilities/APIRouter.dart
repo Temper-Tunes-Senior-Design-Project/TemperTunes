@@ -15,6 +15,39 @@ class APIRouter {
   var handledErrorCodes = [400, 503];
 
   /**
+   * Assigns a user their centroids based on song features and model labels.
+   */
+  Future<bool> assignUserCentroids() async {
+    List<Song> songs = await SpotifyRouter().getAllSongs();
+    List<String> song_ids = [];
+
+    for (Song song in songs) {
+      song_ids.add(song.uid);
+    }
+    final url = "https://moodswing-assign-centroids-ilvif34q5a-ue.a.run.app";
+    var uid = FirebaseAuth.instance.currentUser?.uid;
+    final headers = {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'POST',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Max-Age': '3600',
+      'Content-Type': 'application/json'
+    };
+    final jsonBody = {
+      'user_id': uid,
+      "songs": song_ids,
+    };
+    Response response = await http
+        .post(Uri.parse(url), headers: headers, body: json.encode(jsonBody))
+        .timeout(Duration(minutes: 1));
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /**
    * Encompasses the entire playlist generation flow, including sorting closest
    * songs to user centroid and generating user playlist. Returns the playlist
    * generated.
@@ -70,6 +103,7 @@ class APIRouter {
     } else if (handledErrorCodes.contains(response.statusCode)) {
       var resBody = jsonDecode(response.body);
       String error = resBody["error"]!;
+      print(error);
       return null;
     } else {
       return null;
@@ -111,6 +145,7 @@ class APIRouter {
     } else if (handledErrorCodes.contains(response.statusCode)) {
       var resBody = jsonDecode(response.body);
       String error = resBody["error"]!;
+      print(error);
       return {"error": error};
     } else {
       return {"error": "Internal server error"};
@@ -182,7 +217,8 @@ class APIRouter {
    * Classifies the users song library when they have authenticated with the application
    */
   void classifySpotifyLibrary() async {
-    List<String> songs = (await SpotifyRouter().getAllSongs()).map((e) => e.uid).toList();
+    List<String> songs =
+        (await SpotifyRouter().getAllSongs()).map((e) => e.uid).toList();
     String token = await SpotifyRouter().getToken();
     String uid = AuthRouter().getUserUID();
     Response response = await http
