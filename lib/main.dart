@@ -17,9 +17,6 @@ import 'Pages/UserInputGeneration.dart';
 import 'Widgets/MockNavigator.dart';
 import 'firebase_options.dart';
 
-import 'package:mood_swing/Pages/GenerationOptionsPage.dart';
-import 'package:mood_swing/Pages/GenerationLoadingPage.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(

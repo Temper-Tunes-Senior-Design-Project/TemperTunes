@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:form_field_validator/form_field_validator.dart';
-import 'package:mood_swing/Utilities/APIRouter.dart';
 import '../Objects/GenerationArguments.dart';
 import '../Widgets/widgets.dart';
 import 'package:animate_do/animate_do.dart';
-import '../Objects/Mood.dart';
 import 'package:form_builder_validators/form_builder_validators.dart'
     as validator;
 import 'package:bouncing_widget/bouncing_widget.dart';
@@ -29,9 +26,6 @@ class LargeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-
-    final GenerationArguments args =
-        ModalRoute.of(context)!.settings.arguments as GenerationArguments;
     return SafeArea(
       child: Container(
         width: width,
@@ -81,8 +75,6 @@ class SmallScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    final GenerationArguments args =
-        ModalRoute.of(context)!.settings.arguments as GenerationArguments;
 
     return SafeArea(
       child: Container(
@@ -156,7 +148,7 @@ class Title extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
+    // double width = MediaQuery.of(context).size.width;
     return FittedBox(
       fit: BoxFit.scaleDown,
       child: Container(
@@ -308,7 +300,7 @@ class FormInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
+    // double height = MediaQuery.of(context).size.height;
     return Container(
       //     padding: EdgeInsets.only(top: height * 0.005),
       child: TextFormField(

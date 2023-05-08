@@ -91,7 +91,7 @@ class DatabaseRouter {
               .doc(uid)
               .get())
           .get('spotifyLinked');
-    } on Exception catch (e) {
+    } on Exception catch (_) {
       return false;
     }
   }

@@ -1,12 +1,10 @@
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:mood_swing/Objects/GenerationArguments.dart';
 import 'package:mood_swing/Objects/Mood.dart';
 import 'package:mood_swing/Objects/Playlist.dart';
-import 'package:mood_swing/Utilities/AuthRouter.dart';
 import 'package:mood_swing/Utilities/DatabaseRouter.dart';
 
 import '../Objects/Song.dart';
@@ -213,7 +211,6 @@ class APIRouter {
       return valenceArousalToLabel[valenceLabel][arousalLabel];
     }
     return null;
-    return Mood.Happy;
   }
 
   /**

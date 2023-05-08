@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mood_swing/Objects/GenerationArguments.dart';
 import 'package:mood_swing/Objects/Playlist.dart';
+import 'package:mood_swing/Pages/HomePage.dart';
 import 'package:mood_swing/Utilities/SpotifyRouter.dart';
 import '../Objects/Song.dart';
 import '../Widgets/widgets.dart';
@@ -17,8 +18,7 @@ class Body extends StatelessWidget {
 
 class LargeScreen extends StatelessWidget {
   @override
-  Widget build(BuildContext context)
-  {
+  Widget build(BuildContext context) {
     final GenerationArguments args =
         ModalRoute.of(context)!.settings.arguments as GenerationArguments;
     print("Test");
@@ -156,19 +156,15 @@ class _LargePlaylistLayoutState extends State<LargePlaylistLayout> {
                   final playlistName = playlistNameController.text.isNotEmpty
                       ? playlistNameController.text
                       : "Playlist1";
-
                   ///Pass the name to the next page
                   widget.playlist.setName(playlistName);
                   await SpotifyRouter().publishPlaylist(widget.playlist);
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => NextPage(
-                  //       playlistName: playlistName,
-                  //       songList: widget.songList,
-                  //     ),
-                  //   ),
-                  // );
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => HomePage(),
+                      ),
+                      (e) => false);
                 }
               },
             ),
