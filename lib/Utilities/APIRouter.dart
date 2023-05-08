@@ -72,7 +72,7 @@ class APIRouter {
    */
   Future<Playlist?> _buildPlaylist(Mood mood, double percentage_new_songs,
       int total_songs, List<String> closest_songs) async {
-    var strMood = mood.toString();
+    var strMood = mood != Mood.Tired?mood.toString():"calm";
     final url = "https://moodswing-generate-playlist-ilvif34q5a-ue.a.run.app";
     final headers = {
       'Access-Control-Allow-Origin': '*',
@@ -118,7 +118,7 @@ class APIRouter {
       List<String> songs, Mood mood) async {
     List<String> closestSongList = [];
     var uid = FirebaseAuth.instance.currentUser?.uid;
-    var strMood = mood.toString();
+    var strMood = mood != Mood.Tired?mood.toString():"calm";
     final url = "https://moodswing-closest-songs-ilvif34q5a-ue.a.run.app";
     final headers = {
       'Access-Control-Allow-Origin': '*',
