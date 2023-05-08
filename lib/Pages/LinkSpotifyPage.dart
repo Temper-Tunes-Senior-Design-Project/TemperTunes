@@ -240,7 +240,8 @@ class ConnectSpotifyBtn extends StatelessWidget {
                 backgroundColor: Colors.transparent,
               ),
               onPressed: () async {
-                SpotifyRouter().getToken();
+                await SpotifyRouter().getToken();
+                await APIRouter().assignUserCentroids();
               },
             ),
           ),

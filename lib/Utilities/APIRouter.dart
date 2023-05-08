@@ -20,6 +20,7 @@ class APIRouter {
    */
   Future<bool> assignUserCentroids() async {
     List<Song> songs = await SpotifyRouter().getAllSongs();
+    print(songs);
     List<String> song_ids = [];
 
     for (Song song in songs) {
@@ -41,6 +42,7 @@ class APIRouter {
     Response response = await http
         .post(Uri.parse(url), headers: headers, body: json.encode(jsonBody))
         .timeout(Duration(minutes: 1));
+    print(response.body);
     if (response.statusCode == 200) {
       return true;
     } else {
