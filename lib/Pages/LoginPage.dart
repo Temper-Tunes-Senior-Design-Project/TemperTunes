@@ -428,42 +428,42 @@ class _SmallScreenState extends State<SmallScreen> {
                                   },
                                 ),
                               ),
-                              Flexible(
-                                flex: 1,
-                                fit: FlexFit.loose,
-                                child: ExternalAuthBtn(
-                                  context: context,
-                                  heroTag: "Facebook",
-                                  toolTipText: "Facebook",
-                                  img: Image.asset("assets/facebookIcon.png"),
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => HomePage(),
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ),
-                              Flexible(
-                                flex: 1,
-                                fit: FlexFit.loose,
-                                child: ExternalAuthBtn(
-                                  context: context,
-                                  img: Image.asset("assets/appleIcon.png"),
-                                  toolTipText: "AppleID",
-                                  heroTag: "Apple Login",
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => HomePage(),
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ),
+                              // Flexible(
+                              //   flex: 1,
+                              //   fit: FlexFit.loose,
+                              //   child: ExternalAuthBtn(
+                              //     context: context,
+                              //     heroTag: "Facebook",
+                              //     toolTipText: "Facebook",
+                              //     img: Image.asset("assets/facebookIcon.png"),
+                              //     onPressed: () {
+                              //       Navigator.push(
+                              //         context,
+                              //         MaterialPageRoute(
+                              //           builder: (context) => HomePage(),
+                              //         ),
+                              //       );
+                              //     },
+                              //   ),
+                              // ),
+                              // Flexible(
+                              //   flex: 1,
+                              //   fit: FlexFit.loose,
+                              //   child: ExternalAuthBtn(
+                              //     context: context,
+                              //     img: Image.asset("assets/appleIcon.png"),
+                              //     toolTipText: "AppleID",
+                              //     heroTag: "Apple Login",
+                              //     onPressed: () {
+                              //       Navigator.push(
+                              //         context,
+                              //         MaterialPageRoute(
+                              //           builder: (context) => HomePage(),
+                              //         ),
+                              //       );
+                              //     },
+                              //   ),
+                              // ),
                             ],
                           ),
                         ),
