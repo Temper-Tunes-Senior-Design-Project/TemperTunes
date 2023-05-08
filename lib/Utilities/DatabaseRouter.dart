@@ -2,8 +2,12 @@ import 'package:camera/camera.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mood_swing/Objects/FileTypes.dart';
 import 'package:mood_swing/Objects/Mood.dart';
+import 'package:spotify/spotify.dart';
+
+import 'SpotifyRouter.dart';
 
 class DatabaseRouter {
   String uid = FirebaseAuth.instance.currentUser?.uid ?? "-1";
@@ -76,6 +80,39 @@ class DatabaseRouter {
   void addToUser(List<String> songs) async {
     await FirebaseFirestore.instance.collection("users").doc(uid).set({
       "songsClassified": FieldValue.arrayUnion(songs),
+    });
+  }
+
+  Future<String> getCachedToken(String token) async {
+    return (await FirebaseFirestore.instance
+            .collection("tokens")
+            .doc(token)
+            .get())
+        .get("refreshToken");
+  }
+
+  Future<bool> spotifyLinked() async {
+    return true;
+  }
+
+  Future<SpotifyApiCredentials> getCredentials() async {
+    DocumentSnapshot ds =
+        await FirebaseFirestore.instance.collection("users").doc(uid).get();
+    return SpotifyApiCredentials(
+      dotenv.env['SPOTIFY_CLIENT_ID'],
+      dotenv.env['SPOTIFY_CLIENT_SECRET'],
+      accessToken: ds.get("accessToken"),
+      refreshToken: ds.get("refreshToken"),
+      scopes: SpotifyRouter.scopesList,
+      expiration:  DateTime.parse(ds.get("credentialExpiration").toDate().toString()),
+    );
+  }
+
+  void cacheCredentials(SpotifyApiCredentials creds) async {
+    await FirebaseFirestore.instance.collection("users").doc(uid).set({
+      "accessToken": creds.accessToken,
+      "refreshToken": creds.refreshToken,
+      "credentialExpiration": creds.expiration,
     });
   }
 }

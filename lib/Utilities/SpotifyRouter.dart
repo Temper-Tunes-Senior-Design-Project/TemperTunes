@@ -1,8 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mood_swing/Objects/Song.dart';
+import 'package:mood_swing/Utilities/AuthRouter.dart';
+import 'package:mood_swing/Utilities/DatabaseRouter.dart';
 import 'package:spotify/spotify.dart';
 import 'package:spotify_sdk/spotify_sdk.dart';
+import 'package:spotify_sdk/spotify_sdk_web.dart';
 import '../Objects/Playlist.dart' as CP;
 
 class SpotifyRouter {
@@ -11,6 +16,15 @@ class SpotifyRouter {
    */
   static final SpotifyRouter _instance = SpotifyRouter._internal();
   String token = "";
+  SpotifyApi? client;
+  static final String scopes =
+      "app-remote-control,user-modify-playback-state,playlist-read-private,user-library-read";
+  static final List<String> scopesList = [
+    "app-remote-control",
+    "user-modify-playback-state",
+    "playlist-read-private",
+    "user-library-read"
+  ];
 
   /**
    * Returns the instance of the Spotify Router singleton
@@ -22,14 +36,35 @@ class SpotifyRouter {
   /**
    * Instantiate the Spotify Router Singleton
    */
-  SpotifyRouter._internal() {
-    //getToken();
+  SpotifyRouter._internal() {}
+
+  /**
+   * Instantiates the Spotify client with refresh credentials.
+   */
+  void instantiateClient() async {
+    SpotifyApi? api;
+    if (await DatabaseRouter().spotifyLinked()) {
+      SpotifyApiCredentials credentials = await DatabaseRouter().getCredentials();
+      api = SpotifyApi(
+        credentials,
+        onCredentialsRefreshed: (SpotifyApiCredentials newCred) async {
+          DatabaseRouter().cacheCredentials(newCred);
+        },
+      );
+    } else {
+      //Send user to the link spotify page from the Home Page
+      //Navigator.push();
+    }
+    client = api;
   }
 
   /**
    * Gets the authentication token from a user authenticated spotify.
    */
   Future<String> getToken() async {
+    String uid = AuthRouter().getUserUID();
+    SpotifySdkPlugin.tokenSwapURL =
+        "http://192.168.1.161:8080/main/?uid=" + uid;
     if (token == "") {
       print("Token doesn't exist");
       String redirect = (kIsWeb
@@ -52,31 +87,36 @@ class SpotifyRouter {
    * Gets all of the user's playlists
    */
   Future<List<CP.Playlist>> getSongLibrary() async {
-    ///Instantiate the spotify client library
-    String accessToken = await getToken();
-    SpotifyApi client = SpotifyApi.withAccessToken(accessToken);
-
     ///Instantiate playlists with liked songs
-    Iterable<TrackSaved> tracks = await client.tracks.me.saved.all();
+    assert(client != null);
+    Iterable<TrackSaved> tracks = await client!.tracks.me.saved.all();
     List<CP.Playlist> rPlaylists = [
       CP.Playlist(
           "No ID exists for Liked Songs",
           "Liked Songs",
           {},
-         tracks.map<Song>((e) {
-            return Song(e.track?.id ?? "", e.track?.name ?? "", {},
-                e.track?.artists?.map((e) => e.name ?? "").toList() ?? [], e.track?.album?.images?[0].url??"");
+          tracks.map<Song>((e) {
+            return Song(
+                e.track?.id ?? "",
+                e.track?.name ?? "",
+                {},
+                e.track?.artists?.map((e) => e.name ?? "").toList() ?? [],
+                e.track?.album?.images?[0].url ?? "");
           }).toList(),
-          tracks.fold<List<String>>([], (previousValue, element) => [...previousValue,element.track?.album?.images?[0].url??""])
-          )
+          tracks.fold<List<String>>(
+              [],
+              (previousValue, element) => [
+                    ...previousValue,
+                    element.track?.album?.images?[0].url ?? ""
+                  ]))
     ];
 
     /// Add all other playlists into the list of playlists
-    Iterable<PlaylistSimple> playlists = await client.playlists.me.all();
+    Iterable<PlaylistSimple> playlists = await client!.playlists.me.all();
 
     for (PlaylistSimple p in playlists) {
       Iterable? data =
-          (await client.playlists.get(p.id ?? "")).tracks?.itemsNative;
+          (await client!.playlists.get(p.id ?? "")).tracks?.itemsNative;
       List<Song>? songs = data?.map((e) {
         List<String> artists = List<String>.from(
             e["track"]["artists"].map((e) => e["name"] ?? "").toList());
@@ -93,10 +133,8 @@ class SpotifyRouter {
    */
   Future<Song> getSong(String uid) async {
     ///Instantiate the spotify client library
-    String accessToken = await getToken();
-    SpotifyApi client = SpotifyApi.withAccessToken(accessToken);
 
-    Track t = await client.tracks.get(uid);
+    Track t = await client!.tracks.get(uid);
     return Song(
         t.id ?? "",
         t.name ?? "",
@@ -105,6 +143,9 @@ class SpotifyRouter {
         t.album?.images?[0].url ?? "");
   }
 
+  /**
+   * Publish the playlist to Spotify.
+   */
   Future<void> publishPlaylist(CP.Playlist cp) async {
     String accessToken = await getToken();
     SpotifyApi client = SpotifyApi.withAccessToken(accessToken);
@@ -117,6 +158,9 @@ class SpotifyRouter {
     await client.playlists.addTracks(uris, p.id ?? "");
   }
 
+  /**
+   * Gets all of the songs for use in classification
+   */
   Future<List<Song>> getAllSongs() async {
     return (await getSongLibrary()).fold<List<Song>>([],
         (previousValue, element) {

@@ -9,6 +9,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:mood_swing/Pages/NewlyGeneratedPlaylistPage.dart';
 import 'package:mood_swing/Utilities/AuthRouter.dart';
+import 'package:mood_swing/Utilities/SpotifyRouter.dart';
 import 'Pages/CameraPage.dart';
 import 'Pages/LandingPage.dart';
 import 'Pages/PresetsPage.dart';
@@ -35,6 +36,12 @@ void main() async {
     FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
     return true;
   };
+
+  AuthRouter().authMonitor().listen((event) {
+    if (event != null) {
+      SpotifyRouter().instantiateClient();
+    }
+  });
 
   if (kIsWeb) {
     AuthRouter().initializeFacebookSDK();
@@ -90,8 +97,6 @@ class _AppState extends State<App> {
               return HomePage();
             }
             return LandingPage();
-            // return NewlyGeneratedPlaylistPage();
-            //return GenerationOptionsPage();
           }),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mood_swing/Utilities/SpotifyRouter.dart';
 import '../Widgets/widgets.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:mood_swing/Utilities/APIRouter.dart';
@@ -239,7 +240,7 @@ class ConnectSpotifyBtn extends StatelessWidget {
                 backgroundColor: Colors.transparent,
               ),
               onPressed: () async {
-                APIRouter().classifySpotifyLibrary();
+                SpotifyRouter().getToken();
               },
             ),
           ),

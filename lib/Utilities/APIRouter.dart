@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:mood_swing/Objects/GenerationArguments.dart';
@@ -267,4 +268,26 @@ class APIRouter {
             ? 0.0
             : newSongPercentage;
   }
+
+  // Future<void> getAccessTokenAndRefreshToken() async {
+  //   String code = await SpotifyRouter().getToken();
+  //   final response = await http.post(
+  //     Uri.parse('https://accounts.spotify.com/api/token'),
+  //     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+  //     body: {
+  //       'grant_type': 'authorization_code',
+  //       'code': code,
+  //       'redirect_uri': dotenv.env['SPOTIFY_WEB_REDIRECT_URI'],
+  //       'client_id': dotenv.env['SPOTIFY_CLIENT_ID'],
+  //       'client_secret': dotenv.env['SPOTIFY_CLIENT_SECRET'],
+  //     },
+  //   );
+  //
+  //   final jsonResponse = jsonDecode(response.body);
+  //   final refreshToken = jsonResponse['refresh_token'];
+  //   print(jsonResponse);
+  //   print(refreshToken);
+  //
+  //   return refreshToken;
+  // }
 }
