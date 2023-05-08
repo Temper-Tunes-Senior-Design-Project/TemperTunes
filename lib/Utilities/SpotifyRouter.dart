@@ -44,10 +44,12 @@ class SpotifyRouter {
   void instantiateClient() async {
     SpotifyApi? api;
     if (await DatabaseRouter().spotifyLinked()) {
+      print("Instantiating credentials");
       SpotifyApiCredentials credentials = await DatabaseRouter().getCredentials();
       api = SpotifyApi(
         credentials,
         onCredentialsRefreshed: (SpotifyApiCredentials newCred) async {
+          print("Refreshing credentials");
           DatabaseRouter().cacheCredentials(newCred);
         },
       );
@@ -64,7 +66,7 @@ class SpotifyRouter {
   Future<String> getToken() async {
     String uid = AuthRouter().getUserUID();
     SpotifySdkPlugin.tokenSwapURL =
-        "http://192.168.1.161:8080/main/?uid=" + uid;
+        "https://cachespotifycredentials-ilvif34q5a-ue.a.run.app/main/?uid=" + uid;
     if (token == "") {
       print("Token doesn't exist");
       String redirect = (kIsWeb
