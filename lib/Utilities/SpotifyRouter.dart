@@ -77,6 +77,7 @@ class SpotifyRouter {
           clientId: dotenv.env['SPOTIFY_CLIENT_ID'] ?? "",
           redirectUrl: redirect,
           scope:scopes);
+      SpotifyRouter().instantiateClient();
       token = accessToken;
       return accessToken;
     } else {
