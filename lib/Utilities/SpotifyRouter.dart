@@ -41,8 +41,9 @@ class SpotifyRouter {
   /**
    * Instantiates the Spotify client with refresh credentials.
    */
-  void instantiateClient() async {
+  Future<void> instantiateClient() async {
     SpotifyApi? api;
+    print("Attempting to verify if linked.");
     if (await DatabaseRouter().spotifyLinked()) {
       print("Instantiating credentials");
       SpotifyApiCredentials credentials = await DatabaseRouter().getCredentials();
@@ -87,6 +88,10 @@ class SpotifyRouter {
    */
   Future<List<CP.Playlist>> getSongLibrary() async {
     ///Instantiate playlists with liked songs
+    if(client == null)
+      {
+        await instantiateClient();
+      }
     assert(client != null);
     Iterable<TrackSaved> tracks = await client!.tracks.me.saved.all();
     List<CP.Playlist> rPlaylists = [

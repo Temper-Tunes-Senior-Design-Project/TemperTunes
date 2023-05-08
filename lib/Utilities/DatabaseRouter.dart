@@ -32,6 +32,7 @@ class DatabaseRouter {
         'classifiedSongs': [],
         'settings': {},
         'statistics': {},
+        'spotifyLinked': false,
       },
     );
   }
@@ -82,8 +83,17 @@ class DatabaseRouter {
       "songsClassified": FieldValue.arrayUnion(songs),
     });
   }
+
   Future<bool> spotifyLinked() async {
-    return (await FirebaseFirestore.instance.collection("users").doc(uid).get()).get('spotifyLinked');
+    try {
+      return (await FirebaseFirestore.instance
+              .collection("users")
+              .doc(uid)
+              .get())
+          .get('spotifyLinked');
+    } on Exception catch (e) {
+      return false;
+    }
   }
 
   Future<SpotifyApiCredentials> getCredentials() async {
@@ -95,7 +105,8 @@ class DatabaseRouter {
       accessToken: ds.get("accessToken"),
       refreshToken: ds.get("refreshToken"),
       scopes: SpotifyRouter.scopesList,
-      expiration:  DateTime.parse(ds.get("credentialExpiration").toDate().toString()),
+      expiration:
+          DateTime.parse(ds.get("credentialExpiration").toDate().toString()),
     );
   }
 
