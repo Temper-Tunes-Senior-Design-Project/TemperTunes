@@ -82,17 +82,8 @@ class DatabaseRouter {
       "songsClassified": FieldValue.arrayUnion(songs),
     });
   }
-
-  Future<String> getCachedToken(String token) async {
-    return (await FirebaseFirestore.instance
-            .collection("tokens")
-            .doc(token)
-            .get())
-        .get("refreshToken");
-  }
-
   Future<bool> spotifyLinked() async {
-    return true;
+    return (await FirebaseFirestore.instance.collection("users").doc(uid).get()).get('spotifyLinked');
   }
 
   Future<SpotifyApiCredentials> getCredentials() async {

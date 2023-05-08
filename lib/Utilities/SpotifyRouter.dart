@@ -53,9 +53,6 @@ class SpotifyRouter {
           DatabaseRouter().cacheCredentials(newCred);
         },
       );
-    } else {
-      //Send user to the link spotify page from the Home Page
-      //Navigator.push();
     }
     client = api;
   }
