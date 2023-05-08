@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mood_swing/Objects/GenerationArguments.dart';
 import 'package:mood_swing/Objects/Playlist.dart';
+import 'package:mood_swing/Utilities/SpotifyRouter.dart';
 import '../Objects/Song.dart';
 import '../Widgets/widgets.dart';
 import 'package:mood_swing/Utilities/APIRouter.dart';
@@ -30,6 +31,7 @@ class LargeScreen extends StatelessWidget {
           );
         }
         if (snapshot.hasError) {
+          print(snapshot.error);
           return Center(
             child: Text("error fetching songs"),
           );
@@ -39,7 +41,7 @@ class LargeScreen extends StatelessWidget {
         ///playlist songs content
         return SafeArea(
           child: LargePlaylistLayout(
-            songList: songs,
+            playlist: snapshot.data!,
           ),
         );
       },
@@ -48,8 +50,8 @@ class LargeScreen extends StatelessWidget {
 }
 
 class LargePlaylistLayout extends StatefulWidget {
-  final List<Song> songList;
-  LargePlaylistLayout({required this.songList, super.key});
+  final Playlist playlist;
+  LargePlaylistLayout({required this.playlist, super.key});
 
   @override
   _LargePlaylistLayoutState createState() => _LargePlaylistLayoutState();
@@ -102,7 +104,7 @@ class _LargePlaylistLayoutState extends State<LargePlaylistLayout> {
                             padding:
                                 EdgeInsets.symmetric(vertical: 0.05 * height),
                             child: Image.network(
-                              widget.songList[0].imageURl,
+                              widget.playlist.songs[0].imageURl,
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -131,7 +133,7 @@ class _LargePlaylistLayoutState extends State<LargePlaylistLayout> {
 
                             ///Song list
                             SongListView(
-                              songList: widget.songList,
+                              songList: widget.playlist.songs,
                             ),
                           ],
                         ),
@@ -148,7 +150,7 @@ class _LargePlaylistLayoutState extends State<LargePlaylistLayout> {
             padding: EdgeInsets.only(top: 0.05 * height),
             child: OptionButtons(
               text: 'Save',
-              onPressed: () {
+              onPressed: () async {
                 if (_formKey.currentState!.validate()) {
                   // Get the playlist name from the text controller
                   final playlistName = playlistNameController.text.isNotEmpty
@@ -156,15 +158,17 @@ class _LargePlaylistLayoutState extends State<LargePlaylistLayout> {
                       : "Playlist1";
 
                   ///Pass the name to the next page
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => NextPage(
-                        playlistName: playlistName,
-                        songList: widget.songList,
-                      ),
-                    ),
-                  );
+                  widget.playlist.setName(playlistName);
+                  await SpotifyRouter().publishPlaylist(widget.playlist);
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => NextPage(
+                  //       playlistName: playlistName,
+                  //       songList: widget.songList,
+                  //     ),
+                  //   ),
+                  // );
                 }
               },
             ),

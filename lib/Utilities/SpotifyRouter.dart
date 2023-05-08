@@ -16,12 +16,14 @@ class SpotifyRouter {
   String token = "";
   SpotifyApi? client;
   static final String scopes =
-      "app-remote-control,user-modify-playback-state,playlist-read-private,user-library-read";
+      "app-remote-control,user-modify-playback-state,playlist-read-private,user-library-read,playlist-modify-private,playlist-modify-public";
   static final List<String> scopesList = [
     "app-remote-control",
     "user-modify-playback-state",
     "playlist-read-private",
-    "user-library-read"
+    "user-library-read",
+    "playlist-modify-private",
+    "playlist-modify-public",
   ];
 
   /**
@@ -72,8 +74,7 @@ class SpotifyRouter {
       String accessToken = await SpotifySdk.getAccessToken(
           clientId: dotenv.env['SPOTIFY_CLIENT_ID'] ?? "",
           redirectUrl: redirect,
-          scope:
-              "app-remote-control,user-modify-playback-state,playlist-read-private,user-library-read");
+          scope:scopes);
       token = accessToken;
       return accessToken;
     } else {
@@ -118,7 +119,7 @@ class SpotifyRouter {
       List<Song>? songs = data?.map((e) {
         List<String> artists = List<String>.from(
             e["track"]["artists"].map((e) => e["name"] ?? "").toList());
-        return Song("", e["track"]["name"], {}, artists, "");
+        return Song(e["track"]["id"], e["track"]["name"], {}, artists, "");
       }).toList();
 
       rPlaylists.add(CP.Playlist(p.id ?? "No id exists", p.name ?? "No name",
@@ -145,15 +146,19 @@ class SpotifyRouter {
    * Publish the playlist to Spotify.
    */
   Future<void> publishPlaylist(CP.Playlist cp) async {
-    String accessToken = await getToken();
-    SpotifyApi client = SpotifyApi.withAccessToken(accessToken);
-    Playlist p = await client.playlists
-        .createPlaylist((await client.me.get()).id ?? "", cp.name);
-    List<String> uris = [];
-    for (Song s in cp.songs) {
-      uris.add((await client.tracks.get(s.uid)).uri ?? "");
+    try {
+      Playlist p = await client!.playlists
+          .createPlaylist((await client!.me.get()).id ?? "", cp.name);
+      List<String> uris = [];
+      for (Song s in cp.songs) {
+        uris.add((await client!.tracks.get(s.uid)).uri ?? "");
+      }
+      await client!.playlists.addTracks(uris, p.id ?? "");
     }
-    await client.playlists.addTracks(uris, p.id ?? "");
+    on Exception catch(e)
+    {
+      print(e);
+    }
   }
 
   /**
@@ -162,6 +167,8 @@ class SpotifyRouter {
   Future<List<Song>> getAllSongs() async {
     return (await getSongLibrary()).fold<List<Song>>([],
         (previousValue, element) {
+      print("Current song lengths: " + element.songs.length.toString());
+      print("Collected song lengths: " + previousValue.length.toString());
       return [...previousValue, ...element.songs];
     });
   }

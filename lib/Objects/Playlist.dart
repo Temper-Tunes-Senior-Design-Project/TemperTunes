@@ -8,4 +8,9 @@ class Playlist {
   List<String> images;
 
   Playlist(this.uid, this.name, this.playlistLinks, this.songs, this.images);
+
+  void setName(String name)
+  {
+    this.name = name;
+  }
 }

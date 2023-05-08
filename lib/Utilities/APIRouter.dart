@@ -20,7 +20,7 @@ class APIRouter {
    */
   Future<bool> assignUserCentroids() async {
     List<Song> songs = await SpotifyRouter().getAllSongs();
-    print(songs);
+    print(songs.map((e)=>e.uid).toList());
     List<String> song_ids = [];
 
     for (Song song in songs) {
@@ -258,7 +258,7 @@ class APIRouter {
     //check if the percentage was inputted as a value or a decimal
     args.newSongPercentage = formatPercentage(args.newSongPercentage);
     return await generatePlaylist(songLibrary, args.moods[0],
-        args.newSongPercentage / 100, args.numberOfSongs);
+        args.newSongPercentage, args.numberOfSongs);
   }
 
   double formatPercentage(double newSongPercentage) {
