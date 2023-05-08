@@ -109,8 +109,7 @@ class DatabaseRouter {
   }
 
   void cacheCredentials(SpotifyApiCredentials creds) async {
-    print(creds.expiration);
-    await FirebaseFirestore.instance.collection("users").doc(uid).set({
+    await FirebaseFirestore.instance.collection("users").doc(uid).update({
       "accessToken": creds.accessToken,
       "refreshToken": creds.refreshToken,
       "credentialExpiration": creds.expiration,
