@@ -144,11 +144,12 @@ class _LargeScreenState extends State<LargeScreen> {
                             padding: const EdgeInsets.all(30),
                             child: ElevatedButton(
                               onPressed: () {
-                                Navigator.push(
+                                Navigator.pushAndRemoveUntil(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => HomePage(),
                                   ),
+                                    (e) => false
                                 );
                               },
                               child: const Text("GET STARTED"),
@@ -360,11 +361,12 @@ class _SmallScreenState extends State<SmallScreen> {
                             padding: const EdgeInsets.all(30),
                             child: ElevatedButton(
                               onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => HomePage(),
-                                  ),
+                                Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => HomePage(),
+                                    ),
+                                        (e) => false
                                 );
                               },
                               child: FittedBox(
