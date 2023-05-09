@@ -228,9 +228,7 @@ class APIRouter {
    */
   Future<Playlist?> generateClassification(GenerationArguments args) async {
     ///Do some aggregation logic here
-    print("Classifying");
     List<String> songLibrary = await DatabaseRouter().getClassifiedSongs();
-    print(songLibrary);
     //check if the percentage was inputted as a value or a decimal
     return await generatePlaylist(songLibrary, args.moods[0],
         args.newSongPercentage/100, args.numberOfSongs);
