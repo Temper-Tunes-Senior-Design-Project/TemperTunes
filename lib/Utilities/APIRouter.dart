@@ -18,7 +18,6 @@ class APIRouter {
    */
   Future<bool> assignUserCentroids() async {
     List<Song> songs = await SpotifyRouter().getAllSongs();
-    print(songs.map((e)=>e.uid).toList());
     List<String> song_ids = [];
 
     for (Song song in songs) {
@@ -40,7 +39,6 @@ class APIRouter {
     Response response = await http
         .post(Uri.parse(url), headers: headers, body: json.encode(jsonBody))
         .timeout(Duration(minutes: 1));
-    print(response.body);
     if (response.statusCode == 200) {
       return true;
     } else {
@@ -56,12 +54,11 @@ class APIRouter {
   Future<Playlist?> generatePlaylist(List<String> songs, Mood mood,
       double percentage_new_songs, int total_songs) async {
     var res = await _getClosestSongs(songs, mood);
-    print(res);
     if (res.containsKey("error")) {
       return null; //returns the error
     }
     var closest_songs = res["closest_songs"];
-    print(closest_songs);
+    print(closest_songs.length);
     return await _buildPlaylist(
         mood, percentage_new_songs, total_songs, closest_songs);
   }
@@ -128,7 +125,6 @@ class APIRouter {
     };
     final jsonBody = {'mood': strMood, 'user_id': uid, "songs": songs};
     print("Sent JSON");
-    // print(jsonBody);
     jsonBody.forEach((key, value) {
       print("key: " + key + " - value:" + value.toString());
       print("type:" + value.runtimeType.toString());
@@ -136,9 +132,7 @@ class APIRouter {
     Response response = await http
         .post(Uri.parse(url), headers: headers, body: json.encode(jsonBody))
         .timeout(Duration(minutes: 1));
-    print(response);
     if (response.statusCode == 200) {
-      print(response.body);
       var resBody = jsonDecode(response.body);
       resBody["songs"]!.forEach((element) => closestSongList.add(element));
       return {"closest_songs": closestSongList};
@@ -229,6 +223,7 @@ class APIRouter {
   Future<Playlist?> generateClassification(GenerationArguments args) async {
     ///Do some aggregation logic here
     List<String> songLibrary = await DatabaseRouter().getClassifiedSongs();
+
     //check if the percentage was inputted as a value or a decimal
     return await generatePlaylist(songLibrary, args.moods[0],
         args.newSongPercentage/100, args.numberOfSongs);
