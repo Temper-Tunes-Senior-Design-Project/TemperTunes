@@ -32,6 +32,7 @@ class DatabaseRouter {
         'classifiedSongs': [],
         'settings': {},
         'statistics': {},
+        'spotifyLinked': false,
       },
     );
   }
@@ -83,16 +84,16 @@ class DatabaseRouter {
     });
   }
 
-  Future<String> getCachedToken(String token) async {
-    return (await FirebaseFirestore.instance
-            .collection("tokens")
-            .doc(token)
-            .get())
-        .get("refreshToken");
-  }
-
   Future<bool> spotifyLinked() async {
-    return true;
+    try {
+      return (await FirebaseFirestore.instance
+              .collection("users")
+              .doc(uid)
+              .get())
+          .get('spotifyLinked');
+    } on Exception catch (_) {
+      return false;
+    }
   }
 
   Future<SpotifyApiCredentials> getCredentials() async {

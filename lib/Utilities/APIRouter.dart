@@ -1,12 +1,10 @@
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:mood_swing/Objects/GenerationArguments.dart';
 import 'package:mood_swing/Objects/Mood.dart';
 import 'package:mood_swing/Objects/Playlist.dart';
-import 'package:mood_swing/Utilities/AuthRouter.dart';
 import 'package:mood_swing/Utilities/DatabaseRouter.dart';
 
 import '../Objects/Song.dart';
@@ -74,7 +72,7 @@ class APIRouter {
    */
   Future<Playlist?> _buildPlaylist(Mood mood, double percentage_new_songs,
       int total_songs, List<String> closest_songs) async {
-    var strMood = mood.toString();
+    var strMood = mood != Mood.Tired?mood.toString():"calm";
     final url = "https://moodswing-generate-playlist-ilvif34q5a-ue.a.run.app";
     final headers = {
       'Access-Control-Allow-Origin': '*',
@@ -120,7 +118,7 @@ class APIRouter {
       List<String> songs, Mood mood) async {
     List<String> closestSongList = [];
     var uid = FirebaseAuth.instance.currentUser?.uid;
-    var strMood = mood.toString();
+    var strMood = mood != Mood.Tired?mood.toString():"calm";
     final url = "https://moodswing-closest-songs-ilvif34q5a-ue.a.run.app";
     final headers = {
       'Access-Control-Allow-Origin': '*',
@@ -213,27 +211,6 @@ class APIRouter {
       return valenceArousalToLabel[valenceLabel][arousalLabel];
     }
     return null;
-    return Mood.Happy;
-  }
-
-  /**
-   * Classifies the users song library when they have authenticated with the application
-   */
-  void classifySpotifyLibrary() async {
-    List<String> songs =
-        (await SpotifyRouter().getAllSongs()).map((e) => e.uid).toList();
-    String token = await SpotifyRouter().getToken();
-    String uid = AuthRouter().getUserUID();
-    Response response = await http
-        .get(Uri.parse(
-            "https://user-song-classification-ilvif34q5a-ue.a.run.app/get_classified_mood?spotify_token=" +
-                token +
-                "uid=" +
-                uid))
-        .timeout(Duration(minutes: 1));
-    if (response.statusCode == 200) {
-      print("Successfully classified user songs");
-    }
   }
 
   /**
@@ -270,26 +247,4 @@ class APIRouter {
             ? 0.0
             : newSongPercentage;
   }
-
-  // Future<void> getAccessTokenAndRefreshToken() async {
-  //   String code = await SpotifyRouter().getToken();
-  //   final response = await http.post(
-  //     Uri.parse('https://accounts.spotify.com/api/token'),
-  //     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-  //     body: {
-  //       'grant_type': 'authorization_code',
-  //       'code': code,
-  //       'redirect_uri': dotenv.env['SPOTIFY_WEB_REDIRECT_URI'],
-  //       'client_id': dotenv.env['SPOTIFY_CLIENT_ID'],
-  //       'client_secret': dotenv.env['SPOTIFY_CLIENT_SECRET'],
-  //     },
-  //   );
-  //
-  //   final jsonResponse = jsonDecode(response.body);
-  //   final refreshToken = jsonResponse['refresh_token'];
-  //   print(jsonResponse);
-  //   print(refreshToken);
-  //
-  //   return refreshToken;
-  // }
 }

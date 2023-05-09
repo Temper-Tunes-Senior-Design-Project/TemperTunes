@@ -41,20 +41,19 @@ class SpotifyRouter {
   /**
    * Instantiates the Spotify client with refresh credentials.
    */
-  void instantiateClient() async {
+  Future<void> instantiateClient() async {
     SpotifyApi? api;
+    print("Attempting to verify if linked.");
     if (await DatabaseRouter().spotifyLinked()) {
-      SpotifyApiCredentials credentials =
-          await DatabaseRouter().getCredentials();
+      print("Instantiating credentials");
+      SpotifyApiCredentials credentials = await DatabaseRouter().getCredentials();
       api = SpotifyApi(
         credentials,
         onCredentialsRefreshed: (SpotifyApiCredentials newCred) async {
+          print("Refreshing credentials");
           DatabaseRouter().cacheCredentials(newCred);
         },
       );
-    } else {
-      //Send user to the link spotify page from the Home Page
-      //Navigator.push();
     }
     client = api;
   }
@@ -65,8 +64,7 @@ class SpotifyRouter {
   Future<String> getToken() async {
     String uid = AuthRouter().getUserUID();
     SpotifySdkPlugin.tokenSwapURL =
-        "https://cachespotifycredentials-ilvif34q5a-ue.a.run.app/main/?uid=" +
-            uid;
+        "https://cachespotifycredentials-ilvif34q5a-ue.a.run.app/main/?uid=" + uid;
     if (token == "") {
       print("Token doesn't exist");
       String redirect = (kIsWeb
@@ -76,7 +74,8 @@ class SpotifyRouter {
       String accessToken = await SpotifySdk.getAccessToken(
           clientId: dotenv.env['SPOTIFY_CLIENT_ID'] ?? "",
           redirectUrl: redirect,
-          scope: scopes);
+          scope:scopes);
+      SpotifyRouter().instantiateClient();
       token = accessToken;
       return accessToken;
     } else {
@@ -89,6 +88,10 @@ class SpotifyRouter {
    */
   Future<List<CP.Playlist>> getSongLibrary() async {
     ///Instantiate playlists with liked songs
+    if(client == null)
+      {
+        await instantiateClient();
+      }
     assert(client != null);
     Iterable<TrackSaved> tracks = await client!.tracks.me.saved.all();
     List<CP.Playlist> rPlaylists = [
@@ -156,7 +159,9 @@ class SpotifyRouter {
         uris.add((await client!.tracks.get(s.uid)).uri ?? "");
       }
       await client!.playlists.addTracks(uris, p.id ?? "");
-    } on Exception catch (e) {
+    }
+    on Exception catch(e)
+    {
       print(e);
     }
   }

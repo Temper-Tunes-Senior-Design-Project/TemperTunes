@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:mood_swing/Objects/GenerationArguments.dart';
 import '../Objects/Mood.dart';
 import '../Widgets/widgets.dart';
-import 'GenerationLoadingPage.dart';
 
 class Body extends StatelessWidget {
   @override

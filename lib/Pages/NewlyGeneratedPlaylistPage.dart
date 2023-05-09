@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mood_swing/Objects/GenerationArguments.dart';
 import 'package:mood_swing/Objects/Playlist.dart';
+import 'package:mood_swing/Pages/HomePage.dart';
 import 'package:mood_swing/Utilities/SpotifyRouter.dart';
 import '../Objects/Song.dart';
 import '../Widgets/widgets.dart';
@@ -17,8 +18,7 @@ class Body extends StatelessWidget {
 
 class LargeScreen extends StatelessWidget {
   @override
-  Widget build(BuildContext context)
-  {
+  Widget build(BuildContext context) {
     final GenerationArguments args =
         ModalRoute.of(context)!.settings.arguments as GenerationArguments;
     print("Test");
@@ -156,19 +156,15 @@ class _LargePlaylistLayoutState extends State<LargePlaylistLayout> {
                   final playlistName = playlistNameController.text.isNotEmpty
                       ? playlistNameController.text
                       : "Playlist1";
-
                   ///Pass the name to the next page
                   widget.playlist.setName(playlistName);
                   await SpotifyRouter().publishPlaylist(widget.playlist);
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => NextPage(
-                  //       playlistName: playlistName,
-                  //       songList: widget.songList,
-                  //     ),
-                  //   ),
-                  // );
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => HomePage(),
+                      ),
+                      (e) => false);
                 }
               },
             ),
@@ -182,11 +178,10 @@ class _LargePlaylistLayoutState extends State<LargePlaylistLayout> {
 class SmallScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-
-    return FutureBuilder<Playlist>(
-      // future: APIRouter().fetchSongs(),
+    final GenerationArguments args =
+    ModalRoute.of(context)!.settings.arguments as GenerationArguments;
+    return FutureBuilder<Playlist?>(
+      future: APIRouter().generateClassification(args),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
@@ -198,12 +193,11 @@ class SmallScreen extends StatelessWidget {
             child: Text("error fetching songs"),
           );
         }
-        List<Song> songs = snapshot.data?.songs ?? [];
 
         ///playlist songs
         return SafeArea(
           child: SmallPlaylistLayout(
-            songList: songs,
+            playlist: snapshot.data!,
           ),
         );
       },
@@ -212,8 +206,8 @@ class SmallScreen extends StatelessWidget {
 }
 
 class SmallPlaylistLayout extends StatefulWidget {
-  final List<Song> songList;
-  SmallPlaylistLayout({required this.songList, super.key});
+  final Playlist playlist;
+  SmallPlaylistLayout({required this.playlist, super.key});
 
   @override
   _SmallPlaylistLayoutState createState() => _SmallPlaylistLayoutState();
@@ -250,7 +244,7 @@ class _SmallPlaylistLayoutState extends State<SmallPlaylistLayout> {
               ),
             ),
             child: Image.network(
-              widget.songList[0].imageURl,
+              widget.playlist.songs[0].imageURl,
               fit: BoxFit.contain,
             ),
           ),
@@ -268,23 +262,20 @@ class _SmallPlaylistLayoutState extends State<SmallPlaylistLayout> {
 
           OptionButtons(
             text: 'Save',
-            onPressed: () {
+            onPressed: () async{
               if (_formKey.currentState!.validate()) {
                 // Get the playlist name from the text controller
                 final playlistName = playlistNameController.text.isNotEmpty
                     ? playlistNameController.text
                     : "Playlist1";
-
-                ///Pass the name to the next page
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => NextPage(
-                      playlistName: playlistName,
-                      songList: widget.songList,
+                widget.playlist.setName(playlistName);
+                await SpotifyRouter().publishPlaylist(widget.playlist);
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HomePage(),
                     ),
-                  ),
-                );
+                        (e) => false);
               }
             },
           ),
@@ -292,7 +283,7 @@ class _SmallPlaylistLayoutState extends State<SmallPlaylistLayout> {
 
           Expanded(
             child: ListView.builder(
-              itemCount: widget.songList.length,
+              itemCount: widget.playlist.songs.length,
               itemBuilder: (context, index) {
                 // Build the list of songs using the playlist data
                 return Card(
@@ -304,12 +295,12 @@ class _SmallPlaylistLayoutState extends State<SmallPlaylistLayout> {
                   ),
                   child: ListTile(
                     title: Text(
-                      widget.songList[index].name,
+                      widget.playlist.songs[index].name,
                       style: TextStyle(
                           color: Colors.white, fontWeight: FontWeight.w500),
                     ),
                     subtitle: Text(
-                      widget.songList[index].artists.join(", "),
+                      widget.playlist.songs[index].artists.join(", "),
                       style: TextStyle(color: Colors.white54),
                     ),
                   ),
