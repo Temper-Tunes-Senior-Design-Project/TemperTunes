@@ -311,9 +311,13 @@ class FormInput extends StatelessWidget {
             errorText: "must be an integer",
           ),
           FormBuilderValidators.min(
-            1,
-            errorText: "must be greater than 1",
+            0,
+            errorText: "must be greater than or equal to 0",
           ),
+          FormBuilderValidators.max(
+            100,
+            errorText: "Must be less than or equal to 100"
+          )
         ]),
         textAlign: TextAlign.left,
         cursorColor: Colors.white,

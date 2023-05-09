@@ -92,7 +92,6 @@ class APIRouter {
         .timeout(Duration(minutes: 1));
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
-      print(data);
       final List<dynamic> songs = data['songs'];
       List<Song> spotifySongs = [];
       for (String songID in songs) {
@@ -229,13 +228,10 @@ class APIRouter {
    */
   Future<Playlist?> generateClassification(GenerationArguments args) async {
     ///Do some aggregation logic here
-    print("Classifying");
     List<String> songLibrary = await DatabaseRouter().getClassifiedSongs();
-    print(songLibrary);
     //check if the percentage was inputted as a value or a decimal
-    args.newSongPercentage = formatPercentage(args.newSongPercentage);
     return await generatePlaylist(songLibrary, args.moods[0],
-        args.newSongPercentage, args.numberOfSongs);
+        args.newSongPercentage/100, args.numberOfSongs);
   }
 
   double formatPercentage(double newSongPercentage) {
