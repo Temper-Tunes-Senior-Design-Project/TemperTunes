@@ -104,12 +104,13 @@ class DatabaseRouter {
       accessToken: ds.get("accessToken"),
       refreshToken: ds.get("refreshToken"),
       scopes: SpotifyRouter.scopesList,
-      expiration:  DateTime.parse(ds.get("credentialExpiration").toDate().toString()),
+      expiration:
+          DateTime.parse(ds.get("credentialExpiration").toDate().toString()),
     );
   }
 
   void cacheCredentials(SpotifyApiCredentials creds) async {
-    await FirebaseFirestore.instance.collection("users").doc(uid).set({
+    await FirebaseFirestore.instance.collection("users").doc(uid).update({
       "accessToken": creds.accessToken,
       "refreshToken": creds.refreshToken,
       "credentialExpiration": creds.expiration,

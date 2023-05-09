@@ -55,8 +55,8 @@ class LargeScreen extends StatelessWidget {
                             bottom: 0.03 * height,
                           ),
                           child: Image.asset(
-                                "assets/spotifyLogoWhite.png",
-                                scale: 2.5,
+                            "assets/spotifyLogoWhite.png",
+                            scale: 2.5,
                           ),
                         ),
                       ),
@@ -152,14 +152,15 @@ class SmallScreen extends StatelessWidget {
                     SizedBox(height: 0.08 * height),
 
                     ///Buttons
-                    // BouncingWidget(
-                    //   child: ConnectSpotifyBtn(
-                    //     context: context,
-                    //   ),
-                    //   onPressed: () async {
-                    //     APIRouter().classifySpotifyLibrary();
-                    //   },
-                    // ),
+                    BouncingWidget(
+                      child: ConnectSpotifyBtn(
+                        context: context,
+                      ),
+                      onPressed: () async {
+                        await SpotifyRouter().getToken();
+                        await APIRouter().assignUserCentroids();
+                      },
+                    ),
                   ],
                 ),
               ),

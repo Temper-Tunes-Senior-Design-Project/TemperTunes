@@ -44,7 +44,8 @@ class SpotifyRouter {
   void instantiateClient() async {
     SpotifyApi? api;
     if (await DatabaseRouter().spotifyLinked()) {
-      SpotifyApiCredentials credentials = await DatabaseRouter().getCredentials();
+      SpotifyApiCredentials credentials =
+          await DatabaseRouter().getCredentials();
       api = SpotifyApi(
         credentials,
         onCredentialsRefreshed: (SpotifyApiCredentials newCred) async {
@@ -64,7 +65,8 @@ class SpotifyRouter {
   Future<String> getToken() async {
     String uid = AuthRouter().getUserUID();
     SpotifySdkPlugin.tokenSwapURL =
-        "http://192.168.1.161:8080/main/?uid=" + uid;
+        "https://cachespotifycredentials-ilvif34q5a-ue.a.run.app/main/?uid=" +
+            uid;
     if (token == "") {
       print("Token doesn't exist");
       String redirect = (kIsWeb
@@ -74,7 +76,7 @@ class SpotifyRouter {
       String accessToken = await SpotifySdk.getAccessToken(
           clientId: dotenv.env['SPOTIFY_CLIENT_ID'] ?? "",
           redirectUrl: redirect,
-          scope:scopes);
+          scope: scopes);
       token = accessToken;
       return accessToken;
     } else {
@@ -154,9 +156,7 @@ class SpotifyRouter {
         uris.add((await client!.tracks.get(s.uid)).uri ?? "");
       }
       await client!.playlists.addTracks(uris, p.id ?? "");
-    }
-    on Exception catch(e)
-    {
+    } on Exception catch (e) {
       print(e);
     }
   }
