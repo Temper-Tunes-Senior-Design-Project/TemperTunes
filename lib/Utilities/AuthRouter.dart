@@ -4,6 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mood_swing/Pages/LandingPage.dart';
+import 'package:mood_swing/Pages/OnboardingPage.dart';
 import 'package:mood_swing/Utilities/DatabaseRouter.dart';
 import 'package:mood_swing/Objects/User.dart' as AppUser;
 
@@ -94,14 +95,27 @@ class AuthRouter {
     }
 
     if (FirebaseAuth.instance.currentUser != null) {
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-            builder: (ctxt) => HomePage(
-              shouldOnboard: uc.additionalUserInfo?.isNewUser ?? false,
+      if(uc.additionalUserInfo?.isNewUser ?? false == false) {
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (ctxt) =>
+                  HomePage(
+                    shouldOnboard: uc.additionalUserInfo?.isNewUser ?? false,
+                  ),
             ),
-          ),
-          (route) => false);
+                (route) => false);
+      }
+      else
+        {
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                builder: (ctxt) =>
+                   OnboardingPage()
+              ),
+                  (route) => false);
+        }
     }
   }
 

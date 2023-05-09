@@ -94,7 +94,6 @@ class _LargeScreenState extends State<LargeScreen> {
                                     "assets/music_swing_logo_small.png",
                                     scale: 2.5),
                               ),
-
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
