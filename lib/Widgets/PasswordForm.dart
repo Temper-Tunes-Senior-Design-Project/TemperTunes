@@ -27,6 +27,7 @@ class _PasswordFormState extends State<PasswordForm> {
       controller: widget.controller,
       validator: widget.validator,
       textAlign: TextAlign.left,
+      obscureText: !_isVisible,
       cursorColor: Colors.white,
       style: TextStyle(
         fontFamily: 'Maven Pro',
