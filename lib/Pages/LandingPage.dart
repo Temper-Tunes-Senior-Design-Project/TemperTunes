@@ -20,7 +20,7 @@ class LargeScreen extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
 
     return SingleChildScrollView(
-      child: SafeArea(
+      child: SafeArea(s
         // maintainBottomViewPadding: false,
         child: Container(
           height: height,
@@ -33,7 +33,7 @@ class LargeScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              SizedBox(height: height * 0.01),
+              SizedBox(height: height * 0.03),
               Container(
                 padding: EdgeInsets.only(top: 0.02 * height),
                 alignment: Alignment.center,
@@ -98,8 +98,11 @@ class LargeScreen extends StatelessWidget {
                                           color: MyPalette.white,
                                           size: 50,
                                         ),
-                                        onPressed: () async{
-                                          await showDialog(context: context, builder: (context)=>AdvisementPopup());
+                                        onPressed: () async {
+                                          await showDialog(
+                                              context: context,
+                                              builder: (context) =>
+                                                  AdvisementPopup());
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
@@ -222,7 +225,10 @@ class SmallScreen extends StatelessWidget {
                                             size: 50,
                                           ),
                                           onPressed: () async {
-                                            await showDialog(context: context, builder: (context)=>AdvisementPopup());
+                                            await showDialog(
+                                                context: context,
+                                                builder: (context) =>
+                                                    AdvisementPopup());
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
