@@ -4,7 +4,6 @@ import '../Objects/GenerationArguments.dart';
 import '../Objects/Playlist.dart';
 import '../Widgets/widgets.dart';
 import 'package:animate_do/animate_do.dart';
-import '../Objects/Mood.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -160,7 +159,7 @@ class Title extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
+    // double width = MediaQuery.of(context).size.width;
     return FittedBox(
       fit: BoxFit.scaleDown,
       child: Container(

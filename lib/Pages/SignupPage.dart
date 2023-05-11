@@ -119,8 +119,8 @@ class _LargeScreenState extends State<LargeScreen> {
                                   PasswordForm(
                                     context: context,
                                     controller: _passwordController,
-                                    validator: RequiredValidator(
-                                        errorText: AutofillHints.password),
+                                    validator: MinLengthValidator(7,
+                                        errorText: "Password must be at least 7 characters"),
                                     label: 'Password',
                                     obscuringChar: '*',
                                   ),
@@ -129,8 +129,9 @@ class _LargeScreenState extends State<LargeScreen> {
                                   PasswordForm(
                                     context: context,
                                     controller: _passwordController2,
-                                    validator: RequiredValidator(
-                                        errorText: "confirm password"),
+                                    validator:
+                                    MinLengthValidator(7,
+                                        errorText: "Password must be at least 7 characters"),
                                     label: 'Confirm Password',
                                     obscuringChar: '*',
                                   ),

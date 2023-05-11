@@ -44,6 +44,7 @@ void main() async {
     AuthRouter().initializeFacebookSDK();
   }
 
+
   runApp(App());
 }
 

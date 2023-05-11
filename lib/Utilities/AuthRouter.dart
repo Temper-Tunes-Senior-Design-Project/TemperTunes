@@ -62,9 +62,9 @@ class AuthRouter {
   void login(String email, String password, Function callback, context) async {
     try {
       await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
+          .signInWithEmailAndPassword(email: email.trim(), password: password);
       credentialSignIn(
-          EmailAuthProvider.credential(email: email, password: password),
+          EmailAuthProvider.credential(email: email.trim(), password: password),
           context);
     } on FirebaseAuthException catch (e) {
       print(e);
@@ -158,7 +158,7 @@ class AuthRouter {
       String name, String email, String password, String username, Function callback) async {
     try {
       UserCredential credentials = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email, password: password);
+          .createUserWithEmailAndPassword(email: email.trim(), password: password);
       credentials.user?.updateDisplayName(name);
       FirebaseAuth.instance.currentUser?.sendEmailVerification();
 

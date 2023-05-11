@@ -46,7 +46,6 @@ class LargeScreen extends StatelessWidget {
             child: Text("error fetching songs"),
           );
         }
-        List<Song> songs = snapshot.data?.songs ?? [];
 
         ///playlist songs content
         return SafeArea(
@@ -69,7 +68,7 @@ class LargePlaylistLayout extends StatefulWidget {
 
 class _LargePlaylistLayoutState extends State<LargePlaylistLayout> {
   TextEditingController playlistNameController = TextEditingController();
-  String _defaultPlaylistName = "Playlist1";
+  // String _defaultPlaylistName = "Playlist1";
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -226,7 +225,7 @@ class SmallPlaylistLayout extends StatefulWidget {
 
 class _SmallPlaylistLayoutState extends State<SmallPlaylistLayout> {
   TextEditingController playlistNameController = TextEditingController();
-  String _defaultPlaylistName = "Playlist1";
+  // String _defaultPlaylistName = "Playlist1";
   final _formKey = GlobalKey<FormState>();
 
   @override
