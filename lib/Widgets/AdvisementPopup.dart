@@ -6,7 +6,7 @@ class AdvisementPopup extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text("Alert", style: TextStyle(color: Colors.white, fontSize: 30)),
-      backgroundColor: MyPalette.brightMagenta,
+      backgroundColor: MyPalette.magenta,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(16.0),

@@ -27,6 +27,7 @@ class AuthRouter {
 
   AppUser.User getUser()
   {
+    print(FirebaseAuth.instance.currentUser);
     return AppUser.User(FirebaseAuth.instance.currentUser?.displayName??"No Display Name Set");
   }
 
