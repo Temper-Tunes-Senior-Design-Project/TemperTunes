@@ -15,4 +15,5 @@ class MyPalette {
   static const Color darkBlue = Color(0xFF210A73);
   static const Color circleIcon = Color(0xFF6F03A5);
   static const Color grey = Color(0xFF71797E);
+  static const Color petalPink = Color(0xFFfbe6fe);
 }
