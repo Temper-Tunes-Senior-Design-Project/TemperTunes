@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../Widgets/AdvisementPopup.dart';
 import '../Widgets/widgets.dart';
 import 'SignupPage.dart';
 
@@ -97,7 +98,8 @@ class LargeScreen extends StatelessWidget {
                                           color: MyPalette.white,
                                           size: 50,
                                         ),
-                                        onPressed: () {
+                                        onPressed: () async{
+                                          await showDialog(context: context, builder: (context)=>AdvisementPopup());
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
@@ -219,7 +221,8 @@ class SmallScreen extends StatelessWidget {
                                             color: MyPalette.white,
                                             size: 50,
                                           ),
-                                          onPressed: () {
+                                          onPressed: () async {
+                                            await showDialog(context: context, builder: (context)=>AdvisementPopup());
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
@@ -258,7 +261,7 @@ class SmallScreen extends StatelessWidget {
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
   @override
-  Widget build(Object context) {
+  Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false, body: Column(children: [Body()]));
   }
