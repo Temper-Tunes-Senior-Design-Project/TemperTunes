@@ -7,11 +7,13 @@ import 'package:mood_swing/Pages/BluetoothLoaderPage.dart';
 import 'dart:ui';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:mood_swing/Pages/TestingPage.dart';
+import 'package:mood_swing/Pages/NewlyGeneratedPlaylistPage.dart';
 import 'package:mood_swing/Utilities/AuthRouter.dart';
+import 'package:mood_swing/Utilities/SpotifyRouter.dart';
 import 'Pages/CameraPage.dart';
 import 'Pages/LandingPage.dart';
 import 'Pages/PresetsPage.dart';
+import 'Pages/UserInputGeneration.dart';
 import 'Widgets/MockNavigator.dart';
 import 'firebase_options.dart';
 
@@ -32,9 +34,16 @@ void main() async {
     return true;
   };
 
+  AuthRouter().authMonitor().listen((event) {
+    if (event != null) {
+      SpotifyRouter().instantiateClient();
+    }
+  });
+
   if (kIsWeb) {
     AuthRouter().initializeFacebookSDK();
   }
+
 
   runApp(App());
 }
@@ -75,7 +84,8 @@ class _AppState extends State<App> {
         '/camera': (context) => CameraPage(),
         '/bluetooth': (context) => BluetoothLoaderPage(),
         '/presets': (context) => PresetsPage(),
-        '/compiling': (context) => TestingPage(),
+        '/settings': (context) => UserInputGeneration(),
+        '/finalize': (context) => NewlyGeneratedPlaylistPage(),
       },
       home: StreamBuilder<User?>(
           initialData: FirebaseAuth.instance.currentUser,
@@ -84,7 +94,6 @@ class _AppState extends State<App> {
             if (snapshot.data != null) {
               return HomePage();
             }
-
             return LandingPage();
           }),
     );

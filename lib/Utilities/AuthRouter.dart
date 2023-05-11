@@ -4,6 +4,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mood_swing/Pages/LandingPage.dart';
+import 'package:mood_swing/Pages/OnboardingPage.dart';
 import 'package:mood_swing/Utilities/DatabaseRouter.dart';
 import 'package:mood_swing/Objects/User.dart' as AppUser;
 
@@ -26,6 +27,7 @@ class AuthRouter {
 
   AppUser.User getUser()
   {
+    print(FirebaseAuth.instance.currentUser);
     return AppUser.User(FirebaseAuth.instance.currentUser?.displayName??"No Display Name Set");
   }
 
@@ -61,9 +63,9 @@ class AuthRouter {
   void login(String email, String password, Function callback, context) async {
     try {
       await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
+          .signInWithEmailAndPassword(email: email.trim(), password: password);
       credentialSignIn(
-          EmailAuthProvider.credential(email: email, password: password),
+          EmailAuthProvider.credential(email: email.trim(), password: password),
           context);
     } on FirebaseAuthException catch (e) {
       print(e);
@@ -94,14 +96,27 @@ class AuthRouter {
     }
 
     if (FirebaseAuth.instance.currentUser != null) {
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(
-            builder: (ctxt) => HomePage(
-              shouldOnboard: uc.additionalUserInfo?.isNewUser ?? false,
+      if(uc.additionalUserInfo?.isNewUser ?? false == false) {
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (ctxt) =>
+                  HomePage(
+                    shouldOnboard: uc.additionalUserInfo?.isNewUser ?? false,
+                  ),
             ),
-          ),
-          (route) => false);
+                (route) => false);
+      }
+      else
+        {
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                builder: (ctxt) =>
+                   OnboardingPage()
+              ),
+                  (route) => false);
+        }
     }
   }
 
@@ -144,7 +159,7 @@ class AuthRouter {
       String name, String email, String password, String username, Function callback) async {
     try {
       UserCredential credentials = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email, password: password);
+          .createUserWithEmailAndPassword(email: email.trim(), password: password);
       credentials.user?.updateDisplayName(name);
       FirebaseAuth.instance.currentUser?.sendEmailVerification();
 

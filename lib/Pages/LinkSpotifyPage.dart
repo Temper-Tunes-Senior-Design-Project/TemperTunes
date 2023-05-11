@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mood_swing/Utilities/SpotifyRouter.dart';
 import '../Widgets/widgets.dart';
 import 'package:bouncing_widget/bouncing_widget.dart';
 import 'package:mood_swing/Utilities/APIRouter.dart';
@@ -53,12 +54,9 @@ class LargeScreen extends StatelessWidget {
                             top: height * 0.03,
                             bottom: 0.03 * height,
                           ),
-                          child: FittedBox(
-                            fit: BoxFit.contain,
-                            child: Image.asset(
-                              "assets/spotifyLogoWhite.png",
-                              scale: 2.5,
-                            ),
+                          child: Image.asset(
+                            "assets/spotifyLogoWhite.png",
+                            scale: 2.5,
                           ),
                         ),
                       ),
@@ -89,7 +87,7 @@ class LargeScreen extends StatelessWidget {
                         child: BouncingWidget(
                           child: ConnectSpotifyBtn(context: context),
                           onPressed: () async {
-                            APIRouter().classifySpotifyLibrary();
+                            // APIRouter().classifySpotifyLibrary();
                           },
                         ),
                       ),
@@ -159,7 +157,8 @@ class SmallScreen extends StatelessWidget {
                         context: context,
                       ),
                       onPressed: () async {
-                        APIRouter().classifySpotifyLibrary();
+                        await SpotifyRouter().getToken();
+                        await APIRouter().assignUserCentroids();
                       },
                     ),
                   ],
@@ -178,7 +177,6 @@ class LinkSpotifyPage extends StatelessWidget {
 
   @override
   Widget build(Object context) {
-    //Materialapp debugger false
     return Scaffold(resizeToAvoidBottomInset: false, body: Body());
   }
 }
@@ -243,7 +241,8 @@ class ConnectSpotifyBtn extends StatelessWidget {
                 backgroundColor: Colors.transparent,
               ),
               onPressed: () async {
-                APIRouter().classifySpotifyLibrary();
+                await SpotifyRouter().getToken();
+                await APIRouter().assignUserCentroids();
               },
             ),
           ),

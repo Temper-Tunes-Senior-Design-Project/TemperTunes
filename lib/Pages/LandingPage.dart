@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../Widgets/AdvisementPopup.dart';
 import '../Widgets/widgets.dart';
 import 'SignupPage.dart';
 
@@ -32,7 +33,7 @@ class LargeScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              SizedBox(height: height * 0.01),
+              SizedBox(height: height * 0.03),
               Container(
                 padding: EdgeInsets.only(top: 0.02 * height),
                 alignment: Alignment.center,
@@ -97,7 +98,11 @@ class LargeScreen extends StatelessWidget {
                                           color: MyPalette.white,
                                           size: 50,
                                         ),
-                                        onPressed: () {
+                                        onPressed: () async {
+                                          await showDialog(
+                                              context: context,
+                                              builder: (context) =>
+                                                  AdvisementPopup());
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
@@ -219,7 +224,11 @@ class SmallScreen extends StatelessWidget {
                                             color: MyPalette.white,
                                             size: 50,
                                           ),
-                                          onPressed: () {
+                                          onPressed: () async {
+                                            await showDialog(
+                                                context: context,
+                                                builder: (context) =>
+                                                    AdvisementPopup());
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
@@ -258,7 +267,7 @@ class SmallScreen extends StatelessWidget {
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
   @override
-  Widget build(Object context) {
+  Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false, body: Column(children: [Body()]));
   }

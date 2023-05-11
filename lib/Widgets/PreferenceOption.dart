@@ -18,9 +18,7 @@ class PreferenceOption extends StatelessWidget {
     return Container(
       padding: EdgeInsets.only(top: 0.02 * height),
       alignment: Alignment.topCenter,
-      child: Flexible(
-        flex: 1,
-        child: ElevatedButton.icon(
+      child: ElevatedButton.icon(
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
             elevation: 0,
@@ -39,7 +37,6 @@ class PreferenceOption extends StatelessWidget {
             ),
           ),
         ),
-      ),
     );
   }
 }
