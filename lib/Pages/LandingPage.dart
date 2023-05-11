@@ -20,7 +20,7 @@ class LargeScreen extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
 
     return SingleChildScrollView(
-      child: SafeArea(s
+      child: SafeArea(
         // maintainBottomViewPadding: false,
         child: Container(
           height: height,
