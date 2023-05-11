@@ -19,6 +19,8 @@ class Body extends StatelessWidget {
 class LargeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     final GenerationArguments args =
         ModalRoute.of(context)!.settings.arguments as GenerationArguments;
     print("Test");
@@ -26,8 +28,16 @@ class LargeScreen extends StatelessWidget {
       future: APIRouter().generateClassification(args),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(
-            child: WaveLoader(title: 'wave'),
+          return Container(
+            width: width,
+            height: height,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("assets/appbarBG.png"), fit: BoxFit.cover),
+            ),
+            child: Center(
+              child: WaveLoader(title: 'wave'),
+            ),
           );
         }
         if (snapshot.hasError) {
@@ -155,6 +165,7 @@ class _LargePlaylistLayoutState extends State<LargePlaylistLayout> {
                   final playlistName = playlistNameController.text.isNotEmpty
                       ? playlistNameController.text
                       : "Playlist1";
+
                   ///Pass the name to the next page
                   widget.playlist.setName(playlistName);
                   await SpotifyRouter().publishPlaylist(widget.playlist);
@@ -178,7 +189,7 @@ class SmallScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final GenerationArguments args =
-    ModalRoute.of(context)!.settings.arguments as GenerationArguments;
+        ModalRoute.of(context)!.settings.arguments as GenerationArguments;
     return FutureBuilder<Playlist?>(
       future: APIRouter().generateClassification(args),
       builder: (context, snapshot) {
@@ -261,7 +272,7 @@ class _SmallPlaylistLayoutState extends State<SmallPlaylistLayout> {
 
           OptionButtons(
             text: 'Save',
-            onPressed: () async{
+            onPressed: () async {
               if (_formKey.currentState!.validate()) {
                 // Get the playlist name from the text controller
                 final playlistName = playlistNameController.text.isNotEmpty
@@ -274,7 +285,7 @@ class _SmallPlaylistLayoutState extends State<SmallPlaylistLayout> {
                     MaterialPageRoute(
                       builder: (context) => HomePage(),
                     ),
-                        (e) => false);
+                    (e) => false);
               }
             },
           ),
